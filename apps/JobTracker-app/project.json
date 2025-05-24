@@ -21,7 +21,7 @@
         "assets": [
           {
             "glob": "**/*",
-            "input": "apps/JobTracker-app/public"
+            "input": "public"
           }
         ],
         "styles": ["apps/JobTracker-app/src/styles.css"],
