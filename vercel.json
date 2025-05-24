@@ -1,4 +1,5 @@
 {
-  "buildCommand": "npx nx build jobtracker-app",
-  "outputDirectory": "dist/apps/jobtracker-app"
+  "buildCommand": "npx nx build JobTracker-app",
+  "outputDirectory": "dist/apps/JobTracker-app",
+  "framework": null
 }
