@@ -1,0 +1,26 @@
+/* Import Tailwind CSS */
+@import 'tailwindcss';
+
+@theme {
+  /* Colors */
+  --color-JobTracker-blue: rgb(1, 103, 163);
+  --color-JobTracker-side: rgb(1, 79, 134);
+  --color-JobTracker-side-hover: rgb(0, 122, 189);
+  --color-JobTracker-white: rgb(255, 255, 255);
+  --color-JobTracker-gray: rgb(236, 240, 241);
+  --color-JobTracker-grayOpacity: rgba(236, 240, 241, 0.8);
+}
+
+.active-link {
+  @apply bg-JobTracker-side-hover;
+}
+
+/* Title */
+h1,
+h2 {
+  @apply text-JobTracker-white font-semibold;
+}
+
+h3 {
+  @apply text-JobTracker-blue font-bold text-xl mb-3;
+}
