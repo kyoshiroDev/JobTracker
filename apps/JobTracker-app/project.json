@@ -13,7 +13,7 @@
     "build": {
       "executor": "@angular-devkit/build-angular:application",
       "options": {
-        "outputPath": "dist/apps/jobtracker-app",
+        "outputPath": "dist/apps/JobTracker-app",
         "index": "apps/JobTracker-app/src/index.html",
         "browser": "apps/JobTracker-app/src/main.ts",
         "polyfills": ["zone.js"],
