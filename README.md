@@ -2,7 +2,7 @@
 
 JobTracker est une application web développée avec Angular 19, conçue pour aider les chercheurs d'emploi à organiser et suivre efficacement leurs candidatures. Elle permet de centraliser toutes les informations relatives aux offres d'emploi, de suivre l'évolution des candidatures et d'analyser les opportunités.
 
-[🔗 Accéder à l'application en ligne](https://jobtracker-eight.vercel.app/)
+[🔗 Accéder à l'application en ligne](https://job-tracker-nx.vercel.app/)
 
 ## 🚀 Fonctionnalités principales
 - **Ajout d'offres d'emploi :** Enregistrement des détails des offres, y compris le titre, l'entreprise, le lien vers l'annonce et des notes personnelles.
