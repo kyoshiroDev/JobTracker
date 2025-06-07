@@ -31,6 +31,11 @@ import { NgOptimizedImage } from '@angular/common';
         <h2 class=" px-4 text-xl">Hello {{ name() }}</h2>
       </div>
       <!--<fdw-notifications />-->
+      <div class="cursor-pointer flex flex-col justify-around min-w-8 min-h-8 right-0 mx-4 md:hidden">
+        <span class="h-1 w-full bg-JobTracker-white rounded-full"></span>
+        <span class="h-1 w-full bg-JobTracker-white rounded-full"></span>
+        <span class="h-1 w-full bg-JobTracker-white rounded-full"></span>
+      </div>
     </header>
   `,
 })

@@ -8,13 +8,14 @@ import { STATUS_COLOR } from '../app/tokens/status-color-token';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule],
   template: `
-    <div class="flex justify-center gap-20 h-[90px] max-w-screen px-4">
+    <div class="flex justify-center gap-10 h-[90px] w-full px-4">
       @for(status of statusConfigs; track status.label){
       <div
         class="flex flex-col
   bg-JobTracker-white
   font-semibold
-  w-[300px]
+  w-full
+  max-w-[300px]
   justify-center
   items-center
   gap-2

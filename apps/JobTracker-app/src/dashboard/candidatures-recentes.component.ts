@@ -63,8 +63,7 @@ import { STATUS_COLOR } from '../app/tokens/status-color-token';
             </td>
             <td
               [class]="statusColorClass(annonce.content.status)"
-              content.
-              class="lg:hidden relative group"
+              class="lg:hidden table-cell relative group border border-JobTracker-gray"
             >
               <svg
                 class="m-auto"
@@ -79,8 +78,7 @@ import { STATUS_COLOR } from '../app/tokens/status-color-token';
                 />
               </svg>
               <span
-                class=" absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden px-2
-  py-1 text-white text-xs rounded bg-gray-700 group-hover:inline-block whitespace-nowrap"
+                class=" absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden px-2 py-1 text-white text-xs rounded bg-gray-700 group-hover:inline-block whitespace-nowrap"
               >
                 {{ annonce.content.status }}
               </span>

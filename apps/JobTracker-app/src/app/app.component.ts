@@ -29,7 +29,7 @@ import { ButtonComponent } from './components/button/button.component';
       <fdw-sidebar />
 
       <!-- Header -->
-      <fdw-header class="2xl:pl-[300px] fixed w-full" />
+      <fdw-header class="md:pl-[300px] fixed w-full" />
 
       <!-- Contenu des pages selon les routes -->
       <main class="w-full mx-auto mt-[120px] max-h-dvh overflow-y-auto">
@@ -49,4 +49,6 @@ export class AppComponent {
   closeModal() {
     this.showModal.set(false);
   }
+
+
 }
