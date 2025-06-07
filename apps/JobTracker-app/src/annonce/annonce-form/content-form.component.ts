@@ -27,7 +27,7 @@ import { ContentForm } from './annonceForm';
           rows="2"
           placeholder="Saisissez vôtre texte ici ..."
           formControlName="about"
-          class="w-full border border-gray-300 bg-white px-2 py-1 text-sm text-gray-900 rounded-xl focus:border-JobTracker-blue focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all"
+          class="w-full border border-gray-600 bg-white px-2 py-1 text-sm text-gray-400 rounded-xl focus:border-JobTracker-blue focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all"
         >
         </textarea>
       </div>
@@ -41,7 +41,7 @@ import { ContentForm } from './annonceForm';
           rows="2"
           placeholder="Saisissez vôtre texte ici ..."
           formControlName="descriptif"
-          class="w-full border border-gray-300 bg-white px-2 py-1 text-sm text-gray-900 rounded-xl focus:border-JobTracker-blue focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all"
+          class="w-full border border-gray-600 bg-white px-2 py-1 text-sm text-gray-400 rounded-xl focus:border-JobTracker-blue focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all"
         >
         </textarea>
       </div>
@@ -55,7 +55,7 @@ import { ContentForm } from './annonceForm';
           rows="2"
           placeholder="Saisissez vôtre texte ici ..."
           formControlName="competence"
-          class="w-full border border-gray-300 bg-white px-2 py-1 text-sm text-gray-900 rounded-xl focus:border-JobTracker-blue focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all"
+          class="w-full border border-gray-600 bg-white px-2 py-1 text-sm text-gray-400 rounded-xl focus:border-JobTracker-blue focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all"
         >
         </textarea>
       </div>
@@ -69,7 +69,7 @@ import { ContentForm } from './annonceForm';
           rows="2"
           placeholder="Saisissez vôtre texte ici ..."
           formControlName="avantage"
-          class="w-full border border-gray-300 bg-white px-2 py-1 text-sm text-gray-900 rounded-xl focus:border-JobTracker-blue focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all"
+          class="w-full border border-gray-600 bg-white px-2 py-1 text-sm text-gray-400 rounded-xl focus:border-JobTracker-blue focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all"
         >
         </textarea>
       </div>
@@ -82,7 +82,7 @@ import { ContentForm } from './annonceForm';
             type="text"
             placeholder="10000"
             formControlName="salaire"
-            class="max-w-16 text-center border border-gray-300 bg-white py-1 text-sm text-gray-900 rounded-xl focus:border-JobTracker-blue focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all"
+            class="max-w-16 text-center border border-gray-600 bg-white py-1 text-sm text-gray-400 rounded-xl focus:border-JobTracker-blue focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all"
           />
         </div>
         <!-- Contrat -->
@@ -91,7 +91,7 @@ import { ContentForm } from './annonceForm';
           <select
             id="typeContrat"
             formControlName="typeContrat"
-            class="border border-gray-300 bg-white px-2 py-1 text-sm text-gray-900 rounded-xl focus:border-JobTracker-blue focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all"
+            class="border border-gray-600 text-gray-900 bg-white px-2 py-1 text-sm rounded-xl focus:border-JobTracker-blue focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all"
           >
             <option value="null" hidden>Contrat ...</option>
             <option value="CDI">CDI</option>
@@ -106,7 +106,7 @@ import { ContentForm } from './annonceForm';
           <select
             id="modeTravail"
             formControlName="modeTravail"
-            class="border border-gray-300 bg-white px-2 py-1 text-sm text-gray-900 rounded-xl focus:border-JobTracker-blue focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all"
+            class="border border-gray-600 bg-white px-2 py-1 text-sm text-gray-900 rounded-xl focus:border-JobTracker-blue focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all"
           >
             <option value="null" hidden>Présence ...</option>
             <option value="fullremote">Full remote</option>
@@ -123,7 +123,7 @@ import { ContentForm } from './annonceForm';
           type="text"
           placeholder="https://www.google.com"
           formControlName="annonceLink"
-          class="flex-1/2 border border-gray-300 bg-white px-2 py-1 text-sm text-gray-900 rounded-xl focus:border-JobTracker-blue focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all"
+          class="flex-1/2 border border-gray-600 bg-white px-2 py-1 text-sm text-gray-400 rounded-xl focus:border-JobTracker-blue focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all"
         />
       </div>
     </div>

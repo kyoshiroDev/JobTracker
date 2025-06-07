@@ -16,6 +16,7 @@ import { STATUS_COLOR } from '../../app/tokens/status-color-token';
   standalone: true,
   imports: [ReactiveFormsModule],
   template: `
+    <div class="px-2 lg:px-0">
     <form
       (change)="formValue.emit(this.researchForm.value)"
       [formGroup]="researchForm"
@@ -119,6 +120,7 @@ import { STATUS_COLOR } from '../../app/tokens/status-color-token';
         </button>
       </div>
     </form>
+    </div>
   `,
 })
 export class AnnonceFormSearchComponent {

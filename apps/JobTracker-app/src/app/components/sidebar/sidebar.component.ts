@@ -13,9 +13,8 @@ import { Sidebarmenu } from './sidebarmenu';
   imports: [RouterLink, RouterLinkActive],
   template: `
     <div
-      class="bg-JobTracker-side h-full w-[300px]
-  hidden
-  2xl:flex
+      class="hidden bg-JobTracker-side h-full w-[300px]
+  md:flex
   flex-col
   gap-10
   justify-start
@@ -23,7 +22,7 @@ import { Sidebarmenu } from './sidebarmenu';
   text-JobTracker-white text-xl font-semibold;"
     >
       <div class="flex flex-col justify-center items-center h-35">
-        <h1 class="text-3xl">JobTracker</h1>
+        <h1 class="hidden md:block text-3xl">JobTracker</h1>
       </div>
       <div class="flex flex-col">
         @for (menu of sidebar(); track menu.id) {

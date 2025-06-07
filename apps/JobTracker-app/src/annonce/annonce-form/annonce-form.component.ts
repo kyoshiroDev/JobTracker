@@ -33,7 +33,7 @@ import { Annonce } from '../annonce';
             type="button"
             class="cursor-pointer text-JobTracker-side hover:text-JobTracker-side-hover justify-self-start text-xl"
           >
-            <- Entreprise
+            👈 Retour
           </button>
           } @else {
           <span></span>
@@ -64,7 +64,7 @@ import { Annonce } from '../annonce';
               type="text"
               formControlName="poste"
               placeholder="Développeur web"
-              class="w-full h-12 border border-gray-300 bg-white px-2 py-1 text-sm text-gray-900 rounded-xl focus:border-JobTracker-blue focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all"
+              class="text-gray-400 w-full h-12 border border-gray-600 bg-white px-2 py-1 text-sm rounded-xl focus:border-JobTracker-blue focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all"
             />
           </div>
           <!-- Entreprise -->
@@ -72,13 +72,13 @@ import { Annonce } from '../annonce';
           <fdw-entreprise-form
             [entrepriseForm]="formAnnonce.controls.entreprise"
           />
-          <div class="flex px-5 py-2 justify-end">
+          <div class="flex px-5 py-2 justify-center">
             <button
               (click)="switchForm()"
               type="button"
               class="cursor-pointer text-JobTracker-side hover:text-JobTracker-side-hover text-xl"
             >
-              Annonce ->
+              Suivant 👉
             </button>
           </div>
           } @else {
