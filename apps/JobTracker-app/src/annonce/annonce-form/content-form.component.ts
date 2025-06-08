@@ -14,8 +14,7 @@ import { ContentForm } from './annonceForm';
   template: `
     <div
       [formGroup]="contentForm()"
-      xmlns="http://www.w3.org/1999/html"
-      class="flex flex-col gap-5"
+      class="flex flex-col gap-5 max-w-dvw"
     >
       <!-- à propos -->
       <div
@@ -73,7 +72,7 @@ import { ContentForm } from './annonceForm';
         >
         </textarea>
       </div>
-      <div class="flex w-full  justify-between items-center">
+      <div class="flex flex-wrap w-full justify-between items-center">
         <!-- Salaire -->
         <div class="flex items-center justify-center gap-2">
           <label class="min-w-fit" for="salaire">Salaire :</label>
@@ -116,7 +115,7 @@ import { ContentForm } from './annonceForm';
         </div>
       </div>
       <!-- AnnonceLink-->
-      <div class="flex w-full justify-center items-center gap-2 flex-nowrap">
+      <div class="flex w-full justify-left items-center gap-2 flex-wrap">
         <label for="annonceLink">Lien de l'annonce :</label>
         <input
           id="annonceLink"
