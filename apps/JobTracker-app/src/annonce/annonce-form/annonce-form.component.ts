@@ -21,7 +21,7 @@ import { Annonce } from '../annonce';
   imports: [ReactiveFormsModule, EntrepriseFormComponent, ContentFormComponent],
   template: `
     <div
-      class="z-1 flex items-center justify-center absolute w-full p-3 bg-JobTracker-grayOpacity"
+      class="z-1 flex items-center justify-center absolute w-full md:h-full p-3 bg-JobTracker-grayOpacity"
     >
       <div
         class="w-[600px] max-h-fit bg-JobTracker-white rounded-xl z-3 border border-JobTracker-blue relative"
