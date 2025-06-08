@@ -14,7 +14,7 @@ import { ContentForm } from './annonceForm';
   template: `
     <div
       [formGroup]="contentForm()"
-      class="flex flex-col gap-5 max-w-svw max-h-svh"
+      class="flex flex-col gap-5"
     >
       <!-- à propos -->
       <div
@@ -72,7 +72,7 @@ import { ContentForm } from './annonceForm';
         >
         </textarea>
       </div>
-      <div class="flex flex-wrap w-full justify-between items-center">
+      <div class="flex flex-wrap w-full justify-start md:justify-between items-center gap-3">
         <!-- Salaire -->
         <div class="flex items-center justify-center gap-2">
           <label class="min-w-fit" for="salaire">Salaire :</label>
@@ -81,16 +81,16 @@ import { ContentForm } from './annonceForm';
             type="text"
             placeholder="10000"
             formControlName="salaire"
-            class="max-w-16 text-center border border-gray-600 bg-white py-1 text-sm text-gray-400 rounded-xl focus:border-JobTracker-blue focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all"
+            class="w-1/1 text-center border border-gray-600 bg-white py-1 text-sm text-gray-400 rounded-xl focus:border-JobTracker-blue focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all"
           />
         </div>
         <!-- Contrat -->
-        <div class="flex items-center justify-center gap-2">
+        <div class="flex items-center justify-start gap-2 w-full">
           <label class="min-w-fit" for="typeContrat">Contrat :</label>
           <select
             id="typeContrat"
             formControlName="typeContrat"
-            class="border border-gray-600 text-gray-900 bg-white px-2 py-1 text-sm rounded-xl focus:border-JobTracker-blue focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all"
+            class="text-center border border-gray-600 text-gray-900 bg-white px-2 py-1 text-sm rounded-xl focus:border-JobTracker-blue focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all"
           >
             <option value="null" hidden>Contrat ...</option>
             <option value="CDI">CDI</option>
@@ -100,12 +100,12 @@ import { ContentForm } from './annonceForm';
           </select>
         </div>
         <!-- Mode de travail -->
-        <div class="flex items-center justify-center gap-2">
+        <div class="flex items-center justify-start gap-2 w-full">
           <label class="min-w-fit" for="modeTravail">Présence :</label>
           <select
             id="modeTravail"
             formControlName="modeTravail"
-            class="border border-gray-600 bg-white px-2 py-1 text-sm text-gray-900 rounded-xl focus:border-JobTracker-blue focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all"
+            class="text-center border border-gray-600 bg-white px-2 py-1 text-sm text-gray-900 rounded-xl focus:border-JobTracker-blue focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all"
           >
             <option value="null" hidden>Présence ...</option>
             <option value="fullremote">Full remote</option>

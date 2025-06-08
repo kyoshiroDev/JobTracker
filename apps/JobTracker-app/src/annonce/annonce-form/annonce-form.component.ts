@@ -24,7 +24,7 @@ import { Annonce } from '../annonce';
       class="z-1 flex items-center justify-center absolute w-full p-3 bg-JobTracker-grayOpacity"
     >
       <div
-        class="w-[600px] max-h-[950px] bg-JobTracker-white rounded-xl z-3 border border-JobTracker-blue relative"
+        class="w-[600px] max-h-fit bg-JobTracker-white rounded-xl z-3 border border-JobTracker-blue relative"
       >
         <div class="grid grid-cols-3 items-center py-4 px-4">
           @if (!entrepriseForm()) {
