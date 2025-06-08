@@ -14,7 +14,7 @@ import { ContentForm } from './annonceForm';
   template: `
     <div
       [formGroup]="contentForm()"
-      class="flex flex-col gap-5 max-w-dvw"
+      class="flex flex-col gap-5 max-w-svw max-h-svh"
     >
       <!-- à propos -->
       <div
