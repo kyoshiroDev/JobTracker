@@ -94,7 +94,7 @@ import { Annonce } from '../annonce';
             <fdw-content-form [contentForm]="formAnnonce.controls.content" />
           </fieldset>
           <button
-            class="m-auto w-70 h-10 bg-JobTracker-side hover:bg-JobTracker-side-hover text-JobTracker-gray font-semibold cursor-pointer rounded-lg"
+            class="m-auto w-25 md:w-70 h-10 bg-JobTracker-side hover:bg-JobTracker-side-hover text-JobTracker-gray font-semibold cursor-pointer rounded-lg"
             type="submit"
           >
             Ajouter
