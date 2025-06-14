@@ -1,5 +1,5 @@
 {
-  "name": "JobTracker-app",
+  "name": "frontend",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "generators": {
@@ -7,24 +7,24 @@
       "changeDetection": "OnPush"
     }
   },
-  "sourceRoot": "apps/JobTracker-app/src",
+  "sourceRoot": "apps/frontend/src",
   "prefix": "fdw",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",
       "options": {
-        "outputPath": "dist/apps/JobTracker-app",
-        "index": "apps/JobTracker-app/src/index.html",
-        "browser": "apps/JobTracker-app/src/main.ts",
+        "outputPath": "dist/apps/frontend",
+        "index": "apps/frontend/src/index.html",
+        "browser": "apps/frontend/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "apps/JobTracker-app/tsconfig.app.json",
+        "tsConfig": "apps/frontend/tsconfig.app.json",
         "assets": [
           {
             "glob": "**/*",
             "input": "public"
           }
         ],
-        "styles": ["apps/JobTracker-app/src/styles.css"],
+        "styles": ["apps/frontend/src/styles.css"],
         "scripts": []
       },
       "configurations": {
@@ -55,10 +55,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "buildTarget": "JobTracker-app:build:production"
+          "buildTarget": "frontend:build:production"
         },
         "development": {
-          "buildTarget": "JobTracker-app:build:development"
+          "buildTarget": "frontend:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -70,14 +70,14 @@
       "executor": "@angular-devkit/build-angular:karma",
       "options": {
         "polyfills": ["zone.js", "zone.js/testing"],
-        "tsConfig": "apps/JobTracker-app/tsconfig.spec.json",
+        "tsConfig": "apps/frontend/tsconfig.spec.json",
         "assets": [
           {
             "glob": "**/*",
-            "input": "apps/JobTracker-app/public"
+            "input": "apps/frontend/public"
           }
         ],
-        "styles": ["apps/JobTracker-app/src/styles.css"],
+        "styles": ["apps/frontend/src/styles.css"],
         "scripts": []
       }
     }

@@ -34,7 +34,7 @@ En développant JobTracker, j'ai renforcé et acquis les compétences suivantes 
 ## 🧪 Lancer l'application en local
 1. **Cloner le dépôt :**
 ```bash
-    git clone git@github.com:kyoshiroDev/JobTracker-app.git
+    git clone git@github.com:kyoshiroDev/frontend.git
 ```
 2. **Installer les dépendances :**
 ```bash
