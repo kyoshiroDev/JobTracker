@@ -16,7 +16,7 @@ import { EntrepriseForm } from './annonceForm';
     class="flex flex-col gap-5 border border-JobTracker-blue p-5 rounded-md"
   >
     <legend
-      class="text-center font-semibold text-2xl px-2 text-JobTracker-blue"
+      class="text-center font-semibold text-xl md:text-2xl px-2 text-JobTracker-blue"
     >
       Entreprise
     </legend>
