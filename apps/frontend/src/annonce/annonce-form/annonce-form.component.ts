@@ -21,7 +21,7 @@ import { Annonce } from '../annonce';
   imports: [ReactiveFormsModule, EntrepriseFormComponent, ContentFormComponent],
   template: `
     <div
-      class="z-1 flex items-center justify-center absolute w-full h-full px-2 bg-JobTracker-grayOpacity "
+      class="z-1 flex text-sm md:text-md items-center justify-center absolute w-full h-full px-2 bg-JobTracker-grayOpacity "
     >
       <div
         class="w-[600px] max-h-[98vh] bg-JobTracker-white rounded-md z-3 border border-JobTracker-blue relative"
@@ -31,24 +31,24 @@ import { Annonce } from '../annonce';
           <button
             (click)="switchForm()"
             type="button"
-            class="flex gap-2 items-center cursor-pointer text-JobTracker-side hover:text-JobTracker-side-hover justify-self-start text-xl"
+            class="flex md:w-32 lg:w-48 gap-2 items-center cursor-pointer text-JobTracker-side hover:text-JobTracker-side-hover justify-self-start text-xl"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
               <path fill="currentColor" d="M13 19L2 12l11-7v6h9v2h-9z"/>
             </svg>
             Retour
           </button>
           } @else {
-          <span class="w-[92px]"></span>
+          <span class="md:w-32"></span>
           }
           <p
-            class="text-JobTracker-blue text-center text-2xl font-semibold justify-self-center"
+            class="text-JobTracker-blue text-center text-lg md:text-2xl font-semibold justify-center"
           >
             Nouvelle annonce
           </p>
           <button
             (click)="modalClose.emit()"
-            class="text-3xl cursor-pointer w-14 h-14 text-JobTracker-side hover:text-JobTracker-side-hover justify-self-end"
+            class="flex items-center justify-end text-3xl cursor-pointer w-7 h-4 md:w-32 md:h-8 text-JobTracker-side hover:text-JobTracker-side-hover justify-self-end"
           >
             X
           </button>
@@ -78,10 +78,10 @@ import { Annonce } from '../annonce';
             <button
               (click)="switchForm()"
               type="button"
-              class="flex gap-2 items-center cursor-pointer text-JobTracker-side hover:text-JobTracker-side-hover text-xl"
+              class="flex w-32 lg:w-48 gap-2 items-center justify-center cursor-pointer text-JobTracker-side hover:text-JobTracker-side-hover text-xl"
             >
               Suivant
-              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
               <path fill="currentColor" d="M11 19v-6H2v-2h9V5l11 7z"/>
               </svg>
             </button>
