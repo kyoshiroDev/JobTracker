@@ -21,10 +21,10 @@ import { Annonce } from '../annonce';
   imports: [ReactiveFormsModule, EntrepriseFormComponent, ContentFormComponent],
   template: `
     <div
-      class="z-1 flex items-center justify-center absolute w-full md:h-dvh p-6 bg-JobTracker-grayOpacity"
+      class="z-1 flex items-center justify-center absolute w-full h-full px-2 bg-JobTracker-grayOpacity "
     >
       <div
-        class="w-[600px] max-h-fit bg-JobTracker-white rounded-md z-3 border border-JobTracker-blue relative"
+        class="w-[600px] max-h-[98vh] bg-JobTracker-white rounded-md z-3 border border-JobTracker-blue relative"
       >
         <div class="flex justify-between items-center p-4">
           @if (!entrepriseForm()) {
@@ -55,7 +55,7 @@ import { Annonce } from '../annonce';
         </div>
         <form
           [formGroup]="formAnnonce"
-          class="flex flex-col gap-5 px-5 pb-5"
+          class="flex flex-col gap-5 px-5 pb-5 max-h-[80vh] overflow-hidden overflow-y-auto"
           (ngSubmit)="onSubmit()"
         >
           <div
