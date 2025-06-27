@@ -91,12 +91,12 @@ import { ContentForm } from './annonceForm';
         </div>
         <div class="flex flex-wrap gap-5 justify-start items-center w-full">
         <!-- Contrat -->
-        <div class="flex items-center justify-start gap-2">
+        <div class="flex items-center justify-start gap-2 text-xs md:text-sm">
           <label class="min-w-fit" for="typeContrat">Contrat :</label>
           <select
             id="typeContrat"
             formControlName="typeContrat"
-            class="border border-gray-600 text-gray-900 bg-white p-2 text-sm rounded-md focus:border-JobTracker-blue focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all"
+            class="border border-gray-600 text-gray-900 bg-white p-2 rounded-md focus:border-JobTracker-blue focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all"
           >
             <option value="null" hidden>type de contrat</option>
             <option value="CDI">contrat en CDI</option>
@@ -106,12 +106,12 @@ import { ContentForm } from './annonceForm';
           </select>
         </div>
         <!-- Mode de travail -->
-        <div class="flex items-center justify-start gap-2">
+        <div class="flex items-center justify-start gap-2 text-xs md:text-sm">
           <label class="min-w-fit" for="modeTravail">Présence :</label>
           <select
             id="modeTravail"
             formControlName="modeTravail"
-            class="border border-gray-600 bg-white p-2 text-sm text-gray-900 rounded-md focus:border-JobTracker-blue focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all"
+            class="border border-gray-600 bg-white p-2 text-gray-900 rounded-md focus:border-JobTracker-blue focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all"
           >
             <option value="null" hidden>mode de travail</option>
             <option value="fullremote">Full remote</option>
@@ -122,7 +122,7 @@ import { ContentForm } from './annonceForm';
       </div>
       </div>
       <!-- AnnonceLink-->
-      <div class="flex w-full justify-left items-center gap-2 flex-wrap">
+      <div class="flex flex-col w-full justify-left items-start gap-2 flex-wrap">
         <label for="annonceLink">Lien de l'annonce :</label>
         <input
           id="annonceLink"
