@@ -12,7 +12,8 @@ import { NgOptimizedImage } from '@angular/common';
   template: `
     <header
       class="flex
-  h-30
+      h-20
+  md:h-30
   bg-JobTracker-blue
   text-JobTracker-white
   justify-between
@@ -22,19 +23,19 @@ import { NgOptimizedImage } from '@angular/common';
         <img
           ngSrc="/avatar.webp"
           alt="Avatar"
-          class=" rounded-full aspect-square max-w-fit"
+          class=" w-12 h-12 rounded-full aspect-square max-w-fit"
           width="80"
           height="80"
           priority
         />
 
-        <h2 class=" px-4 text-xl">Hello {{ name() }}</h2>
+        <h2 class=" px-4 text-lg md:text-xl">Hello {{ name() }}</h2>
       </div>
       <!--<fdw-notifications />-->
-      <div class="cursor-pointer flex flex-col justify-around min-w-8 min-h-8 right-0 mx-4 md:hidden">
-        <span class="h-1 w-full bg-JobTracker-white rounded-full"></span>
-        <span class="h-1 w-full bg-JobTracker-white rounded-full"></span>
-        <span class="h-1 w-full bg-JobTracker-white rounded-full"></span>
+      <div class="cursor-pointer flex flex-col justify-around min-w-6 min-h-6 md:min-w-8 md:min-h-8 right-0 mx-4 md:hidden">
+        <span class="h-0.5 md:h-1 w-full bg-JobTracker-white rounded-full"></span>
+        <span class="h-0.5 md:h-1 w-full bg-JobTracker-white rounded-full"></span>
+        <span class="h-0.5 md:h-1 w-full bg-JobTracker-white rounded-full"></span>
       </div>
     </header>
   `,
