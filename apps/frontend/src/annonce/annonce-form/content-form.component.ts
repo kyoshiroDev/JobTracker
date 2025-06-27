@@ -85,7 +85,7 @@ import { ContentForm } from './annonceForm';
             type="text"
             placeholder="10000"
             formControlName="salaire"
-            class="max-w-[80px] text-center border border-gray-600 bg-white py-1 text-sm text-gray-400 rounded-md focus:border-JobTracker-blue focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all"
+            class="max-w-[80px] text-center border border-gray-600 bg-white text-gray-400 rounded-md focus:border-JobTracker-blue focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all"
           />
           <p>annuelle</p>
         </div>
