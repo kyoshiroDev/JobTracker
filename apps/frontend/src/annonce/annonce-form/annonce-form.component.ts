@@ -31,7 +31,7 @@ import { Annonce } from '../annonce';
           <button
             (click)="switchForm()"
             type="button"
-            class="flex md:w-32 lg:w-48 gap-2 items-center cursor-pointer text-JobTracker-side hover:text-JobTracker-side-hover justify-self-start text-xl"
+            class="flex md:w-32 lg:w-48 gap-2 items-center cursor-pointer text-JobTracker-side hover:text-JobTracker-side-hover justify-self-start text-md md:text-lg"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
               <path fill="currentColor" d="M13 19L2 12l11-7v6h9v2h-9z"/>
@@ -48,7 +48,7 @@ import { Annonce } from '../annonce';
           </p>
           <button
             (click)="modalClose.emit()"
-            class="flex items-center justify-end text-3xl cursor-pointer w-7 h-4 md:w-32 md:h-8 text-JobTracker-side hover:text-JobTracker-side-hover justify-self-end"
+            class="flex items-center justify-end text-lg md:text-2xl cursor-pointer w-7 h-4 md:w-32 md:h-8 text-JobTracker-side hover:text-JobTracker-side-hover justify-self-end"
           >
             X
           </button>
@@ -78,7 +78,7 @@ import { Annonce } from '../annonce';
             <button
               (click)="switchForm()"
               type="button"
-              class="flex w-32 lg:w-48 gap-2 items-center justify-center cursor-pointer text-JobTracker-side hover:text-JobTracker-side-hover text-xl"
+              class="flex w-32 lg:w-48 gap-2 items-center justify-center cursor-pointer text-JobTracker-side hover:text-JobTracker-side-hover text-md md:text-lg"
             >
               Suivant
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
