@@ -31,7 +31,6 @@ import { AnnonceDetailHeaderComponent } from './annonce-detail-header.component'
     >
       <!-- En-tête de l'annonce -->
       <fdw-annonce-detail-header
-        (onClickReturn)="returnListeAnnonce()"
         class="text-JobTracker-white"
         [annonce]="annonce()"
       />
@@ -51,7 +50,7 @@ import { AnnonceDetailHeaderComponent } from './annonce-detail-header.component'
 export class AnnonceDetailComponent {
   readonly annonceService = inject(AnnoncesService);
   readonly router = inject(Router);
-  readonly id = input<string | null>();
+  readonly id = input<string>();
 
   readonly annonces: Signal<Annonce[]> = this.annonceService.getAll();
 
@@ -63,8 +62,4 @@ export class AnnonceDetailComponent {
       (annonce) => annonce.id.toString() === this.id()
     );
   });
-
-  returnListeAnnonce() {
-    this.router.navigate(['/annonces']);
-  }
 }
