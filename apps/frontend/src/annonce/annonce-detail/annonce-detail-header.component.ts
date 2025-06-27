@@ -18,8 +18,7 @@ import { RouterLink } from '@angular/router';
         <!-- Flêche retour -->
         <div class="flex justify-between">
           <svg
-            (click)="onClickReturn.emit()"
-            routerLink="/candidature"
+            routerLink="/annonces"
             class="cursor-pointer"
             xmlns="http://www.w3.org/2000/svg"
             width="32"
@@ -218,5 +217,4 @@ import { RouterLink } from '@angular/router';
 })
 export class AnnonceDetailHeaderComponent {
   readonly annonce = input.required<Annonce>();
-  readonly onClickReturn = output<void>();
 }

@@ -21,27 +21,30 @@ import { Annonce } from '../annonce';
   imports: [ReactiveFormsModule, EntrepriseFormComponent, ContentFormComponent],
   template: `
     <div
-      class="z-1 flex items-center justify-center absolute w-full md:h-full p-3 bg-JobTracker-grayOpacity"
+      class="z-1 flex items-center justify-center absolute w-full md:h-dvh p-6 bg-JobTracker-grayOpacity"
     >
       <div
-        class="w-[600px] max-h-fit bg-JobTracker-white rounded-xl z-3 border border-JobTracker-blue relative"
+        class="w-[600px] max-h-fit bg-JobTracker-white rounded-md z-3 border border-JobTracker-blue relative"
       >
-        <div class="grid grid-cols-3 items-center py-4 px-4">
+        <div class="flex justify-between items-center p-4">
           @if (!entrepriseForm()) {
           <button
             (click)="switchForm()"
             type="button"
-            class="cursor-pointer text-JobTracker-side hover:text-JobTracker-side-hover justify-self-start text-xl"
+            class="flex gap-2 items-center cursor-pointer text-JobTracker-side hover:text-JobTracker-side-hover justify-self-start text-xl"
           >
-            👈 Retour
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
+              <path fill="currentColor" d="M13 19L2 12l11-7v6h9v2h-9z"/>
+            </svg>
+            Retour
           </button>
           } @else {
-          <span></span>
+          <span class="w-[92px]"></span>
           }
           <p
             class="text-JobTracker-blue text-center text-2xl font-semibold justify-self-center"
           >
-            Ajout d'annonce
+            Nouvelle annonce
           </p>
           <button
             (click)="modalClose.emit()"
@@ -52,7 +55,7 @@ import { Annonce } from '../annonce';
         </div>
         <form
           [formGroup]="formAnnonce"
-          class="flex flex-col gap-5 p-5"
+          class="flex flex-col gap-5 px-5 pb-5"
           (ngSubmit)="onSubmit()"
         >
           <div
@@ -64,7 +67,6 @@ import { Annonce } from '../annonce';
               type="text"
               formControlName="poste"
               placeholder="Développeur web"
-              class="text-gray-400 w-full h-12 border border-gray-600 bg-white px-2 py-1 text-sm rounded-xl focus:border-JobTracker-blue focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all"
             />
           </div>
           <!-- Entreprise -->
@@ -76,29 +78,26 @@ import { Annonce } from '../annonce';
             <button
               (click)="switchForm()"
               type="button"
-              class="cursor-pointer text-JobTracker-side hover:text-JobTracker-side-hover text-xl"
+              class="flex gap-2 items-center cursor-pointer text-JobTracker-side hover:text-JobTracker-side-hover text-xl"
             >
-              Suivant 👉
+              Suivant
+              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
+              <path fill="currentColor" d="M11 19v-6H2v-2h9V5l11 7z"/>
+              </svg>
             </button>
           </div>
           } @else {
           <!-- Content -->
-          <fieldset
-            class="flex flex-col gap-5 border border-JobTracker-blue p-5 rounded-md"
-          >
-            <legend
-              class="text-center font-semibold text-2xl px-2 text-JobTracker-blue"
-            >
-              Contenue de l'annonce
-            </legend>
+
             <fdw-content-form [contentForm]="formAnnonce.controls.content" />
-          </fieldset>
+            <div class="flex w-full justify-end items-center">
           <button
-            class="m-auto w-25 md:w-70 h-10 bg-JobTracker-side hover:bg-JobTracker-side-hover text-JobTracker-gray font-semibold cursor-pointer rounded-lg"
+            class="w-fit px-5 h-10 bg-JobTracker-side hover:bg-JobTracker-side-hover text-JobTracker-gray font-semibold cursor-pointer rounded-lg"
             type="submit"
           >
             Ajouter
           </button>
+          </div>
           }
         </form>
       </div>

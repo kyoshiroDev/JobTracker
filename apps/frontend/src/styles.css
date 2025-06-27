@@ -9,6 +9,7 @@
   --color-JobTracker-white: rgb(255, 255, 255);
   --color-JobTracker-gray: rgb(236, 240, 241);
   --color-JobTracker-grayOpacity: rgba(236, 240, 241, 0.8);
+  --color-JobTracker-label: rgb(55, 65, 81);
 }
 
 .active-link {
@@ -23,4 +24,16 @@ h2 {
 
 h3 {
   @apply text-JobTracker-blue font-bold text-xl mb-3;
+}
+
+label {
+  @apply text-JobTracker-label;
+}
+
+textarea {
+  @apply w-full border border-gray-600 bg-white p-3 text-sm text-gray-400 rounded-md focus:border-JobTracker-blue focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all;
+}
+
+input {
+  @apply text-gray-400 w-full h-9 border border-gray-600 bg-white px-2 py-1 text-sm rounded-md focus:border-JobTracker-blue focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all
 }

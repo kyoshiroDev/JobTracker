@@ -38,7 +38,7 @@ import { STATUS_COLOR } from '../../app/tokens/status-color-token';
         <select
           aria-label="name"
           formControlName="name"
-          class="p-2 border rounded-lg appearance-none mt-2 w-1/2"
+          class="p-2 border rounded-lg mt-2 w-1/2"
         >
           <option value="null" selected>Choisissez une entreprise</option>
           @if(annonces().length > 0) { @for (annonce of annonces(); track
@@ -51,7 +51,7 @@ import { STATUS_COLOR } from '../../app/tokens/status-color-token';
         <select
           aria-label="ville"
           formControlName="ville"
-          class="p-2 border rounded-lg mt-2 appearance-none w-1/2"
+          class="p-2 border rounded-lg mt-2 w-1/2"
         >
           <option value="null" selected>Choisissez une localisation</option>
           @if(annonces().length > 0) { @for (annonce of annonces(); track
@@ -69,7 +69,7 @@ import { STATUS_COLOR } from '../../app/tokens/status-color-token';
         <select
           aria-label="salaire"
           formControlName="salaire"
-          class="p-2 border rounded-lg mt-2 appearance-none w-1/2"
+          class="p-2 border rounded-lg mt-2 w-1/2"
         >
           <option value="null" selected>Choisissez un revenu</option>
           @if(annonces().length > 0) { @for (annonce of annonces(); track
@@ -82,7 +82,7 @@ import { STATUS_COLOR } from '../../app/tokens/status-color-token';
         <select
           aria-label="status"
           formControlName="status"
-          class="p-2 border rounded-lg h-[42px] mt-2 appearance-none w-1/2"
+          class="p-2 border rounded-lg mt-2 w-1/2"
         >
           <option value="null" selected>Choisissez un statut</option>
           @for (status of statusList; track status.label) {
