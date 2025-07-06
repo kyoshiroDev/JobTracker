@@ -26,7 +26,7 @@ import { ButtonComponent } from './components/button/button.component';
       <fdw-annonce-form (modalClose)="closeModal()" />
       }
       <!-- Sidebar fixe -->
-      @if (!showSideBar()){
+      @if (showSideBar()){
         <fdw-sidebar (closeSideBar)="closeSide()" class="fixed z-3 w-fit h-1/1 md:block md:relative md:z-0"/>
       }
       @defer {<fdw-sidebar class="hidden md:block md:relative md:z-0"/>}
