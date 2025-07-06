@@ -5,12 +5,12 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [],
   template: `<button
-    class="flex justify-center items-center text-5xl md:text-7xl
+    class="flex justify-center items-center text-3xl lg:text-6xl
   text-JobTracker-gray bg-JobTracker-side rounded-full
-   w-12 h-12 md:w-20 md:h-20 cursor-pointer
+   w-9 h-9 lg:w-18 lg:h-18 cursor-pointer
   hover:bg-JobTracker-side-hover fixed bottom-8 right-2 md:right-5"
   >
-    <p class="mb-1.5">+</p>
+    <p class="mb-0.5 lg:mb-1.5">+</p>
   </button>`,
 })
 export class ButtonComponent {}

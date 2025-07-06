@@ -3,7 +3,7 @@ import {
   Component,
   inject,
   input,
-  output,
+  output, OutputEmitterRef
 } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Annonce } from '../annonce';
@@ -20,7 +20,7 @@ import { STATUS_COLOR } from '../../app/tokens/status-color-token';
     <form
       (change)="formValue.emit(this.researchForm.value)"
       [formGroup]="researchForm"
-      class="bg-white p-3 rounded-lg shadow-md flex flex-wrap container justify-center gap-3 mt-5 m-auto"
+      class="bg-white p-4 rounded-lg shadow-md flex flex-wrap container justify-center gap-4 mt-5 m-auto"
     >
       <p class="text-2xl text-JobTracker-blue font-semibold">RECHERCHER</p>
 
@@ -29,7 +29,7 @@ import { STATUS_COLOR } from '../../app/tokens/status-color-token';
         type="text"
         formControlName="poste"
         placeholder="Mot-clé..."
-        class="w-1/1 p-2 border rounded-lg mt-2"
+        class="w-1/1"
       />
       <fieldset
         class="flex justify-around gap-3 w-[500px]"
@@ -38,7 +38,7 @@ import { STATUS_COLOR } from '../../app/tokens/status-color-token';
         <select
           aria-label="name"
           formControlName="name"
-          class="p-2 border rounded-lg mt-2 w-1/2"
+          class="w-1/2"
         >
           <option value="null" selected>Choisissez une entreprise</option>
           @if(annonces().length > 0) { @for (annonce of annonces(); track
@@ -51,7 +51,7 @@ import { STATUS_COLOR } from '../../app/tokens/status-color-token';
         <select
           aria-label="ville"
           formControlName="ville"
-          class="p-2 border rounded-lg mt-2 w-1/2"
+          class="w-1/2"
         >
           <option value="null" selected>Choisissez une localisation</option>
           @if(annonces().length > 0) { @for (annonce of annonces(); track
@@ -69,7 +69,7 @@ import { STATUS_COLOR } from '../../app/tokens/status-color-token';
         <select
           aria-label="salaire"
           formControlName="salaire"
-          class="p-2 border rounded-lg mt-2 w-1/2"
+          class="w-1/2"
         >
           <option value="null" selected>Choisissez un revenu</option>
           @if(annonces().length > 0) { @for (annonce of annonces(); track
@@ -82,7 +82,7 @@ import { STATUS_COLOR } from '../../app/tokens/status-color-token';
         <select
           aria-label="status"
           formControlName="status"
-          class="p-2 border rounded-lg mt-2 w-1/2"
+          class="w-1/2"
         >
           <option value="null" selected>Choisissez un statut</option>
           @for (status of statusList; track status.label) {
@@ -94,13 +94,13 @@ import { STATUS_COLOR } from '../../app/tokens/status-color-token';
         <button
           (click)="resetForm.emit(this.researchForm.reset())"
           type="button"
-          class="flex justify-center items-center cursor-pointer h-[42px] w-[42px] mt-2 bg-JobTracker-side rounded-lg hover:bg-JobTracker-side-hover"
+          class="flex justify-center items-center cursor-pointer h-8 w-8 bg-JobTracker-side rounded-lg hover:bg-JobTracker-side-hover"
         >
           <svg
             class="text-JobTracker-white"
             xmlns="http://www.w3.org/2000/svg"
-            width="32"
-            height="32"
+            width="20"
+            height="20"
             viewBox="0 0 21 21"
             role="button"
             aria-label="bouton pour reset le formulaire"

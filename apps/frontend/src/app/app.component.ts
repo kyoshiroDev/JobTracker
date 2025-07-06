@@ -1,8 +1,8 @@
 import {
   ChangeDetectionStrategy,
-  Component,
+  Component, ElementRef, inject,
   signal,
-  WritableSignal,
+  WritableSignal
 } from '@angular/core';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { RouterOutlet } from '@angular/router';
@@ -22,17 +22,20 @@ import { ButtonComponent } from './components/button/button.component';
   ],
   template: `
     <div class="flex h-dvh">
-      @if (showModal()) { @defer {
+      @if (showModal()) {
       <fdw-annonce-form (modalClose)="closeModal()" />
-      } }
+      }
       <!-- Sidebar fixe -->
-      <fdw-sidebar />
+      @if (!showSideBar()){
+        <fdw-sidebar (closeSideBar)="closeSide()" class="fixed z-3 w-fit h-1/1 md:block md:relative md:z-0"/>
+      }
+      @defer {<fdw-sidebar class="hidden md:block md:relative md:z-0"/>}
 
       <!-- Header -->
-      <fdw-header class="md:pl-[300px] fixed w-full" />
+      <fdw-header class="lg:pl-[250px] fixed w-full" (openSideBar)="openSide()"/>
 
       <!-- Contenu des pages selon les routes -->
-      <main class="w-full mx-auto mt-[120px] max-h-dvh overflow-y-auto">
+      <main class="w-full mx-auto mt-[120px] max-h-dvh overflow-y-auto px-4">
         <router-outlet></router-outlet>
         <fdw-button (click)="openModal()" class="lg:flex lg:justify-center" />
       </main>
@@ -40,15 +43,25 @@ import { ButtonComponent } from './components/button/button.component';
   `,
 })
 export class AppComponent {
+  private el = inject(ElementRef)
   showModal: WritableSignal<boolean> = signal(false);
+  showSideBar: WritableSignal<boolean> = signal(false);
 
-  openModal() {
+  protected openModal() {
     this.showModal.set(true);
   }
 
-  closeModal() {
+  protected closeModal() {
     this.showModal.set(false);
   }
 
+  openSide(): void{
+    if (this.showSideBar) {
+      this.showSideBar.set(!this.showSideBar());
+    }
+  }
 
+  closeSide(): void {
+    this.showSideBar.set(!this.showSideBar());
+  }
 }
