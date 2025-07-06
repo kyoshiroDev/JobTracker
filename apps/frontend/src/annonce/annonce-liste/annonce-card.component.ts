@@ -18,31 +18,44 @@ import { RouterLink } from '@angular/router';
   template: `
     <a
       [routerLink]="['/annonce', annonce().id]"
-      class="flex flex-col items-center xl:flex-row min-h-[250px] lg:min-h-[150px] xl:text-left gap-1 bg-JobTracker-white rounded-md p-4 shadow-md cursor-pointer hover:scale-102 transition-transform duration-500 ease-in-out"
+      class="flex flex-col items-center min-h-[170px] max-h-fit xl:text-left gap-4 bg-JobTracker-white rounded-md p-4 shadow-md cursor-pointer hover:scale-102 transition-transform duration-500 ease-in-out"
     >
-      <div
-        class="w-[100px] flex flex-col justify-center text-2xl text-JobTracker-blue font-semibold"
-      >
-        <p>{{ annonce().content.salaire }} €</p>
-      </div>
-      <div class="grow pl-15">
-        <p class="text-2xl text-JobTracker-blue font-semibold">
+      <div class="flex justify-between w-full">
+        <p class="text-lg md:text-2xl text-JobTracker-blue font-semibold first-letter:uppercase">
           {{ annonce().poste }}
         </p>
-        <p class="text-xl text-JobTracker-blue font-semibold">
-          {{ annonce().entreprise.name }}
-        </p>
-        <p class="flex items-center gap-2 text-lg">
-          {{ annonce().entreprise.ville }}
-        </p>
-      </div>
-      <div class="flex items-center w-[120px] text-JobTracker-blue">
-        <p
-          [class]="statusConfig()"
-          class="rounded-4xl p-2 w-full text-center text-JobTracker-white font-semibold"
+        <div
+          class="flex items-center justify-end w-[120px] text-JobTracker-blue"
         >
-          {{ annonce().content.status }}
-        </p>
+          <p
+            [class]="statusConfig()"
+            class="min-w-[74px] md:min-w-[110px] md:text-sm text-xs rounded-4xl py-2 px-2 md:px-4 text-center text-JobTracker-white font-semibold"
+          >
+            {{ annonce().content.status }}
+          </p>
+        </div>
+      </div>
+      <div class="flex flex-col justify-start w-full gap-1">
+        <div class="flex items-center text-sm md:text-sm gap-1">
+          <p class="font-semibold">
+            Entreprise :
+          </p>
+          <p>
+            {{ annonce().entreprise.name }}
+          </p>
+        </div>
+        <div class="flex items-center text-sm md:text-sm gap-1">
+          <p class="font-semibold">
+            Ville :</p>
+          <p>
+            {{ annonce().entreprise.ville }}
+          </p>
+        </div>
+      </div>
+      <div
+        class="w-full flex justify-start items-center text-sm md:text-lg text-JobTracker-blue font-semibold"
+      >
+        <p>Salaire : {{ annonce().content.salaire }} € /ans</p>
       </div>
     </a>
   `,
