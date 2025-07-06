@@ -57,11 +57,11 @@ export class AppComponent {
 
   openSide(): void{
     if (this.showSideBar) {
-      this.showSideBar.set(!this.showSideBar());
+      this.showSideBar.set(true);
     }
   }
 
-  closeSide(): void {
-    this.showSideBar.set(!this.showSideBar());
+  closeSide() {
+    this.showSideBar.set(false);
   }
 }
