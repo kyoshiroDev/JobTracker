@@ -22,7 +22,7 @@ import { AnnonceCardComponent } from './annonce-card.component';
       (formValue)="annonceSearch.set($event)"
       (resetForm)="annonceSearch.set({})"
     />
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 py-4 px-2 mt-5">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 py-4 px-2">
       @for (annonce of annonceFilter(); track annonce.id) {
       <fdw-annonce-card [annonce]="annonce" />
       } @empty { @for (annonce of annonces(); track annonce.id) {
