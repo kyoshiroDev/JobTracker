@@ -43,4 +43,5 @@ import { NgOptimizedImage } from '@angular/common';
 export class HeaderComponent {
   readonly name = signal<string>('Peter Parker');
   readonly openSideBar = output()
+  readonly closeSideBar = output()
 }

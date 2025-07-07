@@ -1,6 +1,6 @@
 import {
   ChangeDetectionStrategy,
-  Component, ElementRef, inject,
+  Component, computed,
   signal,
   WritableSignal
 } from '@angular/core';
@@ -9,6 +9,7 @@ import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
 import { AnnonceFormComponent } from '../annonce/annonce-form/annonce-form.component';
 import { ButtonComponent } from './components/button/button.component';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'fdw-root',
@@ -23,19 +24,25 @@ import { ButtonComponent } from './components/button/button.component';
   template: `
     <div class="flex h-dvh">
       @if (showModal()) {
-      <fdw-annonce-form (modalClose)="closeModal()" />
+      <fdw-annonce-form (modalClose)="openModal()" />
       }
       <!-- Sidebar fixe -->
-      @if (showSideBar()){
-        <fdw-sidebar (closeSideBar)="closeSide()" class="fixed z-3 w-fit h-1/1 md:block md:relative md:z-0"/>
-      }
-      @defer {<fdw-sidebar class="hidden md:block md:relative md:z-0"/>}
+      <fdw-sidebar
+        (closeSideBar)="!this.showSideBar()"
+        class="fixed top-0 left-0 h-full w-64 bg-gray-800 text-white shadow-lg transition-transform duration-300 ease-in-out z-50 lg:relative lg:translate-x-0"
+        [class]="sideBarClass()"
+      />
 
       <!-- Header -->
-      <fdw-header class="lg:pl-[250px] fixed w-full" (openSideBar)="openSide()"/>
+      <fdw-header
+        class="lg:pl-[250px] fixed w-full"
+        (openSideBar)="openSideBar()"
+      />
 
       <!-- Contenu des pages selon les routes -->
-      <main class="w-full mx-auto mt-[120px] max-h-dvh overflow-y-auto px-4">
+      <main
+        class="w-full mx-auto mt-[80px] md:mt-[120px] max-h-dvh overflow-y-auto px-4"
+      >
         <router-outlet></router-outlet>
         <fdw-button (click)="openModal()" class="lg:flex lg:justify-center" />
       </main>
@@ -43,25 +50,20 @@ import { ButtonComponent } from './components/button/button.component';
   `,
 })
 export class AppComponent {
-  private el = inject(ElementRef)
-  showModal: WritableSignal<boolean> = signal(false);
-  showSideBar: WritableSignal<boolean> = signal(false);
+  protected readonly showModal: WritableSignal<boolean> = signal(false);
+  protected readonly showSideBar: WritableSignal<boolean> = signal(false);
 
   protected openModal() {
-    this.showModal.set(true);
+    this.showModal.set(!this.showModal());
   }
 
-  protected closeModal() {
-    this.showModal.set(false);
+  protected openSideBar() {
+    this.showSideBar.set(!this.showSideBar());
   }
 
-  openSide(): void{
-    if (this.showSideBar) {
-      this.showSideBar.set(true);
-    }
-  }
-
-  closeSide() {
-    this.showSideBar.set(false);
-  }
+  protected sideBarClass = computed(() => {
+   return this.showSideBar()
+     ? 'translate-x-0'
+     : '-translate-x-full lg:translate-x-0';
+  })
 }
