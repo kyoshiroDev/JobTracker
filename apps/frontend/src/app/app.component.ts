@@ -28,7 +28,7 @@ import { NgClass } from '@angular/common';
       }
       <!-- Sidebar fixe -->
       <fdw-sidebar
-        (closeSideBar)="!this.showSideBar()"
+        (closeSideBar)="openSideBar()"
         class="fixed top-0 left-0 h-full w-64 bg-gray-800 text-white shadow-lg transition-transform duration-300 ease-in-out z-50 lg:relative lg:translate-x-0"
         [class]="sideBarClass()"
       />
