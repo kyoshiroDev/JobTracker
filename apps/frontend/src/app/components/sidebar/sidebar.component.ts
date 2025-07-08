@@ -1,8 +1,9 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  inject, output,
-  signal
+  inject,
+  output,
+  signal,
 } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { Sidebarmenu } from './sidebarmenu';
@@ -26,20 +27,20 @@ import { Sidebarmenu } from './sidebarmenu';
       </div>
       <div class="flex flex-col">
         @for (menu of sidebar(); track menu.id) {
-          <a
-            class="py-2
+        <a
+          class="py-2
     pl-4
     pr-12
     my-2.5
     hover:bg-JobTracker-side-hover
     cursor-pointer
     rounded-md"
-            (click)="closeSideBar.emit()"
-            routerLinkActive="active-link"
-            [routerLinkActiveOptions]="{ exact: true }"
-            routerLink="{{ menu.routerLink }}"
+          (click)="closeSideBar.emit()"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: true }"
+          routerLink="{{ menu.routerLink }}"
           >{{ menu.name }}</a
-          >
+        >
         }
       </div>
     </div>
@@ -47,7 +48,7 @@ import { Sidebarmenu } from './sidebarmenu';
 })
 export class SidebarComponent {
   protected readonly router = inject(Router);
-  protected readonly closeSideBar =output()
+  protected readonly closeSideBar = output();
 
   protected readonly sidebar = signal<Sidebarmenu[]>([
     { id: 1, name: '📊 Dashboard', routerLink: '/' },
