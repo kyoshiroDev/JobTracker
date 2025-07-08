@@ -40,7 +40,7 @@ import { STATUS_COLOR } from '../../app/tokens/status-color-token';
           formControlName="name"
           class="w-1/2"
         >
-          <option value="null" selected>Choisissez une entreprise</option>
+          <option value="null" selected>Choisir une entreprise</option>
           @if(annonces().length > 0) { @for (annonce of annonces(); track
           annonce.id) {
           <option [value]="annonce.entreprise.name">
@@ -53,7 +53,7 @@ import { STATUS_COLOR } from '../../app/tokens/status-color-token';
           formControlName="ville"
           class="w-1/2"
         >
-          <option value="null" selected>Choisissez une localisation</option>
+          <option value="null" selected>Choisir une localisation</option>
           @if(annonces().length > 0) { @for (annonce of annonces(); track
           annonce.id) {
           <option [value]="annonce.entreprise.ville">
@@ -71,7 +71,7 @@ import { STATUS_COLOR } from '../../app/tokens/status-color-token';
           formControlName="salaire"
           class="w-1/2"
         >
-          <option value="null" selected>Choisissez un revenu</option>
+          <option value="null" selected>Choisir un revenu</option>
           @if(annonces().length > 0) { @for (annonce of annonces(); track
           annonce.id) {
           <option [value]="annonce.content.salaire">
@@ -84,7 +84,7 @@ import { STATUS_COLOR } from '../../app/tokens/status-color-token';
           formControlName="status"
           class="w-1/2"
         >
-          <option value="null" selected>Choisissez un statut</option>
+          <option value="null" selected>Choisir un statut</option>
           @for (status of statusList; track status.label) {
           <option [value]="status.label">{{ status.label }}</option>
           }
