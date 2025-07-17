@@ -1,12 +1,13 @@
 import {
   ChangeDetectionStrategy,
-  Component,
+  Component, inject,
   input,
-  output,
+  output
 } from '@angular/core';
 import { Annonce } from '../annonce';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { STATUS_COLOR } from '../../app/tokens/status-color-token';
 
 @Component({
   selector: 'fdw-annonce-detail-header',
@@ -35,7 +36,7 @@ import { RouterLink } from '@angular/router';
           <h2
             class="text-4xl font-bold text-JobTracker-white truncate mb-1 uppercase"
           >
-            {{ annonce().poste }}
+            {{ annonce().job }}
           </h2>
 
           <!-- Boutton modifier -->
@@ -57,30 +58,42 @@ import { RouterLink } from '@angular/router';
           </svg>
         </div>
 
-        <!-- Société -->
-        <div class="flex justify-center items-center gap-3">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 32 32"
+        <div
+          class="flex justify-between items-center px-8 py-4 bg-JobTracker-side"
+        >
+          <div class="text-sm text-JobTracker-white">
+            Publiée le {{ annonce().createdAt | date : 'dd/MM/yyyy' }}
+          </div>
+          <div class="flex flex-1 justify-center items-center gap-3">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 32 32"
+            >
+              <path
+                fill="currentColor"
+                stroke="currentColor"
+                stroke-width="1"
+                d="M8 8h2v4H8zm0 6h2v4H8zm6-6h2v4h-2zm0 6h2v4h-2zm-6 6h2v4H8zm6 0h2v4h-2z"
+              />
+              <path
+                fill="currentColor"
+                stroke="currentColor"
+                stroke-width="1"
+                d="M30 14a2 2 0 0 0-2-2h-6V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v26h28ZM4 4h16v24H4Zm18 24V14h6v14Z"
+              />
+            </svg>
+            <p class="text-3xl  font-medium">
+              {{ annonce().company.name }}
+            </p>
+          </div>
+          <span
+            class="px-6 py-2 text-sm text-JobTracker-white font-semibold rounded-full"
+            [class]="statusColorClass(this.annonce().content.status)"
           >
-            <path
-              fill="currentColor"
-              stroke="currentColor"
-              stroke-width="1"
-              d="M8 8h2v4H8zm0 6h2v4H8zm6-6h2v4h-2zm0 6h2v4h-2zm-6 6h2v4H8zm6 0h2v4h-2z"
-            />
-            <path
-              fill="currentColor"
-              stroke="currentColor"
-              stroke-width="1"
-              d="M30 14a2 2 0 0 0-2-2h-6V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v26h28ZM4 4h16v24H4Zm18 24V14h6v14Z"
-            />
-          </svg>
-          <p class="text-3xl  font-medium">
-            {{ annonce().entreprise.name }}
-          </p>
+        {{ annonce().content.status }}
+      </span>
         </div>
 
         <!-- Contact de la société -->
@@ -90,7 +103,6 @@ import { RouterLink } from '@angular/router';
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="h-5 w-5 mr-1"
-              fill="none"
               viewBox="0 2 24 24"
               stroke="currentColor"
             >
@@ -99,7 +111,7 @@ import { RouterLink } from '@angular/router';
                 d="M12 22q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12v1.45q0 1.475-1.012 2.513T18.5 17q-.875 0-1.65-.375t-1.3-1.075q-.725.725-1.638 1.088T12 17q-2.075 0-3.537-1.463T7 12t1.463-3.537T12 7t3.538 1.463T17 12v1.45q0 .65.425 1.1T18.5 15t1.075-.45t.425-1.1V12q0-3.35-2.325-5.675T12 4T6.325 6.325T4 12t2.325 5.675T12 20h5v2zm0-7q1.25 0 2.125-.875T15 12t-.875-2.125T12 9t-2.125.875T9 12t.875 2.125T12 15"
               />
             </svg>
-            {{ annonce().entreprise.email }}
+            {{ annonce().company.email }}
           </div>
 
           <!-- Téléphone -->
@@ -116,7 +128,7 @@ import { RouterLink } from '@angular/router';
                 d="M18.93 20q-2.528 0-5.184-1.266t-4.944-3.555q-2.27-2.288-3.536-4.935T4 5.07q0-.45.3-.76T5.05 4h2.473q.408 0 .712.257t.411.659L9.142 7.3q.07.42-.025.733t-.333.513L6.59 10.592q.616 1.117 1.361 2.076t1.59 1.817q.87.87 1.874 1.62q1.004.749 2.204 1.414l2.139-2.177q.244-.263.549-.347q.304-.083.674-.033l2.103.43q.408.1.662.411t.254.712v2.435q0 .45-.31.75t-.76.3"
               />
             </svg>
-            {{ annonce().entreprise.phone }}
+            {{ annonce().company.phone }}
           </div>
         </div>
       </div>
@@ -126,9 +138,9 @@ import { RouterLink } from '@angular/router';
         <!-- La ville -->
         <div class="flex items-center">
           <svg
+            fill="none"
             xmlns="http://www.w3.org/2000/svg"
             class="h-5 w-5 mr-1"
-            fill="none"
             viewBox="0 2 24 24"
             stroke="currentColor"
           >
@@ -145,18 +157,18 @@ import { RouterLink } from '@angular/router';
               d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
             />
           </svg>
-          {{ annonce().entreprise.ville }}
+          {{ annonce().company.city }}
         </div>
 
         <!-- Salaire -->
         <div class="flex items-center">
           <svg
+            fill="none"
             xmlns="http://www.w3.org/2000/svg"
             class="h-5 w-5 mr-1"
             viewBox="0 2 24 24"
           >
             <g
-              fill="none"
               stroke="currentColor"
               stroke-linecap="round"
               stroke-linejoin="round"
@@ -169,7 +181,7 @@ import { RouterLink } from '@angular/router';
             </g>
           </svg>
           {{
-            annonce().content.salaire | currency : 'EUR' : 'symbol' : '1.0-0'
+            annonce().content.salary | currency : 'EUR' : 'symbol' : '1.0-0'
           }}
           /an
         </div>
@@ -190,7 +202,7 @@ import { RouterLink } from '@angular/router';
               d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
             />
           </svg>
-          {{ annonce().content.typeContrat }}
+          {{ annonce().content.contractType }}
         </div>
 
         <!-- Mode de travail -->
@@ -209,7 +221,7 @@ import { RouterLink } from '@angular/router';
               d="M4.616 20q-.691 0-1.153-.462T3 18.384V8.616q0-.691.463-1.153T4.615 7H9V5.615q0-.69.463-1.153T10.616 4h2.769q.69 0 1.153.462T15 5.615V7h4.385q.69 0 1.152.463T21 8.616v9.769q0 .69-.463 1.153T19.385 20zm0-1h14.769q.23 0 .423-.192t.192-.424V8.616q0-.231-.192-.424T19.385 8H4.615q-.23 0-.423.192T4 8.616v9.769q0 .23.192.423t.423.192M10 7h4V5.615q0-.23-.192-.423T13.385 5h-2.77q-.23 0-.423.192T10 5.615zM4 19V8z"
             />
           </svg>
-          {{ annonce().content.modeTravail }}
+          {{ annonce().content.workMode }}
         </div>
       </div>
     </div>
@@ -217,4 +229,10 @@ import { RouterLink } from '@angular/router';
 })
 export class AnnonceDetailHeaderComponent {
   readonly annonce = input.required<Annonce>();
+  readonly status = inject(STATUS_COLOR);
+
+  protected statusColorClass(status: string): string {
+    const statusConfig = this.status.find((item) => item.label === status);
+    return statusConfig?.colorClassBg || 'text-JobTracker-blue';
+  }
 }

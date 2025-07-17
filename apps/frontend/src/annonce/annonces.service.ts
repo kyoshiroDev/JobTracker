@@ -1,34 +1,40 @@
 import { computed, Injectable, signal, Signal } from '@angular/core';
 import { Annonce } from './annonce';
-import { AnnonceForm } from './annonce-form/annonceForm';
+
+type AnnonceFilter = {
+  job: string | null;
+  salary: string | null;
+  status: string | null;
+  name: string | null;
+  city: string | null;
+};
 
 @Injectable({
   providedIn: 'root',
 })
 export class AnnoncesService {
-  protected readonly id = signal(5);
-  protected readonly annonces = signal<Annonce[]>([
+  protected _annonces = signal<Annonce[]>([
     {
       id: 1,
-      poste: 'développeur front-end Angular',
-      entreprise: {
+      job: 'développeur front-end Angular',
+      company: {
         name: 'Google',
-        ville: 'Lyon',
+        city: 'Lyon',
         phone: 128525,
         email: 'société@gmail.com',
       },
       content: {
         about:
           'Adeptis Group recrute un Développeur Full Stack Senior pour le compte d’un éditeur technologique innovant spécialisé en cybersécurité. Notre client est une startup française dynamique qui développe des solutions de protection pour les entreprises. Grâce à sa technologie d’analyse comportementale, elle offre une protection fluide et sans installation, révolutionnant ainsi la gestion de la sécurité web.',
-        descriptif:
+        description:
           'Participer au développement du portail (front-office et back-office) afin d’enrichir les fonctionnalités de la solution. Collaborer étroitement avec les équipes techniques et les experts métier pour faire évoluer le produit. Proposer des améliorations en termes d’expérience utilisateur et assurer la qualité de vos développements par des tests rigoureux.',
-        competence:
+        skills:
           'Excellente maîtrise des technologies front-end, notamment Angular. Connaissances en développement back-end (Java) ou forte motivation pour apprendre. Expérience avec Docker et Git (GitLab). Autonomie, esprit d’équipe et force de proposition indispensables.Excellente maîtrise des technologies front-end, notamment Angular. Connaissances en développement back-end (Java) ou forte motivation pour apprendre. Expérience avec Docker et Git (GitLab). Autonomie, esprit d’équipe et force de proposition indispensables.',
-        avantage:
+        benifits:
           'Excellente maîtrise des technologies front-end, notamment Angular. Connaissances en développement back-end (Java) ou forte motivation pour apprendre. Expérience avec Docker et Git (GitLab). Autonomie, esprit d’équipe et force de proposition indispensables.',
-        typeContrat: 'CDI',
-        modeTravail: 'fullremote',
-        salaire: 35000,
+        contractType: 'CDI',
+        workMode: 'fullremote',
+        salary: 35000,
         annonceLink: '',
         status: 'En attente',
       },
@@ -36,10 +42,10 @@ export class AnnoncesService {
     },
     {
       id: 2,
-      poste: 'développeur front-end NextJs',
-      entreprise: {
+      job: 'développeur front-end NextJs',
+      company: {
         name: 'Facebook',
-        ville: 'Paris',
+        city: 'Paris',
         phone: 128525,
         email: 'société@gmail.com',
       },
@@ -47,15 +53,15 @@ export class AnnoncesService {
       content: {
         about:
           ' Adeptis Group recrute un Développeur Full Stack Senior pour le compte d’un éditeur technologique innovant spécialisé en cybersécurité. Notre client est une startup française dynamique qui développe des solutions de protection pour les entreprises. Grâce à sa technologie d’analyse comportementale, elle offre une protection fluide et sans installation, révolutionnant ainsi la gestion de la sécurité web.',
-        descriptif:
+        description:
           'Participer au développement du portail (front-office et back-office) afin d’enrichir les fonctionnalités de la solution. Collaborer étroitement avec les équipes techniques et les experts métier pour faire évoluer le produit. Proposer des améliorations en termes d’expérience utilisateur et assurer la qualité de vos développements par des tests rigoureux.',
-        competence:
+        skills:
           'Excellente maîtrise des technologies front-end, notamment Angular. Connaissances en développement back-end (Java) ou forte motivation pour apprendre. Expérience avec Docker et Git (GitLab). Autonomie, esprit d’équipe et force de proposition indispensables.Excellente maîtrise des technologies front-end, notamment Angular. Connaissances en développement back-end (Java) ou forte motivation pour apprendre. Expérience avec Docker et Git (GitLab). Autonomie, esprit d’équipe et force de proposition indispensables.',
-        avantage:
+        benifits:
           'Excellente maîtrise des technologies front-end, notamment Angular. Connaissances en développement back-end (Java) ou forte motivation pour apprendre. Expérience avec Docker et Git (GitLab). Autonomie, esprit d’équipe et force de proposition indispensables.',
-        typeContrat: 'CDI',
-        modeTravail: 'fullremote',
-        salaire: 40000,
+        contractType: 'CDI',
+        workMode: 'fullremote',
+        salary: 40000,
         annonceLink: '',
         status: 'Entretien',
       },
@@ -63,25 +69,25 @@ export class AnnoncesService {
     },
     {
       id: 3,
-      poste: 'développeur back-end',
-      entreprise: {
+      job: 'développeur back-end',
+      company: {
         name: 'Amazon',
-        ville: 'Nante',
+        city: 'Nante',
         phone: 128525,
         email: 'société@gmail.com',
       },
       content: {
         about:
           ' Adeptis Group recrute un Développeur Full Stack Senior pour le compte d’un éditeur technologique innovant spécialisé en cybersécurité. Notre client est une startup française dynamique qui développe des solutions de protection pour les entreprises. Grâce à sa technologie d’analyse comportementale, elle offre une protection fluide et sans installation, révolutionnant ainsi la gestion de la sécurité web.',
-        descriptif:
+        description:
           'Participer au développement du portail (front-office et back-office) afin d’enrichir les fonctionnalités de la solution. Collaborer étroitement avec les équipes techniques et les experts métier pour faire évoluer le produit. Proposer des améliorations en termes d’expérience utilisateur et assurer la qualité de vos développements par des tests rigoureux.',
-        competence:
+        skills:
           'Excellente maîtrise des technologies front-end, notamment Angular. Connaissances en développement back-end (Java) ou forte motivation pour apprendre. Expérience avec Docker et Git (GitLab). Autonomie, esprit d’équipe et force de proposition indispensables.Excellente maîtrise des technologies front-end, notamment Angular. Connaissances en développement back-end (Java) ou forte motivation pour apprendre. Expérience avec Docker et Git (GitLab). Autonomie, esprit d’équipe et force de proposition indispensables.',
-        avantage:
+        benifits:
           'Excellente maîtrise des technologies front-end, notamment Angular. Connaissances en développement back-end (Java) ou forte motivation pour apprendre. Expérience avec Docker et Git (GitLab). Autonomie, esprit d’équipe et force de proposition indispensables.',
-        typeContrat: 'CDI',
-        modeTravail: 'fullremote',
-        salaire: 50000,
+        contractType: 'CDI',
+        workMode: 'fullremote',
+        salary: 50000,
         annonceLink: '',
         status: 'En attente',
       },
@@ -90,25 +96,25 @@ export class AnnoncesService {
     },
     {
       id: 4,
-      poste: 'développeur back-end NestJs',
-      entreprise: {
+      job: 'développeur back-end NestJs',
+      company: {
         name: 'Prestashop',
-        ville: 'Bordeau',
+        city: 'Bordeau',
         phone: 25862541,
         email: 'société@gmail.com',
       },
       content: {
         about:
           'Adeptis Group recrute un Développeur Full Stack Senior pour le compte d’un éditeur technologique innovant spécialisé en cybersécurité. Notre client est une startup française dynamique qui développe des solutions de protection pour les entreprises. Grâce à sa technologie d’analyse comportementale, elle offre une protection fluide et sans installation, révolutionnant ainsi la gestion de la sécurité web.',
-        descriptif:
+        description:
           'Participer au développement du portail (front-office et back-office) afin d’enrichir les fonctionnalités de la solution. Collaborer étroitement avec les équipes techniques et les experts métier pour faire évoluer le produit. Proposer des améliorations en termes d’expérience utilisateur et assurer la qualité de vos développements par des tests rigoureux.',
-        competence:
+        skills:
           'Excellente maîtrise des technologies front-end, notamment Angular. Connaissances en développement back-end (Java) ou forte motivation pour apprendre. Expérience avec Docker et Git (GitLab). Autonomie, esprit d’équipe et force de proposition indispensables.Excellente maîtrise des technologies front-end, notamment Angular. Connaissances en développement back-end (Java) ou forte motivation pour apprendre. Expérience avec Docker et Git (GitLab). Autonomie, esprit d’équipe et force de proposition indispensables.',
-        avantage:
+        benifits:
           'Excellente maîtrise des technologies front-end, notamment Angular. Connaissances en développement back-end (Java) ou forte motivation pour apprendre. Expérience avec Docker et Git (GitLab). Autonomie, esprit d’équipe et force de proposition indispensables.',
-        typeContrat: 'CDI',
-        modeTravail: 'fullremote',
-        salaire: 45000,
+        contractType: 'CDI',
+        workMode: 'fullremote',
+        salary: 45000,
         annonceLink: '',
         status: 'À relancer',
       },
@@ -116,47 +122,78 @@ export class AnnoncesService {
     },
     {
       id: 5,
-      poste: 'développeur back-end Express',
-      entreprise: {
+      job: 'développeur back-end Express',
+      company: {
         name: 'Netflix',
-        ville: 'Dijon',
+        city: 'Dijon',
         phone: 25862541,
         email: 'société@gmail.com',
       },
       content: {
         about:
           'Adeptis Group recrute un Développeur Full Stack Senior pour le compte d’un éditeur technologique innovant spécialisé en cybersécurité. Notre client est une startup française dynamique qui développe des solutions de protection pour les entreprises. Grâce à sa technologie d’analyse comportementale, elle offre une protection fluide et sans installation, révolutionnant ainsi la gestion de la sécurité web.',
-        descriptif:
+        description:
           'Participer au développement du portail (front-office et back-office) afin d’enrichir les fonctionnalités de la solution. Collaborer étroitement avec les équipes techniques et les experts métier pour faire évoluer le produit. Proposer des améliorations en termes d’expérience utilisateur et assurer la qualité de vos développements par des tests rigoureux.Participer au développement du portail (front-office et back-office) afin d’enrichir les fonctionnalités de la solution. Collaborer étroitement avec les équipes techniques et les experts métier pour faire évoluer le produit. Proposer des améliorations en termes d’expérience utilisateur et assurer la qualité de vos développements par des tests rigoureux.',
-        competence:
+        skills:
           'Excellente maîtrise des technologies front-end, notamment Angular. Connaissances en développement back-end (Java) ou forte motivation pour apprendre. Expérience avec Docker et Git (GitLab). Autonomie, esprit d’équipe et force de proposition indispensables.Excellente maîtrise des technologies front-end, notamment Angular. Connaissances en développement back-end (Java) ou forte motivation pour apprendre. Expérience avec Docker et Git (GitLab). Autonomie, esprit d’équipe et force de proposition indispensables.',
-        avantage:
+        benifits:
           'Excellente maîtrise des technologies front-end, notamment Angular. Connaissances en développement back-end (Java) ou forte motivation pour apprendre. Expérience avec Docker et Git (GitLab). Autonomie, esprit d’équipe et force de proposition indispensables.',
-        typeContrat: 'CDI',
-        modeTravail: 'fullremote',
-        salaire: 55000,
+        contractType: 'CDI',
+        workMode: 'fullremote',
+        salary: 55000,
         annonceLink: '',
         status: 'Rejetée',
       },
       createdAt: new Date(),
     },
   ]);
+  private _filters = signal<AnnonceFilter>({
+    job: '',
+    salary: '',
+    status: '',
+    name: '',
+    city: '',
+  });
 
   getAll(): Signal<Annonce[]> {
-    return this.annonces.asReadonly();
+    return this._annonces.asReadonly();
   }
 
+  updateFilters(filtersData: Partial<AnnonceFilter>) {
+    this._filters.update((previous) => ({ ...previous, ...filtersData }));
+  }
+  readonly filteredAnnonces = computed(() => {
+    const filter = this._filters();
+
+    const normalize = (str: string) =>
+      str.toLowerCase().trim().replaceAll(' ', '').replaceAll('-', '').replaceAll('é', 'e');
+
+    const filterJob = filter.job ? normalize(filter.job) : '';
+
+    return this._annonces().filter((annonce) => {
+      const jobNormalized = normalize(annonce.job);
+      const nameMatch = annonce.company.name === filter.name;
+      const cityMatch = annonce.company.city === filter.city;
+      const salaryMatch = annonce.content.salary.toString() === filter.salary?.toString();
+      const statusMatch = annonce.content.status === filter.status;
+      const jobMatch = filterJob ? jobNormalized.includes(filterJob) : false;
+
+      return jobMatch || nameMatch || cityMatch || salaryMatch || statusMatch;
+    });
+  });
+
   addAnnonce(formDataAnnonce: Annonce) {
+    const id = 5;
     const newAnnonce: Annonce = {
       ...formDataAnnonce,
-      id: this.id() + 1,
+      id: id + 1,
       createdAt: new Date(formDataAnnonce.createdAt),
     };
-    this.annonces.update((annonce) => [...annonce, newAnnonce]);
+    this._annonces.update((annonce) => [...annonce, newAnnonce]);
   }
 
   readonly countByStatus = computed(() => {
-    return this.annonces().reduce((acc, annonce) => {
+    return this._annonces().reduce((acc, annonce) => {
       const count = acc.get(annonce.content.status) || 0;
       acc.set(annonce.content.status, count + 1);
       return acc;

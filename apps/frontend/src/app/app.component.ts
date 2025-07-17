@@ -28,7 +28,7 @@ import { ButtonComponent } from './components/button/button.component';
       <!-- Sidebar fixe -->
       <fdw-sidebar
         (closeSideBar)="openSideBar()"
-        class="fixed top-0 left-0 h-full w-64 text-white transition-transform duration-300 ease-in-out z-50 lg:relative lg:translate-x-0"
+        class="fixed top-0 left-0 h-full w-64 text-white transition-transform duration-300 ease-in-out z-50 md:z-0 lg:relative lg:translate-x-0"
         [class]="sideBarClass()"
       />
 

@@ -18,11 +18,11 @@ import { RouterLink } from '@angular/router';
   template: `
     <a
       [routerLink]="['/annonce', annonce().id]"
-      class="flex flex-col items-center min-h-[170px] max-h-fit xl:text-left gap-4 bg-JobTracker-white rounded-md p-4 shadow-md cursor-pointer hover:scale-102 transition-transform duration-500 ease-in-out"
+      class="flex flex-col items-center min-h-[170px] max-h-fit xl:text-left gap-4 bg-JobTracker-white rounded-md p-4 shadow-md cursor-pointer hover:scale-102 transition-transform duration-300 will-change-transform ease-in-out"
     >
       <div class="flex justify-between w-full">
         <p class="text-lg md:text-2xl text-JobTracker-blue font-semibold first-letter:uppercase">
-          {{ annonce().poste }}
+          {{ annonce().job }}
         </p>
         <div
           class="flex items-center justify-end w-[120px] text-JobTracker-blue"
@@ -41,21 +41,21 @@ import { RouterLink } from '@angular/router';
             Entreprise :
           </p>
           <p>
-            {{ annonce().entreprise.name }}
+            {{ annonce().company.name }}
           </p>
         </div>
         <div class="flex items-center text-sm md:text-sm gap-1">
           <p class="font-semibold">
             Ville :</p>
           <p>
-            {{ annonce().entreprise.ville }}
+            {{ annonce().company.city }}
           </p>
         </div>
       </div>
       <div
         class="w-full flex justify-start items-center text-sm md:text-lg text-JobTracker-blue font-semibold"
       >
-        <p>Salaire : {{ annonce().content.salaire }} € /ans</p>
+        <p>Salaire : {{ annonce().content.salary }} € /ans</p>
       </div>
     </a>
   `,
