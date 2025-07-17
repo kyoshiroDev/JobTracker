@@ -20,119 +20,120 @@ import { ContentForm } from './annonceForm';
       >
         Contenu de l'annonce
       </legend>
-    <div
-      [formGroup]="contentForm()"
-      class="flex flex-col gap-5"
-    >
-      <!-- à propos -->
       <div
-        class="flex flex-col w-full justify-center items-start gap-2 flex-nowrap"
+        [formGroup]="contentForm()"
+        class="flex flex-col gap-5"
       >
-        <label class="text-gray-800" for="about">À propos :</label>
-        <textarea
-          id="about"
-          rows="2"
-          placeholder="Saisissez vôtre texte ici ..."
-          formControlName="about"
+        <!-- à propos -->
+        <div
+          class="flex flex-col w-full justify-center items-start gap-2 flex-nowrap"
         >
+          <label for="about">À propos<span class="text-xs text-red-700">*</span></label>
+          <textarea
+            id="about"
+            rows="2"
+            placeholder="Saisissez vôtre texte ici ..."
+            formControlName="about"
+          >
         </textarea>
-      </div>
-      <!-- Descriptif -->
-      <div
-        class="flex flex-col w-full justify-center items-start gap-2 flex-nowrap"
-      >
-        <label for="descriptif">Descriptif :</label>
-        <textarea
-          id="descriptif"
-          rows="2"
-          placeholder="Saisissez vôtre texte ici ..."
-          formControlName="descriptif"
+        </div>
+        <!-- Description -->
+        <div
+          class="flex flex-col w-full justify-center items-start gap-2 flex-nowrap"
         >
+          <label for="description">Descriptif<span class="text-xs text-red-700">*</span></label>
+          <textarea
+            id="description"
+            rows="2"
+            placeholder="Saisissez vôtre texte ici ..."
+            formControlName="description"
+          >
         </textarea>
-      </div>
-      <!-- Competence -->
-      <div
-        class="flex flex-col w-full justify-center items-start gap-2 flex-nowrap"
-      >
-        <label for="competence">Compétences :</label>
-        <textarea
-          id="competence"
-          rows="2"
-          placeholder="Saisissez vôtre texte ici ..."
-          formControlName="competence"
+        </div>
+        <!-- Skills -->
+        <div
+          class="flex flex-col w-full justify-center items-start gap-2 flex-nowrap"
         >
+          <label for="skills">Compétences<span class="text-xs text-red-700">*</span></label>
+          <textarea
+            id="skills"
+            rows="2"
+            placeholder="Saisissez vôtre texte ici ..."
+            formControlName="skills"
+          >
         </textarea>
-      </div>
-      <!-- Avantage -->
-      <div
-        class="flex flex-col w-full justify-center items-start gap-2 flex-nowrap"
-      >
-        <label for="avantage">Avantages :</label>
-        <textarea
-          id="avantage"
-          rows="2"
-          placeholder="Saisissez vôtre texte ici ..."
-          formControlName="avantage"
+        </div>
+        <!-- Benefits -->
+        <div
+          class="flex flex-col w-full justify-center items-start gap-2 flex-nowrap"
         >
+          <label for="benefits">Avantages<span class="text-xs text-red-700">*</span></label>
+          <textarea
+            id="benefits"
+            rows="2"
+            placeholder="Saisissez vôtre texte ici ..."
+            formControlName="benefits"
+          >
         </textarea>
-      </div>
-      <div class="flex flex-wrap justify-start items-center gap-5">
-        <!-- Salaire -->
-        <div class="flex items-center justify-center gap-2">
-          <label class="min-w-fit" for="salaire">Salaire :</label>
+        </div>
+        <div class="flex flex-wrap justify-start items-center gap-5">
+
+          <!-- Salary -->
+          <div class="flex items-center justify-center gap-2">
+            <label class="min-w-fit" for="salary">Salaire<span class="text-xs text-red-700">*</span></label>
+            <input
+              id="salary"
+              type="text"
+              placeholder="10000"
+              formControlName="salary"
+              class="max-w-[80px] text-center border border-gray-600 bg-white text-gray-400 rounded-md focus:border-JobTracker-blue focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all"
+            />
+            <p>annuelle</p>
+          </div>
+          <div class="flex flex-wrap gap-5 justify-start items-center w-full">
+            <!-- Contrat -->
+            <div class="flex items-center justify-start gap-2 text-xs md:text-sm">
+              <label class="min-w-fit" for="contractType">Contrat<span class="text-xs text-red-700">*</span></label>
+              <select
+                id="contractType"
+                formControlName="contractType"
+                class="border border-gray-600 text-gray-900 bg-white p-2 rounded-md focus:border-JobTracker-blue focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all"
+              >
+                <option value="null" hidden>type de contrat</option>
+                <option value="CDI">contrat en CDI</option>
+                <option value="CDD">contrat en CDD</option>
+                <option value="Freelance">contrat en Freelance</option>
+                <option value="Stage">contrat en Stage</option>
+              </select>
+            </div>
+            <!-- Mode de travail -->
+            <div class="flex items-center justify-start gap-2 text-xs md:text-sm">
+              <label class="min-w-fit" for="workMode">Présence<span class="text-xs text-red-700">*</span></label>
+              <select
+                id="workMode"
+                formControlName="workMode"
+                class="border border-gray-600 bg-white p-2 text-gray-900 rounded-md focus:border-JobTracker-blue focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all"
+              >
+                <option value="null" hidden>mode de travail</option>
+                <option value="fullremote">Full remote</option>
+                <option value="presentiel">Présentiel</option>
+                <option value="hybride">Hybride</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <!-- AnnonceLink-->
+        <div class="flex flex-col w-full justify-left items-start gap-2 flex-wrap">
+          <label for="annonceLink">Lien de l'annonce<span class="text-xs text-red-700">*</span></label>
           <input
-            id="salaire"
+            id="annonceLink"
             type="text"
-            placeholder="10000"
-            formControlName="salaire"
-            class="max-w-[80px] text-center border border-gray-600 bg-white text-gray-400 rounded-md focus:border-JobTracker-blue focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all"
+            placeholder="https://www.google.com"
+            formControlName="annonceLink"
+            class="flex-1/2 border border-gray-600 bg-white px-2 py-1 text-sm text-gray-400 rounded-md focus:border-JobTracker-blue focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all"
           />
-          <p>annuelle</p>
-        </div>
-        <div class="flex flex-wrap gap-5 justify-start items-center w-full">
-        <!-- Contrat -->
-        <div class="flex items-center justify-start gap-2 text-xs md:text-sm">
-          <label class="min-w-fit" for="typeContrat">Contrat :</label>
-          <select
-            id="typeContrat"
-            formControlName="typeContrat"
-            class="border border-gray-600 text-gray-900 bg-white p-2 rounded-md focus:border-JobTracker-blue focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all"
-          >
-            <option value="null" hidden>type de contrat</option>
-            <option value="CDI">contrat en CDI</option>
-            <option value="CDD">contrat en CDD</option>
-            <option value="Freelance">contrat en Freelance</option>
-            <option value="Stage">contrat en Stage</option>
-          </select>
-        </div>
-        <!-- Mode de travail -->
-        <div class="flex items-center justify-start gap-2 text-xs md:text-sm">
-          <label class="min-w-fit" for="modeTravail">Présence :</label>
-          <select
-            id="modeTravail"
-            formControlName="modeTravail"
-            class="border border-gray-600 bg-white p-2 text-gray-900 rounded-md focus:border-JobTracker-blue focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all"
-          >
-            <option value="null" hidden>mode de travail</option>
-            <option value="fullremote">Full remote</option>
-            <option value="presentiel">Présentiel</option>
-            <option value="hybride">Hybride</option>
-          </select>
         </div>
       </div>
-      </div>
-      <!-- AnnonceLink-->
-      <div class="flex flex-col w-full justify-left items-start gap-2 flex-wrap">
-        <label for="annonceLink">Lien de l'annonce :</label>
-        <input
-          id="annonceLink"
-          type="text"
-          placeholder="https://www.google.com"
-          formControlName="annonceLink"
-          class="flex-1/2 border border-gray-600 bg-white px-2 py-1 text-sm text-gray-400 rounded-md focus:border-JobTracker-blue focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all"
-        />
-      </div>
-    </div>
     </fieldset>
   `,
 })

@@ -1,26 +1,26 @@
 export interface Entreprise {
   name: string;
-  ville: string;
+  city: string;
   phone: number;
   email: string;
 }
 
 export interface Content {
   about: string;
-  descriptif: string;
-  competence: string;
-  avantage: string;
-  salaire: number;
-  typeContrat: 'CDI' | 'CDD' | 'Freelance' | 'Stage';
-  modeTravail: 'fullremote' | 'presentiel' | 'hybride';
+  description: string;
+  skills: string;
+  benifits: string;
+  salary: number;
+  contractType: 'CDI' | 'CDD' | 'Freelance' | 'Stage';
+  workMode: 'fullremote' | 'presentiel' | 'hybride';
   annonceLink: string;
   status: 'En attente' | 'Entretien' | 'À relancer' | 'Rejetée';
 }
 
 export interface Annonce {
   id: number;
-  poste: string;
-  entreprise: Entreprise;
+  job: string;
+  company: Entreprise;
   content: Content;
   createdAt: Date;
 }

@@ -5,7 +5,7 @@ import {
   InputSignal,
 } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { EntrepriseForm } from './annonceForm';
+import { CompanyForm } from './annonceForm';
 
 @Component({
   selector: 'fdw-entreprise-form',
@@ -24,7 +24,7 @@ import { EntrepriseForm } from './annonceForm';
     <div
       class="flex w-full flex-col justify-center items-start gap-2 flex-nowrap"
     >
-      <label for="name">Nom :</label>
+      <label for="name">Nom<span class="text-xs text-red-700">*</span></label>
       <input
         id="name"
         type="text"
@@ -37,11 +37,11 @@ import { EntrepriseForm } from './annonceForm';
     <div
       class="flex w-full flex-col justify-center items-start gap-2 flex-nowrap"
     >
-      <label for="city">Ville :</label>
+      <label for="city">Ville<span class="text-xs text-red-700">*</span></label>
       <input
         id="city"
         type="text"
-        formControlName="ville"
+        formControlName="city"
         placeholder="Paris"
         class="text-gray-400 w-full h-12 border border-gray-600 bg-white px-2 py-1 text-sm rounded-xl focus:border-JobTracker-blue focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all"
       />
@@ -50,7 +50,9 @@ import { EntrepriseForm } from './annonceForm';
     <div
       class="flex w-full flex-col justify-center items-start gap-2 flex-nowrap"
     >
-      <label for="phone">Téléphone :</label>
+      <label for="phone"
+        >Téléphone<span class="text-xs text-red-700">*</span></label
+      >
       <input
         id="phone"
         type="number"
@@ -63,7 +65,9 @@ import { EntrepriseForm } from './annonceForm';
     <div
       class="flex w-full flex-col justify-center items-start gap-2 flex-nowrap"
     >
-      <label for="email">Email :</label>
+      <label for="email"
+        >Email<span class="text-xs text-red-700">*</span></label
+      >
       <input
         id="entreprise"
         type="email"
@@ -75,5 +79,5 @@ import { EntrepriseForm } from './annonceForm';
   </fieldset>`,
 })
 export class EntrepriseFormComponent {
-  entrepriseForm: InputSignal<FormGroup<EntrepriseForm>> = input.required();
+  entrepriseForm: InputSignal<FormGroup<CompanyForm>> = input.required();
 }
