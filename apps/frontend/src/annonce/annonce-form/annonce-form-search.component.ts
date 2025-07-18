@@ -13,6 +13,7 @@ import {
 import { STATUS_COLOR } from '../../app/tokens/status-color-token';
 import { Annonce } from '../annonce';
 import { AnnoncesService } from '../annonces.service';
+import { InputAnnonceFormSearchComponent } from './components/input-annonce-form-search.component';
 
 type ResearchFormType = {
   company: FormGroup<{
@@ -29,9 +30,12 @@ type ResearchFormType = {
   selector: 'fdw-annonce-form-search',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, InputAnnonceFormSearchComponent],
   template: `
     <div class="px-2 lg:px-0 max-w-3xl m-auto">
+      <div class="pt-4 flex md:hidden justify-center items-center gap-4 flex-1">
+        <fdw-input-annonce-form-search class="w-full" />
+      </div>
       <form
         [formGroup]="selectedAnnonceForm"
         class="bg-white p-4 rounded-lg shadow-md flex flex-col container justify-start gap-4 mt-5 m-auto"
@@ -116,12 +120,12 @@ export class AnnonceFormSearchComponent {
 
   selectedAnnonceForm = this.fb.group<ResearchFormType>({
     company: this.fb.group({
-      name: this.fb.control<string | null>(""),
-      city: this.fb.control<string | null>(""),
+      name: this.fb.control<string | null>(''),
+      city: this.fb.control<string | null>(''),
     }),
     content: this.fb.group({
-      salary: this.fb.control<string | null>(""),
-      status: this.fb.control<string | null>(""),
+      salary: this.fb.control<string | null>(''),
+      status: this.fb.control<string | null>(''),
     }),
   });
 
