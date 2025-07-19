@@ -23,7 +23,7 @@ import { Sidebarmenu } from './sidebarmenu';
   text-JobTracker-white text-xl font-semibold;"
     >
       <a routerLink="/" class="flex flex-col justify-center items-center h-35">
-        <h1 class="hidden lg:block text-3xl">JobTracker</h1>
+        <h1 class="text-3xl">JobTracker</h1>
       </a>
       <div class="flex flex-col">
         @for (menu of sidebar(); track menu.id) {

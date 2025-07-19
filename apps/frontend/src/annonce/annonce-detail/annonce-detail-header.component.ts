@@ -1,29 +1,29 @@
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
-  Component, inject,
+  Component,
+  inject,
   input,
-  output
 } from '@angular/core';
-import { Annonce } from '../annonce';
-import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { STATUS_COLOR } from '../../app/tokens/status-color-token';
+import { Annonce } from '../annonce';
 
 @Component({
   selector: 'fdw-annonce-detail-header',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, RouterLink],
   template: `
-    <div class="bg-JobTracker-side p-6 relative">
-      <div class="flex flex-col justify-center gap-2 mb-7">
+    <div
+      class="bg-JobTracker-side p-2 md:p-4 relative max-w-4xl m-auto rounded-t-lg"
+    >
+      <div class="justify-center gap-2 mb-7">
         <!-- Flêche retour -->
         <div class="flex justify-between">
           <svg
             routerLink="/annonces"
-            class="cursor-pointer"
+            class="cursor-pointer w-4 h-4 md:w-8 md:h-8"
             xmlns="http://www.w3.org/2000/svg"
-            width="32"
-            height="32"
             viewBox="0 0 20 20"
           >
             <path
@@ -31,20 +31,10 @@ import { STATUS_COLOR } from '../../app/tokens/status-color-token';
               d="m5.83 9l5.58-5.58L10 2l-8 8l8 8l1.41-1.41L5.83 11H18V9z"
             />
           </svg>
-
-          <!-- Poste -->
-          <h2
-            class="text-4xl font-bold text-JobTracker-white truncate mb-1 uppercase"
-          >
-            {{ annonce().job }}
-          </h2>
-
           <!-- Boutton modifier -->
           <svg
-            class="cursor-pointer"
+            class="cursor-pointer w-4 h-4 md:w-8 md:h-8"
             xmlns="http://www.w3.org/2000/svg"
-            width="32"
-            height="32"
             viewBox="0 0 24 24"
           >
             <path
@@ -57,11 +47,17 @@ import { STATUS_COLOR } from '../../app/tokens/status-color-token';
             />
           </svg>
         </div>
+        <!-- Poste -->
+        <h2
+          class="flex-inline text-lg sm:text-xl md:text-4xl text-center font-bold text-JobTracker-white pt-2 uppercase"
+        >
+          {{ annonce().job }}
+        </h2>
 
         <div
-          class="flex justify-between items-center px-8 py-4 bg-JobTracker-side"
+          class="flex flex-col gap-4 sm:gap-0 sm:flex-row justify-between sm:items-center md:px-8 py-4 bg-JobTracker-side"
         >
-          <div class="text-sm text-JobTracker-white">
+          <div class="text-center text-sm text-JobTracker-white">
             Publiée le {{ annonce().createdAt | date : 'dd/MM/yyyy' }}
           </div>
           <div class="flex flex-1 justify-center items-center gap-3">
@@ -84,20 +80,22 @@ import { STATUS_COLOR } from '../../app/tokens/status-color-token';
                 d="M30 14a2 2 0 0 0-2-2h-6V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v26h28ZM4 4h16v24H4Zm18 24V14h6v14Z"
               />
             </svg>
-            <p class="text-3xl  font-medium">
+            <p class="text-xl md:text-3xl  font-medium">
               {{ annonce().company.name }}
             </p>
           </div>
           <span
-            class="px-6 py-2 text-sm text-JobTracker-white font-semibold rounded-full"
+            class="max-w-fit m-auto px-6 py-2 text-sm text-JobTracker-white font-semibold rounded-full"
             [class]="statusColorClass(this.annonce().content.status)"
           >
-        {{ annonce().content.status }}
-      </span>
+            {{ annonce().content.status }}
+          </span>
         </div>
 
         <!-- Contact de la société -->
-        <div class="flex gap-5 justify-center">
+        <div
+          class="flex sm:flex-row flex-col gap-5 justify-center items-center"
+        >
           <!-- E-mail -->
           <div class="flex items-center">
             <svg
@@ -134,7 +132,9 @@ import { STATUS_COLOR } from '../../app/tokens/status-color-token';
       </div>
 
       <!-- Renseignement sur le poste -->
-      <div class="flex gap-12 mt-3 justify-center items-center">
+      <div
+        class="flex flex-col sm:flex-row gap-5 sm:gap-12 mt-3 justify-center items-center"
+      >
         <!-- La ville -->
         <div class="flex items-center">
           <svg
@@ -180,9 +180,7 @@ import { STATUS_COLOR } from '../../app/tokens/status-color-token';
               />
             </g>
           </svg>
-          {{
-            annonce().content.salary | currency : 'EUR' : 'symbol' : '1.0-0'
-          }}
+          {{ annonce().content.salary | currency : 'EUR' : 'symbol' : '1.0-0' }}
           /an
         </div>
 
