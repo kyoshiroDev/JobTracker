@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -15,6 +15,8 @@ type InputSearch = {
 @Component({
   selector: 'fdw-input-annonce-form-search',
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true, 
   template: ` <form
     class="flex w-full md:w-3/4 justify-center items-center bg-JobTracker-white p-2 rounded-md shadow-sm m-auto"
     [formGroup]="inputSearchAnnonce"

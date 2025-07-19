@@ -23,7 +23,10 @@
   },
   "generators": {
     "@nx/angular:component": {
-      "style": "css"
+      "style": "css",
+      "changeDetection": "OnPush",
+      "inlineTemplate": true,
+      "skipTests": true
     }
   }
 }

@@ -11,9 +11,9 @@ import { Annonce } from '../annonce';
 import { AnnoncesService } from '../annonces.service';
 
 import { Router } from '@angular/router';
-import { AnnonceDetailContentComponent } from './annonce-details-content.component';
 import { AnnonceDetailFooterComponent } from './annonce-detail-footer.component';
 import { AnnonceDetailHeaderComponent } from './annonce-detail-header.component';
+import { AnnonceDetailContentComponent } from './annonce-details-content.component';
 
 @Component({
   selector: 'fdw-annonce-detail',
@@ -27,7 +27,7 @@ import { AnnonceDetailHeaderComponent } from './annonce-detail-header.component'
   template: `
     @if (annonce()) {
     <div
-      class="w-4xl mx-auto bg-JobTracker-white rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl my-6"
+      class="max-w-4xl mx-auto bg-JobTracker-white rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl my-6"
     >
       <!-- En-tête de l'annonce -->
       <fdw-annonce-detail-header
