@@ -17,7 +17,7 @@ import { Annonce } from '../annonce';
     <div
       class="bg-JobTracker-side p-2 md:p-4 relative max-w-4xl m-auto rounded-t-lg"
     >
-      <div class="justify-center gap-2 mb-7">
+      <div class="flex flex-col justify-center gap-12">
         <!-- Flêche retour -->
         <div class="flex justify-between">
           <svg
@@ -49,18 +49,17 @@ import { Annonce } from '../annonce';
         </div>
         <!-- Poste -->
         <h2
-          class="flex-inline sm:text-xl md:text-2xl text-center font-bold text-JobTracker-white pt-2 uppercase"
+          class="flex-inline sm:text-xl md:text-2xl text-center font-bold text-JobTracker-white uppercase sm:col-span-1"
         >
           {{ annonce().job }}
         </h2>
 
         <div
-          class="flex flex-col gap-4 sm:gap-0 sm:flex-row justify-between sm:items-center md:px-8 py-4 bg-JobTracker-side"
+          class="grid grid-cols-2 sm:grid-cols-3 grid-rows-1 items-center md:px-8 bg-JobTracker-side"
         >
-          <div class="text-center text-sm text-JobTracker-white">
-            Publiée le {{ annonce().createdAt | date : 'dd/MM/yyyy' }}
-          </div>
-          <div class="flex flex-1 justify-center items-center gap-3">
+          <div
+            class="flex flex-1 justify-center items-center gap-3 sm:col-start-2"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20"
@@ -84,18 +83,18 @@ import { Annonce } from '../annonce';
               {{ annonce().company.name }}
             </p>
           </div>
-          <span
-            class="max-w-fit m-auto px-6 py-2 text-sm text-JobTracker-white font-semibold rounded-full"
-            [class]="statusColorClass(this.annonce().content.status)"
-          >
-            {{ annonce().content.status }}
-          </span>
+          <div class="flex justify-center md:justify-end">
+            <div
+              class="max-w-fit px-6 py-2 text-sm text-JobTracker-white font-semibold rounded-full"
+              [class]="statusColorClass(this.annonce().content.status)"
+            >
+              {{ annonce().content.status }}
+            </div>
+          </div>
         </div>
 
         <!-- Contact de la société -->
-        <div
-          class="flex flex-wrap px-2 sm:px-0 gap-5 justify-between sm:justify-center items-center"
-        >
+        <div class="flex flex-wrap justify-around items-center">
           <!-- E-mail -->
           <div class="flex items-center">
             <svg
@@ -129,101 +128,104 @@ import { Annonce } from '../annonce';
             {{ annonce().company.phone }}
           </div>
         </div>
-      </div>
 
-      <!-- Renseignement sur le poste -->
-      <div
-        class="flex flex-wrap px-2 sm:px-0 sm:gap-4 mt-3 justify-between sm:justify-center items-center"
-      >
-        <!-- La ville -->
-        <div class="flex flex-col gap-4 sm:flex-row sm:gap-4">
-          <div class="flex items-center">
-            <svg
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-5 w-5 mr-1"
-              viewBox="0 2 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-              />
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-              />
-            </svg>
-            {{ annonce().company.city }}
-          </div>
-          <!-- Salaire -->
-          <div class="flex items-center">
-            <svg
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-5 w-5 mr-1"
-              viewBox="0 2 24 24"
-            >
-              <g
+        <!-- Renseignement sur le poste -->
+        <div
+          class="flex flex-wrap gap-8 md:gap-16 justify-around sm:justify-center items-center"
+        >
+          <!-- La ville -->
+          <div class="flex flex-col gap-8 sm:flex-row md:gap-16">
+            <div class="flex items-center">
+              <svg
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 mr-1"
+                viewBox="0 2 24 24"
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
               >
-                <path d="M15 11v.01M5.173 8.378a3 3 0 1 1 4.656-1.377" />
                 <path
-                  d="M16 4v3.803A6.02 6.02 0 0 1 18.658 11h1.341a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-1.342c-.336.95-.907 1.8-1.658 2.473V19.5a1.5 1.5 0 0 1-3 0v-.583a6 6 0 0 1-1 .083h-4a6 6 0 0 1-1-.083v.583a1.5 1.5 0 0 1-3 0v-2.027A6 6 0 0 1 8.999 7h2.5z"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
                 />
-              </g>
-            </svg>
-            {{
-              annonce().content.salary | currency : 'EUR' : 'symbol' : '1.0-0'
-            }}
-            /an
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                />
+              </svg>
+              {{ annonce().company.city }}
+            </div>
+            <!-- Salaire -->
+            <div class="flex items-center">
+              <svg
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 mr-1"
+                viewBox="0 2 24 24"
+              >
+                <g
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                >
+                  <path d="M15 11v.01M5.173 8.378a3 3 0 1 1 4.656-1.377" />
+                  <path
+                    d="M16 4v3.803A6.02 6.02 0 0 1 18.658 11h1.341a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-1.342c-.336.95-.907 1.8-1.658 2.473V19.5a1.5 1.5 0 0 1-3 0v-.583a6 6 0 0 1-1 .083h-4a6 6 0 0 1-1-.083v.583a1.5 1.5 0 0 1-3 0v-2.027A6 6 0 0 1 8.999 7h2.5z"
+                  />
+                </g>
+              </svg>
+              {{
+                annonce().content.salary | currency : 'EUR' : 'symbol' : '1.0-0'
+              }}
+              /an
+            </div>
+          </div>
+          <!-- Type de contrat -->
+          <div class="flex flex-col gap-8 sm:flex-row md:gap-16">
+            <div class="flex items-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 mr-1"
+                fill="none"
+                viewBox="0 2 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+                />
+              </svg>
+              {{ annonce().content.contractType }}
+            </div>
+
+            <!-- Mode de travail -->
+            <div class="flex items-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 mr-1"
+                fill="none"
+                viewBox="0 2 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  fill="currentColor"
+                  d="M4.616 20q-.691 0-1.153-.462T3 18.384V8.616q0-.691.463-1.153T4.615 7H9V5.615q0-.69.463-1.153T10.616 4h2.769q.69 0 1.153.462T15 5.615V7h4.385q.69 0 1.152.463T21 8.616v9.769q0 .69-.463 1.153T19.385 20zm0-1h14.769q.23 0 .423-.192t.192-.424V8.616q0-.231-.192-.424T19.385 8H4.615q-.23 0-.423.192T4 8.616v9.769q0 .23.192.423t.423.192M10 7h4V5.615q0-.23-.192-.423T13.385 5h-2.77q-.23 0-.423.192T10 5.615zM4 19V8z"
+                />
+              </svg>
+              {{ annonce().content.workMode }}
+            </div>
           </div>
         </div>
-        <!-- Type de contrat -->
-        <div class="flex flex-col gap-4 sm:flex-row sm:gap-4">
-          <div class="flex items-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-5 w-5 mr-1"
-              fill="none"
-              viewBox="0 2 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
-              />
-            </svg>
-            {{ annonce().content.contractType }}
-          </div>
-
-          <!-- Mode de travail -->
-          <div class="flex items-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-5 w-5 mr-1"
-              fill="none"
-              viewBox="0 2 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                fill="currentColor"
-                d="M4.616 20q-.691 0-1.153-.462T3 18.384V8.616q0-.691.463-1.153T4.615 7H9V5.615q0-.69.463-1.153T10.616 4h2.769q.69 0 1.153.462T15 5.615V7h4.385q.69 0 1.152.463T21 8.616v9.769q0 .69-.463 1.153T19.385 20zm0-1h14.769q.23 0 .423-.192t.192-.424V8.616q0-.231-.192-.424T19.385 8H4.615q-.23 0-.423.192T4 8.616v9.769q0 .23.192.423t.423.192M10 7h4V5.615q0-.23-.192-.423T13.385 5h-2.77q-.23 0-.423.192T10 5.615zM4 19V8z"
-              />
-            </svg>
-            {{ annonce().content.workMode }}
-          </div>
+        <div class="text-right text-xs text-JobTracker-white pt-2">
+          Publiée le {{ annonce().createdAt | date : 'dd/MM/yyyy' }}
         </div>
       </div>
     </div>

@@ -36,9 +36,7 @@ import { AnnonceDetailContentComponent } from './annonce-details-content.compone
       />
 
       <!-- Contenu de l'annonce -->
-      <div class="p-6 overflow-y-scroll">
-        <fdw-annonce-detail-content [annonce]="annonce()" />
-      </div>
+      <fdw-annonce-detail-content [annonce]="annonce()" />
       <!-- Footer de l'annonce -->
       <fdw-annonce-detail-footer [annonce]="annonce()" />
     </div>
