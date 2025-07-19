@@ -20,7 +20,7 @@ export class AnnoncesService {
       company: {
         name: 'Google',
         city: 'Lyon',
-        phone: 128525,
+        phone: '0128569854',
         email: 'société@gmail.com',
       },
       content: {
@@ -46,7 +46,7 @@ export class AnnoncesService {
       company: {
         name: 'Facebook',
         city: 'Paris',
-        phone: 128525,
+        phone: '0128525',
         email: 'société@gmail.com',
       },
 
@@ -73,7 +73,7 @@ export class AnnoncesService {
       company: {
         name: 'Amazon',
         city: 'Nante',
-        phone: 128525,
+        phone: '0128525',
         email: 'société@gmail.com',
       },
       content: {
@@ -100,7 +100,7 @@ export class AnnoncesService {
       company: {
         name: 'Prestashop',
         city: 'Bordeau',
-        phone: 25862541,
+        phone: '0125862541',
         email: 'société@gmail.com',
       },
       content: {
@@ -126,7 +126,7 @@ export class AnnoncesService {
       company: {
         name: 'Netflix',
         city: 'Dijon',
-        phone: 25862541,
+        phone: '0125862541',
         email: 'société@gmail.com',
       },
       content: {

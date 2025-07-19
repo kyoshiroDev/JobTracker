@@ -1,7 +1,7 @@
 export interface Entreprise {
   name: string;
   city: string;
-  phone: number;
+  phone: string;
   email: string;
 }
 
