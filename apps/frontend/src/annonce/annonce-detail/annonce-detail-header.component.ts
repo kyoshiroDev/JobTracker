@@ -49,7 +49,7 @@ import { Annonce } from '../annonce';
         </div>
         <!-- Poste -->
         <h2
-          class="flex-inline text-lg sm:text-xl md:text-4xl text-center font-bold text-JobTracker-white pt-2 uppercase"
+          class="flex-inline sm:text-xl md:text-2xl text-center font-bold text-JobTracker-white pt-2 uppercase"
         >
           {{ annonce().job }}
         </h2>
@@ -80,7 +80,7 @@ import { Annonce } from '../annonce';
                 d="M30 14a2 2 0 0 0-2-2h-6V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v26h28ZM4 4h16v24H4Zm18 24V14h6v14Z"
               />
             </svg>
-            <p class="text-xl md:text-3xl  font-medium">
+            <p class="text-xl md:text-2xl  font-medium">
               {{ annonce().company.name }}
             </p>
           </div>
@@ -94,7 +94,7 @@ import { Annonce } from '../annonce';
 
         <!-- Contact de la société -->
         <div
-          class="flex sm:flex-row flex-col gap-5 justify-center items-center"
+          class="flex flex-wrap px-2 sm:px-0 gap-5 justify-between sm:justify-center items-center"
         >
           <!-- E-mail -->
           <div class="flex items-center">
@@ -133,93 +133,97 @@ import { Annonce } from '../annonce';
 
       <!-- Renseignement sur le poste -->
       <div
-        class="flex flex-col sm:flex-row gap-5 sm:gap-12 mt-3 justify-center items-center"
+        class="flex flex-wrap px-2 sm:px-0 sm:gap-4 mt-3 justify-between sm:justify-center items-center"
       >
         <!-- La ville -->
-        <div class="flex items-center">
-          <svg
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-5 w-5 mr-1"
-            viewBox="0 2 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-            />
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-            />
-          </svg>
-          {{ annonce().company.city }}
-        </div>
-
-        <!-- Salaire -->
-        <div class="flex items-center">
-          <svg
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-5 w-5 mr-1"
-            viewBox="0 2 24 24"
-          >
-            <g
+        <div class="flex flex-col gap-4 sm:flex-row sm:gap-4">
+          <div class="flex items-center">
+            <svg
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 mr-1"
+              viewBox="0 2 24 24"
               stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
             >
-              <path d="M15 11v.01M5.173 8.378a3 3 0 1 1 4.656-1.377" />
               <path
-                d="M16 4v3.803A6.02 6.02 0 0 1 18.658 11h1.341a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-1.342c-.336.95-.907 1.8-1.658 2.473V19.5a1.5 1.5 0 0 1-3 0v-.583a6 6 0 0 1-1 .083h-4a6 6 0 0 1-1-.083v.583a1.5 1.5 0 0 1-3 0v-2.027A6 6 0 0 1 8.999 7h2.5z"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
               />
-            </g>
-          </svg>
-          {{ annonce().content.salary | currency : 'EUR' : 'symbol' : '1.0-0' }}
-          /an
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+              />
+            </svg>
+            {{ annonce().company.city }}
+          </div>
+          <!-- Salaire -->
+          <div class="flex items-center">
+            <svg
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 mr-1"
+              viewBox="0 2 24 24"
+            >
+              <g
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+              >
+                <path d="M15 11v.01M5.173 8.378a3 3 0 1 1 4.656-1.377" />
+                <path
+                  d="M16 4v3.803A6.02 6.02 0 0 1 18.658 11h1.341a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-1.342c-.336.95-.907 1.8-1.658 2.473V19.5a1.5 1.5 0 0 1-3 0v-.583a6 6 0 0 1-1 .083h-4a6 6 0 0 1-1-.083v.583a1.5 1.5 0 0 1-3 0v-2.027A6 6 0 0 1 8.999 7h2.5z"
+                />
+              </g>
+            </svg>
+            {{
+              annonce().content.salary | currency : 'EUR' : 'symbol' : '1.0-0'
+            }}
+            /an
+          </div>
         </div>
-
         <!-- Type de contrat -->
-        <div class="flex items-cente">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-5 w-5 mr-1"
-            fill="none"
-            viewBox="0 2 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
-            />
-          </svg>
-          {{ annonce().content.contractType }}
-        </div>
+        <div class="flex flex-col gap-4 sm:flex-row sm:gap-4">
+          <div class="flex items-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 mr-1"
+              fill="none"
+              viewBox="0 2 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+              />
+            </svg>
+            {{ annonce().content.contractType }}
+          </div>
 
-        <!-- Mode de travail -->
-        <div class="flex items-center">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-5 w-5 mr-1"
-            fill="none"
-            viewBox="0 2 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              fill="currentColor"
-              d="M4.616 20q-.691 0-1.153-.462T3 18.384V8.616q0-.691.463-1.153T4.615 7H9V5.615q0-.69.463-1.153T10.616 4h2.769q.69 0 1.153.462T15 5.615V7h4.385q.69 0 1.152.463T21 8.616v9.769q0 .69-.463 1.153T19.385 20zm0-1h14.769q.23 0 .423-.192t.192-.424V8.616q0-.231-.192-.424T19.385 8H4.615q-.23 0-.423.192T4 8.616v9.769q0 .23.192.423t.423.192M10 7h4V5.615q0-.23-.192-.423T13.385 5h-2.77q-.23 0-.423.192T10 5.615zM4 19V8z"
-            />
-          </svg>
-          {{ annonce().content.workMode }}
+          <!-- Mode de travail -->
+          <div class="flex items-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 mr-1"
+              fill="none"
+              viewBox="0 2 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                fill="currentColor"
+                d="M4.616 20q-.691 0-1.153-.462T3 18.384V8.616q0-.691.463-1.153T4.615 7H9V5.615q0-.69.463-1.153T10.616 4h2.769q.69 0 1.153.462T15 5.615V7h4.385q.69 0 1.152.463T21 8.616v9.769q0 .69-.463 1.153T19.385 20zm0-1h14.769q.23 0 .423-.192t.192-.424V8.616q0-.231-.192-.424T19.385 8H4.615q-.23 0-.423.192T4 8.616v9.769q0 .23.192.423t.423.192M10 7h4V5.615q0-.23-.192-.423T13.385 5h-2.77q-.23 0-.423.192T10 5.615zM4 19V8z"
+              />
+            </svg>
+            {{ annonce().content.workMode }}
+          </div>
         </div>
       </div>
     </div>
