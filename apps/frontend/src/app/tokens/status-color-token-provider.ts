@@ -7,23 +7,23 @@ export const STATUS_COLOR_PROVIDER: Provider = {
   useValue: [
     {
       label: 'En attente',
-      colorClassText: 'text-JobTracker-blue',
-      colorClassBg: 'bg-JobTracker-blue',
+      colorClassText: 'text-blue-700 font-medium',
+      colorClassBg: 'bg-blue-700 font-medium',
     },
     {
       label: 'Entretien',
-      colorClassText: 'text-green-700',
-      colorClassBg: 'bg-green-700',
+      colorClassText: 'text-green-700 font-medium',
+      colorClassBg: 'bg-green-700 font-medium',
     },
     {
       label: 'À relancer',
-      colorClassText: 'text-amber-700',
-      colorClassBg: 'bg-amber-700',
+      colorClassText: 'text-orange-700 font-medium',
+      colorClassBg: 'bg-orange-700 font-medium',
     },
     {
       label: 'Rejetée',
-      colorClassText: 'text-red-700',
-      colorClassBg: 'bg-red-700',
+      colorClassText: 'text-red-700 font-medium',
+      colorClassBg: 'bg-red-600 font-medium',
     },
   ] as StatusConfig[],
 };

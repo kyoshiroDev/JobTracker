@@ -7,9 +7,9 @@ import {
   output,
   Signal,
 } from '@angular/core';
-import { Annonce } from '../annonce';
-import { STATUS_COLOR } from '../../app/tokens/status-color-token';
 import { RouterLink } from '@angular/router';
+import { STATUS_COLOR } from '../../app/tokens/status-color-token';
+import { Annonce } from '../annonce';
 
 @Component({
   selector: 'fdw-annonce-card',
@@ -21,7 +21,9 @@ import { RouterLink } from '@angular/router';
       class="flex flex-col items-center min-h-[170px] max-h-fit xl:text-left gap-4 bg-JobTracker-white rounded-md p-4 shadow-md cursor-pointer hover:scale-102 transition-transform duration-300 will-change-transform ease-in-out"
     >
       <div class="flex justify-between w-full">
-        <p class="text-lg md:text-2xl text-JobTracker-blue font-semibold first-letter:uppercase">
+        <p
+          class="text-lg md:text-2xl text-JobTracker-blue font-semibold first-letter:uppercase"
+        >
           {{ annonce().job }}
         </p>
         <div
@@ -37,16 +39,13 @@ import { RouterLink } from '@angular/router';
       </div>
       <div class="flex flex-col justify-start w-full gap-1">
         <div class="flex items-center text-sm md:text-sm gap-1">
-          <p class="font-semibold">
-            Entreprise :
-          </p>
+          <p class="font-semibold">Entreprise :</p>
           <p>
             {{ annonce().company.name }}
           </p>
         </div>
         <div class="flex items-center text-sm md:text-sm gap-1">
-          <p class="font-semibold">
-            Ville :</p>
+          <p class="font-semibold">Ville :</p>
           <p>
             {{ annonce().company.city }}
           </p>

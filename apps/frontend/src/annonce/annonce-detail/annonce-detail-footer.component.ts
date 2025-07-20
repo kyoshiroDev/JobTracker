@@ -14,7 +14,7 @@ import { STATUS_COLOR } from '../../app/tokens/status-color-token';
   imports: [CommonModule],
   template: `
     @if (annonce().content.status === "À relancer"){
-    <div class="flex justify-center p-4 bg-JobTracker-white">
+    <div class="flex justify-center px-4 pt-4 bg-JobTracker-white">
       <a
         [href]="annonce().content.annonceLink"
         target="_blank"

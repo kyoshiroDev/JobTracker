@@ -7,9 +7,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   template: `<button
     aria-label="Ajouter une annonce"
     class="flex justify-center items-center
-  text-JobTracker-gray bg-JobTracker-side rounded-full
+  text-JobTracker-white bg-JobTracker-side rounded-full
    w-12 h-12 cursor-pointer
-  hover:bg-JobTracker-side-hover fixed bottom-8 right-6 md:right-3"
+  hover:bg-JobTracker-side-hover fixed bottom-8 right-6"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"

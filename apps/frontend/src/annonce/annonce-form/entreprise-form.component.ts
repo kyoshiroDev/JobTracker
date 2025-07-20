@@ -30,7 +30,6 @@ import { CompanyForm } from './annonceForm';
         type="text"
         formControlName="name"
         placeholder="Google"
-        class="text-gray-400 w-full h-12 border border-gray-600 bg-white px-2 py-1 text-sm rounded-xl focus:border-JobTracker-blue focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all"
       />
     </div>
     <!-- Ville -->
@@ -38,13 +37,7 @@ import { CompanyForm } from './annonceForm';
       class="flex w-full flex-col justify-center items-start gap-2 flex-nowrap"
     >
       <label for="city">Ville<span class="text-xs text-red-700">*</span></label>
-      <input
-        id="city"
-        type="text"
-        formControlName="city"
-        placeholder="Paris"
-        class="text-gray-400 w-full h-12 border border-gray-600 bg-white px-2 py-1 text-sm rounded-xl focus:border-JobTracker-blue focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all"
-      />
+      <input id="city" type="text" formControlName="city" placeholder="Paris" />
     </div>
     <!-- Phone -->
     <div
@@ -58,7 +51,6 @@ import { CompanyForm } from './annonceForm';
         type="number"
         formControlName="phone"
         placeholder="01.60.68.98.74"
-        class="text-gray-400 w-full h-12 border border-gray-600 bg-white px-2 py-1 text-sm rounded-xl focus:border-JobTracker-blue focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all"
       />
     </div>
     <!-- Email -->
@@ -73,7 +65,6 @@ import { CompanyForm } from './annonceForm';
         type="email"
         formControlName="email"
         placeholder="monannonce@gmail.com"
-        class="text-gray-400 w-full h-12 border border-gray-600 bg-white px-2 py-1 text-sm rounded-xl focus:border-JobTracker-blue focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all"
       />
     </div>
   </fieldset>`,
