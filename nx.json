@@ -26,6 +26,7 @@
       "style": "css",
       "changeDetection": "OnPush",
       "inlineTemplate": true,
+      "inlineStyle": true,
       "skipTests": true
     }
   }

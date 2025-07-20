@@ -27,14 +27,12 @@ import { AnnonceDetailContentComponent } from './annonce-details-content.compone
   template: `
     @if (annonce()) {
     <div
-      class="max-w-4xl mx-auto bg-JobTracker-white rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl my-6"
+      class="max-w-2xl mx-auto bg-JobTracker-white rounded-lg shadow-xl shadow-slate-400 my-4 pb-4"
     >
       <!-- En-tête de l'annonce -->
       <fdw-annonce-detail-header
-        class="text-JobTracker-white"
         [annonce]="annonce()"
       />
-
       <!-- Contenu de l'annonce -->
       <fdw-annonce-detail-content [annonce]="annonce()" />
       <!-- Footer de l'annonce -->

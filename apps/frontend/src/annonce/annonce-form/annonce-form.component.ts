@@ -84,7 +84,7 @@ import { AnnoncesService } from '../annonces.service';
             <button
               (click)="switchForm()"
               type="button"
-              class="flex w-32 lg:w-48 gap-2 items-center justify-center cursor-pointer text-JobTracker-side hover:text-JobTracker-side-hover text-md md:text-lg"
+              class="flex w-32 lg:w-48 gap-2 items-center justify-center cursor-pointer text-JobTracker-side text-md md:text-lg"
             >
               Suivant
               <svg
