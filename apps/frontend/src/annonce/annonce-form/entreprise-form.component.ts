@@ -30,6 +30,7 @@ import { CompanyForm } from './annonceForm';
         type="text"
         formControlName="name"
         placeholder="Google"
+        class="form-input w-full"
       />
     </div>
     <!-- Ville -->
@@ -37,7 +38,7 @@ import { CompanyForm } from './annonceForm';
       class="flex w-full flex-col justify-center items-start gap-2 flex-nowrap"
     >
       <label for="city">Ville<span class="text-xs text-red-700">*</span></label>
-      <input id="city" type="text" formControlName="city" placeholder="Paris" />
+      <input id="city" type="text" formControlName="city" placeholder="Paris" class="form-input w-full"/>
     </div>
     <!-- Phone -->
     <div
@@ -51,6 +52,7 @@ import { CompanyForm } from './annonceForm';
         type="number"
         formControlName="phone"
         placeholder="01.60.68.98.74"
+        class="form-input w-full"
       />
     </div>
     <!-- Email -->
@@ -65,6 +67,7 @@ import { CompanyForm } from './annonceForm';
         type="email"
         formControlName="email"
         placeholder="monannonce@gmail.com"
+        class="form-input w-full"
       />
     </div>
   </fieldset>`,

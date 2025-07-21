@@ -73,6 +73,7 @@ import { AnnoncesService } from '../annonces.service';
               type="text"
               formControlName="job"
               placeholder="Développeur web"
+              class=""
             />
           </div>
           <!-- Entreprise -->
@@ -99,7 +100,6 @@ import { AnnoncesService } from '../annonces.service';
           </div>
           } @else {
           <!-- Content -->
-
           <fdw-content-form [contentForm]="formAnnonce.controls.content" />
           <div class="flex w-full justify-center items-center">
             <button

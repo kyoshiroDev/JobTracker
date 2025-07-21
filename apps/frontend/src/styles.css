@@ -1,6 +1,8 @@
 /* Import Tailwind CSS */
 @import 'tailwindcss';
 
+@plugin "@tailwindcss/forms";
+
 @theme {
   /* Colors */
   --color-JobTracker-blue: rgb(1, 103, 163);
@@ -28,34 +30,9 @@ h3 {
 
 label {
   @apply text-JobTracker-label inline-flex gap-0.5 font-medium;
+
 }
 
-input,
-textarea,
-select {
-  @apply border text-gray-900 border-gray-400 bg-white rounded-md;
-}
-
-textarea {
-  @apply w-full border p-2 h-12 max-h-15 text-xs md:text-sm rounded-md;
-}
-
-input {
-  @apply text-gray-800 w-full max-h-7 md:max-h-12 border px-2 py-1 text-xs md:text-sm rounded-md;
-}
-
-select {
-  @apply text-xs md:text-sm border p-2 rounded-md;
-}
-
-input:focus,
-textarea:focus,
-select:focus {
-  @apply border-JobTracker-blue ring-2 ring-blue-200 transition-all;
-}
-
-input::placeholder,
-textarea::placeholder,
-select::placeholder {
-  @apply text-gray-400;
+input, select, textarea {
+  @apply block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200;
 }
