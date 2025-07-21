@@ -6,7 +6,7 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { AnnoncesService } from '../../../annonce/annonces.service';
+import { AnnoncesService } from '../../annonces.service';
 
 type InputSearch = {
   job: FormControl<string | null>;
@@ -16,7 +16,7 @@ type InputSearch = {
   selector: 'fdw-input-annonce-form-search',
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true, 
+  standalone: true,
   template: ` <form
     class="flex w-full md:w-3/4 justify-center items-center bg-JobTracker-white p-2 rounded-md shadow-sm m-auto"
     [formGroup]="inputSearchAnnonce"
@@ -27,7 +27,7 @@ type InputSearch = {
       type="text"
       formControlName="job"
       placeholder="Rechercher ..."
-      class="w-full"
+      class="form-input"
     />
     <div class="px-2 text-JobTracker-blue">
       <svg
