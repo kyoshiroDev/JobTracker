@@ -36,7 +36,7 @@ type ResearchFormType = {
         <fdw-input-annonce-form-search class="w-full md:hidden" />
       <form
         [formGroup]="selectedAnnonceForm"
-        class="w-full grid grid-cols-2 gap-4 bg-white p-4 rounded-lg shadow-md mt-4 md:mt-0"
+        class="w-full grid grid-cols-1 sm:grid-cols-2 gap-4 bg-white p-4 rounded-lg shadow-md mt-4 md:mt-0"
       >
           <fieldset
             class="grid grid-cols-1 xl:grid-cols-2 gap-2 max-w-content"
