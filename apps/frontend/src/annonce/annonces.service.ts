@@ -156,7 +156,9 @@ export class AnnoncesService {
   });
 
   getAll(): Signal<Annonce[]> {
-    return this._annonces.asReadonly();
+    return computed(() =>
+      this._annonces().sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
+    );
   }
 
   updateFilters(filtersData: Partial<AnnonceFilter>) {
@@ -166,7 +168,7 @@ export class AnnoncesService {
     const filter = this._filters();
 
     const normalize = (str: string) =>
-      str.toLowerCase().trim().replaceAll(' ', '').replaceAll('-', '').replaceAll('é', 'e');
+      str.toLowerCase().trim().replaceAll('-', '').replaceAll('é', 'e').replaceAll(' ', '');
 
     const filterJob = filter.job ? normalize(filter.job) : '';
 
