@@ -18,20 +18,20 @@ import { Annonce } from '../annonce';
   template: `
     <a
       [routerLink]="['/annonce', annonce().id]"
-      class="flex flex-col items-center min-h-[170px] max-h-fit xl:text-left gap-4 bg-JobTracker-white rounded-md p-4 shadow-md cursor-pointer hover:scale-102 transition-transform duration-300 will-change-transform ease-in-out"
+      class="flex w-full flex-wrap flex-col items-center justify-between min-h-full max-h-fit xl:text-left gap-4 bg-JobTracker-white rounded-md p-4 shadow-md cursor-pointer hover:scale-105 transition-transform duration-300 ease-in-out will-change-transform backface-visible transform-gpu"
     >
-      <div class="flex justify-between w-full">
+      <div class="inline-flex gap-4 w-full justify-between">
         <p
-          class="text-lg md:text-2xl text-JobTracker-blue font-semibold first-letter:uppercase"
+          class="text-lg md:text-xl text-JobTracker-blue font-semibold first-letter:uppercase"
         >
           {{ annonce().job }}
         </p>
         <div
-          class="flex items-center justify-end w-[120px] text-JobTracker-blue"
+          class="flex items-start w-[120px] text-JobTracker-blue"
         >
           <p
             [class]="statusConfig()"
-            class="min-w-[74px] md:min-w-[110px] md:text-sm text-xs rounded-4xl py-2 px-2 md:px-4 text-center text-JobTracker-white font-semibold"
+            class="min-w-[110px] md:text-md text-xs rounded-4xl py-2 px-2 text-center text-JobTracker-white"
           >
             {{ annonce().content.status }}
           </p>
