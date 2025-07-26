@@ -36,7 +36,7 @@ import { AnnoncesService } from '../../../annonce/annonces.service';
         />
         <h2 class="lg:px-2 text-sm md:text-xl">Hello {{ name() }}</h2>
       </div>
-      <div class="hidden md:flex justify-center items-center gap-4 flex-1">
+      <div class="hidden lg:flex justify-center items-center gap-4 flex-1">
         <fdw-input-annonce-form-search class="w-full"/>
       </div>
       <div
