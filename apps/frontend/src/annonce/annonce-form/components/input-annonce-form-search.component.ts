@@ -18,7 +18,7 @@ type InputSearch = {
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   template: ` <form
-    class="flex w-full md:w-3/4 justify-center items-center bg-JobTracker-white p-2 rounded-md shadow-sm m-auto"
+    class="flex w-full md:w-3/4 justify-center items-center bg-JobTracker-white  p-2 rounded-md shadow-sm m-auto"
     [formGroup]="inputSearchAnnonce"
   >
     <input
@@ -27,7 +27,7 @@ type InputSearch = {
       type="text"
       formControlName="job"
       placeholder="Rechercher ..."
-      class="form-input"
+      class="form-input text-black"
     />
     <div class="px-2 text-JobTracker-blue">
       <svg
