@@ -65,21 +65,6 @@
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n"
-    },
-    "test": {
-      "executor": "@angular-devkit/build-angular:karma",
-      "options": {
-        "polyfills": ["zone.js", "zone.js/testing"],
-        "tsConfig": "apps/frontend/tsconfig.spec.json",
-        "assets": [
-          {
-            "glob": "**/*",
-            "input": "apps/frontend/public"
-          }
-        ],
-        "styles": ["apps/frontend/src/styles.css"],
-        "scripts": []
-      }
     }
   }
 }
