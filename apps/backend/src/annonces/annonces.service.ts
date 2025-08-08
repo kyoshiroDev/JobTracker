@@ -1,26 +1,68 @@
 import { Injectable } from '@nestjs/common';
-import { CreateAnnoncesDto } from './dto/create-annonces.dto';
+import { CreateAnnonceDto } from './dto/create-annonces.dto';
 import { UpdateAnnoncesDto } from './dto/update-annonces.dto';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class AnnoncesService {
-  create(createAnnonceDto: CreateAnnoncesDto) {
-    return 'This action adds a new annonces';
+  constructor(private readonly prisma: PrismaService) {}
+
+  async create(createAnnonceDto: CreateAnnonceDto, UserId: string) {
+    return this.prisma.annonce.create({
+      data: {
+        job: createAnnonceDto.job,
+        contract_type: createAnnonceDto.contract_type,
+        work_mode: createAnnonceDto.work_mode,
+        status: createAnnonceDto.status,
+        about: createAnnonceDto.about,
+        description: createAnnonceDto.description,
+        skills: createAnnonceDto.skills,
+        benefits: createAnnonceDto.benefits,
+        salary: createAnnonceDto.salary,
+        annonce_link: createAnnonceDto.annonce_link,
+        company_name: createAnnonceDto.company_name,
+        company_city: createAnnonceDto.company_city,
+        company_phone: createAnnonceDto.company_phone,
+        company_email: createAnnonceDto.company_email,
+        user: {
+          connect: {
+            id: UserId,
+          },
+        },
+      },
+    });
   }
 
-  findAll() {
-    return `This action returns all annonce`;
+  async findAll() {
+    return this.prisma.annonce.findMany({
+      include: {
+        user: true,
+      },
+      orderBy: {
+        created_at: 'desc',
+      },
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} annonce`;
+  async findOne(id: string) {
+    return this.prisma.annonce.findUnique({
+      where: { id },
+      include: {
+        user: true,
+      },
+    });
   }
 
-  update(id: number, updateAnnonceDto: UpdateAnnoncesDto) {
-    return `This action updates a #${id} annonce`;
+  async update(id: string, updateAnnonceDto: UpdateAnnoncesDto) {
+    return this.prisma.annonce.update({
+      where: { id },
+      data: updateAnnonceDto,
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} annonce`;
+  async remove(id: string) {
+    return this.prisma.annonce.delete({
+      where: { id},
+    });
   }
 }
