@@ -52,3 +52,5 @@ vitest.config.*.timestamp*
 /generated/prisma
 
 /generated/prisma
+
+/generated/prisma

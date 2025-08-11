@@ -1,38 +1,22 @@
-/* Import Tailwind CSS */
 @import 'tailwindcss';
 
-@plugin "@tailwindcss/forms";
-
 @theme {
-  /* Colors */
-  --color-JobTracker-blue: rgb(1, 103, 163);
-  --color-JobTracker-side: rgb(1, 79, 134);
-  --color-JobTracker-side-hover: rgb(0, 122, 189);
-  --color-JobTracker-white: rgb(255, 255, 255);
-  --color-JobTracker-gray: rgb(236, 240, 241);
-  --color-JobTracker-grayOpacity: rgba(236, 240, 241, 0.8);
-  --color-JobTracker-label: rgb(31, 41, 55);
+  /* Couleurs*/
+  --color-jobtracker-primary: #286CF5;
+  --color-jobtracker-secondary: #F5A623;
+  --color-jobtracker-background: #F9F9FA;
+  --color-jobtracker-bg-gray:#F3F4F6;
+  --color-jobtracker-text: #333333;
+  --color-jobtracker-text-secondary: #6B7280;
+  --color-jobtracker-border: #ECEAE4;
+
+  /* Couleurs pour le mode sombre*/
+  --color-jobtracker-dark-background: #121212;
+  --color-jobtracker-dark-surface: #1E1E2F;
+  --color-jobtracker-dark-text: #E5E7EB;
+  --color-jobtracker-dark-text-secondary: #9CA3AF;
+  --color-jobtracker-dark-primary: #4C8BF5;
+  --color-jobtracker-dark-secondary: #F5A623;
 }
 
-.active-link {
-  @apply bg-JobTracker-side-hover;
-}
-
-/* Title */
-h1,
-h2 {
-  @apply text-JobTracker-white font-semibold;
-}
-
-h3 {
-  @apply text-JobTracker-blue font-semibold;
-}
-
-label {
-  @apply text-JobTracker-label inline-flex gap-0.5 font-medium;
-
-}
-
-input, select, textarea {
-  @apply block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200;
-}
+@custom-variant dark (&:where(.dark, .dark *));
