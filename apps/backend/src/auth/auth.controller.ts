@@ -16,7 +16,7 @@ export class AuthController {
   constructor(private usersService: UsersService, private readonly authService: AuthService) {}
 
   @HttpCode(HttpStatus.OK)
-  @Post('signing')
+  @Post('signIn')
   signIn(@Body() userSession: UserSigningDto) {
     return this.authService.signIn(userSession);
   }

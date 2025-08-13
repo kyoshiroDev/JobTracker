@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SigningComponent } from './signing/signing.component';
-import { SignupComponent } from './signup/signup.component';
+import { SignInComponent } from './signIn/signIn.component';
+import { SignUpComponent } from './signUp/signUp.component';
 
 @Component({
   selector: 'fdw-auth',
   standalone: true,
-  imports: [CommonModule, SigningComponent, SignupComponent],
+  imports: [CommonModule, SignInComponent, SignUpComponent],
   host: {
     class:
       'flex flex-col justify-center items-center min-h-dvh p-4 bg-gradient-to-br from-jobtracker-background via-jobtracker-background flex flex-col items-center',
@@ -32,29 +32,28 @@ import { SignupComponent } from './signup/signup.component';
             class="bg-jobtracker-bg-gray rounded-md p-1 grid grid-cols-2 gap-1"
           >
             <button
-              aria-label="bouton pou afficher le formulaire de login"
               type="button"
-              (click)="formAuth.set('login')"
+              (click)="formAuth.set('signIn')"
               [class]="loginBtnClass()"
             >
               Connexion
             </button>
             <button
               type="button"
-              (click)="formAuth.set('registre')"
+              (click)="formAuth.set('signUp')"
               [class]="registerBtnClass()"
             >
               Inscription
             </button>
           </div>
         </div>
-        @if (formAuth() === 'login') {
+        @if (formAuth() === 'signIn') {
           <div class="animate-fade-slide">
-            <fdw-auth-signing />
+            <fdw-auth-signIn />
           </div>
         } @else {
           <div class="animate-fade-slide">
-            <fdw-auth-signup />
+            <fdw-auth-signUp />
           </div>
         }
         <!-- <div class="flex items-center justify-center">
@@ -96,16 +95,16 @@ import { SignupComponent } from './signup/signup.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthComponent {
-  protected readonly formAuth = signal<'login' | 'registre'>('login');
+  protected readonly formAuth = signal<'signIn' | 'signUp'>('signIn');
 
   protected readonly loginBtnClass = computed(() =>
-    this.formAuth() === 'login'
+    this.formAuth() === 'signIn'
       ? 'h-10 rounded-md text-sm font-medium transition shadow-sm bg-jobtracker-primary text-white cursor-default transition'
       : 'h-10 rounded-md text-sm font-medium text-jobtracker-text-secondary hover:bg-white/60 transition cursor-pointer transition'
   );
 
   protected readonly registerBtnClass = computed(() =>
-    this.formAuth() === 'registre'
+    this.formAuth() === 'signUp'
       ? 'h-10 rounded-md text-sm font-medium transition shadow-sm bg-jobtracker-primary text-white cursor-default transition'
       : 'h-10 rounded-md text-sm font-medium text-jobtracker-text-secondary hover:bg-white/60 transition cursor-pointer transition'
   );

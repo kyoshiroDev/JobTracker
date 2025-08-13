@@ -22,7 +22,7 @@ import { AuthForm } from '../auth';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'fdw-auth-signup',
+  selector: 'fdw-auth-signUp',
   imports: [
     CommonModule,
     EyeOpenComponent,
@@ -36,7 +36,7 @@ import { ToastrService } from 'ngx-toastr';
   template: `
     <form
       class="px-6 pb-6 pt-4"
-      [formGroup]="formSignup"
+      [formGroup]="formSignUp"
       (ngSubmit)="onSubmit()"
       xmlns="http://www.w3.org/1999/html">
       <!-- Nom complet -->
@@ -198,7 +198,7 @@ import { ToastrService } from 'ngx-toastr';
     </form>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SignupComponent {
+export class SignUpComponent {
   protected readonly typePassword = signal<string>('password');
   protected readonly typeConfirmPassword = signal<string>('password');
   protected readonly fb = inject(FormBuilder);
@@ -216,7 +216,7 @@ export class SignupComponent {
       : this.typeConfirmPassword.set('password');
   }
 
-  protected readonly formSignup: FormGroup = this.fb.group<AuthForm>({
+  protected readonly formSignUp: FormGroup = this.fb.group<AuthForm>({
     name: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.email, Validators.required]),
     password: new FormControl('', [Validators.required]),
@@ -224,11 +224,11 @@ export class SignupComponent {
   });
 
   match(){
-    return this.formSignup.get('password')?.value !== this.formSignup.get('confirmPassword')?.value;
+    return this.formSignUp.get('password')?.value !== this.formSignUp.get('confirmPassword')?.value;
   }
 
   invalidSaisie(controlName: string, errorType?: string): boolean {
-    const control = this.formSignup.get(controlName);
+    const control = this.formSignUp.get(controlName);
     if (!control) return false;
     if (errorType) {
       return control.hasError(errorType) && control.touched;
@@ -237,12 +237,12 @@ export class SignupComponent {
   }
 
   protected onSubmit() {
-    if (this.formSignup.invalid || this.match()) {
-      this.formSignup.markAllAsTouched();
+    if (this.formSignUp.invalid || this.match()) {
+      this.formSignUp.markAllAsTouched();
       this.toast.error('Formulaire invalide');
       return;
     }
     this.toast.success('Enregistrement réussi');
-    this.formSignup.reset();
+    this.formSignUp.reset();
   }
 }
