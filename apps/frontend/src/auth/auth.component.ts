@@ -48,11 +48,14 @@ import { SignupComponent } from './signup/signup.component';
             </button>
           </div>
         </div>
-
         @if (formAuth() === 'login') {
-          <fdw-auth-signing />
+          <div class="animate-fade-slide">
+            <fdw-auth-signing />
+          </div>
         } @else {
-          <fdw-auth-signup />
+          <div class="animate-fade-slide">
+            <fdw-auth-signup />
+          </div>
         }
         <!-- <div class="flex items-center justify-center">
           <span
@@ -97,13 +100,13 @@ export class AuthComponent {
 
   protected readonly loginBtnClass = computed(() =>
     this.formAuth() === 'login'
-      ? 'h-10 rounded-md text-sm font-medium transition shadow-sm bg-jobtracker-primary text-white cursor-default'
-      : 'h-10 rounded-md text-sm font-medium text-jobtracker-text-secondary hover:bg-white/60 transition cursor-pointer'
+      ? 'h-10 rounded-md text-sm font-medium transition shadow-sm bg-jobtracker-primary text-white cursor-default transition'
+      : 'h-10 rounded-md text-sm font-medium text-jobtracker-text-secondary hover:bg-white/60 transition cursor-pointer transition'
   );
 
   protected readonly registerBtnClass = computed(() =>
     this.formAuth() === 'registre'
-      ? 'h-10 rounded-md text-sm font-medium transition shadow-sm bg-jobtracker-primary text-white cursor-default'
-      : 'h-10 rounded-md text-sm font-medium text-jobtracker-text-secondary hover:bg-white/60 transition cursor-pointer'
+      ? 'h-10 rounded-md text-sm font-medium transition shadow-sm bg-jobtracker-primary text-white cursor-default transition'
+      : 'h-10 rounded-md text-sm font-medium text-jobtracker-text-secondary hover:bg-white/60 transition cursor-pointer transition'
   );
 }

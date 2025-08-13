@@ -22,6 +22,21 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+@layer utilities {
+  @keyframes fade-slide {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  .animate-fade-slide {
+    animation: fade-slide 0.50s ease-in-out;
+  }
+}
+
+
 /* Container principal */
 #toast-container > div {
   --toast-timeout: 3s;
