@@ -26,4 +26,4 @@ import { CommonModule } from '@angular/common';
       </g>
     </svg>`,
 })
-export class SalarySvgComponent {}
+export class SalaryComponent {}

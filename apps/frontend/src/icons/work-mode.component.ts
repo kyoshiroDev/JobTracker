@@ -22,4 +22,4 @@ import { CommonModule } from '@angular/common';
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class WorkModeSvgComponent {}
+export class WorkModeComponent {}

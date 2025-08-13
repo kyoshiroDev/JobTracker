@@ -19,4 +19,4 @@ import { CommonModule } from '@angular/common';
       />
     </svg>`,
 })
-export class PhoneSvgComponent {}
+export class PhoneComponent {}

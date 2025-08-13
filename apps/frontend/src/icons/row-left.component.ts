@@ -1,23 +1,23 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'fdw-email-svg',
+  selector: 'fdw-return-row-svg',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   template: `
     <svg
+      routerLink="/annonces"
+      class="cursor-pointer w-4 h-4 md:w-8 md:h-8"
       xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
-      viewBox="0 0 256 256"
+      viewBox="0 0 20 20"
     >
       <path
         stroke-width="1"
         fill="currentColor"
-        d="M224 48H32a8 8 0 0 0-8 8v136a16 16 0 0 0 16 16h176a16 16 0 0 0 16-16V56a8 8 0 0 0-8-8m-20.57 16L128 133.15L52.57 64ZM216 192H40V74.19l82.59 75.71a8 8 0 0 0 10.82 0L216 74.19z"
+        d="m5.83 9l5.58-5.58L10 2l-8 8l8 8l1.41-1.41L5.83 11H18V9z"
       />
     </svg>`,
-
 })
-export class EmailSvgComponent {}
+export class RowLeftComponent {}

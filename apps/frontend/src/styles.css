@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@import 'ngx-toastr/toastr';
 
 @theme {
   /* Couleurs*/
@@ -20,3 +21,67 @@
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
+
+/* Container principal */
+#toast-container > div {
+  --toast-timeout: 3s;
+  text-align: center;
+  padding: 1rem;
+  font-family: 'Inter', sans-serif;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  opacity: 0.95;
+
+  /* Animation entrée/sortie */
+  animation: slideInRight 0.4s ease-out, slideOutRight 0.4s ease-in forwards;
+  animation-delay: 0s, calc(var(--toast-timeout) - 0.4s);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Toast succès */
+.toast-success {
+  background-color: #28a745 !important;
+  color: white;
+}
+
+/* Toast erreur */
+.toast-error {
+  background-color: #dc3545 !important;
+  color: white;
+}
+
+/* Toast info */
+.toast-info {
+  background-color: #007bff !important;
+  color: white;
+}
+
+/* Progress bar */
+#toast-container > div .toast-progress {
+  background-color: rgba(255,255,255,0.7);
+}
+
+/* Animation entrée */
+@keyframes slideInRight {
+  from {
+    transform: translateX(120%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Animation sortie */
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(120%);
+    opacity: 0;
+  }
+}
+

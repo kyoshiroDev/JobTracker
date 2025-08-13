@@ -22,4 +22,4 @@ import { CommonModule } from '@angular/common';
     />
   </svg>`,
 })
-export class UpdateFormSvgComponent {}
+export class UpdateFormComponent {}

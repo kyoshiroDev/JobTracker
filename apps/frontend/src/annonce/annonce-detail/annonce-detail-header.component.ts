@@ -7,30 +7,31 @@ import {
 } from '@angular/core';
 import { STATUS_COLOR } from '../../app/tokens/status-color-token';
 import { Annonce } from '../annonce';
-import { ReturnRowSvgComponent } from './icones/return-row-svg.component';
-import { UpdateFormSvgComponent } from './icones/update-form-svg.component';
-import { CompanySvgComponent } from './icones/company-svg.component';
-import { EmailSvgComponent } from './icones/email-svg.component';
-import { PhoneSvgComponent } from './icones/phone-svg.component';
-import { CitySvgComponent } from './icones/city-svg.component';
-import { SalarySvgComponent } from './icones/salary-svg.component';
-import { ContractTypeSvgComponent } from './icones/contract-type-svg.component';
-import { WorkModeSvgComponent } from './icones/work-mode-svg.component';
+import { RowLeftComponent } from '../../icons/row-left.component';
+import { UpdateFormComponent } from '../../icons/update-form.component';
+import { CompanyComponent } from '../../icons/company.component';
+
+import { PhoneComponent } from '../../icons/phone.component';
+import { CityComponent } from '../../icons/city.component';
+import { SalaryComponent } from '../../icons/salary.component';
+import { ContractTypeComponent } from '../../icons/contract-type.component';
+import { WorkModeComponent } from '../../icons/work-mode.component';
+import { EmailComponent } from '../../icons/email.component';
 
 @Component({
   selector: 'fdw-annonce-detail-header',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     CommonModule,
-    ReturnRowSvgComponent,
-    UpdateFormSvgComponent,
-    CompanySvgComponent,
-    EmailSvgComponent,
-    PhoneSvgComponent,
-    CitySvgComponent,
-    SalarySvgComponent,
-    ContractTypeSvgComponent,
-    WorkModeSvgComponent,
+    RowLeftComponent,
+    UpdateFormComponent,
+    CompanyComponent,
+    PhoneComponent,
+    CityComponent,
+    SalaryComponent,
+    ContractTypeComponent,
+    WorkModeComponent,
+    EmailComponent,
   ],
   template: `
     <header class="relative max-w-4xl m-auto rounded-t-lg text-black">
@@ -67,7 +68,7 @@ import { WorkModeSvgComponent } from './icones/work-mode-svg.component';
         <div
           class="flex items-center bg-slate-200 p-4 gap-4 rounded-md w-xs sm:w-full"
         >
-          <fdw-email-svg />
+          <fdw-email />
           <p class="text-md">
             {{ annonce().company.email }}
           </p>
