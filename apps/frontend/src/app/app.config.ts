@@ -13,7 +13,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes, withComponentInputBinding()),
     provideAnimations(),
     provideToastr({
-      positionClass: 'toast-top-right',
+      positionClass: 'toast-top-center',
       timeOut: 3000,
       preventDuplicates: true,
       progressBar: true,
