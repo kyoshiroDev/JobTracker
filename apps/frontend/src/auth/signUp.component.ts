@@ -1,8 +1,9 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  computed,
-  inject, input, output
+  inject,
+  input,
+  output,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EyeOpenIconComponent } from '../icons/eye-open-icon.component';
@@ -11,7 +12,14 @@ import { LockIconComponent } from '../icons/lock-icon.component';
 import { RowRightIconComponent } from '../icons/row-right-icon.component';
 import { EmailIconComponent } from '../icons/email-icon.component';
 import { UserIconComponent } from '../icons/user-icon.component';
-import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  NonNullableFormBuilder,
+  ReactiveFormsModule,
+  ValidationErrors,
+  ValidatorFn,
+  Validators
+} from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AuthForm } from './auth';
 
@@ -158,7 +166,7 @@ import { AuthForm } from './auth';
       <div
         class="flex items-center border border-jobtracker-border rounded-md focus-within:ring-2 focus-within:ring-jobtracker-primary/40 focus-within:border-jobtracker-primary transition"
         [class.border-red-600]="
-          invalidSaisie('confirmPassword') || passwordMatch()
+          invalidSaisie('confirmPassword') || passwordMismatch()
         "
       >
         <span class="pl-3 flex items-center">
@@ -188,7 +196,7 @@ import { AuthForm } from './auth';
       </div>
       @if (invalidSaisie('confirmPassword', 'required')) {
       <p class="pl-1 mt-1 text-xs text-red-600">Ce champ est obligatoire.</p>
-      } @if (passwordMatch()) {
+      } @if (passwordMismatch()) {
       <p class="pl-1 mt-1 text-xs text-red-600">
         Les mots de passe ne correspondent pas.
       </p>
@@ -212,24 +220,31 @@ export class SignUpComponent {
 
   readonly typePasswordInput = input.required<string>();
   readonly typeConfirmPasswordInput = input.required<string>();
-  readonly typePasswordChanges = output<'password' | 'text'>()
-  readonly typeConfirmPasswordChanges = output<'password' | 'text'>()
+  readonly typePasswordChanges = output<'password' | 'text'>();
+  readonly typeConfirmPasswordChanges = output<'password' | 'text'>();
 
   protected readonly formSignUp = this.fb.group<AuthForm>({
     name: this.fb.control('', [Validators.required]),
-    email: this.fb.control('', [
-      Validators.required,
-      Validators.email,
-    ]),
+    email: this.fb.control('', [Validators.required, Validators.email]),
     password: this.fb.control('', [Validators.required]),
     confirmPassword: this.fb.control('', [Validators.required]),
-  });
+  }, { validators: this.passwordsMatchValidator() });
 
-  protected passwordMatch = computed(
-    () =>
-      this.formSignUp.controls.password?.value !==
-      this.formSignUp.controls.confirmPassword?.value
-  );
+  protected passwordsMatchValidator(): ValidatorFn {
+    return (group: AbstractControl): ValidationErrors | null => {
+      const pwd = group.get('password')?.value ?? '';
+      const confirm = group.get('confirmPassword')?.value ?? '';
+      return pwd && confirm && pwd !== confirm
+        ? { passwordMismatch: true }
+        : null;
+    };
+  }
+
+  protected passwordMismatch(): boolean {
+    const touched = this.formSignUp.get('confirmPassword')?.touched
+      || this.formSignUp.get('password')?.touched;
+    return touched ? this.formSignUp.hasError('passwordMismatch') : false;
+  }
 
   protected invalidSaisie(controlName: string, errorType?: string): boolean {
     const control = this.formSignUp.get(controlName);
@@ -241,7 +256,7 @@ export class SignUpComponent {
   }
 
   protected onSubmit(): void {
-    if (this.formSignUp.invalid || this.passwordMatch()) {
+    if (this.formSignUp.invalid ) {
       this.formSignUp.markAllAsTouched();
       this.toast.error('Formulaire invalide');
       return;
