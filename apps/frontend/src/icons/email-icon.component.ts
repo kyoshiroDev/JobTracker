@@ -1,9 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'fdw-eye-open',
-  imports: [CommonModule],
+  selector: 'fdw-email-icon',
   template: `
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -18,10 +16,12 @@ import { CommonModule } from '@angular/common';
         stroke-linejoin="round"
         stroke-width="2"
       >
-        <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0-4 0" />
-        <path d="M21 12q-3.6 6-9 6t-9-6q3.6-6 9-6t9 6" />
+        <path
+          d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"
+        />
+        <path d="m3 7l9 6l9-6" />
       </g>
     </svg>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EyeOpenComponent {}
+export class EmailIconComponent {}

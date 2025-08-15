@@ -1,9 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'fdw-email',
-  imports: [CommonModule],
+  selector: 'fdw-user-icon',
   template: `
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -11,19 +9,15 @@ import { CommonModule } from '@angular/common';
       height="16"
       viewBox="0 0 24 24"
     >
-      <g
+      <path
         fill="none"
         stroke="currentColor"
         stroke-linecap="round"
         stroke-linejoin="round"
         stroke-width="2"
-      >
-        <path
-          d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"
-        />
-        <path d="m3 7l9 6l9-6" />
-      </g>
+        d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0-8 0M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"
+      />
     </svg>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EmailComponent {}
+export class UserIconComponent {}

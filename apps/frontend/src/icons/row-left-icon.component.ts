@@ -1,14 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'fdw-return-row-svg',
+  selector: 'fdw-return-row-icon',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule, RouterLink],
   template: `
     <svg
-      routerLink="/annonces"
       class="cursor-pointer w-4 h-4 md:w-8 md:h-8"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 20 20"
@@ -20,4 +16,4 @@ import { RouterLink } from '@angular/router';
       />
     </svg>`,
 })
-export class RowLeftComponent {}
+export class RowLeftIconComponent {}

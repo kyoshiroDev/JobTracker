@@ -1,10 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'fdw-contract-type-svg',
+  selector: 'fdw-contract-type-icon',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule],
   template: `
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -22,4 +20,4 @@ import { CommonModule } from '@angular/common';
       />
     </svg>`,
 })
-export class ContractTypeComponent {}
+export class ContractTypeIconComponent {}

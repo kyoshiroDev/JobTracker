@@ -1,10 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'fdw-company-svg',
+  selector: 'fdw-company-icon',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule],
   template: `
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -26,4 +24,4 @@ import { CommonModule } from '@angular/common';
       />
     </svg>`,
 })
-export class CompanyComponent {}
+export class CompanyIconComponent {}

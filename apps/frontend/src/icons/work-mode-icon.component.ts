@@ -1,9 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'fdw-work-mode-svg',
-  imports: [CommonModule],
+  selector: 'fdw-work-mode-icon',
   template: `
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -22,4 +20,4 @@ import { CommonModule } from '@angular/common';
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class WorkModeComponent {}
+export class WorkModeIconComponent {}

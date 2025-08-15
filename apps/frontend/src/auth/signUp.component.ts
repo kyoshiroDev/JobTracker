@@ -5,32 +5,30 @@ import {
   signal,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EyeOpenComponent } from '../../icons/eye-open.component';
-import { EyeCloseComponent } from '../../icons/eye-close.component';
-import { LockComponent } from '../../icons/lock.component';
-import { RowRightComponent } from '../../icons/row-right.component';
-import { EmailComponent } from '../../icons/email.component';
-import { UserComponent } from '../../icons/user.component';
+import { EyeOpenIconComponent } from '../icons/eye-open-icon.component';
+import { EyeCloseIconComponent } from '../icons/eye-close-icon.component';
+import { LockIconComponent } from '../icons/lock-icon.component';
+import { RowRightIconComponent } from '../icons/row-right-icon.component';
+import { EmailIconComponent } from '../icons/email-icon.component';
+import { UserIconComponent } from '../icons/user-icon.component';
 import {
   FormBuilder,
-  FormControl,
-  FormGroup,
   ReactiveFormsModule,
   Validators
 } from '@angular/forms';
-import { AuthForm } from '../auth';
 import { ToastrService } from 'ngx-toastr';
+import { AuthForm } from './auth';
 
 @Component({
   selector: 'fdw-auth-signUp',
   imports: [
     CommonModule,
-    EyeOpenComponent,
-    EyeCloseComponent,
-    LockComponent,
-    RowRightComponent,
-    EmailComponent,
-    UserComponent,
+    EyeOpenIconComponent,
+    EyeCloseIconComponent,
+    LockIconComponent,
+    RowRightIconComponent,
+    EmailIconComponent,
+    UserIconComponent,
     ReactiveFormsModule,
   ],
   template: `
@@ -50,7 +48,7 @@ import { ToastrService } from 'ngx-toastr';
           [class.border-red-600]="invalidSaisie('name')"
         >
           <span class="pl-3 flex items-center">
-            <fdw-user class="block w-4 h-4" />
+            <fdw-user-icon class="block w-4 h-4" />
          </span>
           <input
             id="name"
@@ -81,7 +79,7 @@ import { ToastrService } from 'ngx-toastr';
           [class.border-red-600]="invalidSaisie('email')"
         >
           <span class="pl-3 flex items-center">
-        <fdw-email />
+        <fdw-email-icon />
       </span>
           <input
             id="email"
@@ -114,7 +112,7 @@ import { ToastrService } from 'ngx-toastr';
           [class.border-red-600]="invalidSaisie('password')"
         >
         <span class="pl-3 flex items-center">
-        <fdw-lock />
+        <fdw-lock-icon />
       </span>
           <input
             id="password"
@@ -132,9 +130,9 @@ import { ToastrService } from 'ngx-toastr';
             class="pr-3 inline-flex items-center cursor-pointer"
           >
             @if (typePassword() === 'password') {
-              <fdw-eye-close />
+              <fdw-eye-close-icon />
             } @else () {
-              <fdw-eye-open />
+              <fdw-eye-open-icon />
             }
           </button>
         </div>
@@ -155,7 +153,7 @@ import { ToastrService } from 'ngx-toastr';
           [class.border-red-600]="invalidSaisie('confirmPassword') || match()"
         >
         <span class="pl-3 flex items-center">
-        <fdw-lock />
+        <fdw-lock-icon />
       </span>
           <input
             id="confirm-password"
@@ -173,9 +171,9 @@ import { ToastrService } from 'ngx-toastr';
             class="pr-3 inline-flex items-center cursor-pointer"
           >
             @if (typeConfirmPassword() === 'password') {
-              <fdw-eye-close />
+              <fdw-eye-close-icon />
             } @else () {
-              <fdw-eye-open />
+              <fdw-eye-open-icon />
             }
           </button>
         </div>
@@ -193,7 +191,7 @@ import { ToastrService } from 'ngx-toastr';
         class="mt-8 w-full h-9 text-sm rounded-lg bg-linear-to-r from-jobtracker-primary to-jobtracker-primary/75 text-white font-medium hover:opacity-95 active:opacity-90 transition inline-flex items-center justify-center gap-2 cursor-pointer"
       >
         Créer un compte
-        <fdw-row-right />
+        <fdw-row-right-icon />
       </button>
     </form>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -204,30 +202,29 @@ export class SignUpComponent {
   protected readonly fb = inject(FormBuilder);
   protected readonly toast = inject(ToastrService);
 
-  switchTypePassword(): void {
+  protected switchTypePassword(): void {
     return this.typePassword() === 'password'
       ? this.typePassword.set('text')
       : this.typePassword.set('password');
   }
 
-  switchTypeConfirmPassword(): void {
-    return this.typeConfirmPassword() === 'password'
+  protected switchTypeConfirmPassword(): void {    return this.typeConfirmPassword() === 'password'
       ? this.typeConfirmPassword.set('text')
       : this.typeConfirmPassword.set('password');
   }
 
-  protected readonly formSignUp: FormGroup = this.fb.group<AuthForm>({
-    name: new FormControl('', [Validators.required]),
-    email: new FormControl('', [Validators.email, Validators.required]),
-    password: new FormControl('', [Validators.required]),
-    confirmPassword: new FormControl('', [Validators.required]),
+  protected readonly formSignUp = this.fb.nonNullable.group<AuthForm>({
+    name: this.fb.nonNullable.control('', [Validators.required]),
+    email: this.fb.nonNullable.control('', [Validators.required, Validators.email]),
+    password: this.fb.nonNullable.control('', [Validators.required]),
+    confirmPassword: this.fb.nonNullable.control('', [Validators.required]),
   });
 
-  match(){
-    return this.formSignUp.get('password')?.value !== this.formSignUp.get('confirmPassword')?.value;
+  protected match():boolean{
+    return this.formSignUp.controls.password?.value !== this.formSignUp.controls.confirmPassword?.value;
   }
 
-  invalidSaisie(controlName: string, errorType?: string): boolean {
+  protected invalidSaisie(controlName: string, errorType?: string): boolean {
     const control = this.formSignUp.get(controlName);
     if (!control) return false;
     if (errorType) {
@@ -236,7 +233,7 @@ export class SignUpComponent {
     return control.invalid && control.touched;
   }
 
-  protected onSubmit() {
+  protected onSubmit(): void {
     if (this.formSignUp.invalid || this.match()) {
       this.formSignUp.markAllAsTouched();
       this.toast.error('Formulaire invalide');

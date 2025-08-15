@@ -1,9 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'fdw-row-right',
-  imports: [CommonModule],
+  selector: 'fdw-row-right-icon',
   template: `
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -18,4 +16,4 @@ import { CommonModule } from '@angular/common';
     </svg>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RowRightComponent {}
+export class RowRightIconComponent {}

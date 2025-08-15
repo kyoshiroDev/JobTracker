@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'fdw-salary-svg',
+  selector: 'fdw-salary-icon',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule],
   template: `
@@ -26,4 +26,4 @@ import { CommonModule } from '@angular/common';
       </g>
     </svg>`,
 })
-export class SalaryComponent {}
+export class SalaryIconComponent {}

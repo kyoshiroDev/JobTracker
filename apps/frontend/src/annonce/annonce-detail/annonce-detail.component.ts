@@ -19,7 +19,6 @@ import { AnnonceDetailContentComponent } from './annonce-details-content.compone
   selector: 'fdw-annonce-detail',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    CommonModule,
     AnnonceDetailHeaderComponent,
     AnnonceDetailContentComponent,
     AnnonceDetailFooterComponent,

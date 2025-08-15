@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -7,31 +6,30 @@ import {
 } from '@angular/core';
 import { STATUS_COLOR } from '../../app/tokens/status-color-token';
 import { Annonce } from '../annonce';
-import { RowLeftComponent } from '../../icons/row-left.component';
-import { UpdateFormComponent } from '../../icons/update-form.component';
-import { CompanyComponent } from '../../icons/company.component';
+import { RowLeftIconComponent } from '../../icons/row-left-icon.component';
+import { UpdateFormIconComponent } from '../../icons/update-form-icon.component';
+import { CompanyIconComponent } from '../../icons/company-icon.component';
 
-import { PhoneComponent } from '../../icons/phone.component';
-import { CityComponent } from '../../icons/city.component';
-import { SalaryComponent } from '../../icons/salary.component';
-import { ContractTypeComponent } from '../../icons/contract-type.component';
-import { WorkModeComponent } from '../../icons/work-mode.component';
-import { EmailComponent } from '../../icons/email.component';
+import { PhoneIconComponent } from '../../icons/phone-icon.component';
+import { CityIconComponent } from '../../icons/city-icon.component';
+import { SalaryIconComponent } from '../../icons/salary-icon.component';
+import { ContractTypeIconComponent } from '../../icons/contract-type-icon.component';
+import { WorkModeIconComponent } from '../../icons/work-mode-icon.component';
+import { EmailIconComponent } from '../../icons/email-icon.component';
 
 @Component({
   selector: 'fdw-annonce-detail-header',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    CommonModule,
-    RowLeftComponent,
-    UpdateFormComponent,
-    CompanyComponent,
-    PhoneComponent,
-    CityComponent,
-    SalaryComponent,
-    ContractTypeComponent,
-    WorkModeComponent,
-    EmailComponent,
+    RowLeftIconComponent,
+    UpdateFormIconComponent,
+    CompanyIconComponent,
+    PhoneIconComponent,
+    CityIconComponent,
+    SalaryIconComponent,
+    ContractTypeIconComponent,
+    WorkModeIconComponent,
+    EmailIconComponent,
   ],
   template: `
     <header class="relative max-w-4xl m-auto rounded-t-lg text-black">
@@ -39,8 +37,8 @@ import { EmailComponent } from '../../icons/email.component';
         class="p-4 flex flex-col w-full justify-center text-white gap-4 bg-JobTracker-side rounded-t-lg"
       >
         <div class="flex justify-between">
-          <fdw-return-row-svg />
-          <fdw-update-form-svg />
+          <fdw-return-row-icon />
+          <fdw-update-form-icon />
         </div>
         <h2
           class="flex-inline sm:text-xl md:text-2xl text-center font-bold text-JobTracker-white uppercase"
@@ -49,7 +47,7 @@ import { EmailComponent } from '../../icons/email.component';
         </h2>
         <div class="flex flex-col items-center bg-inherit gap-4 pb-4">
           <div class="flex justify-center items-center gap-4">
-            <fdw-company-svg />
+            <fdw-company-icon />
             <p class="text-xl md:text-2xl font-medium">
               {{ annonce().company.name }}
             </p>
@@ -68,7 +66,7 @@ import { EmailComponent } from '../../icons/email.component';
         <div
           class="flex items-center bg-slate-200 p-4 gap-4 rounded-md w-xs sm:w-full"
         >
-          <fdw-email />
+          <fdw-email-icon />
           <p class="text-md">
             {{ annonce().company.email }}
           </p>
@@ -77,7 +75,7 @@ import { EmailComponent } from '../../icons/email.component';
         <div
           class="flex items-center bg-slate-200 p-4 gap-4 rounded-md w-xs sm:w-full"
         >
-          <fdw-phone-svg />
+          <fdw-phone-icon />
           <p class="text-md">
             {{ annonce().company.phone }}
           </p>
@@ -89,7 +87,7 @@ import { EmailComponent } from '../../icons/email.component';
         <div
           class="flex w-full gap-2 items-center border-2 border-slate-200 p-2 rounded-md"
         >
-          <fdw-city-svg />
+          <fdw-city-icon />
           <div class="flex flex-col justify-items-center items-start gap-0">
             <p class="text-slate-500 text-sm">Lieu</p>
             <p class="text-md">{{ annonce().company.city }}</p>
@@ -99,7 +97,7 @@ import { EmailComponent } from '../../icons/email.component';
         <div
           class="flex w-full gap-2 items-center border-2 border-slate-200 p-2 rounded-md"
         >
-          <fdw-salary-svg />
+          <fdw-salary-icon />
           <div class="flex flex-col justify-items-center items-start gap-0">
             <p class="text-slate-500 text-sm">Salaire</p>
             <p class="text-md">
@@ -113,7 +111,7 @@ import { EmailComponent } from '../../icons/email.component';
         <div
           class="flex w-full gap-2 items-center border-2 border-slate-200 p-2 rounded-md"
         >
-          <fdw-contract-type-svg />
+          <fdw-contract-type-icon />
           <div class="flex flex-col justify-items-center items-start gap-0">
             <p class="text-slate-500 text-sm">Contrat</p>
             <p class="text-md">{{ annonce().content.contractType }}</p>
@@ -122,7 +120,7 @@ import { EmailComponent } from '../../icons/email.component';
         <div
           class="flex w-full gap-2 items-center border-2 border-slate-200 p-2 rounded-md"
         >
-          <fdw-work-mode-svg />
+          <fdw-work-mode-icon />
           <div class="flex flex-col justify-items-center items-start gap-0">
             <p class="text-slate-500 text-sm">Mode</p>
             <p class="text-md">{{ annonce().content.workMode }}</p>

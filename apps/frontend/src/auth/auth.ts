@@ -8,8 +8,8 @@ export interface Auth {
 }
 
 export interface AuthForm {
-  name: FormControl<string | null>;
-  email: FormControl<string | null>;
-  password: FormControl<string | null>;
-  confirmPassword: FormControl<string | null>;
+  name: FormControl<string>;
+  email: FormControl<string>;
+  password: FormControl<string>;
+  confirmPassword: FormControl<string>;
 }

@@ -1,9 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'fdw-eye-close',
-  imports: [CommonModule],
+  selector: 'fdw-eye-close-icon',
   template: ` <svg
     xmlns="http://www.w3.org/2000/svg"
     width="16"
@@ -21,4 +19,4 @@ import { CommonModule } from '@angular/common';
   </svg>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EyeCloseComponent {}
+export class EyeCloseIconComponent {}

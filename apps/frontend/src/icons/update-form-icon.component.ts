@@ -1,10 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'fdw-update-form-svg',
+  selector: 'fdw-update-form-icon',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule],
   template: `<svg
     class="cursor-pointer w-4 h-4 md:w-8 md:h-8"
     xmlns="http://www.w3.org/2000/svg"
@@ -22,4 +20,4 @@ import { CommonModule } from '@angular/common';
     />
   </svg>`,
 })
-export class UpdateFormComponent {}
+export class UpdateFormIconComponent {}

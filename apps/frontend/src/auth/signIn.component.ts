@@ -1,23 +1,22 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EmailComponent } from '../../icons/email.component';
-import { LockComponent } from '../../icons/lock.component';
-import { EyeCloseComponent } from '../../icons/eye-close.component';
-import { EyeOpenComponent } from '../../icons/eye-open.component';
-import { RowRightComponent } from '../../icons/row-right.component';
+import { EmailIconComponent } from '../icons/email-icon.component';
+import { LockIconComponent } from '../icons/lock-icon.component';
+import { EyeCloseIconComponent } from '../icons/eye-close-icon.component';
+import { EyeOpenIconComponent } from '../icons/eye-open-icon.component';
+import { RowRightIconComponent } from '../icons/row-right-icon.component';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthForm } from '../auth';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'fdw-auth-signIn',
   imports: [
     CommonModule,
-    EmailComponent,
-    LockComponent,
-    EyeCloseComponent,
-    EyeOpenComponent,
-    RowRightComponent,
+    EmailIconComponent,
+    LockIconComponent,
+    EyeCloseIconComponent,
+    EyeOpenIconComponent,
+    RowRightIconComponent,
     ReactiveFormsModule,
   ],
   template: ` <form [formGroup]="formSignIn" (ngSubmit)="onSubmit()" class="px-6 pb-6 pt-4">
@@ -33,7 +32,7 @@ import { ToastrService } from 'ngx-toastr';
         [class.border-red-600]="invalidSaisie('email')"
       >
           <span class="pl-3 flex items-center">
-        <fdw-email />
+        <fdw-email-icon />
       </span>
         <input
           id="email"
@@ -66,7 +65,7 @@ import { ToastrService } from 'ngx-toastr';
         [class.border-red-600]="invalidSaisie('password')"
       >
         <span class="pl-3 flex items-center">
-        <fdw-lock />
+        <fdw-lock-icon />
       </span>
         <input
           id="password"
@@ -84,9 +83,9 @@ import { ToastrService } from 'ngx-toastr';
           class="pr-3 inline-flex items-center cursor-pointer"
         >
           @if (typePassword() === 'password') {
-            <fdw-eye-close />
+            <fdw-eye-close-icon />
           } @else () {
-            <fdw-eye-open />
+            <fdw-eye-open-icon />
           }
         </button>
       </div>
@@ -110,7 +109,7 @@ import { ToastrService } from 'ngx-toastr';
       class="w-full h-9 text-sm rounded-lg bg-linear-to-r from-jobtracker-primary to-jobtracker-primary/75 text-white font-medium hover:opacity-95 active:opacity-90 transition inline-flex items-center justify-center gap-2 cursor-pointer"
     >
       Se connecter
-      <fdw-row-right />
+      <fdw-row-right-icon />
     </button>
   </form>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -120,7 +119,7 @@ export class SignInComponent {
   protected readonly toast = inject(ToastrService) ;
   protected readonly fb = inject(FormBuilder)
 
-  protected readonly formSignIn = this.fb.group<Pick<AuthForm, 'email' | 'password'>>({
+  protected readonly formSignIn = this.fb.group({
     email: new FormControl ('', [Validators.required, Validators.email]),
     password: new FormControl ('', [Validators.required]),
   })
