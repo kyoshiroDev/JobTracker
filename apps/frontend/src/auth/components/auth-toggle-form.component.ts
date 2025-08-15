@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, input, output, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 
 @Component({
   selector: 'fdw-auth-toggle-form',
@@ -9,14 +9,14 @@ import { ChangeDetectionStrategy, Component, computed, input, output, signal } f
       >
         <button
           type="button"
-          (click)="onChangeSignInBtnForm.emit()"
+          (click)="toggleForm('signIn')"
           [class]="loginBtnClass()"
         >
           Connexion
         </button>
         <button
           type="button"
-          (click)="onChangeSignUpBtnForm.emit()"
+          (click)="toggleForm('signUp')"
           [class]="registerBtnClass()"
         >
           Inscription
@@ -32,7 +32,9 @@ export class AuthToggleFormComponent {
   readonly loginBtnClass = input.required()
   readonly registerBtnClass = input.required()
 
-  readonly onChangeSignUpBtnForm = output()
-  readonly onChangeSignInBtnForm = output()
+  readonly switchFormChanges = output<'signIn' | 'signUp'>()
 
+  toggleForm(form: 'signIn' | 'signUp') {
+    this.switchFormChanges.emit(form);
+  }
 }

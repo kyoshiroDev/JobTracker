@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  signal,
+} from '@angular/core';
 import { SignInComponent } from './signIn.component';
 import { SignUpComponent } from './signUp.component';
 import { AuthHeaderComponent } from './components/auth-header.component';
@@ -28,8 +33,7 @@ import { AuthProvidersComponent } from './components/auth-providers.component';
         class="bg-white rounded-2xl border border-jobtracker-border shadow-sm"
       >
         <fdw-auth-toggle-form
-          (onChangeSignUpBtnForm)="this.formAuth.set('signUp')"
-          (onChangeSignInBtnForm)="this.formAuth.set('signIn')"
+          (switchFormChanges)="switchForm($event)"
           [formAuth]="formAuth()"
           [loginBtnClass]="loginBtnClass()"
           [registerBtnClass]="registerBtnClass()"
@@ -37,11 +41,19 @@ import { AuthProvidersComponent } from './components/auth-providers.component';
 
         @if (formAuth() === 'signIn') {
         <div class="animate-fade-slide">
-          <fdw-auth-signIn />
+          <fdw-auth-signIn
+            (typePasswordChanges)="switchTypePassword($event)"
+            [typePasswordInput]="typePassword()"
+          />
         </div>
         } @else {
         <div class="animate-fade-slide">
-          <fdw-auth-signUp />
+          <fdw-auth-signUp
+            (typePasswordChanges)="switchTypePassword($event)"
+            (typeConfirmPasswordChanges)="switchTypeConfirmPassword($event)"
+            [typePasswordInput]="typePassword()"
+            [typeConfirmPasswordInput]="typeConfirmPassword()"
+          />
         </div>
         } <fdw-auth-providers />
       </div>
@@ -51,6 +63,8 @@ import { AuthProvidersComponent } from './components/auth-providers.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthComponent {
+  protected readonly typePassword = signal<string>('password');
+  protected readonly typeConfirmPassword = signal<string>('password');
   protected readonly formAuth = signal<'signIn' | 'signUp'>('signIn');
 
   protected readonly loginBtnClass = computed(() =>
@@ -64,4 +78,16 @@ export class AuthComponent {
       ? 'h-10 rounded-md text-sm font-medium transition shadow-sm bg-jobtracker-primary text-white cursor-default transition'
       : 'h-10 rounded-md text-sm font-medium text-jobtracker-text-secondary hover:bg-white/60 transition cursor-pointer transition'
   );
+
+  protected switchForm($event: 'signIn' | 'signUp') {
+    this.formAuth.set($event);
+  }
+
+  protected switchTypePassword($event: 'password' | 'text') {
+      this.typePassword() === 'password' ? this.typePassword.set($event) : this.typePassword.set('password');
+  };
+
+  protected switchTypeConfirmPassword($event: 'password' | 'text') {
+    this.typeConfirmPassword() === 'password' ? this.typeConfirmPassword.set($event) : this.typeConfirmPassword.set('password');
+  }
 }
