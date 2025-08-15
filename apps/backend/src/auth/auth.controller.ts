@@ -6,10 +6,10 @@ import {
   Post
 } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
-import { CreateUsersDto } from '../users/dto/create-users.dto';
-import { UpdateUsersDto } from '../users/dto/update-users.dto';
+import { CreateUsersDto } from '../../../../libs/dto/create-users.dto';
+import { UpdateUsersDto } from '../../../../libs/dto/update-users.dto';
 import { AuthService } from './auth.service';
-import { UserSigningDto } from './dto/UserSigning.dto';
+import { UserSigningDto } from '../../../../libs/dto/UserSigning.dto';
 
 @Controller('auth')
 export class AuthController {
