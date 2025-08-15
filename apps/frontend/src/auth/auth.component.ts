@@ -79,15 +79,15 @@ export class AuthComponent {
       : 'h-10 rounded-md text-sm font-medium text-jobtracker-text-secondary hover:bg-white/60 transition cursor-pointer transition'
   );
 
-  protected switchForm($event: 'signIn' | 'signUp') {
+  protected switchForm($event: 'signIn' | 'signUp'): void {
     this.formAuth.set($event);
   }
 
-  protected switchTypePassword($event: 'password' | 'text') {
+  protected switchTypePassword($event: 'password' | 'text'): void {
       this.typePassword() === 'password' ? this.typePassword.set($event) : this.typePassword.set('password');
   };
 
-  protected switchTypeConfirmPassword($event: 'password' | 'text') {
+  protected switchTypeConfirmPassword($event: 'password' | 'text'): void {
     this.typeConfirmPassword() === 'password' ? this.typeConfirmPassword.set($event) : this.typeConfirmPassword.set('password');
   }
 }

@@ -144,7 +144,7 @@ export class SignInComponent {
     password: this.fb.control('', [Validators.required]),
   });
 
-  invalidSaisie(controlName: string, errorType?: string): boolean {
+  protected invalidSaisie(controlName: string, errorType?: string): boolean {
     const control = this.formSignIn.get(controlName);
     if (!control) return false;
     if (errorType) {
@@ -153,7 +153,7 @@ export class SignInComponent {
     return control.invalid && control.touched;
   }
 
-  protected onSubmit() {
+  protected onSubmit(): void {
     if (this.formSignIn.invalid) {
       this.formSignIn.markAllAsTouched();
       this.toast.error('Formulaire invalide');
