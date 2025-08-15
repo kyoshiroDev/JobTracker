@@ -7,7 +7,7 @@ async function bootstrap() {
 
   // CORS d'abord
   app.enableCors({
-    origin: 'https://jobtrakerv2.netlify.app/', // pas '*', car credentials potentiels
+    origin: 'https://jobtrakerv2.netlify.app', // pas '*', car credentials potentiels
     methods: ['GET','HEAD','PUT','PATCH','POST','DELETE','OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true, // mets à false si tu n'utilises pas de cookies
