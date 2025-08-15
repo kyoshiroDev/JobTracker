@@ -9,7 +9,7 @@ import { SignUpComponent } from './signUp.component';
 import { AuthHeaderComponent } from './components/auth-header.component';
 import { AuthFooterComponent } from './components/auth-footer.component';
 import { AuthToggleFormComponent } from './components/auth-toggle-form.component';
-import { AuthProvidersComponent } from './components/auth-providers.component';
+//import { AuthProvidersComponent } from './components/auth-providers.component';
 
 @Component({
   selector: 'fdw-auth',
@@ -20,7 +20,7 @@ import { AuthProvidersComponent } from './components/auth-providers.component';
     AuthHeaderComponent,
     AuthFooterComponent,
     AuthToggleFormComponent,
-    AuthProvidersComponent,
+   // AuthProvidersComponent,
   ],
   host: {
     class:
@@ -55,7 +55,8 @@ import { AuthProvidersComponent } from './components/auth-providers.component';
             [typeConfirmPasswordInput]="typeConfirmPassword()"
           />
         </div>
-        } <fdw-auth-providers />
+        }
+        <!-- <fdw-auth-providers /> -->
       </div>
     </section>
     <fdw-auth-footer />
