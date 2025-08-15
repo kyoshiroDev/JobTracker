@@ -21,7 +21,8 @@ import {
   Validators
 } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { AuthForm } from './auth';
+import { AuthForm } from '../../../../libs/interfaces/auth';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'fdw-auth-signUp',
@@ -35,11 +36,11 @@ import { AuthForm } from './auth';
     UserIconComponent,
     ReactiveFormsModule,
   ],
-  template: ` <form
+  template: `
+    <form
     class="px-6 pb-6 pt-4"
     [formGroup]="formSignUp"
     (ngSubmit)="onSubmit()"
-    xmlns="http://www.w3.org/1999/html"
   >
     <!-- Nom complet -->
     <label
@@ -143,7 +144,7 @@ import { AuthForm } from './auth';
         >
           @if (typePasswordInput() === 'password') {
           <fdw-eye-close-icon />
-          } @else () {
+          } @else {
           <fdw-eye-open-icon />
           }
         </button>
@@ -165,9 +166,7 @@ import { AuthForm } from './auth';
     <div class="relative">
       <div
         class="flex items-center border border-jobtracker-border rounded-md focus-within:ring-2 focus-within:ring-jobtracker-primary/40 focus-within:border-jobtracker-primary transition"
-        [class.border-red-600]="
-          invalidSaisie('confirmPassword') || passwordMismatch()
-        "
+        [class.border-red-600]="invalidSaisie('confirmPassword') || passwordMismatch()"
       >
         <span class="pl-3 flex items-center">
           <fdw-lock-icon />
@@ -189,7 +188,7 @@ import { AuthForm } from './auth';
         >
           @if (typeConfirmPasswordInput() === 'password') {
           <fdw-eye-close-icon />
-          } @else () {
+          } @else {
           <fdw-eye-open-icon />
           }
         </button>
@@ -217,6 +216,7 @@ import { AuthForm } from './auth';
 export class SignUpComponent {
   protected readonly fb = inject(NonNullableFormBuilder);
   protected readonly toast = inject(ToastrService);
+  protected readonly serviceAuth = inject(AuthService);
 
   readonly typePasswordInput = input.required<string>();
   readonly typeConfirmPasswordInput = input.required<string>();
@@ -261,7 +261,15 @@ export class SignUpComponent {
       this.toast.error('Formulaire invalide');
       return;
     }
-    this.toast.success('Enregistrement réussi');
-    this.formSignUp.reset();
+    const { name, email, password } = this.formSignUp.getRawValue()
+    this.serviceAuth.SignUp({ name, email, password }).subscribe({
+      next: () => {
+        this.toast.success('Enregistrement réussi');
+        this.formSignUp.reset();
+      },
+      error: () => {
+        this.toast.info("Erreur lors de l'enregistrement");
+      }
+    })
   }
 }

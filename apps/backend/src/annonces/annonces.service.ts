@@ -8,7 +8,7 @@ export class AnnoncesService {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(createAnnonceDto: CreateAnnonceDto, UserId: string) {
-    return this.prisma.annonce.create({
+    return this.prisma['annonce'].create({
       data: {
         job: createAnnonceDto.job,
         contract_type: createAnnonceDto.contract_type,
@@ -34,7 +34,7 @@ export class AnnoncesService {
   }
 
   async findAll() {
-    return this.prisma.annonce.findMany({
+    return this.prisma['annonce'].findMany({
       include: {
         user: true,
       },
@@ -45,7 +45,7 @@ export class AnnoncesService {
   }
 
   async findOne(id: string) {
-    return this.prisma.annonce.findUnique({
+    return this.prisma['annonce'].findUnique({
       where: { id },
       include: {
         user: true,
@@ -54,14 +54,14 @@ export class AnnoncesService {
   }
 
   async update(id: string, updateAnnonceDto: UpdateAnnoncesDto) {
-    return this.prisma.annonce.update({
+    return this.prisma['annonce'].update({
       where: { id },
       data: updateAnnonceDto,
     });
   }
 
   async remove(id: string) {
-    return this.prisma.annonce.delete({
+    return this.prisma['annonce'].delete({
       where: { id},
     });
   }

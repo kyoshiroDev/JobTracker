@@ -5,7 +5,9 @@ import { routes } from './app.routes';
 import { STATUS_COLOR_PROVIDER } from './tokens/status-color-token-provider';
 import { provideToastr } from 'ngx-toastr';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideHttpClient } from '@angular/common/http';
 
+// @ts-ignore
 export const appConfig: ApplicationConfig = {
   providers: [
     STATUS_COLOR_PROVIDER,
@@ -19,5 +21,6 @@ export const appConfig: ApplicationConfig = {
       progressBar: true,
       progressAnimation: 'decreasing'
     }),
+    provideHttpClient()
   ],
 };
