@@ -54,10 +54,10 @@ const client_namespaceObject = require("@prisma/client");
 
 let PrismaService = class PrismaService extends client_namespaceObject.PrismaClient {
     async onModuleInit() {
-        await this['$connect']();
+        await this.$connect();
     }
     async onModuleDestroy() {
-        await this['$disconnect']();
+        await this.$disconnect();
     }
 };
 PrismaService = (0,external_tslib_namespaceObject.__decorate)([
@@ -138,7 +138,7 @@ AnnoncesService = (0,external_tslib_namespaceObject.__decorate)([
 
 ;// external "class-validator"
 const external_class_validator_namespaceObject = require("class-validator");
-;// ../../libs/dto/create-annonces.dto.ts
+;// ./src/annonces/dto/create-annonces.dto.ts
 
 
 class CreateAnnonceDto {
@@ -230,7 +230,7 @@ class CreateAnnonceDto {
 
 ;// external "@nestjs/mapped-types"
 const mapped_types_namespaceObject = require("@nestjs/mapped-types");
-;// ../../libs/dto/update-annonces.dto.ts
+;// ./src/annonces/dto/update-annonces.dto.ts
 
 
 class UpdateAnnoncesDto extends (0,mapped_types_namespaceObject.PartialType)(CreateAnnonceDto) {
@@ -354,7 +354,7 @@ let UsersService = class UsersService {
         const saltOrRounds = 10;
         const password = User.password;
         const hash = await external_bcrypt_namespaceObject.hash(password, saltOrRounds);
-        return this.prisma['user'].create({
+        return this.prisma.user.create({
             data: {
                 name: User.name,
                 email: User.email,
@@ -364,17 +364,17 @@ let UsersService = class UsersService {
         });
     }
     findOne(email) {
-        return this.prisma['user'].findFirst({
+        return this.prisma.user.findFirst({
             where: { email }
         });
     }
     update(id, updateUserDto) {
-        return this.prisma['user'].update({
+        return this.prisma.user.update({
             where: { id }, data: updateUserDto
         });
     }
     remove(id) {
-        return this.prisma['user'].delete({
+        return this.prisma.user.delete({
             where: { id }
         });
     }
@@ -448,7 +448,7 @@ AuthService = (0,external_tslib_namespaceObject.__decorate)([
 ], AuthService);
 
 
-;// ../../libs/dto/create-users.dto.ts
+;// ./src/users/dto/create-users.dto.ts
 
 
 class CreateUsersDto {
@@ -487,13 +487,13 @@ class CreateUsersDto {
     (0,external_tslib_namespaceObject.__metadata)("design:type", String)
 ], CreateUsersDto.prototype, "updatedAt", void 0);
 
-;// ../../libs/dto/update-users.dto.ts
+;// ./src/users/dto/update-users.dto.ts
 
 
 class UpdateUsersDto extends (0,mapped_types_namespaceObject.PartialType)(CreateUsersDto) {
 }
 
-;// ../../libs/dto/UserSigning.dto.ts
+;// ./src/auth/UserSigning.dto.ts
 
 
 class UserSigningDto {
@@ -642,12 +642,11 @@ AppModule = (0,external_tslib_namespaceObject.__decorate)([
 
 async function bootstrap() {
     const app = await core_namespaceObject.NestFactory.create(AppModule);
-    // CORS d'abord
     app.enableCors({
-        origin: 'https://jobtrakerv2.netlify.app/', // pas '*', car credentials potentiels
+        origin: ['localhost:4200', 'https://jobtrakerv2.netlify.app'],
         methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
         allowedHeaders: ['Content-Type', 'Authorization'],
-        credentials: true, // mets à false si tu n'utilises pas de cookies
+        credentials: true,
     });
     // pipes, etc.
     app.useGlobalPipes(new common_namespaceObject.ValidationPipe({

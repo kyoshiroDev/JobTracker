@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { AnnoncesService } from './annonces.service';
-import { CreateAnnonceDto } from '../../../../libs/dto/create-annonces.dto';
-import { UpdateAnnoncesDto } from '../../../../libs/dto/update-annonces.dto';
+import { CreateAnnonceDto } from './dto/create-annonces.dto';
+import { UpdateAnnoncesDto } from './dto/update-annonces.dto';
 
 @Controller('annonces')
 export class AnnoncesController {

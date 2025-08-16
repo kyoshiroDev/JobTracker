@@ -21,7 +21,7 @@ import {
   Validators
 } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { AuthForm } from '../../../../libs/interfaces/auth';
+import { AuthForm } from '../../../backend/src/auth/auth';
 import { AuthService } from './auth.service';
 
 @Component({
