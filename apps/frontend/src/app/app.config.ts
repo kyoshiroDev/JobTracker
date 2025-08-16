@@ -7,7 +7,6 @@ import { provideToastr } from 'ngx-toastr';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideHttpClient } from '@angular/common/http';
 
-// @ts-ignore
 export const appConfig: ApplicationConfig = {
   providers: [
     STATUS_COLOR_PROVIDER,
@@ -19,8 +18,8 @@ export const appConfig: ApplicationConfig = {
       timeOut: 3000,
       preventDuplicates: true,
       progressBar: true,
-      progressAnimation: 'decreasing'
+      progressAnimation: 'decreasing',
     }),
-    provideHttpClient()
+    provideHttpClient(),
   ],
 };

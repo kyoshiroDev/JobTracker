@@ -13,6 +13,7 @@ import { ContentFormComponent } from './content-form.component';
 import { EntrepriseFormComponent } from './entreprise-form.component';
 
 import { AnnoncesService } from '../annonces.service';
+import { Annonce } from '../annonce';
 
 @Component({
   selector: 'fdw-annonce-form',
@@ -127,23 +128,23 @@ export class AnnonceFormComponent {
   }
 
   protected readonly formAnnonce = this.fb.group<AnnonceForm>({
-    job: this.fb.control(null, Validators.required),
+    job: this.fb.control('', Validators.required),
     company: this.fb.group<CompanyForm>({
-      name: this.fb.control(null, Validators.required),
-      city: this.fb.control(null, Validators.required),
-      phone: this.fb.control(null, [
+      name: this.fb.control('', Validators.required),
+      city: this.fb.control('', Validators.required),
+      phone: this.fb.control('', [
         Validators.required,
         Validators.maxLength(10),
         Validators.pattern(/^[0-9]/),
       ]),
-      email: this.fb.control(null, [Validators.required, Validators.email]),
+      email: this.fb.control('', [Validators.required, Validators.email]),
     }),
     content: this.fb.group<ContentForm>({
-      about: this.fb.control(null, Validators.required),
+      about: this.fb.control('', Validators.required),
       description: this.fb.control(null, Validators.required),
-      skills: this.fb.control(null, Validators.required),
-      benefits: this.fb.control(null, Validators.required),
-      salary: this.fb.control(null, [
+      skills: this.fb.control('', Validators.required),
+      benefits: this.fb.control('', Validators.required),
+      salary: this.fb.control('', [
         Validators.required,
         Validators.pattern(/^\d+$/),
       ]),
@@ -164,7 +165,7 @@ export class AnnonceFormComponent {
   });
 
   protected onSubmit() {
-    const formDataAnnonce: any = this.formAnnonce.getRawValue();
+    const formDataAnnonce: Omit<Annonce, 'id'> = this.formAnnonce.getRawValue();
     if (this.formAnnonce.valid) {
       this.service.addAnnonce(formDataAnnonce);
       this.formAnnonce.reset();

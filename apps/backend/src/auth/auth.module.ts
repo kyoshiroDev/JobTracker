@@ -8,12 +8,17 @@ import { JwtModule } from '@nestjs/jwt';
 import * as process from 'node:process';
 
 @Module({
-  imports: [PrismaModule, UsersModule, PassportModule, JwtModule.register({
-    secret: process.env['JWT_SECRET'],
-    signOptions: {
-      expiresIn: '60m',
-    }
-  })],
+  imports: [
+    PrismaModule,
+    UsersModule,
+    PassportModule,
+    JwtModule.register({
+      secret: process.env['JWT_SECRET'],
+      signOptions: {
+        expiresIn: '60m',
+      },
+    }),
+  ],
   providers: [AuthService],
   controllers: [AuthController],
 })

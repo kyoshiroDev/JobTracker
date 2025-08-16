@@ -1,7 +1,15 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { AnnoncesService } from './annonces.service';
-import { CreateAnnonceDto } from './dto/create-annonces.dto';
-import { UpdateAnnoncesDto } from './dto/update-annonces.dto';
+import { CreateAnnonceDto } from '@libs/dto';
+import { UpdateAnnoncesDto } from '@libs/dto';
 
 @Controller('annonces')
 export class AnnoncesController {
@@ -9,7 +17,7 @@ export class AnnoncesController {
 
   @Post()
   create(@Body() createAnnonceDto: CreateAnnonceDto) {
-    const UserId = "3fa85f64-5717-4562-b3fc-2c963f66afa6";
+    const UserId = '3fa85f64-5717-4562-b3fc-2c963f66afa6';
     return this.annonceService.create(createAnnonceDto, UserId);
   }
 

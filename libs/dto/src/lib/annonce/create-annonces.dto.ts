@@ -54,5 +54,4 @@ export class CreateAnnonceDto {
   @IsOptional()
   @IsEmail()
   company_email?: string;
-
 }

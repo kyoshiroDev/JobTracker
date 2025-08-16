@@ -1,23 +1,30 @@
 import {
   Body,
-  Controller, Delete, Get, HttpCode, HttpStatus,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  HttpStatus,
   Param,
   Patch,
-  Post
+  Post,
 } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
-import { CreateUsersDto } from '../users/dto/create-users.dto';
-import { UpdateUsersDto } from '../users/dto/update-users.dto';
+import { CreateUsersDto } from '@libs/dto';
+import { UpdateUsersDto } from '@libs/dto';
 import { AuthService } from './auth.service';
-import { UserSigningDto } from './UserSigning.dto';
+import { UserSignInDto } from '@libs/dto';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private usersService: UsersService, private readonly authService: AuthService) {}
+  constructor(
+    private usersService: UsersService,
+    private readonly authService: AuthService
+  ) {}
 
   @HttpCode(HttpStatus.OK)
   @Post('signIn')
-  signIn(@Body() userSession: UserSigningDto) {
+  signIn(@Body() userSession: UserSignInDto) {
     return this.authService.signIn(userSession);
   }
 
@@ -27,13 +34,13 @@ export class AuthController {
   }
 
   @Post('signup')
-  async signup(@Body()User: CreateUsersDto){
-    return this.usersService.create(User)
+  async signup(@Body() User: CreateUsersDto) {
+    return this.usersService.create(User);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body()User: UpdateUsersDto){
-    return this.usersService.update(id, User)
+  update(@Param('id') id: string, @Body() User: UpdateUsersDto) {
+    return this.usersService.update(id, User);
   }
 
   @Delete(':id')

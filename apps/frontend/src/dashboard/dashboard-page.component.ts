@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, computed, signal, WritableSignal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  signal,
+  WritableSignal,
+} from '@angular/core';
 import { CandidaturesRecentesComponent } from './candidatures-recentes.component';
 import { SuiviCandidaturesComponent } from './suivi-candidatures.component';
 //import { TacheAFaireComponent } from './widgets/tache-a-faire/tache-a-faire.component';

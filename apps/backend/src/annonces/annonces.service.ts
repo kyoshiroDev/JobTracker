@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CreateAnnonceDto } from './dto/create-annonces.dto';
-import { UpdateAnnoncesDto } from './dto/update-annonces.dto';
+import { CreateAnnonceDto, UpdateAnnoncesDto } from '@libs/dto';
 import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
@@ -62,7 +61,7 @@ export class AnnoncesService {
 
   async remove(id: string) {
     return this.prisma.annonce.delete({
-      where: { id},
+      where: { id },
     });
   }
 }

@@ -3,21 +3,21 @@
 
 @theme {
   /* Couleurs*/
-  --color-jobtracker-primary: #286CF5;
-  --color-jobtracker-secondary: #F5A623;
-  --color-jobtracker-background: #F9F9FA;
-  --color-jobtracker-bg-gray:#F3F4F6;
+  --color-jobtracker-primary: #286cf5;
+  --color-jobtracker-secondary: #f5a623;
+  --color-jobtracker-background: #f9f9fa;
+  --color-jobtracker-bg-gray: #f3f4f6;
   --color-jobtracker-text: #333333;
-  --color-jobtracker-text-secondary: #6B7280;
-  --color-jobtracker-border: #ECEAE4;
+  --color-jobtracker-text-secondary: #6b7280;
+  --color-jobtracker-border: #eceae4;
 
   /* Couleurs pour le mode sombre*/
   --color-jobtracker-dark-background: #121212;
-  --color-jobtracker-dark-surface: #1E1E2F;
-  --color-jobtracker-dark-text: #E5E7EB;
-  --color-jobtracker-dark-text-secondary: #9CA3AF;
-  --color-jobtracker-dark-primary: #4C8BF5;
-  --color-jobtracker-dark-secondary: #F5A623;
+  --color-jobtracker-dark-surface: #1e1e2f;
+  --color-jobtracker-dark-text: #e5e7eb;
+  --color-jobtracker-dark-text-secondary: #9ca3af;
+  --color-jobtracker-dark-primary: #4c8bf5;
+  --color-jobtracker-dark-secondary: #f5a623;
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
@@ -32,10 +32,9 @@
     }
   }
   .animate-fade-slide {
-    animation: fade-slide 0.90s ease-in-out;
+    animation: fade-slide 0.9s ease-in-out;
   }
 }
-
 
 /* Container principal */
 #toast-container > div {
@@ -74,7 +73,7 @@
 
 /* Progress bar */
 #toast-container > div .toast-progress {
-  background-color: rgba(255,255,255,0.7);
+  background-color: rgba(255, 255, 255, 0.7);
 }
 
 /* Animation entrée */
@@ -100,4 +99,3 @@
     opacity: 0;
   }
 }
-

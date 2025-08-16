@@ -30,7 +30,7 @@ export class AnnoncesService {
           'Participer au développement du portail (front-office et back-office) afin d’enrichir les fonctionnalités de la solution. Collaborer étroitement avec les équipes techniques et les experts métier pour faire évoluer le produit. Proposer des améliorations en termes d’expérience utilisateur et assurer la qualité de vos développements par des tests rigoureux.',
         skills:
           'Excellente maîtrise des technologies front-end, notamment Angular. Connaissances en développement back-end (Java) ou forte motivation pour apprendre. Expérience avec Docker et Git (GitLab). Autonomie, esprit d’équipe et force de proposition indispensables.Excellente maîtrise des technologies front-end, notamment Angular. Connaissances en développement back-end (Java) ou forte motivation pour apprendre. Expérience avec Docker et Git (GitLab). Autonomie, esprit d’équipe et force de proposition indispensables.',
-        benifits:
+        benefits:
           'Excellente maîtrise des technologies front-end, notamment Angular. Connaissances en développement back-end (Java) ou forte motivation pour apprendre. Expérience avec Docker et Git (GitLab). Autonomie, esprit d’équipe et force de proposition indispensables.',
         contractType: 'CDI',
         workMode: 'fullremote',
@@ -57,7 +57,7 @@ export class AnnoncesService {
           'Participer au développement du portail (front-office et back-office) afin d’enrichir les fonctionnalités de la solution. Collaborer étroitement avec les équipes techniques et les experts métier pour faire évoluer le produit. Proposer des améliorations en termes d’expérience utilisateur et assurer la qualité de vos développements par des tests rigoureux.',
         skills:
           'Excellente maîtrise des technologies front-end, notamment Angular. Connaissances en développement back-end (Java) ou forte motivation pour apprendre. Expérience avec Docker et Git (GitLab). Autonomie, esprit d’équipe et force de proposition indispensables.Excellente maîtrise des technologies front-end, notamment Angular. Connaissances en développement back-end (Java) ou forte motivation pour apprendre. Expérience avec Docker et Git (GitLab). Autonomie, esprit d’équipe et force de proposition indispensables.',
-        benifits:
+        benefits:
           'Excellente maîtrise des technologies front-end, notamment Angular. Connaissances en développement back-end (Java) ou forte motivation pour apprendre. Expérience avec Docker et Git (GitLab). Autonomie, esprit d’équipe et force de proposition indispensables.',
         contractType: 'CDI',
         workMode: 'fullremote',
@@ -83,7 +83,7 @@ export class AnnoncesService {
           'Participer au développement du portail (front-office et back-office) afin d’enrichir les fonctionnalités de la solution. Collaborer étroitement avec les équipes techniques et les experts métier pour faire évoluer le produit. Proposer des améliorations en termes d’expérience utilisateur et assurer la qualité de vos développements par des tests rigoureux.',
         skills:
           'Excellente maîtrise des technologies front-end, notamment Angular. Connaissances en développement back-end (Java) ou forte motivation pour apprendre. Expérience avec Docker et Git (GitLab). Autonomie, esprit d’équipe et force de proposition indispensables.Excellente maîtrise des technologies front-end, notamment Angular. Connaissances en développement back-end (Java) ou forte motivation pour apprendre. Expérience avec Docker et Git (GitLab). Autonomie, esprit d’équipe et force de proposition indispensables.',
-        benifits:
+        benefits:
           'Excellente maîtrise des technologies front-end, notamment Angular. Connaissances en développement back-end (Java) ou forte motivation pour apprendre. Expérience avec Docker et Git (GitLab). Autonomie, esprit d’équipe et force de proposition indispensables.',
         contractType: 'CDI',
         workMode: 'fullremote',
@@ -110,7 +110,7 @@ export class AnnoncesService {
           'Participer au développement du portail (front-office et back-office) afin d’enrichir les fonctionnalités de la solution. Collaborer étroitement avec les équipes techniques et les experts métier pour faire évoluer le produit. Proposer des améliorations en termes d’expérience utilisateur et assurer la qualité de vos développements par des tests rigoureux.',
         skills:
           'Excellente maîtrise des technologies front-end, notamment Angular. Connaissances en développement back-end (Java) ou forte motivation pour apprendre. Expérience avec Docker et Git (GitLab). Autonomie, esprit d’équipe et force de proposition indispensables.Excellente maîtrise des technologies front-end, notamment Angular. Connaissances en développement back-end (Java) ou forte motivation pour apprendre. Expérience avec Docker et Git (GitLab). Autonomie, esprit d’équipe et force de proposition indispensables.',
-        benifits:
+        benefits:
           'Excellente maîtrise des technologies front-end, notamment Angular. Connaissances en développement back-end (Java) ou forte motivation pour apprendre. Expérience avec Docker et Git (GitLab). Autonomie, esprit d’équipe et force de proposition indispensables.',
         contractType: 'CDI',
         workMode: 'fullremote',
@@ -136,7 +136,7 @@ export class AnnoncesService {
           'Participer au développement du portail (front-office et back-office) afin d’enrichir les fonctionnalités de la solution. Collaborer étroitement avec les équipes techniques et les experts métier pour faire évoluer le produit. Proposer des améliorations en termes d’expérience utilisateur et assurer la qualité de vos développements par des tests rigoureux.Participer au développement du portail (front-office et back-office) afin d’enrichir les fonctionnalités de la solution. Collaborer étroitement avec les équipes techniques et les experts métier pour faire évoluer le produit. Proposer des améliorations en termes d’expérience utilisateur et assurer la qualité de vos développements par des tests rigoureux.',
         skills:
           'Excellente maîtrise des technologies front-end, notamment Angular. Connaissances en développement back-end (Java) ou forte motivation pour apprendre. Expérience avec Docker et Git (GitLab). Autonomie, esprit d’équipe et force de proposition indispensables.Excellente maîtrise des technologies front-end, notamment Angular. Connaissances en développement back-end (Java) ou forte motivation pour apprendre. Expérience avec Docker et Git (GitLab). Autonomie, esprit d’équipe et force de proposition indispensables.',
-        benifits:
+        benefits:
           'Excellente maîtrise des technologies front-end, notamment Angular. Connaissances en développement back-end (Java) ou forte motivation pour apprendre. Expérience avec Docker et Git (GitLab). Autonomie, esprit d’équipe et force de proposition indispensables.',
         contractType: 'CDI',
         workMode: 'fullremote',
@@ -157,7 +157,9 @@ export class AnnoncesService {
 
   getAll(): Signal<Annonce[]> {
     return computed(() =>
-      this._annonces().sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
+      this._annonces().sort(
+        (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
+      )
     );
   }
 
@@ -168,7 +170,12 @@ export class AnnoncesService {
     const filter = this._filters();
 
     const normalize = (str: string) =>
-      str.toLowerCase().trim().replaceAll('-', '').replaceAll('é', 'e').replaceAll(' ', '');
+      str
+        .toLowerCase()
+        .trim()
+        .replaceAll('-', '')
+        .replaceAll('é', 'e')
+        .replaceAll(' ', '');
 
     const filterJob = filter.job ? normalize(filter.job) : '';
 
@@ -176,7 +183,8 @@ export class AnnoncesService {
       const jobNormalized = normalize(annonce.job);
       const nameMatch = annonce.company.name === filter.name;
       const cityMatch = annonce.company.city === filter.city;
-      const salaryMatch = annonce.content.salary.toString() === filter.salary?.toString();
+      const salaryMatch =
+        annonce.content.salary.toString() === filter.salary?.toString();
       const statusMatch = annonce.content.status === filter.status;
       const jobMatch = filterJob ? jobNormalized.includes(filterJob) : false;
 
@@ -184,7 +192,7 @@ export class AnnoncesService {
     });
   });
 
-  addAnnonce(formDataAnnonce: Annonce) {
+  addAnnonce(formDataAnnonce: Omit<Annonce, 'id'>) {
     const id = 5;
     const newAnnonce: Annonce = {
       ...formDataAnnonce,

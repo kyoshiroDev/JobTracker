@@ -9,7 +9,6 @@ import { SignUpComponent } from './signUp.component';
 import { AuthHeaderComponent } from './components/auth-header.component';
 import { AuthFooterComponent } from './components/auth-footer.component';
 import { AuthToggleFormComponent } from './components/auth-toggle-form.component';
-//import { AuthProvidersComponent } from './components/auth-providers.component';
 
 @Component({
   selector: 'fdw-auth',
@@ -20,7 +19,6 @@ import { AuthToggleFormComponent } from './components/auth-toggle-form.component
     AuthHeaderComponent,
     AuthFooterComponent,
     AuthToggleFormComponent,
-   // AuthProvidersComponent,
   ],
   host: {
     class:
@@ -56,7 +54,6 @@ import { AuthToggleFormComponent } from './components/auth-toggle-form.component
           />
         </div>
         }
-        <!-- <fdw-auth-providers /> -->
       </div>
     </section>
     <fdw-auth-footer />
@@ -85,10 +82,18 @@ export class AuthComponent {
   }
 
   protected switchTypePassword($event: 'password' | 'text'): void {
-      this.typePassword() === 'password' ? this.typePassword.set($event) : this.typePassword.set('password');
-  };
+    if (this.typePassword() === 'password') {
+      this.typePassword.set($event);
+    } else {
+      this.typePassword.set('password');
+    }
+  }
 
   protected switchTypeConfirmPassword($event: 'password' | 'text'): void {
-    this.typeConfirmPassword() === 'password' ? this.typeConfirmPassword.set($event) : this.typeConfirmPassword.set('password');
+    if (this.typeConfirmPassword() === 'password') {
+      this.typeConfirmPassword.set($event);
+    } else {
+      this.typeConfirmPassword.set('password');
+    }
   }
 }

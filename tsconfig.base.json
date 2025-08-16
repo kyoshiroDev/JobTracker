@@ -16,7 +16,8 @@
     "target": "ESNext",
     "module": "ESNext",
     "paths": {
-
+      "@libs/dto": ["libs/dto/src/index.ts"],
+      "@libs/interface": ["libs/interface/src/index.ts"]
     },
     "baseUrl": ".",
     "rootDir": "."

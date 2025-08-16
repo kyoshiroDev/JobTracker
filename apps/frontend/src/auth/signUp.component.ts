@@ -18,10 +18,10 @@ import {
   ReactiveFormsModule,
   ValidationErrors,
   ValidatorFn,
-  Validators
+  Validators,
 } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { AuthForm } from '../../../backend/src/auth/auth';
+import { AuthForm } from '@libs/interface';
 import { AuthService } from './auth.service';
 
 @Component({
@@ -36,8 +36,7 @@ import { AuthService } from './auth.service';
     UserIconComponent,
     ReactiveFormsModule,
   ],
-  template: `
-    <form
+  template: ` <form
     class="px-6 pb-6 pt-4"
     [formGroup]="formSignUp"
     (ngSubmit)="onSubmit()"
@@ -166,7 +165,9 @@ import { AuthService } from './auth.service';
     <div class="relative">
       <div
         class="flex items-center border border-jobtracker-border rounded-md focus-within:ring-2 focus-within:ring-jobtracker-primary/40 focus-within:border-jobtracker-primary transition"
-        [class.border-red-600]="invalidSaisie('confirmPassword') || passwordMismatch()"
+        [class.border-red-600]="
+          invalidSaisie('confirmPassword') || passwordMismatch()
+        "
       >
         <span class="pl-3 flex items-center">
           <fdw-lock-icon />
@@ -223,12 +224,15 @@ export class SignUpComponent {
   readonly typePasswordChanges = output<'password' | 'text'>();
   readonly typeConfirmPasswordChanges = output<'password' | 'text'>();
 
-  protected readonly formSignUp = this.fb.group<AuthForm>({
-    name: this.fb.control('', [Validators.required]),
-    email: this.fb.control('', [Validators.required, Validators.email]),
-    password: this.fb.control('', [Validators.required]),
-    confirmPassword: this.fb.control('', [Validators.required]),
-  }, { validators: this.passwordsMatchValidator() });
+  protected readonly formSignUp = this.fb.group<AuthForm>(
+    {
+      name: this.fb.control('', [Validators.required]),
+      email: this.fb.control('', [Validators.required, Validators.email]),
+      password: this.fb.control('', [Validators.required]),
+      confirmPassword: this.fb.control('', [Validators.required]),
+    },
+    { validators: this.passwordsMatchValidator() }
+  );
 
   protected passwordsMatchValidator(): ValidatorFn {
     return (group: AbstractControl): ValidationErrors | null => {
@@ -241,8 +245,9 @@ export class SignUpComponent {
   }
 
   protected passwordMismatch(): boolean {
-    const touched = this.formSignUp.get('confirmPassword')?.touched
-      || this.formSignUp.get('password')?.touched;
+    const touched =
+      this.formSignUp.get('confirmPassword')?.touched ||
+      this.formSignUp.get('password')?.touched;
     return touched ? this.formSignUp.hasError('passwordMismatch') : false;
   }
 
@@ -256,12 +261,12 @@ export class SignUpComponent {
   }
 
   protected onSubmit(): void {
-    if (this.formSignUp.invalid ) {
+    if (this.formSignUp.invalid) {
       this.formSignUp.markAllAsTouched();
       this.toast.error('Formulaire invalide');
       return;
     }
-    const { name, email, password } = this.formSignUp.getRawValue()
+    const { name, email, password } = this.formSignUp.getRawValue();
     this.serviceAuth.SignUp({ name, email, password }).subscribe({
       next: () => {
         this.toast.success('Enregistrement réussi');
@@ -269,7 +274,7 @@ export class SignUpComponent {
       },
       error: () => {
         this.toast.info("Erreur lors de l'enregistrement");
-      }
-    })
+      },
+    });
   }
 }

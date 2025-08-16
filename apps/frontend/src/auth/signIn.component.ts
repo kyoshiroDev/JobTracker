@@ -2,7 +2,8 @@ import {
   ChangeDetectionStrategy,
   Component,
   inject,
-  input, output
+  input,
+  output,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EmailIconComponent } from '../icons/email-icon.component';
@@ -13,7 +14,7 @@ import { RowRightIconComponent } from '../icons/row-right-icon.component';
 import {
   NonNullableFormBuilder,
   ReactiveFormsModule,
-  Validators
+  Validators,
 } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 
@@ -137,7 +138,7 @@ export class SignInComponent {
   protected readonly fb = inject(NonNullableFormBuilder);
 
   readonly typePasswordInput = input.required();
-  readonly typePasswordChanges = output<'password' | 'text'>()
+  readonly typePasswordChanges = output<'password' | 'text'>();
 
   protected readonly formSignIn = this.fb.group({
     email: this.fb.control('', [Validators.required, Validators.email]),

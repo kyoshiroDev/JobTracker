@@ -1,12 +1,6 @@
 import { CommonModule } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { Annonce } from '../annonce';
-import { STATUS_COLOR } from '../../app/tokens/status-color-token';
 
 @Component({
   selector: 'fdw-annonce-detail-footer',
@@ -27,8 +21,5 @@ import { STATUS_COLOR } from '../../app/tokens/status-color-token';
   `,
 })
 export class AnnonceDetailFooterComponent {
-
   readonly annonce = input.required<Annonce>();
-
-
 }

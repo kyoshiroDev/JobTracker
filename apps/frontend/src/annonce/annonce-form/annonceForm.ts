@@ -15,7 +15,9 @@ export interface ContentForm {
   salary: FormControl<string | null>;
   contractType: FormControl<'CDI' | 'CDD' | 'Freelance' | 'Stage' | null>;
   workMode: FormControl<'fullremote' | 'presentiel' | 'hybride' | null>;
-  status: FormControl<string | null>;
+  status: FormControl<
+    'En attente' | 'Entretien' | 'À relancer' | 'Rejetée' | null
+  >;
   annonceLink: FormControl<string | null>;
 }
 export interface AnnonceForm {

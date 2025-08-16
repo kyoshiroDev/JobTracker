@@ -1,7 +1,7 @@
-# interfaces
+# interface
 
 This library was generated with [Nx](https://nx.dev).
 
 ## Building
 
-Run `nx build interfaces` to build the library.
+Run `nx build interface` to build the library.

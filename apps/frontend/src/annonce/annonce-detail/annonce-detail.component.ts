@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -29,9 +28,7 @@ import { AnnonceDetailContentComponent } from './annonce-details-content.compone
       class="max-w-2xl mx-auto bg-JobTracker-white rounded-lg shadow-xl shadow-slate-400 my-4 pb-4"
     >
       <!-- En-tête de l'annonce -->
-      <fdw-annonce-detail-header
-        [annonce]="annonce()"
-      />
+      <fdw-annonce-detail-header [annonce]="annonce()" />
       <!-- Contenu de l'annonce -->
       <fdw-annonce-detail-content [annonce]="annonce()" />
       <!-- Footer de l'annonce -->
@@ -49,7 +46,7 @@ export class AnnonceDetailComponent {
 
   readonly annonces: Signal<Annonce[]> = this.annonceService.getAll();
 
-  readonly annonce: Signal<Annonce | any> = computed(() => {
+  readonly annonce: Signal<Annonce> = computed(() => {
     if (!this.id()) {
       return null;
     }
