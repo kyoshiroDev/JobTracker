@@ -13,7 +13,7 @@ export class UsersService {
     const password: string = User.password;
     const hash: string = await bcrypt.hash(password, saltOrRounds);
 
-    return this.prisma['user'].create({
+    return this.prisma.user.create({
       data:{
         name: User.name,
         email: User.email,
@@ -24,19 +24,19 @@ export class UsersService {
   }
 
   findOne(email: string) {
-    return this.prisma['user'].findFirst({
+    return this.prisma.user.findFirst({
       where: {email}
     });
   }
 
   update(id: string, updateUserDto: UpdateUsersDto) {
-    return this.prisma['user'].update({
+    return this.prisma.user.update({
       where: { id }, data: updateUserDto
     });
   }
 
   remove(id: string) {
-    return this.prisma['user'].delete({
+    return this.prisma.user.delete({
       where: { id }
     });
   }
