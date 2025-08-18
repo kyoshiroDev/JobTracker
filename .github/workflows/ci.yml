@@ -138,4 +138,5 @@ jobs:
     needs: [ build-frontend, build-backend ]
     steps:
       - name: Report
-        run: echo "CI pipeline finished. Artifacts: dist-frontend, dist-backend"
+        run:  |
+          echo "CI pipeline finished. Artifacts: dist-frontend, dist-backend"
