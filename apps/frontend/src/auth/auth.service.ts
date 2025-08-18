@@ -10,6 +10,6 @@ export class AuthService {
   private readonly _apiUrl = 'https://jobtracker-1-h6qf.onrender.com';
 
   SignUp(formDataSignup: Pick<Auth, 'name' | 'email' | 'password'>) {
-    return this._http.post<Auth>(`${this._apiUrl}/auth/signup`, formDataSignup);
+    return this._http.post<Auth>(`${this._apiUrl}auth/signup`, formDataSignup);
   }
 }
