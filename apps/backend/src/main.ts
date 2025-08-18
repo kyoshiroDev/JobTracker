@@ -8,7 +8,7 @@ async function bootstrap() {
   app.enableCors({
     origin: ['http://localhost:4200', 'https://jobtrakerv2.netlify.app/'],
     methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    allowedHeaders: ['Content-Type', 'Authorization', true, 'X-Requested-With'],
     credentials: true,
   });
 
