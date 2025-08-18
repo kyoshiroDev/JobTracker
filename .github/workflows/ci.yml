@@ -35,10 +35,10 @@ jobs:
         run: npm ci
 
       - name: Run ESLint
-        run: npx eslint . --ext .ts,.js,.mjs,.cjs --quiet
+        run: nx run-many --target=lint --all
 
       - name: Run Prettier (check)
-        run: npx prettier --check .
+        run: nx format:write --all
 
   setup-and-test:
     name: Install & Test
