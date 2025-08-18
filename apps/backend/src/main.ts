@@ -8,7 +8,6 @@ async function bootstrap() {
   app.enableCors({
     origin: ['http://localhost:4200', 'https://jobtrakerv2.netlify.app'],
     methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
   });
 
@@ -23,4 +22,4 @@ async function bootstrap() {
   const port = process.env.PORT ? Number(process.env.PORT) : 3000;
   await app.listen(port, '0.0.0.0');
 }
-bootstrap()
+bootstrap();

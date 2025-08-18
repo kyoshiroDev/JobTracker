@@ -196,7 +196,9 @@ export class AnnoncesService {
   addAnnonce(formDataAnnonce: Omit<Annonce, 'id'>) {
     const newAnnonce: Annonce = {
       ...formDataAnnonce,
-      id: (globalThis.crypto?.randomUUID?.() ?? Math.random().toString(36).slice(2) + Date.now().toString(36)),
+      id:
+        globalThis.crypto?.randomUUID?.() ??
+        Math.random().toString(36).slice(2) + Date.now().toString(36),
       createdAt: new Date(formDataAnnonce.createdAt),
     };
     this._annonces.update((annonce) => [...annonce, newAnnonce]);

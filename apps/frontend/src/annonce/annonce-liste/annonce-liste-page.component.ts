@@ -14,21 +14,21 @@ import { AnnonceCardComponent } from './annonce-card.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [AnnonceFormSearchComponent, AnnonceCardComponent],
   template: `
-    <fdw-annonce-form-search
-      [annonces]="annonces()"
-    />
-    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 p-4">
-        @for (annonce of this.annoncesService.filteredAnnonces(); track annonce.id) {
-          <fdw-annonce-card [annonce]="annonce" />
-        } @empty {
-          @for (annonce of annonces(); track annonce.id) {
-        <fdw-annonce-card [annonce]="annonce" />
-      }
-        }
+    <fdw-annonce-form-search [annonces]="annonces()" />
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 p-4"
+    >
+      @for (annonce of this.annoncesService.filteredAnnonces(); track
+      annonce.id) {
+      <fdw-annonce-card [annonce]="annonce" />
+      } @empty { @for (annonce of annonces(); track annonce.id) {
+      <fdw-annonce-card [annonce]="annonce" />
+      } }
     </div>
   `,
 })
 export class AnnonceListePageComponent {
   protected readonly annoncesService = inject(AnnoncesService);
-  protected readonly annonces: Signal<Annonce[]> = this.annoncesService.getAll();
+  protected readonly annonces: Signal<Annonce[]> =
+    this.annoncesService.getAll();
 }

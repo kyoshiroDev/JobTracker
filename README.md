@@ -5,12 +5,14 @@ JobTracker est une application web développée avec Angular 19, conçue pour ai
 [🔗 Accéder à l'application en ligne](https://job-tracker-nx.vercel.app/)
 
 ## 🚀 Fonctionnalités principales
+
 - **Ajout d'offres d'emploi :** Enregistrement des détails des offres, y compris le titre, l'entreprise, le lien vers l'annonce et des notes personnelles.
 - **Suivi des candidatures :** Mise à jour du statut de chaque candidature (en attente, entretien, refus, etc.).
 - **Tableau de bord intuitif :** Vue d'ensemble des candidatures avec des filtres pour une navigation facilitée.
 - **Analyse des candidatures :** Statistiques sur les candidatures envoyées, les réponses reçues et les entretiens programmés.
 
 ## 🛠️ Technologies utilisées
+
 - **Framewoek :** Angular 19
 - **Langage :** TypeScript 5
 - **Styles :** Tailwind CSS 4
@@ -32,16 +34,23 @@ En développant JobTracker, j'ai renforcé et acquis les compétences suivantes 
 - **Déploiement :** Publication de l'application sur Vercel pour une accessibilité en ligne.
 
 ## 🧪 Lancer l'application en local
+
 1. **Cloner le dépôt :**
+
 ```bash
     git clone git@github.com:kyoshiroDev/frontend.git
 ```
+
 2. **Installer les dépendances :**
+
 ```bash
     npm install
 ```
+
 3.**Démarrer le serveur de développement :**
+
 ```bash
     ng serve
 ```
+
 L'application sera accessible à l'adresse http://localhost:4200/.

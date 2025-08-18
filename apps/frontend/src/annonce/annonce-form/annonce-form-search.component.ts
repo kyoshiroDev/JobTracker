@@ -33,74 +33,74 @@ type ResearchFormType = {
   imports: [ReactiveFormsModule, InputAnnonceFormSearchComponent],
   template: `
     <div class="flex flex-col gap-4 w-full md:w-fit m-auto px-2 pt-4">
-        <fdw-input-annonce-form-search class="w-full lg:hidden" />
+      <fdw-input-annonce-form-search class="w-full lg:hidden" />
       <form
         [formGroup]="selectedAnnonceForm"
         class="w-full grid grid-cols-1 sm:grid-cols-2 gap-2 bg-white p-2 rounded-lg shadow-md mt-4 md:mt-0"
       >
-          <fieldset
-            class="grid grid-cols-1 xl:grid-cols-2 gap-2 max-w-content"
-            formGroupName="company"
+        <fieldset
+          class="grid grid-cols-1 xl:grid-cols-2 gap-2 max-w-content"
+          formGroupName="company"
+        >
+          <select
+            (change)="onChange()"
+            aria-label="name"
+            formControlName="name"
+            class="form-select w-full sm:max-w-full md:text-left"
           >
-            <select
-              (change)="onChange()"
-              aria-label="name"
-              formControlName="name"
-              class="form-select w-full sm:max-w-full md:text-left"
-            >
-              <option value="" selected>Choisir une entreprise</option>
-              @if (annonces().length > 0) { @for (annonce of annonces(); track
-              annonce.id) {
-              <option [value]="annonce.company.name">
-                {{ annonce.company.name }}
-              </option>
-              } }
-            </select>
-            <select
-              (change)="onChange()"
-              aria-label="city"
-              formControlName="city"
-              class="form-select w-full sm:max-w-full md:text-left"
-            >
-              <option value="" selected>Choisir une localisation</option>
-              @if (annonces().length > 0) { @for (annonce of annonces(); track
-              annonce.id) {
-              <option [value]="annonce.company.city">
-                {{ annonce.company.city }}
-              </option>
-              } }
-            </select>
-          </fieldset>
-          <fieldset
-            class="grid grid-cols-1 xl:grid-cols-2 gap-2 max-w-content"
-            formGroupName="content"
+            <option value="" selected>Choisir une entreprise</option>
+            @if (annonces().length > 0) { @for (annonce of annonces(); track
+            annonce.id) {
+            <option [value]="annonce.company.name">
+              {{ annonce.company.name }}
+            </option>
+            } }
+          </select>
+          <select
+            (change)="onChange()"
+            aria-label="city"
+            formControlName="city"
+            class="form-select w-full sm:max-w-full md:text-left"
           >
-            <select
-              (change)="onChange()"
-              aria-label="salaire"
-              formControlName="salary"
-              class="form-select w-full sm:max-w-full md:text-left"
-            >
-              <option value="" selected>Choisir un revenu</option>
-              @if (annonces().length > 0) { @for (annonce of annonces(); track
-              annonce.id) {
-              <option [value]="annonce.content.salary">
-                {{ annonce.content.salary }} €
-              </option>
-              } }
-            </select>
-            <select
-              (change)="onChange()"
-              aria-label="status"
-              formControlName="status"
-              class="form-select w-full sm:max-w-full md:text-left"
-            >
-              <option value="" selected>Choisir un statut</option>
-              @for (status of statusList; track status.label) {
-              <option [value]="status.label">{{ status.label }}</option>
-              }
-            </select>
-          </fieldset>
+            <option value="" selected>Choisir une localisation</option>
+            @if (annonces().length > 0) { @for (annonce of annonces(); track
+            annonce.id) {
+            <option [value]="annonce.company.city">
+              {{ annonce.company.city }}
+            </option>
+            } }
+          </select>
+        </fieldset>
+        <fieldset
+          class="grid grid-cols-1 xl:grid-cols-2 gap-2 max-w-content"
+          formGroupName="content"
+        >
+          <select
+            (change)="onChange()"
+            aria-label="salaire"
+            formControlName="salary"
+            class="form-select w-full sm:max-w-full md:text-left"
+          >
+            <option value="" selected>Choisir un revenu</option>
+            @if (annonces().length > 0) { @for (annonce of annonces(); track
+            annonce.id) {
+            <option [value]="annonce.content.salary">
+              {{ annonce.content.salary }} €
+            </option>
+            } }
+          </select>
+          <select
+            (change)="onChange()"
+            aria-label="status"
+            formControlName="status"
+            class="form-select w-full sm:max-w-full md:text-left"
+          >
+            <option value="" selected>Choisir un statut</option>
+            @for (status of statusList; track status.label) {
+            <option [value]="status.label">{{ status.label }}</option>
+            }
+          </select>
+        </fieldset>
       </form>
     </div>
   `,

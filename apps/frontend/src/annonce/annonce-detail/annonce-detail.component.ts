@@ -50,9 +50,7 @@ export class AnnonceDetailComponent {
     if (!this.id()) {
       return null;
     }
-    const found = this.annonces().find(
-      (annonce) => annonce.id === this.id()
-    );
+    const found = this.annonces().find((annonce) => annonce.id === this.id());
     return found ?? null;
   });
 }

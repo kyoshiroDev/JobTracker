@@ -1,87 +1,85 @@
-# Nom du workflow tel qu'il apparaîtra dans l'onglet Actions de GitHub
 name: CI
 
-# Événements qui déclenchent le workflow
 on:
-  # Sur chaque push vers ces branches
   push:
     branches: [ refactor/ui-redesign-v2 ]
-  # Sur chaque Pull Request ciblant ces branches
   pull_request:
     branches: [ refactor/ui-redesign-v2 ]
+  workflow_dispatch: {}
 
-# Permissions minimales pour la lecture du contenu du repo
 permissions:
   contents: read
 
-# Définition des jobs (tâches) exécutés par le workflow
+# Annule les jobs obsolètes si tu repushes sur la même branche
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  # 1) Job de lint (ESLint) et de vérification de formatage (Prettier)
   lint-and-format:
     name: Lint & Prettier Check
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22.18.0
-          cache: 'npm'
+          node-version: 20
+          cache: npm
 
       - name: Install dependencies
         run: npm ci
 
-      # Vérifie les erreurs ESLint (échoue si des erreurs ou avertissements)
       - name: Run ESLint
         run: npx eslint . --ext .ts,.js,.mjs,.cjs --max-warnings=0
 
-      # Vérifie le formatage Prettier (échoue si des fichiers ne respectent pas le format)
       - name: Run Prettier (check)
         run: npx prettier --check .
 
-  # 2) Job d'installation et de tests
   setup-and-test:
     name: Install & Test
-    runs-on: ubuntu-latest # Machine virtuelle fournie par GitHub Actions
+    runs-on: ubuntu-latest
     needs: lint-and-format
     steps:
-      # Récupère le code du dépôt
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      # Installe Node.js (version 22.18.0) et active le cache npm
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22.18.0
-          cache: 'npm'
+          node-version: 20
+          cache: npm
 
-      # Installe les dépendances exactes à partir du package lock.json
       - name: Install dependencies
         run: npm ci
 
-      # Lance la suite de tests (Vitest) définie par "npm run test"
+      # IMPORTANT : génère Prisma avant les tests si le backend utilise @prisma/client
+      - name: Prisma generate
+        run: npx prisma generate --schema=apps/backend/prisma/schema.prisma
+
       - name: Run unit tests (Vitest)
         run: npm run test
 
-      # Téléverse (si présents) des rapports de test/couverture comme artefacts du job
       - name: Upload test results (if any)
-        if: always() # Toujours tenter upload, même si les tests échouent
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: vitest-results
           path: |
             coverage
             junit.xml
-          if-no-files-found: ignore # Ignore si les fichiers n'existent pas
+          if-no-files-found: ignore
 
-  # 3) Job de build du frontend Angular via Nx
   build-frontend:
     name: Build Frontend (Nx Angular)
     runs-on: ubuntu-latest
-    needs: setup-and-test # N'exécuter qu'après la fin du job tests
+    needs: setup-and-test
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -89,28 +87,25 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22.18.0
-          cache: 'npm'
+          node-version: 20
+          cache: npm
 
       - name: Install dependencies
         run: npm ci
 
-      # Construit l'app frontend (commande définie dans le package.json)
       - name: Build frontend app
         run: npm run build:frontend
 
-      # Téléverse le dossier de build du frontend comme artefact téléchargeable
       - name: Upload frontend build artifact
         uses: actions/upload-artifact@v4
         with:
           name: dist-frontend
           path: dist/apps/frontend
 
-  # 4) Job de build du backend NestJS via Nx
   build-backend:
     name: Build Backend (Nx NestJS)
     runs-on: ubuntu-latest
-    needs: setup-and-test # N'exécuter qu'après la fin du job tests
+    needs: setup-and-test
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -118,29 +113,29 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22.18.0
-          cache: 'npm'
+          node-version: 20
+          cache: npm
 
       - name: Install dependencies
         run: npm ci
 
-      # Construit l'app backend (commande définie dans package.json)
+      # IMPORTANT : re-génère Prisma dans ce job avant le build
+      - name: Prisma generate
+        run: npx prisma generate --schema=apps/backend/prisma/schema.prisma
+
       - name: Build backend app
         run: npm run build:backend
 
-      # Téléverse le dossier de build du backend comme artefact téléchargeable
       - name: Upload backend build artifact
         uses: actions/upload-artifact@v4
         with:
           name: dist-backend
           path: dist/apps/backend
 
-  # 5) Petit job de synthèse pour signaler la fin de la CI
   summary:
     name: CI Summary
     runs-on: ubuntu-latest
-    needs: [build-frontend, build-backend] # Attendre que les builds Front/Back soient terminés
+    needs: [ build-frontend, build-backend ]
     steps:
       - name: Report
-        run: |
-          echo "CI pipeline finished. Artifacts available: dist-frontend, dist-backend"
+        run: echo "CI pipeline finished. Artifacts: dist-frontend, dist-backend"

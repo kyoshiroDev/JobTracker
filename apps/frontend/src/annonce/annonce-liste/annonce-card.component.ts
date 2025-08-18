@@ -26,9 +26,7 @@ import { Annonce } from '../annonce';
         >
           {{ annonce().job }}
         </p>
-        <div
-          class="flex items-start w-[120px] text-JobTracker-blue"
-        >
+        <div class="flex items-start w-[120px] text-JobTracker-blue">
           <p
             [class]="statusConfig()"
             class="min-w-[110px] md:text-md text-xs rounded-4xl py-2 px-2 text-center text-JobTracker-white"

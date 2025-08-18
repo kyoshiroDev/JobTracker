@@ -38,7 +38,13 @@ import { CompanyForm } from './annonceForm';
       class="flex w-full flex-col justify-center items-start gap-2 flex-nowrap"
     >
       <label for="city">Ville<span class="text-xs text-red-700">*</span></label>
-      <input id="city" type="text" formControlName="city" placeholder="Paris" class="form-input w-full"/>
+      <input
+        id="city"
+        type="text"
+        formControlName="city"
+        placeholder="Paris"
+        class="form-input w-full"
+      />
     </div>
     <!-- Phone -->
     <div
