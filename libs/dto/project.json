@@ -1,7 +1,7 @@
 {
   "name": "dto",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "dto/src",
+  "sourceRoot": "libs/dto/src",
   "projectType": "library",
   "tags": [],
   "targets": {
@@ -9,10 +9,10 @@
       "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/dto",
-        "main": "dto/src/index.ts",
-        "tsConfig": "dto/tsconfig.lib.json",
-        "assets": ["dto/*.md"]
+        "outputPath": "dist/libs/dto",
+        "main": "libs/dto/src/index.ts",
+        "tsConfig": "libs/dto/tsconfig.lib.json",
+        "assets": ["libs/dto/*.md"]
       }
     }
   }

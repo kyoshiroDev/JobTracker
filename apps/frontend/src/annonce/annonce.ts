@@ -1,6 +1,6 @@
 export interface Entreprise {
-  name: string | null;
-  city: string | null;
+  name: string;
+  city: string;
   phone: string | null;
   email: string | null;
 }
@@ -14,13 +14,13 @@ export interface Content {
   contractType: 'CDI' | 'CDD' | 'Freelance' | 'Stage' | null;
   workMode: 'fullremote' | 'presentiel' | 'hybride' | null;
   annonceLink: string | null;
-  status: 'En attente' | 'Entretien' | 'À relancer' | 'Rejetée' | null;
+  status: 'En attente' | 'Entretien' | 'À relancer' | 'Rejetée';
 }
 
 export interface Annonce {
-  id: number | null;
-  job: string | null;
+  id: string;
+  job: string;
   company: Entreprise;
   content: Content;
-  createdAt: Date | null;
+  createdAt: Date;
 }

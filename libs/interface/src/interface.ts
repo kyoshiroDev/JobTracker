@@ -1,3 +1,3 @@
-export function interface(): string {
+export function interfaceUtil(): string {
   return 'interface';
 }

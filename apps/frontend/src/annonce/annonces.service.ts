@@ -15,7 +15,7 @@ type AnnonceFilter = {
 export class AnnoncesService {
   protected _annonces = signal<Annonce[]>([
     {
-      id: 1,
+      id: '3d6f0a88-1a2b-4d6e-9f1a-1b2c3d4e5f61',
       job: 'développeur front-end Angular',
       company: {
         name: 'Google',
@@ -34,14 +34,14 @@ export class AnnoncesService {
           'Excellente maîtrise des technologies front-end, notamment Angular. Connaissances en développement back-end (Java) ou forte motivation pour apprendre. Expérience avec Docker et Git (GitLab). Autonomie, esprit d’équipe et force de proposition indispensables.',
         contractType: 'CDI',
         workMode: 'fullremote',
-        salary: 35000,
+        salary: '35000',
         annonceLink: '',
         status: 'En attente',
       },
       createdAt: new Date(),
     },
     {
-      id: 2,
+      id: '5a1b2c3d-4e5f-6789-9abc-def012345678',
       job: 'développeur front-end NextJs',
       company: {
         name: 'Facebook',
@@ -61,14 +61,14 @@ export class AnnoncesService {
           'Excellente maîtrise des technologies front-end, notamment Angular. Connaissances en développement back-end (Java) ou forte motivation pour apprendre. Expérience avec Docker et Git (GitLab). Autonomie, esprit d’équipe et force de proposition indispensables.',
         contractType: 'CDI',
         workMode: 'fullremote',
-        salary: 40000,
+        salary: '40000',
         annonceLink: '',
         status: 'Entretien',
       },
       createdAt: new Date(),
     },
     {
-      id: 3,
+      id: '7b2c3d4e-5f61-4728-9abc-def012345679',
       job: 'développeur back-end',
       company: {
         name: 'Amazon',
@@ -87,7 +87,7 @@ export class AnnoncesService {
           'Excellente maîtrise des technologies front-end, notamment Angular. Connaissances en développement back-end (Java) ou forte motivation pour apprendre. Expérience avec Docker et Git (GitLab). Autonomie, esprit d’équipe et force de proposition indispensables.',
         contractType: 'CDI',
         workMode: 'fullremote',
-        salary: 50000,
+        salary: '50000',
         annonceLink: '',
         status: 'En attente',
       },
@@ -95,7 +95,7 @@ export class AnnoncesService {
       createdAt: new Date(),
     },
     {
-      id: 4,
+      id: '8c3d4e5f-6172-4839-9abc-def012345680',
       job: 'développeur back-end NestJs',
       company: {
         name: 'Prestashop',
@@ -114,14 +114,14 @@ export class AnnoncesService {
           'Excellente maîtrise des technologies front-end, notamment Angular. Connaissances en développement back-end (Java) ou forte motivation pour apprendre. Expérience avec Docker et Git (GitLab). Autonomie, esprit d’équipe et force de proposition indispensables.',
         contractType: 'CDI',
         workMode: 'fullremote',
-        salary: 45000,
+        salary: '45000',
         annonceLink: '',
         status: 'À relancer',
       },
       createdAt: new Date(),
     },
     {
-      id: 5,
+      id: '9d4e5f61-7283-494a-9abc-def012345681',
       job: 'développeur back-end Express',
       company: {
         name: 'Netflix',
@@ -140,7 +140,7 @@ export class AnnoncesService {
           'Excellente maîtrise des technologies front-end, notamment Angular. Connaissances en développement back-end (Java) ou forte motivation pour apprendre. Expérience avec Docker et Git (GitLab). Autonomie, esprit d’équipe et force de proposition indispensables.',
         contractType: 'CDI',
         workMode: 'fullremote',
-        salary: 55000,
+        salary: '55000',
         annonceLink: '',
         status: 'Rejetée',
       },
@@ -183,8 +183,9 @@ export class AnnoncesService {
       const jobNormalized = normalize(annonce.job);
       const nameMatch = annonce.company.name === filter.name;
       const cityMatch = annonce.company.city === filter.city;
-      const salaryMatch =
-        annonce.content.salary.toString() === filter.salary?.toString();
+      const salaryMatch = filter.salary
+        ? annonce.content.salary?.toString() === filter.salary.toString()
+        : false;
       const statusMatch = annonce.content.status === filter.status;
       const jobMatch = filterJob ? jobNormalized.includes(filterJob) : false;
 
@@ -193,10 +194,9 @@ export class AnnoncesService {
   });
 
   addAnnonce(formDataAnnonce: Omit<Annonce, 'id'>) {
-    const id = 5;
     const newAnnonce: Annonce = {
       ...formDataAnnonce,
-      id: id + 1,
+      id: (globalThis.crypto?.randomUUID?.() ?? Math.random().toString(36).slice(2) + Date.now().toString(36)),
       createdAt: new Date(formDataAnnonce.createdAt),
     };
     this._annonces.update((annonce) => [...annonce, newAnnonce]);

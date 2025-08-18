@@ -12,7 +12,8 @@
     "watch": "nx build --watch --configuration development",
     "test": "vitest run",
     "test:watch": "vitest",
-    "start:all": "nx run-many --target=serve --projects=frontend,backend --parallel"
+    "start:all": "nx run-many --target=serve --projects=frontend,backend --parallel",
+    "prisma:generate": "prisma generate --schema=apps/backend/prisma/schema.prisma"
   },
   "private": true,
   "dependencies": {

@@ -46,12 +46,13 @@ export class AnnonceDetailComponent {
 
   readonly annonces: Signal<Annonce[]> = this.annonceService.getAll();
 
-  readonly annonce: Signal<Annonce> = computed(() => {
+  readonly annonce: Signal<Annonce | null> = computed(() => {
     if (!this.id()) {
       return null;
     }
-    return this.annonces().find(
-      (annonce) => annonce.id.toString() === this.id()
+    const found = this.annonces().find(
+      (annonce) => annonce.id === this.id()
     );
+    return found ?? null;
   });
 }

@@ -165,7 +165,29 @@ export class AnnonceFormComponent {
   });
 
   protected onSubmit() {
-    const formDataAnnonce: Omit<Annonce, 'id'> = this.formAnnonce.getRawValue();
+    const form = this.formAnnonce.getRawValue();
+    const formDataAnnonce: Omit<Annonce, 'id'> = {
+      job: form.job ?? '',
+      company: {
+        name: form.company.name ?? '',
+        city: form.company.city ?? '',
+        phone: form.company.phone,
+        email: form.company.email,
+      },
+      content: {
+        about: form.content.about,
+        description: form.content.description,
+        skills: form.content.skills,
+        benefits: form.content.benefits,
+        salary: form.content.salary ?? null,
+        contractType: form.content.contractType,
+        workMode: form.content.workMode,
+        annonceLink: form.content.annonceLink,
+        status: form.content.status ?? 'En attente',
+      },
+      createdAt: form.createdAt ?? new Date(),
+    };
+
     if (this.formAnnonce.valid) {
       this.service.addAnnonce(formDataAnnonce);
       this.formAnnonce.reset();
