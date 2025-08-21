@@ -15,7 +15,7 @@ type AnnonceFilter = {
 export class AnnoncesService {
   protected _annonces = signal<Annonce[]>([
     {
-      id: '3d6f0a88-1a2b-4d6e-9f1a-1b2c3d4e5f61',
+      id: 1,
       job: 'développeur front-end Angular',
       company: {
         name: 'Google',
@@ -41,7 +41,7 @@ export class AnnoncesService {
       createdAt: new Date(),
     },
     {
-      id: '5a1b2c3d-4e5f-6789-9abc-def012345678',
+      id: 2,
       job: 'développeur front-end NextJs',
       company: {
         name: 'Facebook',
@@ -68,7 +68,7 @@ export class AnnoncesService {
       createdAt: new Date(),
     },
     {
-      id: '7b2c3d4e-5f61-4728-9abc-def012345679',
+      id: 3,
       job: 'développeur back-end',
       company: {
         name: 'Amazon',
@@ -95,7 +95,7 @@ export class AnnoncesService {
       createdAt: new Date(),
     },
     {
-      id: '8c3d4e5f-6172-4839-9abc-def012345680',
+      id: 4,
       job: 'développeur back-end NestJs',
       company: {
         name: 'Prestashop',
@@ -121,7 +121,7 @@ export class AnnoncesService {
       createdAt: new Date(),
     },
     {
-      id: '9d4e5f61-7283-494a-9abc-def012345681',
+      id: 5,
       job: 'développeur back-end Express',
       company: {
         name: 'Netflix',
@@ -194,11 +194,10 @@ export class AnnoncesService {
   });
 
   addAnnonce(formDataAnnonce: Omit<Annonce, 'id'>) {
+    const id = 5;
     const newAnnonce: Annonce = {
       ...formDataAnnonce,
-      id:
-        globalThis.crypto?.randomUUID?.() ??
-        Math.random().toString(36).slice(2) + Date.now().toString(36),
+      id: id + 1,
       createdAt: new Date(formDataAnnonce.createdAt),
     };
     this._annonces.update((annonce) => [...annonce, newAnnonce]);

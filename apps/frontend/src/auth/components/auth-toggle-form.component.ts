@@ -12,14 +12,14 @@ import {
       <div class="bg-jobtracker-bg-gray rounded-md p-1 grid grid-cols-2 gap-1">
         <button
           type="button"
-          (click)="toggleForm('signIn')"
+          (click)="toggleForm('login')"
           [class]="loginBtnClass()"
         >
           Connexion
         </button>
         <button
           type="button"
-          (click)="toggleForm('signUp')"
+          (click)="toggleForm('register')"
           [class]="registerBtnClass()"
         >
           Inscription
@@ -34,9 +34,9 @@ export class AuthToggleFormComponent {
   readonly loginBtnClass = input.required();
   readonly registerBtnClass = input.required();
 
-  readonly switchFormChanges = output<'signIn' | 'signUp'>();
+  readonly switchFormChanges = output<'login' | 'register'>();
 
-  toggleForm(form: 'signIn' | 'signUp') {
+  toggleForm(form: 'login' | 'register') {
     this.switchFormChanges.emit(form);
   }
 }

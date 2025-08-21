@@ -18,7 +18,7 @@ export interface Content {
 }
 
 export interface Annonce {
-  id: string;
+  id: number;
   job: string;
   company: Entreprise;
   content: Content;

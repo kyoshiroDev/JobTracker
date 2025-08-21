@@ -4,20 +4,14 @@ import { AuthController } from './auth.controller';
 import { PrismaModule } from '../prisma/prisma.module';
 import { UsersModule } from '../users/users.module';
 import { PassportModule } from '@nestjs/passport';
-import { JwtModule } from '@nestjs/jwt';
-import * as process from 'node:process';
+import { TokenModule } from './jwt-token/token.module';
 
 @Module({
   imports: [
     PrismaModule,
     UsersModule,
     PassportModule,
-    JwtModule.register({
-      secret: process.env['JWT_SECRET'],
-      signOptions: {
-        expiresIn: '60m',
-      },
-    }),
+    TokenModule,
   ],
   providers: [AuthService],
   controllers: [AuthController],

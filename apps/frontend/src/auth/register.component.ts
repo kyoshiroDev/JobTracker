@@ -13,7 +13,7 @@ import { RowRightIconComponent } from '../icons/row-right-icon.component';
 import { EmailIconComponent } from '../icons/email-icon.component';
 import { UserIconComponent } from '../icons/user-icon.component';
 import {
-  AbstractControl,
+  AbstractControl, FormControl,
   NonNullableFormBuilder,
   ReactiveFormsModule,
   ValidationErrors,
@@ -21,11 +21,18 @@ import {
   Validators,
 } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { AuthForm } from '@libs/interface';
 import { AuthService } from './auth.service';
+import { CreateUser } from '@libs/schemas-zod';
+
+type AuthForm = {
+  username: FormControl<string>;
+  email: FormControl<string>;
+  password: FormControl<string>;
+  confirmPassword: FormControl<string>;
+}
 
 @Component({
-  selector: 'fdw-auth-signUp',
+  selector: 'fdw-auth-register',
   imports: [
     CommonModule,
     EyeOpenIconComponent,
@@ -38,12 +45,12 @@ import { AuthService } from './auth.service';
   ],
   template: ` <form
     class="px-6 pb-6 pt-4"
-    [formGroup]="formSignUp"
+    [formGroup]="formRegister"
     (ngSubmit)="onSubmit()"
   >
     <!-- Nom complet -->
     <label
-      for="name"
+      for="username"
       class="block text-sm font-medium text-jobtracker-text-primary mt-4 mb-2 pl-1"
     >
       Nom complet <span class="text-red-800 pl-1">*</span>
@@ -52,24 +59,24 @@ import { AuthService } from './auth.service';
     <div class="mb-5">
       <div
         class="flex items-center border border-jobtracker-border rounded-md focus-within:ring-2 focus-within:ring-jobtracker-primary/40 focus-within:border-jobtracker-primary transition"
-        [class.border-red-600]="invalidSaisie('name')"
+        [class.border-red-600]="invalidSaisie('username')"
       >
         <span class="pl-3 flex items-center">
           <fdw-user-icon class="block w-4 h-4" />
         </span>
         <input
-          id="name"
-          name="name"
-          autocomplete="name"
+          id="username"
+          name="username"
+          autocomplete="username"
           autocapitalize="words"
-          formControlName="name"
+          formControlName="username"
           type="text"
           placeholder="Jean Dupont"
           class="flex-1 h-9 border-0 outline-none pl-2 placeholder:opacity-70 pt-0.5"
         />
       </div>
 
-      @if (invalidSaisie('name', 'required')) {
+      @if (invalidSaisie('username', 'required')) {
       <p class="pl-1 mt-1 text-xs text-red-600">Ce champ est obligatoire.</p>
       }
     </div>
@@ -214,7 +221,7 @@ import { AuthService } from './auth.service';
   </form>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SignUpComponent {
+export class RegisterComponent {
   protected readonly fb = inject(NonNullableFormBuilder);
   protected readonly toast = inject(ToastrService);
   protected readonly serviceAuth = inject(AuthService);
@@ -224,14 +231,14 @@ export class SignUpComponent {
   readonly typePasswordChanges = output<'password' | 'text'>();
   readonly typeConfirmPasswordChanges = output<'password' | 'text'>();
 
-  protected readonly formSignUp = this.fb.group<AuthForm>(
+  protected readonly formRegister = this.fb.group<AuthForm>(
     {
-      name: this.fb.control('', [Validators.required]),
+      username: this.fb.control('', [Validators.required]),
       email: this.fb.control('', [Validators.required, Validators.email]),
       password: this.fb.control('', [Validators.required]),
       confirmPassword: this.fb.control('', [Validators.required]),
     },
-    { validators: this.passwordsMatchValidator() }
+    { validators: this.passwordsMatchValidator() },
   );
 
   protected passwordsMatchValidator(): ValidatorFn {
@@ -246,13 +253,13 @@ export class SignUpComponent {
 
   protected passwordMismatch(): boolean {
     const touched =
-      this.formSignUp.get('confirmPassword')?.touched ||
-      this.formSignUp.get('password')?.touched;
-    return touched ? this.formSignUp.hasError('passwordMismatch') : false;
+      this.formRegister.get('confirmPassword')?.touched ||
+      this.formRegister.get('password')?.touched;
+    return touched ? this.formRegister.hasError('passwordMismatch') : false;
   }
 
   protected invalidSaisie(controlName: string, errorType?: string): boolean {
-    const control = this.formSignUp.get(controlName);
+    const control = this.formRegister.get(controlName);
     if (!control) return false;
     if (errorType) {
       return control.hasError(errorType) && control.touched;
@@ -261,16 +268,21 @@ export class SignUpComponent {
   }
 
   protected onSubmit(): void {
-    if (this.formSignUp.invalid) {
-      this.formSignUp.markAllAsTouched();
+    if (this.formRegister.invalid) {
+      this.formRegister.markAllAsTouched();
       this.toast.error('Formulaire invalide');
       return;
     }
-    const { name, email, password } = this.formSignUp.getRawValue();
-    this.serviceAuth.SignUp({ name, email, password }).subscribe({
+    const form = this.formRegister.getRawValue();
+    const user = {
+      username: form.username,
+      email: form.email,
+      password: form.password,
+    } satisfies CreateUser;
+    this.serviceAuth.register(user).subscribe({
       next: () => {
         this.toast.success('Enregistrement réussi');
-        this.formSignUp.reset();
+        this.formRegister.reset();
       },
       error: () => {
         this.toast.info("Erreur lors de l'enregistrement");

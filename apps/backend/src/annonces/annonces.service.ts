@@ -1,34 +1,14 @@
 import { Injectable } from '@nestjs/common';
-import { CreateAnnonceDto, UpdateAnnoncesDto } from '@libs/dto';
 import { PrismaService } from '../prisma/prisma.service';
+import { CreateAnnonce, UpdateAnnonceDto } from '@libs/schemas-zod';
 
 @Injectable()
 export class AnnoncesService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async create(createAnnonceDto: CreateAnnonceDto, UserId: string) {
+  async create(annonce: CreateAnnonce) {
     return this.prisma.annonce.create({
-      data: {
-        job: createAnnonceDto.job,
-        contract_type: createAnnonceDto.contract_type,
-        work_mode: createAnnonceDto.work_mode,
-        status: createAnnonceDto.status,
-        about: createAnnonceDto.about,
-        description: createAnnonceDto.description,
-        skills: createAnnonceDto.skills,
-        benefits: createAnnonceDto.benefits,
-        salary: createAnnonceDto.salary,
-        annonce_link: createAnnonceDto.annonce_link,
-        company_name: createAnnonceDto.company_name,
-        company_city: createAnnonceDto.company_city,
-        company_phone: createAnnonceDto.company_phone,
-        company_email: createAnnonceDto.company_email,
-        user: {
-          connect: {
-            id: UserId,
-          },
-        },
-      },
+      data: { ...annonce },
     });
   }
 
@@ -52,10 +32,10 @@ export class AnnoncesService {
     });
   }
 
-  async update(id: string, updateAnnonceDto: UpdateAnnoncesDto) {
+  async update(id: string, annonce: UpdateAnnonceDto) {
     return this.prisma.annonce.update({
       where: { id },
-      data: updateAnnonceDto,
+      data: annonce,
     });
   }
 

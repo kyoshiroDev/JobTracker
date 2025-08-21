@@ -1,13 +1,11 @@
 {
-  "name": "@libs/dto",
+  "name": "@libs/schemas-zod",
   "version": "0.0.1",
   "private": true,
   "type": "commonjs",
   "main": "./src/index.js",
   "types": "./src/index.d.ts",
   "dependencies": {
-    "class-validator": "^0.14.2",
-    "@nestjs/mapped-types": "^2.1.0",
     "tslib": "^2.3.0"
   }
 }

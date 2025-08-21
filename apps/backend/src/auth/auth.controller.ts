@@ -1,19 +1,9 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  HttpCode,
-  HttpStatus,
-  Param,
-  Patch,
-  Post,
-} from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
-import { CreateUsersDto } from '@libs/dto';
-import { UpdateUsersDto } from '@libs/dto';
 import { AuthService } from './auth.service';
-import { UserSignInDto } from '@libs/dto';
+import { ZodValidationPipe } from '../pipes/zod-validation.pipe';
+import { z } from 'zod';
+import { createUserSchema, loginUserSchema, updateUserSchema, userModelSchema } from '@libs/schemas-zod';
 
 @Controller('auth')
 export class AuthController {
@@ -23,28 +13,44 @@ export class AuthController {
   ) {}
 
   @HttpCode(HttpStatus.OK)
-  @Post('signIn')
-  signIn(@Body() userSession: UserSignInDto) {
-    return this.authService.signIn(userSession);
+  @Post('login')
+  login(
+    @Body(new ZodValidationPipe(loginUserSchema))
+    user: z.infer<typeof loginUserSchema>
+  ) {
+    return this.authService.login(user);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.usersService.findOne(id);
+  findOne(
+    @Param(new ZodValidationPipe(userModelSchema))
+    params: z.infer<typeof userModelSchema>
+  ) {
+    return this.usersService.findOne(params.id);
   }
 
-  @Post('signup')
-  async signup(@Body() User: CreateUsersDto) {
-    return this.usersService.create(User);
+  @Post('register')
+  async register(
+    @Body(new ZodValidationPipe(createUserSchema))
+    body: z.infer<typeof createUserSchema>
+  ) {
+    return this.usersService.register(body);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() User: UpdateUsersDto) {
-    return this.usersService.update(id, User);
+  update(
+    @Param('id')
+    @Body(new ZodValidationPipe(updateUserSchema))
+    user: z.infer<typeof updateUserSchema>
+  ) {
+    return this.usersService.update(user.id, user);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.usersService.remove(id);
+  remove(
+    @Param(new ZodValidationPipe(userModelSchema))
+    params: z.infer<typeof userModelSchema>
+  ) {
+    return this.usersService.remove(params.id);
   }
 }

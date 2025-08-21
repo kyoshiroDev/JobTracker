@@ -1,15 +1,8 @@
-import { FormControl } from '@angular/forms';
-
 export interface Auth {
-  name: string;
+  username: string;
   email: string;
   password: string;
-  confirmPassword: string;
+  createdAt: Date;
 }
 
-export interface AuthForm {
-  name: FormControl<string>;
-  email: FormControl<string>;
-  password: FormControl<string>;
-  confirmPassword: FormControl<string>;
-}
+

@@ -8,17 +8,17 @@ import {
   Delete,
 } from '@nestjs/common';
 import { AnnoncesService } from './annonces.service';
-import { CreateAnnonceDto } from '@libs/dto';
-import { UpdateAnnoncesDto } from '@libs/dto';
-
+import type { CreateAnnonce, UpdateAnnonceDto} from '@libs/schemas-zod';
+import { createAnnonceSchema, updateAnnonceSchema } from '@libs/schemas-zod';
 @Controller('annonces')
 export class AnnoncesController {
   constructor(private readonly annonceService: AnnoncesService) {}
 
+
   @Post()
-  create(@Body() createAnnonceDto: CreateAnnonceDto) {
-    const UserId = '3fa85f64-5717-4562-b3fc-2c963f66afa6';
-    return this.annonceService.create(createAnnonceDto, UserId);
+  create(@Body() body: unknown) {
+    const annonce:CreateAnnonce = createAnnonceSchema.parse(body);
+    return this.annonceService.create(annonce);
   }
 
   @Get()
@@ -32,8 +32,9 @@ export class AnnoncesController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAnnonceDto: UpdateAnnoncesDto) {
-    return this.annonceService.update(id, updateAnnonceDto);
+  update(@Param('id') id: string, @Body() body: UpdateAnnonceDto) {
+    const annonce = updateAnnonceSchema.parse(body);
+    return this.annonceService.update(id, annonce);
   }
 
   @Delete(':id')

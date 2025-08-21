@@ -19,7 +19,7 @@ import {
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'fdw-auth-signIn',
+  selector: 'fdw-auth-login',
   imports: [
     CommonModule,
     EmailIconComponent,
@@ -30,7 +30,7 @@ import { ToastrService } from 'ngx-toastr';
     ReactiveFormsModule,
   ],
   template: ` <form
-    [formGroup]="formSignIn"
+    [formGroup]="formLogin"
     (ngSubmit)="onSubmit()"
     class="px-6 pb-6 pt-4"
   >
@@ -103,7 +103,7 @@ import { ToastrService } from 'ngx-toastr';
         >
           @if (typePasswordInput() === 'password') {
           <fdw-eye-close-icon />
-          } @else () {
+          } @else {
           <fdw-eye-open-icon />
           }
         </button>
@@ -133,20 +133,20 @@ import { ToastrService } from 'ngx-toastr';
   </form>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SignInComponent {
+export class LoginComponent {
   protected readonly toast = inject(ToastrService);
   protected readonly fb = inject(NonNullableFormBuilder);
 
   readonly typePasswordInput = input.required();
   readonly typePasswordChanges = output<'password' | 'text'>();
 
-  protected readonly formSignIn = this.fb.group({
+  protected readonly formLogin = this.fb.group({
     email: this.fb.control('', [Validators.required, Validators.email]),
     password: this.fb.control('', [Validators.required]),
   });
 
   protected invalidSaisie(controlName: string, errorType?: string): boolean {
-    const control = this.formSignIn.get(controlName);
+    const control = this.formLogin.get(controlName);
     if (!control) return false;
     if (errorType) {
       return control.hasError(errorType) && control.touched;
@@ -155,12 +155,12 @@ export class SignInComponent {
   }
 
   protected onSubmit(): void {
-    if (this.formSignIn.invalid) {
-      this.formSignIn.markAllAsTouched();
+    if (this.formLogin.invalid) {
+      this.formLogin.markAllAsTouched();
       this.toast.error('Formulaire invalide');
       return;
     }
     this.toast.success('Connexion réussi');
-    this.formSignIn.reset();
+    this.formLogin.reset();
   }
 }

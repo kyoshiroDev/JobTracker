@@ -1,18 +1,23 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { UsersService } from '../users/users.service';
-
-import { JwtService } from '@nestjs/jwt';
-import { UserSignInDto } from '@libs/dto';
+import {
+  AuthResponse,
+  LoginUser,
+  UserModel,
+  UserPublic,
+  UserPublicModelSchema,
+} from '@libs/schemas-zod';
+import { TokenService } from './jwt-token/token.service';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly usersService: UsersService,
-    private readonly jwtService: JwtService
+    private readonly token: TokenService,
   ) {}
 
-  async signIn(userSession: UserSignInDto) {
+  async login(userSession: LoginUser): Promise<AuthResponse> {
     const user = await this.usersService.findOne(userSession.email);
     if (!user) throw new UnauthorizedException('Utilisateur introuvable');
 
@@ -23,26 +28,8 @@ export class AuthService {
     if (!isPasswordValid)
       throw new UnauthorizedException('Mot de passe invalide');
 
-    const payload = { sub: user.id, email: user.email };
-    const access = await this.jwtService.signAsync(payload, {
-      expiresIn: '15m',
-    });
-    const refresh = await this.jwtService.signAsync(payload, {
-      expiresIn: '7d',
-    });
-
-    return {
-      user: {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-      },
-      tokens: {
-        access,
-        refresh,
-        expires_in: 15 * 60,
-        token_type: 'Bearer',
-      },
-    };
+    const userPublic: UserPublic = UserPublicModelSchema.parse(user);
+    const tokens = await this.token.issueForUser(user.id);
+    return { user: userPublic, tokens };
   }
 }

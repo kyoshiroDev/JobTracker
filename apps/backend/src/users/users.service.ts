@@ -1,42 +1,51 @@
 import { Injectable } from '@nestjs/common';
-import { CreateUsersDto, UpdateUsersDto } from '@libs/dto';
 import { PrismaService } from '../prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
+import {
+  CreateUser,
+  JwtTokens,
+  UpdateUser,
+  UserPublic,
+} from '@libs/schemas-zod';
+import { TokenService } from '../auth/jwt-token/token.service';
 
 @Injectable()
 export class UsersService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly _prisma: PrismaService, private readonly _tokens: TokenService) {}
 
-  async create(User: CreateUsersDto) {
-    const saltOrRounds = 10;
-    const password: string = User.password;
+  async register(user: CreateUser) {
+    const saltOrRounds: number = 10;
+    const password: string = user.password;
     const hash: string = await bcrypt.hash(password, saltOrRounds);
 
-    return this.prisma.user.create({
+    const createdUser: UserPublic = await this._prisma.user.create({
       data: {
-        name: User.name,
-        email: User.email,
+        username: user.username,
+        email: user.email,
         password: hash,
-        created_at: User.createdAt,
-      },
-    });
+        created_at: user.createdAt,
+      }
+    })
+
+    const tokens: JwtTokens  = await this._tokens.issueForUser(createdUser.id);
+    return { user: createdUser, tokens };
   }
 
   findOne(email: string) {
-    return this.prisma.user.findFirst({
+    return this._prisma.user.findFirst({
       where: { email },
     });
   }
 
-  update(id: string, updateUserDto: UpdateUsersDto) {
-    return this.prisma.user.update({
+  update(id: string, updateUserDto: UpdateUser) {
+    return this._prisma.user.update({
       where: { id },
       data: updateUserDto,
     });
   }
 
   remove(id: string) {
-    return this.prisma.user.delete({
+    return this._prisma.user.delete({
       where: { id },
     });
   }

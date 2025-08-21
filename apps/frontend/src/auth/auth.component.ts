@@ -4,8 +4,8 @@ import {
   computed,
   signal,
 } from '@angular/core';
-import { SignInComponent } from './signIn.component';
-import { SignUpComponent } from './signUp.component';
+import { LoginComponent } from './login.component';
+import { RegisterComponent } from './register.component';
 import { AuthHeaderComponent } from './components/auth-header.component';
 import { AuthFooterComponent } from './components/auth-footer.component';
 import { AuthToggleFormComponent } from './components/auth-toggle-form.component';
@@ -14,8 +14,8 @@ import { AuthToggleFormComponent } from './components/auth-toggle-form.component
   selector: 'fdw-auth',
   standalone: true,
   imports: [
-    SignInComponent,
-    SignUpComponent,
+    LoginComponent,
+    RegisterComponent,
     AuthHeaderComponent,
     AuthFooterComponent,
     AuthToggleFormComponent,
@@ -37,16 +37,16 @@ import { AuthToggleFormComponent } from './components/auth-toggle-form.component
           [registerBtnClass]="registerBtnClass()"
         />
 
-        @if (formAuth() === 'signIn') {
+        @if (formAuth() === 'login') {
         <div class="animate-fade-slide">
-          <fdw-auth-signIn
+          <fdw-auth-login
             (typePasswordChanges)="switchTypePassword($event)"
             [typePasswordInput]="typePassword()"
           />
         </div>
         } @else {
         <div class="animate-fade-slide">
-          <fdw-auth-signUp
+          <fdw-auth-register
             (typePasswordChanges)="switchTypePassword($event)"
             (typeConfirmPasswordChanges)="switchTypeConfirmPassword($event)"
             [typePasswordInput]="typePassword()"
@@ -63,21 +63,21 @@ import { AuthToggleFormComponent } from './components/auth-toggle-form.component
 export class AuthComponent {
   protected readonly typePassword = signal<string>('password');
   protected readonly typeConfirmPassword = signal<string>('password');
-  protected readonly formAuth = signal<'signIn' | 'signUp'>('signIn');
+  protected readonly formAuth = signal<'login' | 'register'>('login');
 
   protected readonly loginBtnClass = computed(() =>
-    this.formAuth() === 'signIn'
+    this.formAuth() === 'login'
       ? 'h-10 rounded-md text-sm font-medium transition shadow-sm bg-jobtracker-primary text-white cursor-default transition'
       : 'h-10 rounded-md text-sm font-medium text-jobtracker-text-secondary hover:bg-white/60 transition cursor-pointer transition'
   );
 
   protected readonly registerBtnClass = computed(() =>
-    this.formAuth() === 'signUp'
-      ? 'h-10 rounded-md text-sm font-medium transition shadow-sm bg-jobtracker-primary text-white cursor-default transition'
+    this.formAuth() === 'register'
+      ? 'h-10 rounded-md text-sm font-medium transition shadow sm bg-jobtracker-primary text-white cursor-default transition'
       : 'h-10 rounded-md text-sm font-medium text-jobtracker-text-secondary hover:bg-white/60 transition cursor-pointer transition'
   );
 
-  protected switchForm($event: 'signIn' | 'signUp'): void {
+  protected switchForm($event: 'login' | 'register'): void {
     this.formAuth.set($event);
   }
 
