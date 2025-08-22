@@ -285,7 +285,11 @@ export class RegisterComponent {
       next: () => {
         this.toast.success('Enregistrement réussi');
         this.formRegister.reset();
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/dashboard']).then(erreur => {
+          if (erreur) {
+            new Error('Erreur lors de la redirection');
+          }
+        });
       },
       error: () => {
         this.toast.info("Erreur lors de l'enregistrement");

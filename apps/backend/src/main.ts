@@ -22,7 +22,6 @@ async function bootstrap() {
   );
 
   const port = process.env.PORT ? Number(process.env.PORT) : 3000;
-  const host = process.env.HOST ? String(process.env.HOST) : 'localhost';
-  await app.listen(port, host);
+  await app.listen(port, '0.0.0.0');
 }
 bootstrap();
