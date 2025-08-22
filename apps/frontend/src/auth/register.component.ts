@@ -23,6 +23,7 @@ import {
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from './auth.service';
 import { CreateUser } from '@libs/schemas-zod';
+import { Router } from '@angular/router';
 
 type AuthForm = {
   username: FormControl<string>;
@@ -225,6 +226,7 @@ export class RegisterComponent {
   protected readonly fb = inject(NonNullableFormBuilder);
   protected readonly toast = inject(ToastrService);
   protected readonly serviceAuth = inject(AuthService);
+  protected readonly router = inject(Router);
 
   readonly typePasswordInput = input.required<string>();
   readonly typeConfirmPasswordInput = input.required<string>();
@@ -283,6 +285,7 @@ export class RegisterComponent {
       next: () => {
         this.toast.success('Enregistrement réussi');
         this.formRegister.reset();
+        this.router.navigate(['/dashboard']);
       },
       error: () => {
         this.toast.info("Erreur lors de l'enregistrement");

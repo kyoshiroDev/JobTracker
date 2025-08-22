@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Auth } from '@libs/interface';
-import { CreateUser } from '@libs/schemas-zod';
+import { AuthResponse, CreateUser, UserPublic } from '@libs/schemas-zod';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +10,20 @@ export class AuthService {
   private readonly _http = inject(HttpClient);
   private readonly _apiUrl = 'https://jobtracker-1-h6qf.onrender.com';
 
+  private readonly _userSession = new BehaviorSubject<AuthResponse>({} as AuthResponse);
+
+  public readonly userSession: Observable<AuthResponse> = this._userSession.asObservable();
+
+  userSessionAdd() {
+    return this._userSession.asObservable();
+  }
+
   register(user: CreateUser) {
-    return this._http.post<Auth>(`${this._apiUrl}/auth/register`, user);
+    return this._http.post<AuthResponse>(`${this._apiUrl}/auth/register`, user).pipe(
+      map((response) => {
+        this._userSession.next(response)
+        }
+      )
+    )
   }
 }

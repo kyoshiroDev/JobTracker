@@ -7,11 +7,9 @@ export const routes: Routes = [
   { path: '', component: AuthComponent },
   {
     path: 'dashboard',
-    component: DashboardComponent,
-    loadChildren: () =>
-      import('../annonce/annonce-liste/annonce-liste-page.component').then(
-        (m) => m.AnnonceListePageComponent
-      ),
+    loadComponent: () =>
+      import('../dashboard/dashboard-page.component')
+        .then(c => c.DashboardComponent),
   },
   { path: '**', component: NotFoundComponent },
 ];
