@@ -38,9 +38,8 @@
 
 /* Container principal */
 #toast-container > div {
+  width: fit-content;
   --toast-timeout: 3s;
-  text-align: center;
-  padding: 1rem;
   font-family: 'Inter', sans-serif;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
   opacity: 0.95;

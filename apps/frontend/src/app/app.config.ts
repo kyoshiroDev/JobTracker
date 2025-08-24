@@ -17,6 +17,8 @@ export const appConfig: ApplicationConfig = {
       positionClass: 'toast-top-center',
       timeOut: 3000,
       preventDuplicates: true,
+      easing: 'ease-in',
+      enableHtml: true,
       progressBar: true,
       progressAnimation: 'decreasing',
     }),

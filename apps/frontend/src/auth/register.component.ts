@@ -24,6 +24,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AuthService } from './auth.service';
 import { CreateUser } from '@libs/schemas-zod';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 type AuthForm = {
   username: FormControl<string>;
@@ -285,14 +286,14 @@ export class RegisterComponent {
       next: () => {
         this.toast.success('Enregistrement réussi');
         this.formRegister.reset();
-        this.router.navigate(['/dashboard']).then(erreur => {
-          if (erreur) {
+        this.router.navigate(['/dashboard']).then(error => {
+          if (error) {
             new Error('Erreur lors de la redirection');
           }
         });
       },
-      error: () => {
-        this.toast.info("Erreur lors de l'enregistrement");
+      error: (err: HttpErrorResponse) => {
+          this.toast.error(err.error.message || "Erreur lors de l'enregistrement");
       },
     });
   }

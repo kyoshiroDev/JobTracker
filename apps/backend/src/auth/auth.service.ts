@@ -4,7 +4,6 @@ import { UsersService } from '../users/users.service';
 import {
   AuthResponse,
   LoginUser,
-  UserModel,
   UserPublic,
   UserPublicModelSchema,
 } from '@libs/schemas-zod';
