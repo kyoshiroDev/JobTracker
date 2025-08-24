@@ -26,7 +26,7 @@ async function bootstrap() {
     origin: (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
       if (!origin) return callback(null, true);
       const allowedOrigins = [
-        'https://job-tracker-nx.vercel.app',
+        'https://jobtrakerv2.netlify.app/',
         'http://localhost:4200',
       ];
       return allowedOrigins.includes(origin)

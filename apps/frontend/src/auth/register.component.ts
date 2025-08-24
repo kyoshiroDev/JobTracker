@@ -206,12 +206,12 @@ export class RegisterComponent {
     this.serviceAuth.register(user).subscribe({
       next: () => {
         this.toast.success('Enregistrement réussi');
-        this.formRegister.reset();
         this.router.navigate(['/dashboard']).then(error => {
           if (error) {
             new Error('Erreur lors de la redirection');
           }
         });
+        this.formRegister.reset();
       },
       error: (err: HttpErrorResponse) => {
           this.toast.error(err.error.message || "Erreur lors de l'enregistrement");
