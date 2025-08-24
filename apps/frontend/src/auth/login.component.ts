@@ -17,6 +17,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'fdw-auth-login',
@@ -136,6 +137,7 @@ import { ToastrService } from 'ngx-toastr';
 export class LoginComponent {
   protected readonly toast = inject(ToastrService);
   protected readonly fb = inject(NonNullableFormBuilder);
+  protected readonly router = inject(Router);
 
   readonly typePasswordInput = input.required();
   readonly typePasswordChanges = output<'password' | 'text'>();
@@ -154,7 +156,7 @@ export class LoginComponent {
     return control.invalid && control.touched;
   }
 
-  protected onSubmit(): void {
+  protected onSubmit(){
     if (this.formLogin.invalid) {
       this.formLogin.markAllAsTouched();
       this.toast.error('Formulaire invalide');
@@ -162,5 +164,6 @@ export class LoginComponent {
     }
     this.toast.success('Connexion réussi');
     this.formLogin.reset();
+
   }
 }

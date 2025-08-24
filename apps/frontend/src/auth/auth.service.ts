@@ -8,8 +8,7 @@ import { BehaviorSubject, catchError, map, Observable, throwError } from 'rxjs';
 })
 export class AuthService {
   private readonly _http = inject(HttpClient);
-  //private readonly _apiUrl = 'https://jobtracker-1-h6qf.onrender.com';
-  private readonly _apiUrl = 'http://localhost:3000';
+  private readonly _apiUrl = 'https://jobtracker-1-h6qf.onrender.com';
 
   private readonly _userSession = new BehaviorSubject<AuthResponse>({} as AuthResponse);
 
