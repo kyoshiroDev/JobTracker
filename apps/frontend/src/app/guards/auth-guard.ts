@@ -1,14 +1,29 @@
-import { CanActivateFn, Router } from '@angular/router'
-import { inject } from '@angular/core'
-import { AuthService } from './auth.service'
+import { CanActivateFn, Router } from '@angular/router';
+import { inject } from '@angular/core';
+import { SupabaseClient } from '@supabase/supabase-js';
+import { SUPABASE } from '../providers/supabase.client';
 
-export const authGuard: CanActivateFn = (_route, state) => {
-  const auth = inject(AuthService)
-  const router = inject(Router)
+export const authGuard: CanActivateFn = async (_route, state) => {
+  const router = inject(Router);
+  const supabase = inject<SupabaseClient>(SUPABASE);
 
-  if (!auth.ready()) return false
+  const { data: { user }, error } = await supabase.auth.getSession();
 
-  return auth.isAuthenticated()
-    ? true
-    : router.createUrlTree(['/login'], { queryParams: { redirect: state.url } })
-}
+  if (error || !user) {
+    return router.createUrlTree(['/login'], { queryParams: { redirect: state.url } });
+  }
+  return true;
+};
+
+export const authMatchGuard: CanMatchFn = async (_route, segments) => {
+  const router = inject(Router);
+  const supabase = inject<SupabaseClient>(SUPABASE);
+
+  const url = '/' + segments.map(s => s.path).join('/');
+  const { data: { user }, error } = await supabase.auth.getUser();
+
+  if (error || !user) {
+    return router.createUrlTree(['/login'], { queryParams: { redirect: url } });
+  }
+  return true;
+};
