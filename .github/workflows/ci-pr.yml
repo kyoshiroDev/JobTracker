@@ -1,90 +1,35 @@
-name: CI (PR)
+# .github/workflows/build.yml
+name: Angular CI
 
 on:
-  pull_request:
-    branches: [ main, refactor/ui-redesign-v2 ]
   push:
-    branches: [ main, refactor/ui-redesign-v2 ]
+    branches: [ main ] # dès qu’on push sur main
+  pull_request: # toutes les PR
 
 jobs:
-  ci:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with: { fetch-depth: 0 }
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          node-version: 20
-          cache: 'pnpm'
+          node-version: '18' # mettre la version utilisée en local
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with: { version: 9 }
+      - name: Install dependencies
+        run: npm ci
 
-      - name: Install
-        run: pnpm install --frozen-lockfile
+      - name: Lint
+        run: npm run lint
 
-      - name: Cache Nx
-        uses: actions/cache@v4
-        with:
-          path: |
-            .nx/cache
-            node_modules/.cache/nx
-          key: nx-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
-          restore-keys: |
-            nx-${{ runner.os }}-
+      - name: Run tests
+        run: npm run test
 
-      # 🔧 Définir BASE/HEAD pour PR et PUSH (robuste)
-      - name: Define base/head for affected
-        id: ah
-        shell: bash
-        run: |
-          git fetch origin main --depth=50
-          if [[ "${GITHUB_EVENT_NAME}" == "pull_request" ]]; then
-            echo "BASE_SHA=${{ github.event.pull_request.base.sha }}" >> "$GITHUB_OUTPUT"
-            echo "HEAD_SHA=${{ github.event.pull_request.head.sha }}" >> "$GITHUB_OUTPUT"
-          else
-            BR="${GITHUB_REF_NAME}"
-            if [[ "$BR" == "main" ]]; then
-              BASE="origin/main~1"
-              HEAD="HEAD"
-            else
-              # compare la branche courante au point commun avec main (plus fiable que 'before')
-              BASE="$(git merge-base origin/main HEAD)"
-              HEAD="HEAD"
-            fi
-            echo "BASE_SHA=$BASE" >> "$GITHUB_OUTPUT"
-            echo "HEAD_SHA=$HEAD" >> "$GITHUB_OUTPUT"
-          fi
+      - name: Build
+        run: npm run build
 
-      - name: Debug base/head
-        run: |
-          echo "BASE=${{ steps.ah.outputs.BASE_SHA }}"
-          echo "HEAD=${{ steps.ah.outputs.HEAD_SHA }}"
-          git log --oneline -5
-
-      - name: Prettier check (affected)
-        run: npx nx format:check --base ${{ steps.ah.outputs.BASE_SHA }} --head ${{ steps.ah.outputs.HEAD_SHA }}
-
-      - name: Lint (affected)
-        run: npx nx affected -t lint --base ${{ steps.ah.outputs.BASE_SHA }} --head ${{ steps.ah.outputs.HEAD_SHA }} --parallel=3
-
-      - name: Test (affected)
-        run: npx nx affected -t test --base ${{ steps.ah.outputs.BASE_SHA }} --head ${{ steps.ah.outputs.HEAD_SHA }} --parallel=3 --ci --code-coverage
-
-      - name: Build (affected)
-        run: npx nx affected -t build --base ${{ steps.ah.outputs.BASE_SHA }} --head ${{ steps.ah.outputs.HEAD_SHA }} --parallel=3
-
-      - name: Upload artifacts (dist + coverage)
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: pr-artifacts
-          path: |
-            dist/**
-            coverage/**
-          if-no-files-found: ignore
+      - name: Prettier
+        run: npm run prettier
