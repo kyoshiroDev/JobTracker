@@ -3,7 +3,7 @@ name: CI (PR)
 on:
   pull_request:
     branches: [ main, refactor/ui-redesign-v2 ]
-
+  push: { branches: [ main, refactor/ui-redesign-v2 ] }
 jobs:
   ci:
     runs-on: ubuntu-latest
