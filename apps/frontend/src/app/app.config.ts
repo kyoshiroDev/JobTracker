@@ -24,6 +24,6 @@ export const appConfig: ApplicationConfig = {
       progressAnimation: 'decreasing',
     }),
     provideHttpClient(),
-    provideSupabase()
+    provideSupabase(),
   ],
 };

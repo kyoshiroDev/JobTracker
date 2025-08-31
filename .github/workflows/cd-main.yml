@@ -1,0 +1,99 @@
+name: CD (main)
+
+on:
+  push:
+    branches: [ main, refactor/ui-redesign-v2 ]
+
+permissions:
+  contents: write
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    outputs:
+      affectedProjects: ${{ steps.affected.outputs.json || '[]' }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+      - uses: pnpm/action-setup@v4
+        with: { version: 9 }
+      - run: pnpm install --frozen-lockfile
+      - uses: actions/cache@v4
+        with:
+          path: |
+            .nx/cache
+            node_modules/.cache/nx
+          key: nx-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            nx-${{ runner.os }}-
+
+      - name: Prettier check (affected)
+        run: npx nx format:check --base origin/main~1 --head HEAD
+
+      - name: Lint (affected)
+        run: npx nx affected -t lint --base origin/main~1 --head HEAD --parallel=3
+
+      - name: Test (affected)
+        run: npx nx affected -t test --base origin/main~1 --head HEAD --parallel=3 --ci --code-coverage
+
+      - name: Build (affected)
+        run: npx nx affected -t build --base origin/main~1 --head HEAD --parallel=3
+
+      - name: List affected apps (JSON)
+        id: affected
+        run: |
+          node -e "const {execSync}=require('node:child_process');
+          const out=execSync('npx nx print-affected --target=build --select=tasks.target.project --base origin/main~1 --head HEAD').toString().trim();
+          console.log(`json=${JSON.stringify(out?out.split('\n').filter(Boolean):[])}`);"
+
+  release:
+    needs: quality
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, cache: 'pnpm' }
+      - uses: pnpm/action-setup@v4
+        with: { version: 9 }
+      - run: pnpm install --frozen-lockfile
+      - name: Nx release (version + changelog + tag)
+        run: |
+          npx nx release version
+          npx nx release changelog
+          npx nx release tag
+      - name: Push tags
+        run: |
+          git push --follow-tags
+          git push
+
+  deploy:
+    needs: [quality, release]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        app: ${{ fromJson(needs.quality.outputs.affectedProjects) }}
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+      - uses: pnpm/action-setup@v4
+        with: { version: 9 }
+      - run: pnpm install --frozen-lockfile
+
+      - name: Build app (prod)
+        run: npx nx build ${{ matrix.app }} --configuration=production
+
+      - name: Deploy
+        run: |
+          echo "Déployer ${{ matrix.app }} ici…"
+          # 👉 Remplace par ta commande réelle (Docker/Helm/Firebase/Cloudflare/etc.)
+          # npx nx run ${{ matrix.app }}:deploy --configuration=production

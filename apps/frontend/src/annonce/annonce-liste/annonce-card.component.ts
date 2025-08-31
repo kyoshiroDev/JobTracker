@@ -65,7 +65,7 @@ export class AnnonceCardComponent {
 
   readonly statusConfig: Signal<string | undefined> = computed(() => {
     const statusConfig = this.status.find(
-      (config) => config.label === this.annonce().content.status
+      (config) => config.label === this.annonce().content.status,
     );
     return statusConfig ? statusConfig.colorClassBg : 'bg-JobTracker-blue';
   });

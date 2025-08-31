@@ -229,7 +229,7 @@ export class RegisterComponent {
       password: this.fb.control('', [Validators.required]),
       confirmPassword: this.fb.control('', [Validators.required]),
     },
-    { validators: passwordsMatchValidator() }
+    { validators: passwordsMatchValidator() },
   );
 
   protected passwordMismatch(): boolean {
@@ -263,17 +263,17 @@ export class RegisterComponent {
     };
 
     this.serviceAuth.signUp(user).subscribe({
-     next: (res) => {
-       if (res.data.user?.identities?.length === 0) {
-         this.toast.error("Cet email est déjà utilisé ou doit être confirmé.");
-       } else {
-         this.toast.success('Enregistrement réussi !');
-         this.router.navigate(['/dashboard']).then(() => {
-           this.error.set('Redirection impossible.');
-         })
-       }
-     },
+      next: (res) => {
+        if (res.data.user?.identities?.length === 0) {
+          this.toast.error('Cet email est déjà utilisé ou doit être confirmé.');
+        } else {
+          this.toast.success('Enregistrement réussi !');
+          this.router.navigate(['/dashboard']).then(() => {
+            this.error.set('Redirection impossible.');
+          });
+        }
+      },
       error: (error) => this.error.set(error.error.message),
-    })
+    });
   }
 }

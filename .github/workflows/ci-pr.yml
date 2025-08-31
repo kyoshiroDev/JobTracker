@@ -1,0 +1,65 @@
+name: CI (PR)
+
+on:
+  pull_request:
+    branches: [ main, refactor/ui-redesign-v2 ]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with: { version: 9 }
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Cache Nx
+        uses: actions/cache@v4
+        with:
+          path: |
+            .nx/cache
+            node_modules/.cache/nx
+          key: nx-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            nx-${{ runner.os }}-
+
+      - name: Define base/head for affected
+        id: ah
+        run: |
+          echo "BASE_SHA=${{ github.event.pull_request.base.sha }}" >> $GITHUB_OUTPUT
+          echo "HEAD_SHA=${{ github.event.pull_request.head.sha }}" >> $GITHUB_OUTPUT
+
+      - name: Prettier check (affected)
+        run: npx nx format:check --base ${{ steps.ah.outputs.BASE_SHA }} --head ${{ steps.ah.outputs.HEAD_SHA }}
+
+      - name: Lint (affected)
+        run: npx nx affected -t lint --base ${{ steps.ah.outputs.BASE_SHA }} --head ${{ steps.ah.outputs.HEAD_SHA }} --parallel=3
+
+      - name: Test (affected)
+        run: npx nx affected -t test --base ${{ steps.ah.outputs.BASE_SHA }} --head ${{ steps.ah.outputs.HEAD_SHA }} --parallel=3 --ci --code-coverage
+
+      - name: Build (affected)
+        run: npx nx affected -t build --base ${{ steps.ah.outputs.BASE_SHA }} --head ${{ steps.ah.outputs.HEAD_SHA }} --parallel=3
+
+      - name: Upload artifacts (dist + coverage)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr-artifacts
+          path: |
+            dist/**
+            coverage/**
+          if-no-files-found: ignore

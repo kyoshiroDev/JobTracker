@@ -158,8 +158,8 @@ export class AnnoncesService {
   getAll(): Signal<Annonce[]> {
     return computed(() =>
       this._annonces().sort(
-        (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
-      )
+        (a, b) => b.createdAt.getTime() - a.createdAt.getTime(),
+      ),
     );
   }
 

@@ -1,9 +1,19 @@
 import { z } from 'zod';
 
-export const createUserSchema = z.object({
-  username: z.string().nonempty('Le nom est obligatoire'),
-  email: z.string().trim().toLowerCase().email('Email invalide').nonempty("L'email est obligatoire"),
-  password: z.string().min(1, 'Mot de passe trop court').nonempty('Le mot de passe est obligatoire'),
-}).strict();
+export const createUserSchema = z
+  .object({
+    username: z.string().nonempty('Le nom est obligatoire'),
+    email: z
+      .string()
+      .trim()
+      .toLowerCase()
+      .email('Email invalide')
+      .nonempty("L'email est obligatoire"),
+    password: z
+      .string()
+      .min(1, 'Mot de passe trop court')
+      .nonempty('Le mot de passe est obligatoire'),
+  })
+  .strict();
 
 export type CreateUser = z.infer<typeof createUserSchema>;

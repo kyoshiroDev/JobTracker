@@ -10,7 +10,9 @@
     "watch": "nx build frontend --watch --configuration=development",
     "test": "vitest run",
     "test:watch": "vitest",
-    "lint": "nx lint frontend"
+    "lint": "nx lint frontend",
+    "format": "nx format:write",
+    "format:check": "nx format:check"
   },
   "dependencies": {
     "@angular/animations": "20.1.7",
@@ -51,8 +53,10 @@
     "autoprefixer": "^10.4.21",
     "eslint": "^9.8.0",
     "eslint-config-prettier": "^10.1.8",
+    "husky": "^9.1.7",
     "jsdom": "^26.1.0",
     "jsonc-eslint-parser": "^2.1.0",
+    "lint-staged": "^16.1.5",
     "nx": "21.4.0",
     "postcss": "^8.5.3",
     "prettier": "^2.6.2",
@@ -61,5 +65,9 @@
     "typescript-eslint": "^8.29.0",
     "vite": "^6.0.0",
     "vitest": "^3.2.4"
+  },
+  "lint-staged": {
+    "*.{ts,html,css,scss,md,json}": ["prettier --write"]
   }
 }
+

@@ -4,5 +4,3 @@ export interface Auth {
   password: string;
   createdAt: Date;
 }
-
-

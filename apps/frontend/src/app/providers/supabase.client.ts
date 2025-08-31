@@ -14,6 +14,6 @@ export function provideSupabase(): Provider {
           persistSession: true,
           detectSessionInUrl: true,
         },
-      })
+      }),
   };
 }

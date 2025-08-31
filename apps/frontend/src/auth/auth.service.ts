@@ -7,7 +7,7 @@ import { SUPABASE } from '../app/providers/supabase.client';
   providedIn: 'root',
 })
 export class AuthService {
-  private readonly _supabase = inject(SUPABASE)
+  private readonly _supabase = inject(SUPABASE);
 
   signUp(user: CreateUser) {
     return from(
@@ -19,7 +19,7 @@ export class AuthService {
             username: user.username,
           },
         },
-      })
+      }),
     );
   }
 
@@ -28,7 +28,7 @@ export class AuthService {
       this._supabase.auth.signInWithPassword({
         email: user.email,
         password: user.password,
-      })
+      }),
     );
   }
 

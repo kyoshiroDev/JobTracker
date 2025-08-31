@@ -68,13 +68,13 @@ export class AuthComponent {
   protected readonly loginBtnClass = computed(() =>
     this.formAuth() === 'login'
       ? 'h-10 rounded-md text-sm font-medium transition shadow-sm bg-jobtracker-primary text-white cursor-default transition'
-      : 'h-10 rounded-md text-sm font-medium text-jobtracker-text-secondary hover:bg-white/60 transition cursor-pointer transition'
+      : 'h-10 rounded-md text-sm font-medium text-jobtracker-text-secondary hover:bg-white/60 transition cursor-pointer transition',
   );
 
   protected readonly registerBtnClass = computed(() =>
     this.formAuth() === 'register'
       ? 'h-10 rounded-md text-sm font-medium transition shadow sm bg-jobtracker-primary text-white cursor-default transition'
-      : 'h-10 rounded-md text-sm font-medium text-jobtracker-text-secondary hover:bg-white/60 transition cursor-pointer transition'
+      : 'h-10 rounded-md text-sm font-medium text-jobtracker-text-secondary hover:bg-white/60 transition cursor-pointer transition',
   );
 
   protected switchForm($event: 'login' | 'register'): void {

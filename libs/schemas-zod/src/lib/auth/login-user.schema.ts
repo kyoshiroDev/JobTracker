@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const loginUserSchema = z
   .object({
@@ -9,7 +9,7 @@ export const loginUserSchema = z
       .email("L'email doit être valide")
       .transform((v) => v.toLowerCase()),
 
-    password: z.string().trim().min(1, "Le mot de passe est obligatoire"),
+    password: z.string().trim().min(1, 'Le mot de passe est obligatoire'),
   })
   .strict();
 

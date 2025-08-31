@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const UserPublicModelSchema = z.object({
   id: z.string().uuid('UUID invalide'),

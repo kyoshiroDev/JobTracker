@@ -51,7 +51,7 @@ export class AnnonceDetailComponent {
       return null;
     }
     const found = this.annonces().find(
-      (annonce) => annonce.id.toString() === this.id()
+      (annonce) => annonce.id.toString() === this.id(),
     );
     return found ?? null;
   });

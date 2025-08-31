@@ -153,7 +153,7 @@ export class AnnonceFormComponent {
       >(null, Validators.required),
       workMode: this.fb.control<'fullremote' | 'presentiel' | 'hybride' | null>(
         null,
-        Validators.required
+        Validators.required,
       ),
       annonceLink: this.fb.control(null, [
         Validators.required,
