@@ -1,33 +1,51 @@
 import { inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { AuthResponse, CreateUser } from '@libs/schemas-zod';
-import { BehaviorSubject, catchError, map, Observable, throwError } from 'rxjs';
+import { CreateUser, LoginUser } from '@libs/schemas-zod';
+import { from, defer, map, throwError, catchError } from 'rxjs';
+import { SUPABASE } from '../app/providers/supabase.client';
+import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private readonly _http = inject(HttpClient);
-  private readonly _apiUrl = 'https://jobtracker-1-h6qf.onrender.com';
+  private readonly _supabase = inject(SUPABASE)
 
-  private readonly _userSession = new BehaviorSubject<AuthResponse>(
-    {} as AuthResponse
-  );
+  signUp(user: CreateUser) {
+    return defer(() =>
+      this._supabase.auth.signUp({
+        email: user.email,
+        password: user.password,
+        options: {
+          data: {
+            username: user.username,
+          },
+        }
+      })
+    ).pipe(
+      map(({ data, error }) => {
+        if (error) throw error;
+        return data;
+      }),
+      catchError(err => throwError(() => new Error(err?.message ?? 'Inscription échouée')))
+    );
+  }
 
-  public readonly userSession: Observable<AuthResponse> =
-    this._userSession.asObservable();
+  signIn(user: LoginUser) {
+    return defer(() =>
+      this._supabase.auth.signInWithPassword({
+        email: user.email,
+        password: user.password
+      })
+    ).pipe(
+      map(({ data, error }) => {
+        if (error) throw error;
+        return data;
+      }),
+      catchError(err => throwError(() => new Error(err?.message ?? 'Connexion échouée')))
+    );
+  }
 
-  register(user: CreateUser): Observable<AuthResponse> {
-    return this._http
-      .post<AuthResponse>(`${this._apiUrl}/auth/register`, user)
-      .pipe(
-        map((response) => {
-          this._userSession.next(response);
-          return response;
-        }),
-        catchError((error) => {
-          return throwError(() => error);
-        })
-      );
+  signOut() {
+    return from(this._supabase.auth.signOut());
   }
 }

@@ -51,5 +51,4 @@ vite.config.*.timestamp*
 vitest.config.*.timestamp*
 /generated/prisma
 
-.env
 dist/

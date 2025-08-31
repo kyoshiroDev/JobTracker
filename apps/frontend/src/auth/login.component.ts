@@ -18,6 +18,7 @@ import {
 } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'fdw-auth-login',
@@ -138,6 +139,7 @@ export class LoginComponent {
   protected readonly toast = inject(ToastrService);
   protected readonly fb = inject(NonNullableFormBuilder);
   protected readonly router = inject(Router);
+  protected readonly service = inject(AuthService);
 
   readonly typePasswordInput = input.required();
   readonly typePasswordChanges = output<'password' | 'text'>();
@@ -157,12 +159,22 @@ export class LoginComponent {
   }
 
   protected onSubmit() {
+    const user = this.formLogin.getRawValue();
     if (this.formLogin.invalid) {
       this.formLogin.markAllAsTouched();
       this.toast.error('Formulaire invalide');
       return;
     }
-    this.toast.success('Connexion réussi');
-    this.formLogin.reset();
+    this.service.signIn(user).subscribe({
+      next: () => {
+        this.toast.success('Connexion réussi');
+        this.router.navigate(['/dashboard']).then((error) => {
+          if (error) {
+            new Error('Erreur lors de la redirection');
+          }
+          this.formLogin.reset();
+        });
+      },
+    });
   }
 }

@@ -22,8 +22,8 @@ import { ToastrService } from 'ngx-toastr';
 import { AuthService } from './auth.service';
 import { CreateUser } from '@libs/schemas-zod';
 import { Router } from '@angular/router';
-import { HttpErrorResponse } from '@angular/common/http';
 import { passwordsMatchValidator } from './register.validators';
+import { signal } from '@angular/core';
 
 type AuthForm = {
   username: FormControl<string>;
@@ -220,6 +220,7 @@ export class RegisterComponent {
   readonly typeConfirmPasswordInput = input.required<string>();
   readonly typePasswordChanges = output<'password' | 'text'>();
   readonly typeConfirmPasswordChanges = output<'password' | 'text'>();
+  readonly error = signal<string | null>(null);
 
   protected readonly formRegister = this.fb.group<AuthForm>(
     {
@@ -253,27 +254,26 @@ export class RegisterComponent {
       this.toast.error('Formulaire invalide');
       return;
     }
+
     const form = this.formRegister.getRawValue();
-    const user = {
+    const user: CreateUser = {
       username: form.username,
       email: form.email,
       password: form.password,
-    } satisfies CreateUser;
-    this.serviceAuth.register(user).subscribe({
-      next: () => {
-        this.toast.success('Enregistrement réussi');
-        this.router.navigate(['/dashboard']).then((error) => {
-          if (error) {
-            new Error('Erreur lors de la redirection');
-          }
-        });
-        this.formRegister.reset();
-      },
-      error: (err: HttpErrorResponse) => {
-        this.toast.error(
-          err.error.message || "Erreur lors de l'enregistrement"
-        );
-      },
-    });
+    };
+
+    this.serviceAuth.signUp(user).subscribe({
+     next: (res) => {
+       if (res.user?.identities?.length === 0) {
+         this.toast.error("Cet email est déjà utilisé ou doit être confirmé.");
+       } else {
+         this.toast.success('Enregistrement réussi !');
+         this.router.navigate(['/dashboard']).then(() => {
+           this.error.set('Redirection impossible.');
+         })
+       }
+     },
+      error: (error) => this.error.set(error.error.message),
+    })
   }
 }

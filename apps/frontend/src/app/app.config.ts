@@ -6,6 +6,7 @@ import { STATUS_COLOR_PROVIDER } from './tokens/status-color-token-provider';
 import { provideToastr } from 'ngx-toastr';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideHttpClient } from '@angular/common/http';
+import { provideSupabase } from './providers/supabase.client';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -23,5 +24,6 @@ export const appConfig: ApplicationConfig = {
       progressAnimation: 'decreasing',
     }),
     provideHttpClient(),
+    provideSupabase()
   ],
 };
