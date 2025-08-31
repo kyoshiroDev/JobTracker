@@ -156,7 +156,7 @@ export class LoginComponent {
     return control.invalid && control.touched;
   }
 
-  protected onSubmit(){
+  protected onSubmit() {
     if (this.formLogin.invalid) {
       this.formLogin.markAllAsTouched();
       this.toast.error('Formulaire invalide');
@@ -164,6 +164,5 @@ export class LoginComponent {
     }
     this.toast.success('Connexion réussi');
     this.formLogin.reset();
-
   }
 }

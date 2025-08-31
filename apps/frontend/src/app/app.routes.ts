@@ -8,8 +8,9 @@ export const routes: Routes = [
   {
     path: 'dashboard',
     loadComponent: () =>
-      import('../dashboard/dashboard-page.component')
-        .then(c => c.DashboardComponent),
+      import('../dashboard/dashboard-page.component').then(
+        (c) => c.DashboardComponent
+      ),
   },
   { path: '**', component: NotFoundComponent },
 ];
