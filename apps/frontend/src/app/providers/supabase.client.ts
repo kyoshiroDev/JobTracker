@@ -8,6 +8,12 @@ export function provideSupabase(): Provider {
   return {
     provide: SUPABASE,
     useFactory: () =>
-      createClient(environment.supabaseUrl, environment.supabaseAnonKey)
+      createClient(environment.supabaseUrl, environment.supabaseAnonKey, {
+        auth: {
+          autoRefreshToken: true,
+          persistSession: true,
+          detectSessionInUrl: true,
+        },
+      })
   };
 }
