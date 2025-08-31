@@ -264,7 +264,7 @@ export class RegisterComponent {
 
     this.serviceAuth.signUp(user).subscribe({
      next: (res) => {
-       if (res.user?.identities?.length === 0) {
+       if (res.data.user?.identities?.length === 0) {
          this.toast.error("Cet email est déjà utilisé ou doit être confirmé.");
        } else {
          this.toast.success('Enregistrement réussi !');
