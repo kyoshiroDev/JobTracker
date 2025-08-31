@@ -5,6 +5,7 @@ on:
     branches: [ main, refactor/ui-redesign-v2 ]
   push:
     branches: [ main, refactor/ui-redesign-v2 ]
+
 jobs:
   ci:
     runs-on: ubuntu-latest
@@ -37,11 +38,34 @@ jobs:
           restore-keys: |
             nx-${{ runner.os }}-
 
+      # 🔧 Définir BASE/HEAD pour PR et PUSH (robuste)
       - name: Define base/head for affected
         id: ah
+        shell: bash
         run: |
-          echo "BASE_SHA=${{ github.event.pull_request.base.sha }}" >> $GITHUB_OUTPUT
-          echo "HEAD_SHA=${{ github.event.pull_request.head.sha }}" >> $GITHUB_OUTPUT
+          git fetch origin main --depth=50
+          if [[ "${GITHUB_EVENT_NAME}" == "pull_request" ]]; then
+            echo "BASE_SHA=${{ github.event.pull_request.base.sha }}" >> "$GITHUB_OUTPUT"
+            echo "HEAD_SHA=${{ github.event.pull_request.head.sha }}" >> "$GITHUB_OUTPUT"
+          else
+            BR="${GITHUB_REF_NAME}"
+            if [[ "$BR" == "main" ]]; then
+              BASE="origin/main~1"
+              HEAD="HEAD"
+            else
+              # compare la branche courante au point commun avec main (plus fiable que 'before')
+              BASE="$(git merge-base origin/main HEAD)"
+              HEAD="HEAD"
+            fi
+            echo "BASE_SHA=$BASE" >> "$GITHUB_OUTPUT"
+            echo "HEAD_SHA=$HEAD" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Debug base/head
+        run: |
+          echo "BASE=${{ steps.ah.outputs.BASE_SHA }}"
+          echo "HEAD=${{ steps.ah.outputs.HEAD_SHA }}"
+          git log --oneline -5
 
       - name: Prettier check (affected)
         run: npx nx format:check --base ${{ steps.ah.outputs.BASE_SHA }} --head ${{ steps.ah.outputs.HEAD_SHA }}

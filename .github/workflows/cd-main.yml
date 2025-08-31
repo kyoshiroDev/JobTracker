@@ -1,4 +1,4 @@
-name: CD (main)
+name: CD (push)
 
 on:
   push:
@@ -16,52 +16,73 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with: { fetch-depth: 0 }
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'pnpm'
-      - uses: pnpm/action-setup@v4
-        with: { version: 9 }
-      - run: pnpm install --frozen-lockfile
-      - uses: actions/cache@v4
+          cache: 'npm'        # ✅ npm, pas pnpm
+
+      - name: Install (npm ci)
+        run: npm ci          # ✅ pas de --frozen-lockfile (option pnpm/yarn)
+
+      - name: Cache Nx
+        uses: actions/cache@v4
         with:
           path: |
             .nx/cache
             node_modules/.cache/nx
-          key: nx-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+          key: nx-${{ runner.os }}-${{ hashFiles('package-lock.json') }}   # ✅ hash sur package-lock.json
           restore-keys: |
             nx-${{ runner.os }}-
 
+      # Définir BASE/HEAD pour push ET PR
+      - name: Define base/head for affected
+        id: ah
+        shell: bash
+        run: |
+          if [[ "${GITHUB_EVENT_NAME}" == "pull_request" ]]; then
+            echo "BASE_SHA=${{ github.event.pull_request.base.sha }}" >> "$GITHUB_OUTPUT"
+            echo "HEAD_SHA=${{ github.event.pull_request.head.sha }}" >> "$GITHUB_OUTPUT"
+          else
+            BASE="${{ github.event.before }}"
+            HEAD="${{ github.sha }}"
+            if [[ "$BASE" == "0000000000000000000000000000000000000000" ]] || [[ -z "$BASE" ]]; then
+              BASE="$(git rev-parse HEAD~1 || true)"
+            fi
+            echo "BASE_SHA=$BASE" >> "$GITHUB_OUTPUT"
+            echo "HEAD_SHA=$HEAD" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Prettier check (affected)
-        run: npx nx format:check --base origin/main~1 --head HEAD
+        run: npx nx format:check --base ${{ steps.ah.outputs.BASE_SHA }} --head ${{ steps.ah.outputs.HEAD_SHA }}
 
       - name: Lint (affected)
-        run: npx nx affected -t lint --base origin/main~1 --head HEAD --parallel=3
+        run: npx nx affected -t lint --base ${{ steps.ah.outputs.BASE_SHA }} --head ${{ steps.ah.outputs.HEAD_SHA }} --parallel=3
 
       - name: Test (affected)
-        run: npx nx affected -t test --base origin/main~1 --head HEAD --parallel=3 --ci --code-coverage
+        run: npx nx affected -t test --base ${{ steps.ah.outputs.BASE_SHA }} --head ${{ steps.ah.outputs.HEAD_SHA }} --parallel=3 --ci --code-coverage
 
       - name: Build (affected)
-        run: npx nx affected -t build --base origin/main~1 --head HEAD --parallel=3
+        run: npx nx affected -t build --base ${{ steps.ah.outputs.BASE_SHA }} --head ${{ steps.ah.outputs.HEAD_SHA }} --parallel=3
 
       - name: List affected apps (JSON)
         id: affected
+        shell: bash
         run: |
-          node -e "const {execSync}=require('node:child_process');
-          const out=execSync('npx nx print-affected --target=build --select=tasks.target.project --base origin/main~1 --head HEAD').toString().trim();
-          console.log(`json=${JSON.stringify(out?out.split('\n').filter(Boolean):[])}`);"
+          APPS=$(npx nx print-affected --target=build --select=tasks.target.project --base ${{ steps.ah.outputs.BASE_SHA }} --head ${{ steps.ah.outputs.HEAD_SHA }} | jq -R -s 'split("\n")|map(select(length>0))')
+          echo "json=$APPS" >> "$GITHUB_OUTPUT"
+          echo "Affected apps: $APPS"
 
   release:
     needs: quality
+    if: github.ref == 'refs/heads/main'   # ✅ release seulement sur main
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with: { fetch-depth: 0 }
       - uses: actions/setup-node@v4
-        with: { node-version: 20, cache: 'pnpm' }
-      - uses: pnpm/action-setup@v4
-        with: { version: 9 }
-      - run: pnpm install --frozen-lockfile
+        with: { node-version: 20, cache: 'npm' }
+      - run: npm ci
       - name: Nx release (version + changelog + tag)
         run: |
           npx nx release version
@@ -74,6 +95,7 @@ jobs:
 
   deploy:
     needs: [quality, release]
+    if: ${{ needs.quality.outputs.affectedProjects != '[]' }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -84,10 +106,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'pnpm'
-      - uses: pnpm/action-setup@v4
-        with: { version: 9 }
-      - run: pnpm install --frozen-lockfile
+          cache: 'npm'
+      - run: npm ci
 
       - name: Build app (prod)
         run: npx nx build ${{ matrix.app }} --configuration=production
@@ -95,5 +115,4 @@ jobs:
       - name: Deploy
         run: |
           echo "Déployer ${{ matrix.app }} ici…"
-          # 👉 Remplace par ta commande réelle (Docker/Helm/Firebase/Cloudflare/etc.)
           # npx nx run ${{ matrix.app }}:deploy --configuration=production
