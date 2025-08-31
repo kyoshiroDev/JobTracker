@@ -16,7 +16,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18' # mettre la version utilisée en local
+          node-version: '22' # mettre la version utilisée en local
 
       - name: Install dependencies
         run: npm ci
