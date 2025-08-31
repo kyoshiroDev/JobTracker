@@ -21,7 +21,7 @@ export const authMatchGuard: CanMatchFn = async (route: Route, segments: UrlSegm
   const url = '/' + segments.map((s: UrlSegment) => s.path).join('/');
   const { data, error } = await supabase.auth.getUser();
   if (error || !data.user) {
-    return router.createUrlTree(['/login'], { queryParams: { redirect: url } });
+    return this.router.redirect(['/']);
   }
   return true;
 };
