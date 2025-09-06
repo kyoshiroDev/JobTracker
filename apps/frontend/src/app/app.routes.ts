@@ -5,6 +5,7 @@ import { authMatchGuard } from './guards/auth-guard';
 import { DashboardLayoutComponent } from '../dashboard/dashboard-layout.component';
 
 export const routes: Routes = [
+  { path: '', redirectTo: 'auth', pathMatch: 'full' },
   { path: 'auth', component: AuthComponent },
 
   {
