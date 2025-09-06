@@ -5,12 +5,7 @@ import { z } from 'zod';
  * STATUS_TYPES enum des statuts
  * STATUS_LABELS label des statuts pour l'UI'
  */
-export const STATUS_TYPES = [
-  'pending',
-  'interview',
-  'follow_up',
-  'rejected',
-] as const;
+export const STATUS_TYPES = ['pending', 'interview', 'follow_up', 'rejected'] as const;
 export const statusTypeEnum = z.enum(STATUS_TYPES);
 export type StatusType = z.infer<typeof statusTypeEnum>;
 export const STATUS_LABELS: Record<StatusType, string> = {

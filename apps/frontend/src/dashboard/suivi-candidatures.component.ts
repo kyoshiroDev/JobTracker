@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AnnoncesService } from '../annonce/annonces.service';
+import { CandidaturesService } from '../candidatures/candidatures.service';
 import { STATUS_COLOR } from '../app/tokens/status-color-token';
 
 @Component({
@@ -32,7 +32,7 @@ import { STATUS_COLOR } from '../app/tokens/status-color-token';
   `,
 })
 export class SuiviCandidaturesComponent {
-  protected readonly annoncesServices = inject(AnnoncesService);
+  protected readonly annoncesServices = inject(CandidaturesService);
 
   protected readonly statusConfigs = inject(STATUS_COLOR);
 }

@@ -2,7 +2,7 @@ name: JobTracker
 
 on:
   push:
-    branches: [ refactor/ui-redesign-v2 ] # dès qu’on push sur main
+    branches: [refactor/ui-redesign-v2] # dès qu’on push sur main
   pull_request: # toutes les PR
 
 jobs:

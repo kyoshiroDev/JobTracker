@@ -1,49 +1,51 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  output,
-  signal,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, output, signal } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { Sidebarmenu } from './sidebarmenu';
+import { WorkModeIconComponent } from '../../../assets/icons/work-mode-icon.component';
 
 @Component({
   selector: 'fdw-sidebar',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive, WorkModeIconComponent],
+  host: {
+    class:
+      'flex flex-col gap-4 bg-jobtracker-background-side border-r border-solid border-r-jobtracker-border h-screen w-64 -translate-x-full lg:translate-x-0 transition-transform',
+  },
   template: `
-    <div
-      class="bg-JobTracker-side h-full md:w-[250px]
-  lg:flex
-  flex-col
-  gap-10
-  justify-start
-  items-center
-  text-JobTracker-white text-xl font-semibold;"
-    >
-      <a routerLink="/" class="flex flex-col justify-center items-center h-35">
-        <h1 class="text-3xl">JobTracker</h1>
-      </a>
-      <div class="flex flex-col">
-        @for (menu of sidebar(); track menu.id) {
+    <a routerLink="/" class="flex justify-start items-center gap-4 h-20">
+      <div
+        class="flex items-center justify-center ml-4 bg-gradient-primary p-1.5 rounded-xl text-primary-foreground font-bold"
+      >
+        <fdw-work-mode-icon />
+      </div>
+      <div>
+        <h1 class="font-bold text-lg bg-gradient-primary clip-text ">JobTracker</h1>
+        <p class="text-xs text-muted-foreground">Votre succès commence ici</p>
+      </div>
+    </a>
+    <nav class="flex flex-col justify-center gap-3 mt-8 px-3">
+      @for (menu of sidebar(); track menu.id) {
         <a
-          class="py-2
-    pl-4
-    pr-12
-    my-2.5
-    hover:bg-JobTracker-side-hover
-    cursor-pointer
-    rounded-md"
+          class="flex h-8 items-center gap-4 py-1 pl-4 hover:text-primary-foreground
+         hover:bg-gradient-primary cursor-pointer rounded-xl
+         text-muted-foreground/80 text-sm"
           (click)="closeSideBar.emit()"
           routerLinkActive="active-link"
           [routerLinkActiveOptions]="{ exact: true }"
-          routerLink="{{ menu.routerLink }}"
-          >{{ menu.name }}</a
+          [routerLink]="menu.routerLink"
         >
-        }
-      </div>
-    </div>
+          <svg
+            class="size-5 shrink-0 [stroke-width:1] text-current"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <use [attr.href]="menu.icon"></use>
+          </svg>
+          <span class="h-5 mt-px">{{ menu.name }}</span>
+        </a>
+
+      }
+    </nav>
   `,
 })
 export class SidebarComponent {
@@ -51,10 +53,17 @@ export class SidebarComponent {
   protected readonly closeSideBar = output();
 
   protected readonly sidebar = signal<Sidebarmenu[]>([
-    { id: 1, name: '📊 Dashboard', routerLink: '/' },
-    { id: 2, name: '📂 Mes Annonces', routerLink: 'annonces' },
-    //{id:3, name: "📝 Ma TodoList", routerLink:"todoliste"},
-    //{id:4, name: "🔍 Offres d'Emploi", routerLink:"Offres-d-emploi"},
-    //{id:5, name: "⚙️ Parametre", routerLink:"setting"},
+    {
+      id: 1,
+      icon: 'assets/icons/sprite.svg#i-dashboard',
+      name: 'Dashboard',
+      routerLink: '/dashboard',
+    },
+    {
+      id: 2,
+      icon: 'assets/icons/sprite.svg#i-suitcase',
+      name: 'Candidatures',
+      routerLink: '/candidatures',
+    },
   ]);
 }

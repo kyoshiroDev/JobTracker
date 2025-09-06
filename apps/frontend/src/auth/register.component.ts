@@ -1,23 +1,12 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  input,
-  output,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EyeOpenIconComponent } from '../icons/eye-open-icon.component';
-import { EyeCloseIconComponent } from '../icons/eye-close-icon.component';
-import { LockIconComponent } from '../icons/lock-icon.component';
-import { RowRightIconComponent } from '../icons/row-right-icon.component';
-import { EmailIconComponent } from '../icons/email-icon.component';
-import { UserIconComponent } from '../icons/user-icon.component';
-import {
-  FormControl,
-  NonNullableFormBuilder,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { EyeOpenIconComponent } from '../assets/icons/eye-open-icon.component';
+import { EyeCloseIconComponent } from '../assets/icons/eye-close-icon.component';
+import { LockIconComponent } from '../assets/icons/lock-icon.component';
+import { RowRightIconComponent } from '../assets/icons/row-right-icon.component';
+import { EmailIconComponent } from '../assets/icons/email-icon.component';
+import { UserIconComponent } from '../assets/icons/user-icon.component';
+import { FormControl, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from './auth.service';
 import { CreateUser } from '@libs/schemas-zod';
@@ -45,23 +34,13 @@ type AuthForm = {
     ReactiveFormsModule,
   ],
   template: `
-    <form
-      class="px-6 pb-6 pt-4"
-      [formGroup]="formRegister"
-      (ngSubmit)="onSubmit()"
-    >
+    <form class="px-6 pb-6 pt-4" [formGroup]="formRegister" (ngSubmit)="onSubmit()">
       <!-- Nom complet -->
-      <label
-        for="username"
-        class="block text-sm font-medium text-jobtracker-text-primary mt-4 mb-2 pl-1"
-      >
-        Nom complet <span class="text-red-800 pl-1">*</span>
+      <label for="username" class="block text-sm font-medium text-jobtracker-text-primary mt-4 mb-2 pl-1">
+        Nom complet <span class="text-destructive pl-1">*</span>
       </label>
       <div class="mb-5">
-        <div
-          class="flex items-center border border-jobtracker-border rounded-md focus-within:ring-2 focus-within:ring-jobtracker-primary/40 focus-within:border-jobtracker-primary transition"
-          [class.border-red-600]="invalidSaisie('username')"
-        >
+        <div class="input" [class.border-destructive]="invalidSaisie('username')">
           <span class="pl-3 flex items-center">
             <fdw-user-icon class="block w-4 h-4" />
           </span>
@@ -76,22 +55,16 @@ type AuthForm = {
           />
         </div>
         @if (invalidSaisie('username', 'required')) {
-        <p class="pl-1 mt-1 text-xs text-red-600">Ce champ est obligatoire.</p>
+        <p class="pl-1 mt-1 text-xs text-destructive">Ce champ est obligatoire.</p>
         }
       </div>
 
       <!-- Email -->
-      <label
-        for="email"
-        class="block text-sm font-medium text-jobtracker-text-primary mt-4 mb-2 pl-1"
-      >
-        Email <span class="text-red-800 pl-1">*</span>
+      <label for="email" class="block text-sm font-medium text-jobtracker-text-primary mt-4 mb-2 pl-1">
+        Email <span class="text-destructive pl-1">*</span>
       </label>
       <div class="relative mb-5">
-        <div
-          class="flex items-center border border-jobtracker-border rounded-md focus-within:ring-2 focus-within:ring-jobtracker-primary/40 focus-within:border-jobtracker-primary transition"
-          [class.border-red-600]="invalidSaisie('email')"
-        >
+        <div class="input" [class.border-destructive]="invalidSaisie('email')">
           <span class="pl-3 flex items-center"><fdw-email-icon /></span>
           <input
             id="email"
@@ -104,26 +77,18 @@ type AuthForm = {
           />
         </div>
         @if (invalidSaisie('email', 'required')) {
-        <p class="pl-1 mt-1 text-xs text-red-600">Ce champ est obligatoire.</p>
+        <p class="pl-1 mt-1 text-xs text-destructive">Ce champ est obligatoire.</p>
         } @if (invalidSaisie('email', 'email')) {
-        <p class="pl-1 mt-1 text-xs text-red-600">
-          L’adresse e-mail n’est pas valide.
-        </p>
+        <p class="pl-1 mt-1 text-xs text-destructive">L’adresse e-mail n’est pas valide.</p>
         }
       </div>
 
       <!-- Mot de passe -->
-      <label
-        for="password"
-        class="block text-sm font-medium text-jobtracker-text-primary mt-4 mb-2 pl-1"
-      >
-        Mot de passe <span class="text-red-800 pl-1">*</span>
+      <label for="password" class="block text-sm font-medium text-jobtracker-text-primary mt-4 mb-2 pl-1">
+        Mot de passe <span class="text-destructive pl-1">*</span>
       </label>
       <div class="relative">
-        <div
-          class="flex items-center border border-jobtracker-border rounded-md focus-within:ring-2 focus-within:ring-jobtracker-primary/40 focus-within:border-jobtracker-primary transition"
-          [class.border-red-600]="invalidSaisie('password')"
-        >
+        <div class="input" [class.border-destructive]="invalidSaisie('password')">
           <span class="pl-3 flex items-center"><fdw-lock-icon /></span>
           <input
             id="password"
@@ -148,24 +113,16 @@ type AuthForm = {
           </button>
         </div>
         @if (invalidSaisie('password', 'required')) {
-        <p class="pl-1 mt-1 text-xs text-red-600">Ce champ est obligatoire.</p>
+        <p class="pl-1 mt-1 text-xs text-destructive">Ce champ est obligatoire.</p>
         }
       </div>
 
       <!-- Confirmation du mot de passe -->
-      <label
-        for="confirm-password"
-        class="block text-sm font-medium text-jobtracker-text-primary mt-4 mb-2 pl-1"
-      >
-        Confirmer le mot de passe <span class="text-red-800 pl-1">*</span>
+      <label for="confirm-password" class="block text-sm font-medium text-jobtracker-text-primary mt-4 mb-2 pl-1">
+        Confirmer le mot de passe <span class="text-destructive pl-1">*</span>
       </label>
       <div class="relative">
-        <div
-          class="flex items-center border border-jobtracker-border rounded-md focus-within:ring-2 focus-within:ring-jobtracker-primary/40 focus-within:border-jobtracker-primary transition"
-          [class.border-red-600]="
-            invalidSaisie('confirmPassword') || passwordMismatch()
-          "
-        >
+        <div class="input" [class.border-destructive]="invalidSaisie('confirmPassword') || passwordMismatch()">
           <span class="pl-3 flex items-center"><fdw-lock-icon /></span>
           <input
             id="confirm-password"
@@ -190,11 +147,9 @@ type AuthForm = {
           </button>
         </div>
         @if (invalidSaisie('confirmPassword', 'required')) {
-        <p class="pl-1 mt-1 text-xs text-red-600">Ce champ est obligatoire.</p>
+        <p class="pl-1 mt-1 text-xs text-destructive">Ce champ est obligatoire.</p>
         } @if (passwordMismatch()) {
-        <p class="pl-1 mt-1 text-xs text-red-600">
-          Les mots de passe ne correspondent pas.
-        </p>
+        <p class="pl-1 mt-1 text-xs text-destructive">Les mots de passe ne correspondent pas.</p>
         }
       </div>
 
@@ -233,9 +188,7 @@ export class RegisterComponent {
   );
 
   protected passwordMismatch(): boolean {
-    const touched =
-      this.formRegister.get('confirmPassword')?.touched ||
-      this.formRegister.get('password')?.touched;
+    const touched = this.formRegister.get('confirmPassword')?.touched || this.formRegister.get('password')?.touched;
     return touched ? this.formRegister.hasError('passwordMismatch') : false;
   }
 

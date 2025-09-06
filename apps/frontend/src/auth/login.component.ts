@@ -1,21 +1,11 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  input,
-  output,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EmailIconComponent } from '../icons/email-icon.component';
-import { LockIconComponent } from '../icons/lock-icon.component';
-import { EyeCloseIconComponent } from '../icons/eye-close-icon.component';
-import { EyeOpenIconComponent } from '../icons/eye-open-icon.component';
-import { RowRightIconComponent } from '../icons/row-right-icon.component';
-import {
-  NonNullableFormBuilder,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { EmailIconComponent } from '../assets/icons/email-icon.component';
+import { LockIconComponent } from '../assets/icons/lock-icon.component';
+import { EyeCloseIconComponent } from '../assets/icons/eye-close-icon.component';
+import { EyeOpenIconComponent } from '../assets/icons/eye-open-icon.component';
+import { RowRightIconComponent } from '../assets/icons/row-right-icon.component';
+import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
@@ -31,23 +21,15 @@ import { AuthService } from './auth.service';
     RowRightIconComponent,
     ReactiveFormsModule,
   ],
-  template: ` <form
-    [formGroup]="formLogin"
-    (ngSubmit)="onSubmit()"
-    class="px-6 pb-6 pt-4"
-  >
+  template: ` <form [formGroup]="formLogin" (ngSubmit)="onSubmit()" class="px-6 pb-6 pt-4">
     <!-- Email -->
-    <label
-      for="email"
-      class="block text-sm font-medium text-jobtracker-text-primary mt-4 mb-2 pl-1"
-      >Email<span class="text-red-800 flex-col justify-start pl-1"
-        >*</span
-      ></label
+    <label for="email" class="block text-sm font-medium text-jobtracker-text-primary mt-4 mb-2 pl-1"
+      >Email<span class="text-destructive flex-col justify-start pl-1">*</span></label
     >
     <div class="relative mb-5">
       <div
-        class="flex items-center border border-jobtracker-border rounded-md focus-within:ring-2 focus-within:ring-jobtracker-primary/40 focus-within:border-jobtracker-primary transition"
-        [class.border-red-600]="invalidSaisie('email')"
+        class="flex items-center border border-jobtracker-border rounded-md focus-within:ring-2 focus-within:ring-primary/40 focus-within:border-primary transition"
+        [class.border-destructive]="invalidSaisie('email')"
       >
         <span class="pl-3 flex items-center">
           <fdw-email-icon />
@@ -64,26 +46,20 @@ import { AuthService } from './auth.service';
         />
       </div>
       @if (invalidSaisie('email', 'required')) {
-      <p class="pl-1 mt-1 text-xs text-red-600">Ce champ est obligatoire.</p>
+      <p class="pl-1 mt-1 text-xs text-destructive">Ce champ est obligatoire.</p>
       } @if (invalidSaisie('email', 'email')) {
-      <p class="pl-1 mt-1 text-xs text-red-600">
-        L’adresse e-mail n’est pas valide.
-      </p>
+      <p class="pl-1 mt-1 text-xs text-destructive">L’adresse e-mail n’est pas valide.</p>
       }
     </div>
 
     <!-- Mot de passe -->
-    <label
-      for="password"
-      class="block text-sm font-medium text-jobtracker-text-primary mt-4 mb-2 pl-1"
-      >Mot de passe<span class="text-red-800 flex-col justify-start pl-1"
-        >*</span
-      ></label
+    <label for="password" class="block text-sm font-medium text-jobtracker-text-primary mt-4 mb-2 pl-1"
+      >Mot de passe<span class="text-destructive flex-col justify-start pl-1">*</span></label
     >
     <div class="relative">
       <div
-        class="flex items-center border border-jobtracker-border rounded-md focus-within:ring-2 focus-within:ring-jobtracker-primary/40 focus-within:border-jobtracker-primary transition"
-        [class.border-red-600]="invalidSaisie('password')"
+        class="flex items-center border border-jobtracker-border rounded-md focus-within:ring-2 focus-within:ring-primary/40 focus-within:border-primary transition"
+        [class.border-destructive]="invalidSaisie('password')"
       >
         <span class="pl-3 flex items-center">
           <fdw-lock-icon />
@@ -111,14 +87,14 @@ import { AuthService } from './auth.service';
         </button>
       </div>
       @if (invalidSaisie('password', 'required')) {
-      <p class="pl-1 mt-1 text-xs text-red-600">Ce champ est obligatoire.</p>
+      <p class="pl-1 mt-1 text-xs text-destructive">Ce champ est obligatoire.</p>
       }
     </div>
 
     <!-- Lien oublié -->
     <div class="text-right my-8">
       <a
-        class="text-sm text-jobtracker-dark-primary hover:underline cursor-pointer font-semibold"
+        class="text-sm text-muted-foreground hover:underline hover:underline-offset-5 cursor-pointer font-semibold"
         href="#"
         >Mot de passe oublié ?</a
       >
@@ -127,7 +103,7 @@ import { AuthService } from './auth.service';
     <!-- CTA -->
     <button
       type="submit"
-      class="w-full h-9 text-sm rounded-lg bg-linear-to-r from-jobtracker-primary to-jobtracker-primary/75 text-white font-medium hover:opacity-95 active:opacity-90 transition inline-flex items-center justify-center gap-2 cursor-pointer"
+      class="w-full h-9 text-sm rounded-lg bg-gradient-primary text-white font-medium hover:opacity-95 active:opacity-90 transition inline-flex items-center justify-center gap-2 cursor-pointer"
     >
       Se connecter
       <fdw-row-right-icon />
@@ -168,7 +144,7 @@ export class LoginComponent {
     this.service.signIn(user).subscribe({
       next: () => {
         this.toast.success('Connexion réussi');
-        this.router.navigate(['/dashboard']).then((error) => {
+        this.router.navigate(['dashboard']).then((error) => {
           if (error) {
             new Error('Erreur lors de la redirection');
           }

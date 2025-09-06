@@ -10,7 +10,7 @@ export * from './lib/user/create-user-schema';
 export * from './lib/user/update-user.schema';
 export * from './lib/user/user-public-model.schema';
 
-// annonce
+// candidatures
 export * from './lib/annonce/create-annonce-schema';
 export * from './lib/annonce/update-annonce-schema';
 export * from './lib/annonce/annonce.enums';

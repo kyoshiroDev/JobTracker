@@ -1,12 +1,7 @@
 import { z } from 'zod';
-import {
-  contratTypeEnum,
-  statusTypeEnum,
-  workModeTypeEnum,
-} from './annonce.enums';
+import { contratTypeEnum, statusTypeEnum, workModeTypeEnum } from './annonce.enums';
 
-const required = (label: string) =>
-  z.string().min(1, `${label} est obligatoire`);
+const required = (label: string) => z.string().min(1, `${label} est obligatoire`);
 
 export const createAnnonceSchema = z
   .object({

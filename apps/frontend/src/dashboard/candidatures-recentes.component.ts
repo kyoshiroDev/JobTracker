@@ -1,14 +1,7 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  HostListener,
-  inject,
-  signal,
-  Signal,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, inject, signal, Signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AnnoncesService } from '../annonce/annonces.service';
-import { Annonce } from '../annonce/annonce';
+import { CandidaturesService } from '../candidatures/candidatures.service';
+import { Candidature } from '../candidatures/candidature';
 import { STATUS_COLOR } from '../app/tokens/status-color-token';
 
 @Component({
@@ -16,33 +9,15 @@ import { STATUS_COLOR } from '../app/tokens/status-color-token';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule],
   template: `
-    <div
-      class="max-w-[92%] m-auto bg-JobTracker-white p-5 rounded-xl  drop-shadow-lg"
-    >
-      <h3 class="text-center lg:text-left inline-block">
-        Candidatures Récentes
-      </h3>
-      <table
-        class="table-auto lg:table-fixed w-full border-collapse border border-JobTracker-gray"
-      >
-        <thead
-          class="bg-JobTracker-blue h-[40px] text-JobTracker-white text-left"
-        >
+    <div class="max-w-[92%] m-auto bg-JobTracker-white p-5 rounded-xl  drop-shadow-lg">
+      <h3 class="text-center lg:text-left inline-block">Candidatures Récentes</h3>
+      <table class="table-auto lg:table-fixed w-full border-collapse border border-JobTracker-gray">
+        <thead class="bg-JobTracker-blue h-[40px] text-JobTracker-white text-left">
           <tr class="text-center h-[40px]">
             <th class="border border-JobTracker-gray text-center p-2">Poste</th>
-            <th
-              class="hidden lg:table-cell border border-JobTracker-gray text-center p-2"
-            >
-              Entreprise
-            </th>
-            <th
-              class="hidden lg:table-cell border border-JobTracker-gray text-center p-2"
-            >
-              Localisation
-            </th>
-            <th class="border border-JobTracker-gray text-center p-2">
-              Statut
-            </th>
+            <th class="hidden lg:table-cell border border-JobTracker-gray text-center p-2">Entreprise</th>
+            <th class="hidden lg:table-cell border border-JobTracker-gray text-center p-2">Localisation</th>
+            <th class="border border-JobTracker-gray text-center p-2">Statut</th>
           </tr>
         </thead>
         <tbody>
@@ -65,13 +40,7 @@ import { STATUS_COLOR } from '../app/tokens/status-color-token';
               [class]="statusColorClass(annonce.content.status)"
               class="lg:hidden table-cell relative group border border-JobTracker-gray"
             >
-              <svg
-                class="m-auto"
-                xmlns="http://www.w3.org/2000/svg"
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-              >
+              <svg class="m-auto" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
                 <path
                   fill="currentColor"
                   d="m10.6 16.6l7.05-7.05l-1.4-1.4l-5.65 5.65l-2.85-2.85l-1.4 1.4zM12 22q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22m0-2q3.35 0 5.675-2.325T20 12t-2.325-5.675T12 4T6.325 6.325T4 12t2.325 5.675T12 20m0-8"
@@ -91,11 +60,10 @@ import { STATUS_COLOR } from '../app/tokens/status-color-token';
   `,
 })
 export class CandidaturesRecentesComponent {
-  private readonly annoncesService = inject(AnnoncesService);
+  private readonly annoncesService = inject(CandidaturesService);
   private readonly status = inject(STATUS_COLOR);
 
-  protected readonly annonces: Signal<Annonce[]> =
-    this.annoncesService.getAll();
+  protected readonly annonces: Signal<Candidature[]> = this.annoncesService.getAll();
 
   protected readonly screenWidth = signal(window.innerWidth);
   @HostListener('window:resize', ['$event'])

@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  signal,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
 import { LoginComponent } from './login.component';
 import { RegisterComponent } from './register.component';
 import { AuthHeaderComponent } from './components/auth-header.component';
@@ -13,13 +8,7 @@ import { AuthToggleFormComponent } from './components/auth-toggle-form.component
 @Component({
   selector: 'fdw-auth',
   standalone: true,
-  imports: [
-    LoginComponent,
-    RegisterComponent,
-    AuthHeaderComponent,
-    AuthFooterComponent,
-    AuthToggleFormComponent,
-  ],
+  imports: [LoginComponent, RegisterComponent, AuthHeaderComponent, AuthFooterComponent, AuthToggleFormComponent],
   host: {
     class:
       'flex flex-col justify-center items-center min-h-dvh p-4 bg-gradient-to-br from-jobtracker-background via-jobtracker-background',
@@ -27,9 +16,7 @@ import { AuthToggleFormComponent } from './components/auth-toggle-form.component
   template: `
     <fdw-auth-header />
     <section class="w-full max-w-md">
-      <div
-        class="bg-white rounded-2xl border border-jobtracker-border shadow-sm"
-      >
+      <div class="bg-white rounded-2xl border border-border shadow-sm">
         <fdw-auth-toggle-form
           (switchFormChanges)="switchForm($event)"
           [formAuth]="formAuth()"
@@ -39,10 +26,7 @@ import { AuthToggleFormComponent } from './components/auth-toggle-form.component
 
         @if (formAuth() === 'login') {
         <div class="animate-fade-slide">
-          <fdw-auth-login
-            (typePasswordChanges)="switchTypePassword($event)"
-            [typePasswordInput]="typePassword()"
-          />
+          <fdw-auth-login (typePasswordChanges)="switchTypePassword($event)" [typePasswordInput]="typePassword()" />
         </div>
         } @else {
         <div class="animate-fade-slide">
@@ -67,14 +51,14 @@ export class AuthComponent {
 
   protected readonly loginBtnClass = computed(() =>
     this.formAuth() === 'login'
-      ? 'h-10 rounded-md text-sm font-medium transition shadow-sm bg-jobtracker-primary text-white cursor-default transition'
-      : 'h-10 rounded-md text-sm font-medium text-jobtracker-text-secondary hover:bg-white/60 transition cursor-pointer transition',
+      ? 'h-10 rounded-md text-sm font-medium transition shadow-sm bg-gradient-primary text-white cursor-default transition'
+      : 'h-10 rounded-md text-sm font-medium text-muted-foreground hover:bg-white/60 transition cursor-pointer transition',
   );
 
   protected readonly registerBtnClass = computed(() =>
     this.formAuth() === 'register'
-      ? 'h-10 rounded-md text-sm font-medium transition shadow sm bg-jobtracker-primary text-white cursor-default transition'
-      : 'h-10 rounded-md text-sm font-medium text-jobtracker-text-secondary hover:bg-white/60 transition cursor-pointer transition',
+      ? 'h-10 rounded-md text-sm font-medium transition shadow sm bg-gradient-primary text-white cursor-default transition'
+      : 'h-10 rounded-md text-sm font-medium text-muted-foreground hover:bg-white/60 transition cursor-pointer transition',
   );
 
   protected switchForm($event: 'login' | 'register'): void {

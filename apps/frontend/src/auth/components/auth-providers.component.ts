@@ -4,9 +4,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   selector: 'fdw-auth-providers',
   template: `
     <div class="flex items-center justify-center">
-      <span
-        class="px-1 text-xs uppercase tracking-wide text-jobtracker-text-secondary bg-white"
-      >
+      <span class="px-1 text-xs uppercase tracking-wide text-jobtracker-text-secondary bg-white">
         ou continuer avec
       </span>
     </div>

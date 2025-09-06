@@ -3,14 +3,8 @@ import { z } from 'zod';
 export const updateAnnonceSchema = z
   .object({
     job: z.string().min(1, 'Le poste est obligatoire').optional(),
-    contract_type: z
-      .string()
-      .min(1, 'Le type de contrat est obligatoire')
-      .optional(),
-    work_mode: z
-      .string()
-      .min(1, 'Le mode de travail est obligatoire')
-      .optional(),
+    contract_type: z.string().min(1, 'Le type de contrat est obligatoire').optional(),
+    work_mode: z.string().min(1, 'Le mode de travail est obligatoire').optional(),
     status: z.string().min(1, 'Le statut est obligatoire').optional(),
 
     user_id: z.string().uuid('UUID invalide').optional(), // autorisé si tu veux réassigner

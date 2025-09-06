@@ -1,18 +1,26 @@
 import { Routes } from '@angular/router';
 import { AuthComponent } from '../auth/auth.component';
 import { NotFoundComponent } from './not-found.component';
-import { authGuard, authMatchGuard } from './guards/auth-guard';
+import { authMatchGuard } from './guards/auth-guard';
+import { DashboardLayoutComponent } from '../dashboard/dashboard-layout.component';
 
 export const routes: Routes = [
-  { path: '', component: AuthComponent },
+  { path: 'auth', component: AuthComponent },
+
   {
-    path: 'dashboard',
+    path: '',
     canMatch: [authMatchGuard],
-    canActivate: [authGuard],
-    loadComponent: () =>
-      import('../dashboard/dashboard-page.component').then(
-        (c) => c.DashboardComponent,
-      ),
+    component: DashboardLayoutComponent,
+    children: [
+      { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
+      {
+        path: 'dashboard',
+        loadComponent: () => import('../dashboard/dashboard.component').then((m) => m.DashboardComponent),
+      },
+      { path: 'candidatures',
+        loadComponent: () => import('../candidatures/candidature-liste/candidature-liste-page.component').then((m) => m.CandidatureListePageComponent),
+      }
+    ],
   },
   { path: '**', component: NotFoundComponent },
 ];

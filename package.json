@@ -67,7 +67,8 @@
     "vitest": "^3.2.4"
   },
   "lint-staged": {
-    "*.{ts,html,css,scss,md,json}": ["prettier --write"]
+    "*.{ts,html,css,scss,md,json}": [
+      "prettier --write"
+    ]
   }
 }
-
