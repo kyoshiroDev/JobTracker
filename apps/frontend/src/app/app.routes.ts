@@ -18,9 +18,6 @@ export const routes: Routes = [
         path: 'dashboard',
         loadComponent: () => import('../dashboard/dashboard.component').then((m) => m.DashboardComponent),
       },
-      { path: 'candidatures',
-        loadComponent: () => import('../candidatures/candidature-liste/candidature-liste-page.component').then((m) => m.CandidatureListePageComponent),
-      }
     ],
   },
   { path: '**', component: NotFoundComponent },

@@ -1,10 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, input, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EmailIconComponent } from '../assets/icons/email-icon.component';
-import { LockIconComponent } from '../assets/icons/lock-icon.component';
-import { EyeCloseIconComponent } from '../assets/icons/eye-close-icon.component';
-import { EyeOpenIconComponent } from '../assets/icons/eye-open-icon.component';
-import { RowRightIconComponent } from '../assets/icons/row-right-icon.component';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
@@ -14,25 +9,22 @@ import { AuthService } from './auth.service';
   selector: 'fdw-auth-login',
   imports: [
     CommonModule,
-    EmailIconComponent,
-    LockIconComponent,
-    EyeCloseIconComponent,
-    EyeOpenIconComponent,
-    RowRightIconComponent,
     ReactiveFormsModule,
   ],
   template: ` <form [formGroup]="formLogin" (ngSubmit)="onSubmit()" class="px-6 pb-6 pt-4">
     <!-- Email -->
-    <label for="email" class="block text-sm font-medium text-jobtracker-text-primary mt-4 mb-2 pl-1"
+    <label for="email" class="block text-sm text-foreground mt-4 mb-2 pl-1"
       >Email<span class="text-destructive flex-col justify-start pl-1">*</span></label
     >
     <div class="relative mb-5">
       <div
-        class="flex items-center border border-jobtracker-border rounded-md focus-within:ring-2 focus-within:ring-primary/40 focus-within:border-primary transition"
+        class="flex items-center input"
         [class.border-destructive]="invalidSaisie('email')"
       >
         <span class="pl-3 flex items-center">
-          <fdw-email-icon />
+          <svg class="size-6 text-foreground">
+            <use href="assets/icons/sprite.svg#i-email"></use>
+          </svg>
         </span>
         <input
           id="email"
@@ -53,16 +45,18 @@ import { AuthService } from './auth.service';
     </div>
 
     <!-- Mot de passe -->
-    <label for="password" class="block text-sm font-medium text-jobtracker-text-primary mt-4 mb-2 pl-1"
+    <label for="password" class="block text-sm text-foreground mt-4 mb-2 pl-1"
       >Mot de passe<span class="text-destructive flex-col justify-start pl-1">*</span></label
     >
     <div class="relative">
       <div
-        class="flex items-center border border-jobtracker-border rounded-md focus-within:ring-2 focus-within:ring-primary/40 focus-within:border-primary transition"
+        class="flex items-center input"
         [class.border-destructive]="invalidSaisie('password')"
       >
         <span class="pl-3 flex items-center">
-          <fdw-lock-icon />
+          <svg class="size-6 text-foreground">
+            <use href="assets/icons/sprite.svg#i-lock"></use>
+          </svg>
         </span>
         <input
           id="password"
@@ -80,9 +74,13 @@ import { AuthService } from './auth.service';
           class="pr-3 inline-flex items-center cursor-pointer"
         >
           @if (typePasswordInput() === 'password') {
-          <fdw-eye-close-icon />
+          <svg class="size-6 text-foreground">
+            <use href="assets/icons/sprite.svg#i-eye-close"></use>
+          </svg>
           } @else {
-          <fdw-eye-open-icon />
+            <svg class="size-6 text-foreground">
+              <use href="assets/icons/sprite.svg#i-eye-open"></use>
+            </svg>
           }
         </button>
       </div>
@@ -94,7 +92,7 @@ import { AuthService } from './auth.service';
     <!-- Lien oublié -->
     <div class="text-right my-8">
       <a
-        class="text-sm text-muted-foreground hover:underline hover:underline-offset-5 cursor-pointer font-semibold"
+        class="text-sm text-muted-foreground hover:underline hover:underline-offset-5 cursor-pointer font-medium"
         href="#"
         >Mot de passe oublié ?</a
       >
@@ -103,10 +101,12 @@ import { AuthService } from './auth.service';
     <!-- CTA -->
     <button
       type="submit"
-      class="w-full h-9 text-sm rounded-lg bg-gradient-primary text-white font-medium hover:opacity-95 active:opacity-90 transition inline-flex items-center justify-center gap-2 cursor-pointer"
+      class="w-full h-9 text-sm rounded-lg bg-gradient-primary text-primary-foreground font-medium hover:opacity-95 active:opacity-90 transition inline-flex items-center justify-center gap-2 cursor-pointer"
     >
       Se connecter
-      <fdw-row-right-icon />
+      <svg class="size-4 text-primary-foreground">
+        <use href="assets/icons/sprite.svg#i-row-right"></use>
+      </svg>
     </button>
   </form>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -134,23 +134,22 @@ export class LoginComponent {
     return control.invalid && control.touched;
   }
 
-  protected onSubmit() {
+  protected async onSubmit() {
     const user = this.formLogin.getRawValue();
+
     if (this.formLogin.invalid) {
       this.formLogin.markAllAsTouched();
       this.toast.error('Formulaire invalide');
       return;
     }
-    this.service.signIn(user).subscribe({
-      next: () => {
-        this.toast.success('Connexion réussi');
-        this.router.navigate(['dashboard']).then((error) => {
-          if (error) {
-            new Error('Erreur lors de la redirection');
-          }
-          this.formLogin.reset();
-        });
-      },
-    });
+
+    try {
+      await this.service.signIn(user);
+      this.toast.success('Connexion réussie');
+      await this.router.navigate(['dashboard']);
+      this.formLogin.reset();
+    } catch (error) {
+      this.toast.error('Email ou mot de passe incorrect');
+    }
   }
 }

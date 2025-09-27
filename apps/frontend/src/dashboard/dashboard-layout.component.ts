@@ -1,46 +1,31 @@
-import { ChangeDetectionStrategy, Component, computed, signal, WritableSignal } from '@angular/core';
-import { ButtonComponent } from '../app/components/button/button.component';
-import { CandidatureFormComponent } from '../candidatures/candidature-form/candidature-form.component';
-import { HeaderComponent } from '../app/components/header/header.component';
-import { SidebarComponent } from '../app/components/sidebar/sidebar.component';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { HeaderComponent } from '../app/components/header.component';
 import { RouterOutlet } from '@angular/router';
+import { SidebarComponent } from '../app/components/sidebar/sidebar.component';
 
 @Component({
   selector: 'fdw-dashboard',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CandidatureFormComponent, HeaderComponent, SidebarComponent, ButtonComponent, RouterOutlet],
+  imports: [HeaderComponent, RouterOutlet, SidebarComponent],
   host: {
     class: 'flex min-h-dvh bg-jobtracker-background',
   },
   template: `
-    @if (showModal()) {
-    <fdw-candidatures-form (modalClose)="openModal()" />
-    }
-    <!-- Sidebar fixe -->
-    <fdw-sidebar (closeSideBar)="openSideBar()" [class]="sideBarClass()" />
+    @if (showSidebar()) {
+      <fdw-sidebar />}
     <div class="flex flex-col gap-4 w-full">
       <!-- Header -->
-      <fdw-header (openSideBar)="openSideBar()" />
-      <div class="flex flex-col justify-start mx-auto gap-15 w-7xl h-full bg-jobtracker-background">
+      <fdw-header (sidebar)="toggleSidebar()"/>
+      <div class="flex flex-col justify-start mx-auto gap-4 w-full h-full px-30 bg-jobtracker-background">
         <router-outlet />
       </div>
-      <fdw-button (click)="openModal()" class="lg:flex lg:justify-center" />
     </div>
   `,
 })
 export class DashboardLayoutComponent {
-  protected readonly showModal: WritableSignal<boolean> = signal(false);
-  protected readonly showSideBar: WritableSignal<boolean> = signal(false);
+  protected showSidebar = signal<boolean>(true);
 
-  protected openModal() {
-    this.showModal.set(!this.showModal());
-  }
-
-  protected openSideBar() {
-    this.showSideBar.set(!this.showSideBar());
-  }
-
-  protected sideBarClass = computed(() => {
-    return this.showSideBar() ? 'translate-x-0' : '-translate-x-full lg:translate-x-0';
-  });
+  toggleSidebar(){
+    this.showSidebar.update(v => !v);
+  };
 }

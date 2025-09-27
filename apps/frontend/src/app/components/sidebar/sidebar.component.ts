@@ -1,22 +1,26 @@
 import { ChangeDetectionStrategy, Component, inject, output, signal } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { Sidebarmenu } from './sidebarmenu';
-import { WorkModeIconComponent } from '../../../assets/icons/work-mode-icon.component';
 
 @Component({
   selector: 'fdw-sidebar',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterLink, RouterLinkActive, WorkModeIconComponent],
+  imports: [RouterLink, RouterLinkActive],
   host: {
     class:
-      'flex flex-col gap-4 bg-jobtracker-background-side border-r border-solid border-r-jobtracker-border h-screen w-64 -translate-x-full lg:translate-x-0 transition-transform',
+      'flex flex-col gap-4 border-r border-solid h-screen w-64 -translate-x-full lg:translate-x-0 transition-transform bg-background/80',
   },
   template: `
-    <a routerLink="/" class="flex justify-start items-center gap-4 h-20">
+    <a routerLink="/dashboard" class="flex justify-start items-center gap-4 h-20">
       <div
-        class="flex items-center justify-center ml-4 bg-gradient-primary p-1.5 rounded-xl text-primary-foreground font-bold"
+        class="flex items-center justify-center ml-4 bg-gradient-primary p-1.5 text-secondary rounded-xl font-bold"
       >
-        <fdw-work-mode-icon />
+        <svg
+          class="size-6 text-current"
+          aria-hidden="true"
+          focusable="false">
+          <use href="assets/icons/sprite.svg#i-suitcase"></use>
+        </svg>
       </div>
       <div>
         <h1 class="font-bold text-lg bg-gradient-primary clip-text ">JobTracker</h1>
@@ -28,7 +32,7 @@ import { WorkModeIconComponent } from '../../../assets/icons/work-mode-icon.comp
         <a
           class="flex h-8 items-center gap-4 py-1 pl-4 hover:text-primary-foreground
          hover:bg-gradient-primary cursor-pointer rounded-xl
-         text-muted-foreground/80 text-sm"
+         text-muted-foreground text-sm"
           (click)="closeSideBar.emit()"
           routerLinkActive="active-link"
           [routerLinkActiveOptions]="{ exact: true }"

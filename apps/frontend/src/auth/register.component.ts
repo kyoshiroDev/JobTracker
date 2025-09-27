@@ -1,11 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, input, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EyeOpenIconComponent } from '../assets/icons/eye-open-icon.component';
-import { EyeCloseIconComponent } from '../assets/icons/eye-close-icon.component';
-import { LockIconComponent } from '../assets/icons/lock-icon.component';
-import { RowRightIconComponent } from '../assets/icons/row-right-icon.component';
-import { EmailIconComponent } from '../assets/icons/email-icon.component';
-import { UserIconComponent } from '../assets/icons/user-icon.component';
 import { FormControl, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from './auth.service';
@@ -25,24 +19,20 @@ type AuthForm = {
   selector: 'fdw-auth-register',
   imports: [
     CommonModule,
-    EyeOpenIconComponent,
-    EyeCloseIconComponent,
-    LockIconComponent,
-    RowRightIconComponent,
-    EmailIconComponent,
-    UserIconComponent,
     ReactiveFormsModule,
   ],
   template: `
     <form class="px-6 pb-6 pt-4" [formGroup]="formRegister" (ngSubmit)="onSubmit()">
       <!-- Nom complet -->
-      <label for="username" class="block text-sm font-medium text-jobtracker-text-primary mt-4 mb-2 pl-1">
+      <label for="username" class="block text-sm text-foreground mt-4 mb-2 pl-1">
         Nom complet <span class="text-destructive pl-1">*</span>
       </label>
       <div class="mb-5">
         <div class="input" [class.border-destructive]="invalidSaisie('username')">
           <span class="pl-3 flex items-center">
-            <fdw-user-icon class="block w-4 h-4" />
+            <svg class="size-7 text-foreground">
+              <use href="assets/icons/sprite.svg#i-user"></use>
+            </svg>
           </span>
           <input
             id="username"
@@ -55,17 +45,21 @@ type AuthForm = {
           />
         </div>
         @if (invalidSaisie('username', 'required')) {
-        <p class="pl-1 mt-1 text-xs text-destructive">Ce champ est obligatoire.</p>
+          <p class="pl-1 mt-1 text-xs text-destructive">Ce champ est obligatoire.</p>
         }
       </div>
 
       <!-- Email -->
-      <label for="email" class="block text-sm font-medium text-jobtracker-text-primary mt-4 mb-2 pl-1">
+      <label for="email" class="block text-sm text-foreground mt-4 mb-2 pl-1">
         Email <span class="text-destructive pl-1">*</span>
       </label>
       <div class="relative mb-5">
         <div class="input" [class.border-destructive]="invalidSaisie('email')">
-          <span class="pl-3 flex items-center"><fdw-email-icon /></span>
+          <span class="pl-3 flex items-center">
+            <svg class="size-6 text-foreground">
+              <use href="assets/icons/sprite.svg#i-email"></use>
+            </svg>
+          </span>
           <input
             id="email"
             name="email"
@@ -77,19 +71,24 @@ type AuthForm = {
           />
         </div>
         @if (invalidSaisie('email', 'required')) {
-        <p class="pl-1 mt-1 text-xs text-destructive">Ce champ est obligatoire.</p>
-        } @if (invalidSaisie('email', 'email')) {
-        <p class="pl-1 mt-1 text-xs text-destructive">L’adresse e-mail n’est pas valide.</p>
+          <p class="pl-1 mt-1 text-xs text-destructive">Ce champ est obligatoire.</p>
+        }
+        @if (invalidSaisie('email', 'email')) {
+          <p class="pl-1 mt-1 text-xs text-destructive">L’adresse e-mail n’est pas valide.</p>
         }
       </div>
 
       <!-- Mot de passe -->
-      <label for="password" class="block text-sm font-medium text-jobtracker-text-primary mt-4 mb-2 pl-1">
+      <label for="password" class="block text-sm text-foreground mt-4 mb-2 pl-1">
         Mot de passe <span class="text-destructive pl-1">*</span>
       </label>
       <div class="relative">
         <div class="input" [class.border-destructive]="invalidSaisie('password')">
-          <span class="pl-3 flex items-center"><fdw-lock-icon /></span>
+          <span class="pl-3 flex items-center">
+            <svg class="size-6 text-foreground">
+              <use href="assets/icons/sprite.svg#i-lock"></use>
+            </svg>
+          </span>
           <input
             id="password"
             name="password"
@@ -106,24 +105,32 @@ type AuthForm = {
             aria-label="Afficher/Masquer le mot de passe"
           >
             @if (typePasswordInput() === 'password') {
-            <fdw-eye-close-icon />
+              <svg class="size-6 text-foreground">
+                <use href="assets/icons/sprite.svg#i-eye-close"></use>
+              </svg>
             } @else {
-            <fdw-eye-open-icon />
+              <svg class="size-6 text-foreground">
+                <use href="assets/icons/sprite.svg#i-eye-open"></use>
+              </svg>
             }
           </button>
         </div>
         @if (invalidSaisie('password', 'required')) {
-        <p class="pl-1 mt-1 text-xs text-destructive">Ce champ est obligatoire.</p>
+          <p class="pl-1 mt-1 text-xs text-destructive">Ce champ est obligatoire.</p>
         }
       </div>
 
       <!-- Confirmation du mot de passe -->
-      <label for="confirm-password" class="block text-sm font-medium text-jobtracker-text-primary mt-4 mb-2 pl-1">
+      <label for="confirm-password" class="block text-sm text-foreground mt-4 mb-2 pl-1">
         Confirmer le mot de passe <span class="text-destructive pl-1">*</span>
       </label>
       <div class="relative">
         <div class="input" [class.border-destructive]="invalidSaisie('confirmPassword') || passwordMismatch()">
-          <span class="pl-3 flex items-center"><fdw-lock-icon /></span>
+          <span class="pl-3 flex items-center">
+            <svg class="size-6 text-foreground">
+              <use href="assets/icons/sprite.svg#i-lock"></use>
+            </svg>
+          </span>
           <input
             id="confirm-password"
             name="confirm-password"
@@ -140,26 +147,33 @@ type AuthForm = {
             aria-label="Afficher/Masquer la confirmation du mot de passe"
           >
             @if (typeConfirmPasswordInput() === 'password') {
-            <fdw-eye-close-icon />
+              <svg class="size-6 text-foreground">
+                <use href="assets/icons/sprite.svg#i-eye-close"></use>
+              </svg>
             } @else {
-            <fdw-eye-open-icon />
+              <svg class="size-6 text-foreground">
+                <use href="assets/icons/sprite.svg#i-eye-open"></use>
+              </svg>
             }
           </button>
         </div>
         @if (invalidSaisie('confirmPassword', 'required')) {
-        <p class="pl-1 mt-1 text-xs text-destructive">Ce champ est obligatoire.</p>
-        } @if (passwordMismatch()) {
-        <p class="pl-1 mt-1 text-xs text-destructive">Les mots de passe ne correspondent pas.</p>
+          <p class="pl-1 mt-1 text-xs text-destructive">Ce champ est obligatoire.</p>
+        }
+        @if (passwordMismatch()) {
+          <p class="pl-1 mt-1 text-xs text-destructive">Les mots de passe ne correspondent pas.</p>
         }
       </div>
 
       <!-- CTA -->
       <button
         type="submit"
-        class="mt-8 w-full h-9 text-sm rounded-lg bg-linear-to-r from-jobtracker-primary to-jobtracker-primary/75 text-white font-medium hover:opacity-95 active:opacity-90 transition inline-flex items-center justify-center gap-2 cursor-pointer"
+        class="w-full h-9 text-sm mt-8 rounded-lg bg-gradient-primary text-primary-foreground font-medium hover:opacity-95 active:opacity-90 transition inline-flex items-center justify-center gap-2 cursor-pointer"
       >
         Créer un compte
-        <fdw-row-right-icon />
+        <svg class="size-4 text-primary-foreground">
+          <use href="assets/icons/sprite.svg#i-row-right"></use>
+        </svg>
       </button>
     </form>
   `,
@@ -201,7 +215,7 @@ export class RegisterComponent {
     return control.invalid && control.touched;
   }
 
-  protected onSubmit(): void {
+  protected async onSubmit(): Promise<void> {
     if (this.formRegister.invalid) {
       this.formRegister.markAllAsTouched();
       this.toast.error('Formulaire invalide');
@@ -215,18 +229,29 @@ export class RegisterComponent {
       password: form.password,
     };
 
-    this.serviceAuth.signUp(user).subscribe({
-      next: (res) => {
-        if (res.data.user?.identities?.length === 0) {
-          this.toast.error('Cet email est déjà utilisé ou doit être confirmé.');
-        } else {
-          this.toast.success('Enregistrement réussi !');
-          this.router.navigate(['/dashboard']).then(() => {
-            this.error.set('Redirection impossible.');
-          });
-        }
-      },
-      error: (error) => this.error.set(error.error.message),
-    });
+    try {
+      const { data, error } = await this.serviceAuth.signUp(user);
+
+      if (error) {
+        this.toast.error(error.message);
+        return;
+      }
+
+      const alreadyRegistered = data.user?.identities?.length === 0;
+
+      if (alreadyRegistered) {
+        this.toast.error('Cet email est déjà utilisé ou doit être confirmé.');
+        return;
+      }
+
+      this.toast.success('Enregistrement réussi !');
+      await this.router.navigate(['/dashboard']).catch(() => {
+        this.error.set('Redirection impossible.');
+      });
+
+    } catch (e: any) {
+      this.error.set(e?.message ?? 'Une erreur est survenue lors de l’enregistrement.');
+    }
   }
+
 }

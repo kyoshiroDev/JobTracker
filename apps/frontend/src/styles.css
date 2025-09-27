@@ -41,7 +41,6 @@
   /* Motivating gradients */
   --gradient-primary: linear-gradient(135deg, hsl(220 91% 55%), hsl(220 100% 75%));
   --gradient-success: linear-gradient(135deg, hsl(142 76% 36%), hsl(142 76% 50%));
-  --gradient-hero: linear-gradient(135deg, hsl(220 91% 55%) 0%, hsl(200 91% 60%) 50%, hsl(142 76% 50%) 100%);
 
   /* Depth */
   --shadow-elegant: 0 10px 30px -10px hsl(220 91% 55% / 0.2);
@@ -198,9 +197,7 @@
 @utility bg-gradient-success {
   background-image: var(--gradient-success);
 }
-@utility bg-gradient-hero {
-  background-image: var(--gradient-hero);
-}
+
 @utility hover-lift {
   transition: var(--transition-smooth);
   &:hover {
@@ -228,7 +225,7 @@
     color: transparent;
   }
   .input {
-    @apply flex items-center border border-muted-foreground/30 rounded-md focus-within:ring-2 focus-within:ring-primary/40 focus-within:border-primary transition;
+    @apply flex items-center outline-none border border-muted-foreground/30 rounded-md focus-within:ring-2 focus-within:ring-primary/40 focus-within:border-primary transition;
   }
   .active-link {
     @apply text-primary-foreground bg-gradient-primary rounded-xl;
