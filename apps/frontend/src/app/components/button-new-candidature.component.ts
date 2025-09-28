@@ -5,9 +5,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [],
   template: ` <button
-    class="inline-flex flex-nowrap gap-2 justify-center items-center text-sm bg-gradient-primary text-primary-foreground font-medium min-w-fit px-2 h-10 rounded-lg cursor-pointer"
+    class="flex flex-nowrap justify-center items-center gap-4 max-w-fit pl-4 pr-6 w-fit h-10 rounded-lg cursor-pointer"
   >
-    <svg class="hidden md:block size-6">
+    <svg class="size-6 mb-0.5">
       <use href="assets/icons/sprite.svg#i-cross"></use>
     </svg>
     Nouvelle Candidature

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
 import { HeaderComponent } from '../app/components/header.component';
 import { RouterOutlet } from '@angular/router';
 import { SidebarComponent } from '../app/components/sidebar/sidebar.component';
@@ -8,15 +8,14 @@ import { SidebarComponent } from '../app/components/sidebar/sidebar.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [HeaderComponent, RouterOutlet, SidebarComponent],
   host: {
-    class: 'flex min-h-dvh bg-jobtracker-background',
+    class: 'flex min-h-dvh',
   },
   template: `
-    @if (showSidebar()) {
-      <fdw-sidebar />}
+    <fdw-sidebar [class]="styleSidebar()" />
     <div class="flex flex-col gap-4 w-full">
       <!-- Header -->
-      <fdw-header (sidebar)="toggleSidebar()"/>
-      <div class="flex flex-col justify-start mx-auto gap-4 w-full h-full px-4 md:px-30 bg-jobtracker-background">
+      <fdw-header (sidebar)="toggleSidebar()" />
+      <div class="flex flex-col justify-start gap-4 h-full px-4 md:px-30">
         <router-outlet />
       </div>
     </div>
@@ -28,4 +27,8 @@ export class DashboardLayoutComponent {
   toggleSidebar(){
     this.showSidebar.update(v => !v);
   };
+
+  styleSidebar = computed(() => {
+    return this.showSidebar() ? 'hidden md:block transition-all ease-in-out duration-300' : 'bock md:hidden transition-all ease-in-out duration-300';
+  })
 }

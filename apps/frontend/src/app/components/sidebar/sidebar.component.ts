@@ -8,12 +8,12 @@ import { Sidebarmenu } from './sidebarmenu';
   imports: [RouterLink, RouterLinkActive],
   host: {
     class:
-      'flex flex-col gap-4 border-r border-solid h-screen w-64 -translate-x-full lg:translate-x-0 transition-transform bg-background/80',
+      'flex flex-col gap-4 border-r border-solid h-screen w-fit bg-background p-4',
   },
   template: `
-    <a routerLink="/dashboard" class="flex justify-start items-center gap-4 h-20">
+    <a routerLink="/dashboard" class="flex justify-start gap-4 items-center h-20">
       <div
-        class="flex items-center justify-center ml-4 bg-gradient-primary p-1.5 text-secondary rounded-xl font-bold"
+        class="flex items-center justify-center m-auto  bg-gradient-primary p-1.5 text-secondary rounded-xl font-bold"
       >
         <svg
           class="size-6 text-current"
@@ -30,7 +30,7 @@ import { Sidebarmenu } from './sidebarmenu';
     <nav class="flex flex-col justify-center gap-3 mt-8 px-3">
       @for (menu of sidebar(); track menu.id) {
         <a
-          class="flex h-8 items-center gap-4 py-1 pl-4 hover:text-primary-foreground
+          class="flex w-43 h-8 items-center gap-4 py-1 pl-4 hover:text-primary-foreground
          hover:bg-gradient-primary cursor-pointer rounded-xl
          text-muted-foreground text-sm"
           (click)="closeSideBar.emit()"
@@ -63,11 +63,11 @@ export class SidebarComponent {
       name: 'Dashboard',
       routerLink: '/dashboard',
     },
-    {
+    /*{
       id: 2,
       icon: 'assets/icons/sprite.svg#i-suitcase',
       name: 'Candidatures',
       routerLink: '/candidatures',
-    },
+    },*/
   ]);
 }
