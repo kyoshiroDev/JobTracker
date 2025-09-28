@@ -16,7 +16,7 @@ import { SidebarComponent } from '../app/components/sidebar/sidebar.component';
     <div class="flex flex-col gap-4 w-full">
       <!-- Header -->
       <fdw-header (sidebar)="toggleSidebar()"/>
-      <div class="flex flex-col justify-start mx-auto gap-4 w-full h-full px-30 bg-jobtracker-background">
+      <div class="flex flex-col justify-start mx-auto gap-4 w-full h-full px-4 md:px-30 bg-jobtracker-background">
         <router-outlet />
       </div>
     </div>
