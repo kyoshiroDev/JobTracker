@@ -29,7 +29,7 @@ import { ButtonNewCandidatureComponent } from './button-new-candidature.componen
         />
       </div>
       <div class="inline-flex py-4 justify-center items-center gap-4 md:gap-8 px-4 md:px-4">
-        <fdw-button-new-candidature class="hidden md:inline-flex flex-nowrap gap-2 justify-center items-center bg-gradient-primary text-primary-foreground font-medium px-2 h-10 rounded-lg cursor-pointer"/>
+        <fdw-button-new-candidature class="hidden lg:inline-flex flex-nowrap gap-2 justify-center items-center bg-gradient-primary text-primary-foreground font-medium px-2 h-10 rounded-lg cursor-pointer"/>
         <span>
           <img class="rounded-full h-14 w-14" ngSrc="/avatar.webp" alt="" height="80" width="80" />
         </span>

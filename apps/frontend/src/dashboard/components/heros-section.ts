@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
 import { MotivationComponent } from './motivation/motivation.component';
-import { ButtonNewCandidatureComponent } from './button-new-candidature.component';
+import { ButtonNewCandidatureComponent } from '../../app/components/button-new-candidature.component';
 
 @Component({
   selector: 'fdw-heros-section',
@@ -12,7 +12,7 @@ import { ButtonNewCandidatureComponent } from './button-new-candidature.componen
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <section
-      class="relative flex md:flex items-center justify-between md:h-60 overflow-hidden rounded-2xl shadow-xl ring-1 ring-primary-foreground/10
+      class="relative flex lg:flex items-center justify-between lg:h-60 overflow-hidden rounded-2xl shadow-xl ring-1 ring-primary-foreground/10
              bg-[url('/assets/images/hero-bg.jpg')] bg-cover bg-center"
     >
       <div class="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/90 to-primary/10"></div>
@@ -28,7 +28,7 @@ import { ButtonNewCandidatureComponent } from './button-new-candidature.componen
         </div>
         <fdw-motivation />
         <fdw-button-new-candidature
-          class="md:hidden flex flex-nowrap justify-center items-center bg-primary-foreground/15 border-solid border-1 border-border rounded-lg text-primary-foreground font-medium m-auto " />
+          class="lg:hidden flex flex-nowrap justify-center items-center bg-primary-foreground/15 border-solid border-1 border-border rounded-lg text-primary-foreground font-medium m-auto " />
       </div>
     </section>`,
 })

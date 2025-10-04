@@ -8,14 +8,14 @@ import { SidebarComponent } from '../app/components/sidebar/sidebar.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [HeaderComponent, RouterOutlet, SidebarComponent],
   host: {
-    class: 'flex min-h-dvh',
+    class: 'flex flex-1 w-screen h-screen',
   },
   template: `
     <fdw-sidebar [class]="styleSidebar()" />
-    <div class="flex flex-col gap-4 w-full">
+    <div class="relative flex flex-1 flex-col">
       <!-- Header -->
       <fdw-header (sidebar)="toggleSidebar()" />
-      <div class="flex flex-col justify-start gap-4 h-full px-4 md:px-30">
+      <div class="flex w-full h-full flex-col justify-start gap-8 px-4 md:px-60">
         <router-outlet />
       </div>
     </div>
@@ -29,6 +29,9 @@ export class DashboardLayoutComponent {
   };
 
   styleSidebar = computed(() => {
-    return this.showSidebar() ? 'hidden md:block transition-all ease-in-out duration-300' : 'bock md:hidden transition-all ease-in-out duration-300';
+    return this.showSidebar() ?
+      'flex fixed relative -translate-x-0 transition-all ease-in-out duration-300 opacity-100'
+      :
+      'fixed flex -translate-x-full transition-all ease-in-out duration-300 opacity-0';
   })
 }

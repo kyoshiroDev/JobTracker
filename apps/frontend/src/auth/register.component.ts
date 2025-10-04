@@ -233,7 +233,7 @@ export class RegisterComponent {
       const { data, error } = await this.serviceAuth.signUp(user);
 
       if (error) {
-        this.toast.error(error.message);
+        this.toast.error('Formulaire invalide');
         return;
       }
 
