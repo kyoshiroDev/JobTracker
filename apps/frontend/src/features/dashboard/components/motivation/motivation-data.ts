@@ -4,10 +4,11 @@ export interface MotivationMessage {
   id: string;
   text: string;
 }
+
 @Injectable({
   providedIn: 'root',
 })
-export class Motivation {
+export class MotivationData {
   protected readonly motivation = signal<MotivationMessage[]>([
     {
       id: 'b8f65a34-52e3-4e7d-8b74-12c2b45e5b21',
@@ -109,14 +110,12 @@ export class Motivation {
     this.loadOrPickForToday();
   }
 
-  /** Retourne un élément aléatoire du tableau */
   private pickRandom(): MotivationMessage {
     const list = this.motivation();
     const i = Math.floor(Math.random() * list.length);
     return list[i];
   }
 
-  /** Charge depuis localStorage si la date est la même, sinon pioche et enregistre */
   private loadOrPickForToday() {
     try {
       const raw = localStorage.getItem(this.storageKey);
@@ -125,30 +124,17 @@ export class Motivation {
       if (raw) {
         const saved = JSON.parse(raw) as { date: string; id: string };
         if (saved?.date === today) {
-          // retrouver le texte par l'id sauvegardé
           const found = this.motivation().find(m => m.id === saved.id) ?? this.pickRandom();
           this.selected.set(found);
           return;
         }
       }
 
-      // Pas de sauvegarde today → on en pioche une nouvelle
       const picked = this.pickRandom();
       this.selected.set(picked);
       localStorage.setItem(this.storageKey, JSON.stringify({ date: today, id: picked.id }));
     } catch {
-      // fallback silencieux si localStorage indispo
       this.selected.set(this.pickRandom());
     }
-  }
-
-  /** Force un nouveau tirage et remplace celle du jour (utile pour bouton "Nouvelle inspiration") */
-  randomMotivation() {
-    const picked = this.pickRandom();
-    this.selected.set(picked);
-    const today = new Date().toISOString().slice(0, 10);
-    try {
-      localStorage.setItem(this.storageKey, JSON.stringify({ date: today, id: picked.id }));
-    } catch {}
   }
 }

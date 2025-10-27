@@ -51,7 +51,7 @@
   --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --radius: 0.75rem;
 
-  /* Sidebar */
+  /* SidebarData */
   --sidebar-background: 0 0% 98%;
   --sidebar-foreground: 240 5.3% 26.1%;
   --sidebar-primary: 240 5.9% 10%;
@@ -137,7 +137,7 @@
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
 
-  /* Sidebar palette */
+  /* SidebarData palette */
   --color-sidebar-background: hsl(var(--sidebar-background));
   --color-sidebar-foreground: hsl(var(--sidebar-foreground));
   --color-sidebar-primary: hsl(var(--sidebar-primary));

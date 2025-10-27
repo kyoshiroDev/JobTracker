@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { AuthComponent } from '../auth/auth.component';
 import { NotFoundComponent } from './not-found.component';
 import { authMatchGuard } from './guards/auth-guard';
-import { DashboardLayoutComponent } from '../dashboard/dashboard-layout.component';
+import { DashboardLayoutComponent } from '../features/dashboard/dashboard-layout.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'auth', pathMatch: 'full' },
@@ -16,7 +16,7 @@ export const routes: Routes = [
       { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
       {
         path: 'dashboard',
-        loadComponent: () => import('../dashboard/dashboard.component').then((m) => m.DashboardComponent),
+        loadComponent: () => import('../features/dashboard/dashboard.component').then((m) => m.DashboardComponent),
       },
     ],
   },

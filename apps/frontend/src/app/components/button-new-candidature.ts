@@ -13,4 +13,4 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     Nouvelle Candidature
   </button>`,
 })
-export class ButtonNewCandidatureComponent {}
+export class ButtonNewCandidature {}

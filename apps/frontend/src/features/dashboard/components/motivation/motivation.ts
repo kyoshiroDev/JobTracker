@@ -1,11 +1,10 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { Motivation } from './motivation';
+import { MotivationData } from './motivation-data';
 
 @Component({
   selector: 'fdw-motivation',
-  imports: [],
+  host: { class: 'md:w-[450px]'},
   template: `
-    <div class="md:w-[450px]">
       <div
         class="rounded-xl border border-border/30 bg-primary-foreground/15 backdrop-blur-md
                    text-primary-foreground shadow-lg px-5 py-4 md:ml-auto"
@@ -20,10 +19,9 @@ import { Motivation } from './motivation';
           </div>
         </div>
       </div>
-    </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MotivationComponent {
-  protected readonly motivationService = inject(Motivation)
+export class Motivation {
+  protected readonly motivationService = inject(MotivationData)
 }

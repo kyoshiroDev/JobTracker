@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { AuthService } from '../../auth/auth.service';
-import { MotivationComponent } from './motivation/motivation.component';
-import { ButtonNewCandidatureComponent } from '../../app/components/button-new-candidature.component';
+import { AuthService } from '../../../auth/auth.service';
+import { Motivation } from './motivation/motivation';
+import { ButtonNewCandidature } from '../../../app/components/button-new-candidature';
 
 @Component({
   selector: 'fdw-heros-section',
   imports: [
-    MotivationComponent,
-    ButtonNewCandidatureComponent
+    Motivation,
+    ButtonNewCandidature
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `

@@ -17,7 +17,7 @@
     "module": "ESNext",
     "paths": {
       "@libs/interface": ["libs/interface/src/index.ts"],
-      "@libs/schemas-zod": ["libs/schemas-zod/src/index.ts"]
+      "@libs/schemas-zod": ["libs/schemas-zod/src/index.ts"],
     },
     "baseUrl": ".",
     "rootDir": "."
