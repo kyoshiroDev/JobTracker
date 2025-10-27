@@ -7,7 +7,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
   selector: 'fdw-candidatures-list',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    class: 'flex flex-col w-2/3 gap-4 border border-border rounded-lg p-8 shadow-sm',
+    class: 'flex flex-col w-full lg:w-2/3 gap-4 border border-border rounded-lg p-8 shadow-sm',
   },
   template: `
     <div class="flex items-center justify-between">
@@ -30,11 +30,11 @@ import { toSignal } from '@angular/core/rxjs-interop';
       <section
         class="relative flex flex-wrap items-center justify-between border-border border-solid border-1 rounded-xl p-4">
         <h3 class="font-semibold w-full">{{ candidature.job }}</h3>
-        <ul class="inline-flex items-baseline gap-2 text-sm text-foreground/60">
+        <ul class="flex-col lg:inline-flex items-baseline gap-2 text-sm text-foreground/60">
           <li>{{ candidature.company?.name }}</li>
-          <li class="font-extrabold text-lg">.</li>
+          <li class="font-extrabold text-lg hidden lg:block">.</li>
           <li>{{ candidature.company?.city}}</li>
-          <li class="flex font-extrabold text-lg">.</li>
+          <li class="font-extrabold text-lg hidden lg:block">.</li>
           <li class="text-primary font-medium">{{ candidature.salary }}</li>
         </ul>
         <p

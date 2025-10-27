@@ -8,7 +8,7 @@ import { SidebarComponent } from '../../app/components/sidebar/sidebar.component
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [Header, RouterOutlet, SidebarComponent],
   host: {
-    class: 'flex flex-1 w-screen h-screen overflow-hidden',
+    class: 'flex flex-1 w-screen h-screen overflow-x-scroll',
   },
   template: `
     <fdw-sidebar />
