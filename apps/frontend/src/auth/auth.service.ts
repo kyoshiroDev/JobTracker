@@ -16,7 +16,6 @@ export class AuthService {
     this._supabase.auth.onAuthStateChange((_event, session: Session | null) => {
       this.user.set(session?.user ?? null);
     });
-    console.log(this.user())
   }
 
   private async restoreSession() {

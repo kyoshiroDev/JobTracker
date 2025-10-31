@@ -1,11 +1,13 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
-import { SupabaseCandidatureGateway } from './supabase-candidature-gateway';
-import { Candidature } from './candidature';
+import { SupabaseCandidatureGateway } from '../../../candidatures/supabase-candidature-gateway';
+import { Candidature } from '../../../candidatures/candidature';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { StatusStylePipe } from '../../../../app/pipes/status-style.pipe';
 
 @Component({
-  selector: 'fdw-candidatures-list',
+  selector: 'fdw-candidatures-recentes',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [StatusStylePipe],
   host: {
     class: 'flex flex-col w-full lg:w-2/3 gap-4 border border-border rounded-lg p-8 shadow-sm',
   },
@@ -22,39 +24,40 @@ import { toSignal } from '@angular/core/rxjs-interop';
       >Voir tout
         <svg class="size-3.5 mb-0.5">
           <use href="/assets/icons/sprite.svg#i-row-right"></use>
-        </svg
-        >
+        </svg>
       </a>
     </div>
     @for (candidature of topThree(); track candidature.id) {
       <section
-        class="relative flex flex-wrap items-center justify-between border-border border-solid border-1 rounded-xl p-4">
+        class="relative flex flex-wrap items-center justify-between border-border border-solid border-1 rounded-xl p-4"
+      >
         <h3 class="font-semibold w-full">{{ candidature.job }}</h3>
-        <ul class="flex-col lg:inline-flex items-baseline gap-2 text-sm text-foreground/60">
+        <ul class="flex-col lg:flex-row inline-flex items-baseline gap-2 text-sm text-foreground/60">
           <li>{{ candidature.company?.name }}</li>
           <li class="font-extrabold text-lg hidden lg:block">.</li>
-          <li>{{ candidature.company?.city}}</li>
-          <li class="font-extrabold text-lg hidden lg:block">.</li>
+          <li>{{ candidature.company?.city }}</li>
+          <li class="font-extrabold text-lg hidden md:block">.</li>
           <li class="text-primary font-medium">{{ candidature.salary }}</li>
         </ul>
-        <p
-          class="inline-flex items-center gap-1 absolute right-6 text-xs font-medium bg-foreground/10 px-2 py-0.5 rounded-3xl">
-          <svg class="size-4 text-sm font-light">
-            <use [attr.href]="statusIcon(candidature.status)"></use>
+        <div
+          [class]="
+    'inline-flex items-center gap-1 absolute right-6 text-xs font-medium px-2 py-0.5 rounded-3xl ' +
+    (candidature.status | statusStyle).styleCard
+  "
+        >
+          <svg class="size-3.5 text-foreground/60">
+            <use [attr.href]="(candidature.status | statusStyle).icon "></use>
           </svg>
-          {{ candidature.status }}
-        </p>
+          <p class="mt-px font-semibold">{{ candidature.status }}</p>
+        </div>
       </section>
     }
   `,
 })
-export class CandidaturesList {
+export class CandidaturesRecentes {
   private readonly _candidaturesGateway = inject(SupabaseCandidatureGateway);
-  protected readonly candidatures = toSignal<Candidature[]>(this._candidaturesGateway.getAllCandidatures());
-  protected readonly statusStyle = toSignal(this._candidaturesGateway.getStatusStyle(), {initialValue: []});
+  protected candidatures = toSignal<Candidature[]>(this._candidaturesGateway.getAllCandidatures());
 
   topThree = computed(() => (this.candidatures() ?? []).slice(0, 3));
 
-  statusIcon = (status: string) =>
-    (this.statusStyle()?.find(s => s.status === status)?.icon);
 }

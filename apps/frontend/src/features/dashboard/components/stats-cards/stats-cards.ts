@@ -1,41 +1,48 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { SupabaseCandidatureGateway } from '../../../candidatures/supabase-candidature-gateway';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { StatusStylePipe } from '../../../../app/pipes/status-style.pipe';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'fdw-stats-cards',
+  imports: [StatusStylePipe],
   host: { class: 'grid grid-cols-2 grid-rows-2 lg:grid-cols-4 lg:grid-rows-1 gap-4 lg:gap-8' },
   template: `
     @for (card of cards(); track card.title) {
-      <div [class]="card.classes">
-        <div class="flex flex-col gap-5 justify-between p-5">
+      <div [class]="'flex items-center justify-between h-30 px-6 ' + (card.status | statusStyle).styleCard">
+        <div class="flex flex-col gap-5 justify-between">
           <p class="text-foreground/65 font-semibold text-sm">{{ card.title }}</p>
           <p class="text-3xl font-bold text-foreground">{{ card.value }}</p>
+        </div>
+        <div class="flex justify-center items-center rounded-lg shadow-md w-10 h-10 bg-muted">
+          <svg [class]="'size-6 ' + (card.status | statusStyle).fontColor">
+            <use [attr.href]="(card.status | statusStyle).icon "></use>
+          </svg>
         </div>
       </div>
     }
   `,
 })
 export class StatsCards {
-  readonly cards = signal([
-    {
-      title: 'Total candidatures',
-      value: 24,
-      classes: 'flex items-center h-30 bg-primary/10 rounded-lg border border-solid border-primary/20',
-    },
-    {
-      title: 'En attente',
-      value: 3,
-      classes: 'flex items-center h-30 bg-warning/10 rounded-lg border border-solid border-warning/20',
-    },
-    {
-      title: 'Entretiens',
-      value: 2,
-      classes: 'flex items-center h-30 bg-success/10 rounded-lg border border-solid border-success/20',
-    },
-    {
-      title: 'Rejetées',
-      value: 1,
-      classes: 'flex items-center h-30 bg-destructive/10 rounded-lg border border-solid border-destructive/20',
-    },
-  ]);
+  private readonly _candidaturesGateway = inject(SupabaseCandidatureGateway);
+  protected candidatures = toSignal(this._candidaturesGateway.getAllCandidatures(), {
+    initialValue: [],
+  });
+
+  readonly cards = computed(() => {
+    const list = this.candidatures();
+
+    const counts = list.reduce<Record<string, number>>((acc, c) => {
+      acc[c.status] = (acc[c.status] ?? 0) + 1;
+      return acc;
+    }, {});
+
+    return [
+      { title: 'Total candidatures', value: list.length, status: 'Total candidatures' },
+      { title: 'En attente', value: counts['En attente'] ?? 0, status: 'En attente' },
+      { title: 'Entretiens', value: counts['Entretiens'] ?? 0, status: 'Entretiens' },
+      { title: 'Rejetées', value: counts['Rejetées'] ?? 0, status: 'Rejetées' },
+    ];
+  });
 }

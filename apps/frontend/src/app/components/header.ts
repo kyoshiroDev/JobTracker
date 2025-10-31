@@ -20,14 +20,7 @@ import { SidebarData } from './sidebar/sidebar-data';
           </svg>
         </button>
         <label for="search"></label>
-        <input
-          type="text"
-          [formControl]="search"
-          id="search"
-          placeholder="Rechercher une candidature, entreprise..."
-          autocomplete="on"
-          class="bg-muted/50 border-muted focus:bg-background transition-smooth md:w-[450px] h-8 p-4 rounded-md input placeholder:text-muted-foreground"
-        />
+
       </div>
       <div class="inline-flex py-4 justify-center items-center gap-4 md:gap-8 px-4 md:px-4">
         <fdw-button-new-candidature
@@ -42,7 +35,6 @@ import { SidebarData } from './sidebar/sidebar-data';
 })
 export class Header {
   private readonly sidebarService = inject(SidebarData);
-  protected readonly search = new FormControl('');
 
   protected showSidebar = () => this.sidebarService.toggleSidebar();
 }

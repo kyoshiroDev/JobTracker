@@ -1,5 +1,6 @@
-@import 'tailwindcss';
-@import 'ngx-toastr/toastr';
+@import "ngx-toastr/toastr";
+@import "tailwindcss";
+@source "./src/**/*.{html,ts}";
 
 /* JobTracker Design System - Modern, motivating colors for job search */
 :root {

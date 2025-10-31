@@ -8,13 +8,13 @@ import { SidebarComponent } from '../../app/components/sidebar/sidebar.component
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [Header, RouterOutlet, SidebarComponent],
   host: {
-    class: 'flex flex-1 w-screen h-screen overflow-x-scroll',
+    class: 'flex flex-1 w-screen h-screen ',
   },
   template: `
     <fdw-sidebar />
     <div class="relative flex flex-1 flex-col">
       <fdw-header />
-      <div class="flex w-full h-full flex-col justify-start gap-8">
+      <div class="flex w-full h-full flex-col justify-start gap-8 overflow-x-scroll">
         <router-outlet />
       </div>
     </div>
