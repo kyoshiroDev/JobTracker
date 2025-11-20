@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, HostListener, inject, OnInit, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { SidebarData } from './sidebar-data';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 interface MenuItem {
   id: number;
@@ -14,7 +15,7 @@ interface MenuItem {
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [RouterLink, RouterLinkActive],
   host: {
-    '[class]': 'this.sidebarService.styleSidebar()',
+    '[class]': 'this.sidebarStyle()',
   },
 
   template: `
@@ -49,11 +50,19 @@ interface MenuItem {
       </a>
       }
     </nav>
+    <button
+      class="text-muted rounded-md px-4 py-2 absolute bottom-5 right-4 left-4 bg-red-700/75 cursor-pointer hover:bg-red-700/80 font-bold"
+    >
+      Déconnexion
+    </button>
   `,
 })
 export class SidebarComponent implements OnInit {
   protected readonly sidebarService = inject(SidebarData);
   protected readonly router = inject(Router);
+
+  protected isSidebarOpen = toSignal(this.sidebarService.showSidebar$, { initialValue: false });
+  protected sidebarStyle = toSignal(this.sidebarService.styleSidebar$, { initialValue: 'hidden' });
 
   protected readonly sidebar = signal<MenuItem[]>([
     {
@@ -62,30 +71,17 @@ export class SidebarComponent implements OnInit {
       name: 'Dashboard',
       routerLink: '/dashboard',
     },
-    /*{
+    {
       id: 2,
       icon: 'assets/icons/sprite.svg#i-suitcase',
       name: 'Candidatures',
       routerLink: '/candidatures',
-    },*/
+    },
   ]);
 
   ngOnInit() {
-    this.checkScreenSize();
+    this.isSidebarOpen();
   }
 
-  @HostListener('window:resize')
-  onResize() {
-    this.checkScreenSize();
-  }
-
-  checkScreenSize() {
-    if (window.innerWidth < 768) {
-      this.sidebarService.showSidebar.set(false);
-    } else {
-      this.sidebarService.showSidebar.set(true);
-    }
-  }
-
-  toggleSidebar = () => this.sidebarService.toggleSidebar();
+  toggleSidebar = () => (window.innerWidth < 720 ? this.sidebarService.toggleSidebar() : null);
 }

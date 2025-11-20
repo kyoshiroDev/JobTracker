@@ -17,10 +17,7 @@ type AuthForm = {
 
 @Component({
   selector: 'fdw-auth-register',
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-  ],
+  imports: [CommonModule, ReactiveFormsModule],
   template: `
     <form class="px-6 pb-6 pt-4" [formGroup]="formRegister" (ngSubmit)="onSubmit()">
       <!-- Nom complet -->
@@ -45,7 +42,7 @@ type AuthForm = {
           />
         </div>
         @if (invalidSaisie('username', 'required')) {
-          <p class="pl-1 mt-1 text-xs text-destructive">Ce champ est obligatoire.</p>
+        <p class="pl-1 mt-1 text-xs text-destructive">Ce champ est obligatoire.</p>
         }
       </div>
 
@@ -71,10 +68,9 @@ type AuthForm = {
           />
         </div>
         @if (invalidSaisie('email', 'required')) {
-          <p class="pl-1 mt-1 text-xs text-destructive">Ce champ est obligatoire.</p>
-        }
-        @if (invalidSaisie('email', 'email')) {
-          <p class="pl-1 mt-1 text-xs text-destructive">L’adresse e-mail n’est pas valide.</p>
+        <p class="pl-1 mt-1 text-xs text-destructive">Ce champ est obligatoire.</p>
+        } @if (invalidSaisie('email', 'email')) {
+        <p class="pl-1 mt-1 text-xs text-destructive">L’adresse e-mail n’est pas valide.</p>
         }
       </div>
 
@@ -105,18 +101,18 @@ type AuthForm = {
             aria-label="Afficher/Masquer le mot de passe"
           >
             @if (typePasswordInput() === 'password') {
-              <svg class="size-6 text-foreground">
-                <use href="assets/icons/sprite.svg#i-eye-close"></use>
-              </svg>
+            <svg class="size-6 text-foreground">
+              <use href="assets/icons/sprite.svg#i-eye-close"></use>
+            </svg>
             } @else {
-              <svg class="size-6 text-foreground">
-                <use href="assets/icons/sprite.svg#i-eye-open"></use>
-              </svg>
+            <svg class="size-6 text-foreground">
+              <use href="assets/icons/sprite.svg#i-eye-open"></use>
+            </svg>
             }
           </button>
         </div>
         @if (invalidSaisie('password', 'required')) {
-          <p class="pl-1 mt-1 text-xs text-destructive">Ce champ est obligatoire.</p>
+        <p class="pl-1 mt-1 text-xs text-destructive">Ce champ est obligatoire.</p>
         }
       </div>
 
@@ -147,21 +143,20 @@ type AuthForm = {
             aria-label="Afficher/Masquer la confirmation du mot de passe"
           >
             @if (typeConfirmPasswordInput() === 'password') {
-              <svg class="size-6 text-foreground">
-                <use href="assets/icons/sprite.svg#i-eye-close"></use>
-              </svg>
+            <svg class="size-6 text-foreground">
+              <use href="assets/icons/sprite.svg#i-eye-close"></use>
+            </svg>
             } @else {
-              <svg class="size-6 text-foreground">
-                <use href="assets/icons/sprite.svg#i-eye-open"></use>
-              </svg>
+            <svg class="size-6 text-foreground">
+              <use href="assets/icons/sprite.svg#i-eye-open"></use>
+            </svg>
             }
           </button>
         </div>
         @if (invalidSaisie('confirmPassword', 'required')) {
-          <p class="pl-1 mt-1 text-xs text-destructive">Ce champ est obligatoire.</p>
-        }
-        @if (passwordMismatch()) {
-          <p class="pl-1 mt-1 text-xs text-destructive">Les mots de passe ne correspondent pas.</p>
+        <p class="pl-1 mt-1 text-xs text-destructive">Ce champ est obligatoire.</p>
+        } @if (passwordMismatch()) {
+        <p class="pl-1 mt-1 text-xs text-destructive">Les mots de passe ne correspondent pas.</p>
         }
       </div>
 
@@ -248,10 +243,9 @@ export class RegisterComponent {
       await this.router.navigate(['/dashboard']).catch(() => {
         this.error.set('Redirection impossible.');
       });
-
-    } catch (e: any) {
-      this.error.set(e?.message ?? 'Une erreur est survenue lors de l’enregistrement.');
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'Une erreur est survenue lors de l’enregistrement.';
+      this.error.set(errorMessage);
     }
   }
-
 }

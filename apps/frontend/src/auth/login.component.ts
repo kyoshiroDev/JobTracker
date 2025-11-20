@@ -7,20 +7,14 @@ import { AuthService } from './auth.service';
 
 @Component({
   selector: 'fdw-auth-login',
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-  ],
+  imports: [CommonModule, ReactiveFormsModule],
   template: ` <form [formGroup]="formLogin" (ngSubmit)="onSubmit()" class="px-6 pb-6 pt-4">
     <!-- Email -->
     <label for="email" class="block text-sm text-foreground mt-4 mb-2 pl-1"
       >Email<span class="text-destructive flex-col justify-start pl-1">*</span></label
     >
     <div class="relative mb-5">
-      <div
-        class="flex items-center input"
-        [class.border-destructive]="invalidSaisie('email')"
-      >
+      <div class="flex items-center input" [class.border-destructive]="invalidSaisie('email')">
         <span class="pl-3 flex items-center">
           <svg class="size-6 text-foreground">
             <use href="assets/icons/sprite.svg#i-email"></use>
@@ -49,10 +43,7 @@ import { AuthService } from './auth.service';
       >Mot de passe<span class="text-destructive flex-col justify-start pl-1">*</span></label
     >
     <div class="relative">
-      <div
-        class="flex items-center input"
-        [class.border-destructive]="invalidSaisie('password')"
-      >
+      <div class="flex items-center input" [class.border-destructive]="invalidSaisie('password')">
         <span class="pl-3 flex items-center">
           <svg class="size-6 text-foreground">
             <use href="assets/icons/sprite.svg#i-lock"></use>
@@ -78,9 +69,9 @@ import { AuthService } from './auth.service';
             <use href="assets/icons/sprite.svg#i-eye-close"></use>
           </svg>
           } @else {
-            <svg class="size-6 text-foreground">
-              <use href="assets/icons/sprite.svg#i-eye-open"></use>
-            </svg>
+          <svg class="size-6 text-foreground">
+            <use href="assets/icons/sprite.svg#i-eye-open"></use>
+          </svg>
           }
         </button>
       </div>
@@ -148,8 +139,9 @@ export class LoginComponent {
       this.toast.success('Connexion réussie');
       await this.router.navigate(['dashboard']);
       this.formLogin.reset();
-    } catch (error) {
-      this.toast.error('Email ou mot de passe incorrect');
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'Email ou mot de passe incorrect';
+      this.toast.error(errorMessage);
     }
   }
 }

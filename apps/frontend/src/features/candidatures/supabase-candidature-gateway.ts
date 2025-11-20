@@ -13,7 +13,7 @@ export class SupabaseCandidatureGateway {
     return from(
       this._supabase.from('candidatures').select(`
       id, job, contract_type, work_mode, status, about, description, skills, benefits, salary, annonce_link,company_id, company:company_id(id, name, city)
-    `)
+    `),
     ).pipe(
       map(({ data, error }) => {
         if (error) throw new Error(error.message);

@@ -9,11 +9,11 @@ import { CandidaturesRecentes } from './components/candidatures-recentes/candida
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { class: 'flex flex-col gap-8 px-4 md:px-20 xl:px-60 h-screen' },
   template: `
-      <fdw-heros-section />
-      <fdw-stats-cards />
-      <div class="flex gap-8">
-        <fdw-candidatures-recentes />
-      </div>
+    <fdw-heros-section />
+    <fdw-stats-cards />
+    <div class="flex gap-8">
+      <fdw-candidatures-recentes />
+    </div>
   `,
 })
 export class DashboardComponent {}

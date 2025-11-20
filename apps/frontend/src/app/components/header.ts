@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { NgOptimizedImage } from '@angular/common';
 import { ButtonNewCandidature } from './button-new-candidature';
 import { SidebarData } from './sidebar/sidebar-data';
@@ -20,7 +20,6 @@ import { SidebarData } from './sidebar/sidebar-data';
           </svg>
         </button>
         <label for="search"></label>
-
       </div>
       <div class="inline-flex py-4 justify-center items-center gap-4 md:gap-8 px-4 md:px-4">
         <fdw-button-new-candidature

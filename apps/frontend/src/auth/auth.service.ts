@@ -40,8 +40,8 @@ export class AuthService {
       email: user.email,
       password: user.password,
     });
-      if (error)  throw error;
-      if(data.user){
+    if (error) throw error;
+    if (data.user) {
       this.user.set(data.user ?? null);
     }
   }

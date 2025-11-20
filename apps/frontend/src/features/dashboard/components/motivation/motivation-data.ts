@@ -124,7 +124,7 @@ export class MotivationData {
       if (raw) {
         const saved = JSON.parse(raw) as { date: string; id: string };
         if (saved?.date === today) {
-          const found = this.motivation().find(m => m.id === saved.id) ?? this.pickRandom();
+          const found = this.motivation().find((m) => m.id === saved.id) ?? this.pickRandom();
           this.selected.set(found);
           return;
         }

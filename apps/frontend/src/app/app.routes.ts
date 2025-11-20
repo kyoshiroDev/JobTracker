@@ -18,6 +18,10 @@ export const routes: Routes = [
         path: 'dashboard',
         loadComponent: () => import('../features/dashboard/dashboard.component').then((m) => m.DashboardComponent),
       },
+      {
+        path: 'candidatures',
+        loadComponent: () => import('../features/candidatures/candidatures-list').then((m) => m.CandidaturesList),
+      },
     ],
   },
   { path: '**', component: NotFoundComponent },
