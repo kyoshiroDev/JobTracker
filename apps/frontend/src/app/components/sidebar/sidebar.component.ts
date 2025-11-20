@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@ang
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { SidebarData } from './sidebar-data';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { AuthService } from '../../../auth/auth.service';
 
 interface MenuItem {
   id: number;
@@ -32,6 +33,7 @@ interface MenuItem {
         <p class="text-xs text-muted-foreground">Votre succès commence ici</p>
       </div>
     </a>
+    <div class="flex flex-col justify-between h-full">
     <nav class="flex flex-col justify-center gap-3 mt-8 px-3">
       @for (menu of sidebar(); track menu.id) {
       <a
@@ -51,14 +53,17 @@ interface MenuItem {
       }
     </nav>
     <button
-      class="text-muted rounded-md px-4 py-2 absolute bottom-5 right-4 left-4 bg-red-700/75 cursor-pointer hover:bg-red-700/80 font-bold"
+      (click)="this.logOut()"
+      class="w-full rounded-lg text-red-500/90 h-10 font-medium cursor-pointer"
     >
       Déconnexion
     </button>
+    </div>
   `,
 })
 export class SidebarComponent implements OnInit {
   protected readonly sidebarService = inject(SidebarData);
+  protected readonly authService = inject(AuthService);
   protected readonly router = inject(Router);
 
   protected isSidebarOpen = toSignal(this.sidebarService.showSidebar$, { initialValue: false });
@@ -84,4 +89,9 @@ export class SidebarComponent implements OnInit {
   }
 
   toggleSidebar = () => (window.innerWidth < 720 ? this.sidebarService.toggleSidebar() : null);
+
+  logOut() {
+    this.authService.signOut()
+    this.router.navigate(['/auth/login'])
+  };
 }
