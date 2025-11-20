@@ -65,11 +65,11 @@ import { AuthService } from './auth.service';
           class="pr-3 inline-flex items-center cursor-pointer"
         >
           @if (typePasswordInput() === 'password') {
-          <svg class="size-6 text-foreground">
+          <svg class="size-6 text-foreground" aria-label="eye close">
             <use href="assets/icons/sprite.svg#i-eye-close"></use>
           </svg>
           } @else {
-          <svg class="size-6 text-foreground">
+          <svg class="size-6 text-foreground" aria-label="eye open">
             <use href="assets/icons/sprite.svg#i-eye-open"></use>
           </svg>
           }
@@ -91,6 +91,7 @@ import { AuthService } from './auth.service';
 
     <!-- CTA -->
     <button
+      aria-label="Se connecter"
       type="submit"
       class="w-full h-9 text-sm rounded-lg bg-gradient-primary text-primary-foreground font-medium hover:opacity-95 active:opacity-90 transition inline-flex items-center justify-center gap-2 cursor-pointer"
     >
