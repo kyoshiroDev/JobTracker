@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, input, output } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
@@ -7,7 +7,7 @@ import { AuthService } from './auth.service';
 
 @Component({
   selector: 'fdw-auth-login',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [ReactiveFormsModule],
   template: ` <form [formGroup]="formLogin" (ngSubmit)="onSubmit()" class="px-6 pb-6 pt-4">
     <!-- Email -->
     <label for="email" class="block text-sm text-foreground mt-4 mb-2 pl-1"

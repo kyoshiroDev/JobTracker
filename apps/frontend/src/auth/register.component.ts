@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, input, output } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormControl, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from './auth.service';
@@ -17,7 +17,7 @@ type AuthForm = {
 
 @Component({
   selector: 'fdw-auth-register',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [ReactiveFormsModule],
   template: `
     <form class="px-6 pb-6 pt-4" [formGroup]="formRegister" (ngSubmit)="onSubmit()">
       <!-- Nom complet -->
