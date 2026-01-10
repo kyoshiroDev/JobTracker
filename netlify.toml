@@ -1,5 +1,5 @@
 [build]
-  command = "nx build frontend"
+  command = "pnpm build"
   publish = "dist/apps/frontend/browser"
 
 # SPA rewrite
