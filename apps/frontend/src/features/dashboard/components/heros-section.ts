@@ -7,11 +7,11 @@ import { ButtonNewCandidature } from '../../../app/components/button-new-candida
   selector: 'fdw-heros-section',
   imports: [Motivation, ButtonNewCandidature],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: ` <section
-    class="relative flex lg:flex items-center justify-between lg:h-60 overflow-hidden rounded-2xl shadow-xl ring-1 ring-primary-foreground/10
-             bg-[url('/assets/images/hero-bg.jpg')] bg-cover bg-center"
+  template: `
+    <section
+    class="relative flex lg:flex items-center justify-between lg:h-60 overflow-hidden rounded-2xl shadow-xl ring-1 ring-primary-foreground/10 bg-[url('/assets/images/hero-bg.jpg')] bg-cover bg-center"
   >
-    <div class="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/90 to-primary/10"></div>
+    <div class="absolute inset-0 bg-linear-to-r from-primary/90 via-primary/90 to-primary/10"></div>
     <div
       class="relative w-full flex flex-col flex-wrap gap-8 md:flex-row md:items-center md:justify-between px-8 py-10"
     >
@@ -23,7 +23,7 @@ import { ButtonNewCandidature } from '../../../app/components/button-new-candida
       </div>
       <fdw-motivation />
       <fdw-button-new-candidature
-        class="lg:hidden flex flex-nowrap justify-center items-center bg-primary-foreground/15 border-solid border-1 border-border rounded-lg text-primary-foreground font-medium m-auto "
+        class="lg:hidden flex flex-nowrap justify-center items-center bg-primary-foreground/15 border-solid border border-border rounded-lg text-primary-foreground font-medium m-auto "
       />
     </div>
   </section>`,
