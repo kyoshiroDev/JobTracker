@@ -17,7 +17,7 @@
         "index": "apps/frontend/src/index.html",
         "browser": "apps/frontend/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsconfig": "apps/frontend/tsconfig.app.json",
+        "tsConfig": "apps/frontend/tsconfig.app.json",
         "assets": [
           "apps/frontend/src/favicon.ico",
           "apps/frontend/src/assets",
@@ -32,7 +32,7 @@
       },
       "configurations": {
         "production": {
-          "tsconfig": "apps/frontend/tsconfig.app.json",
+          "tsConfig": "apps/frontend/tsconfig.app.json",
           "budgets": [
             {
               "type": "initial",
@@ -51,8 +51,7 @@
           "optimization": false,
           "extractLicenses": false,
           "sourceMap": true
-        },
-        "tsconfig": "apps/frontend/tsconfig.app.json"
+        }
       },
       "defaultConfiguration": "production"
     },
