@@ -32,7 +32,6 @@
       },
       "configurations": {
         "production": {
-          "tsconfig": "apps/frontend/tsconfig.app.json",
           "budgets": [
             {
               "type": "initial",
@@ -51,7 +50,8 @@
           "optimization": false,
           "extractLicenses": false,
           "sourceMap": true
-        }
+        },
+        "tsconfig": "apps/frontend/tsconfig.app.json"
       },
       "defaultConfiguration": "production"
     },
