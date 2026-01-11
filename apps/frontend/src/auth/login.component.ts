@@ -1,9 +1,8 @@
 import { ChangeDetectionStrategy, Component, inject, input, output } from '@angular/core';
-
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { AuthService } from './auth.service';
+import { AuthService } from '@apps/frontend/auth/auth.service';
 
 @Component({
   selector: 'fdw-auth-login',

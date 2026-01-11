@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
 import { LoginComponent } from './login.component';
 import { RegisterComponent } from './register.component';
-import { AuthHeaderComponent } from './components/auth-header.component';
-import { AuthFooterComponent } from './components/auth-footer.component';
-import { AuthToggleFormComponent } from './components/auth-toggle-form.component';
+import { AuthHeaderComponent } from '@apps/frontend/auth/components/auth-header.component';
+import { AuthFooterComponent } from '@apps/frontend/auth/components/auth-footer.component';
+import { AuthToggleFormComponent } from '@apps/frontend/auth/components/auth-toggle-form.component';
 
 @Component({
   selector: 'fdw-auth',

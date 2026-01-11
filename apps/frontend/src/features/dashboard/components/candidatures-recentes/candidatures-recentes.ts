@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { SupabaseCandidatureGateway } from '../../../candidatures/supabase-candidature-gateway';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { StatusStylePipe } from '../../../../app/pipes/status-style.pipe';
+import { StatusStylePipe } from '@apps/frontend/app/pipes/status-style.pipe';
+import { SupabaseCandidatureGateway } from '@apps/frontend/features/candidatures/supabase-candidature-gateway';
 
 @Component({
   selector: 'fdw-candidatures-recentes',
@@ -32,37 +32,37 @@ import { StatusStylePipe } from '../../../../app/pipes/status-style.pipe';
     </header>
     <ul class="flex flex-col gap-4" role="list">
       @for (candidature of topThree(); track candidature.id) {
-      <li>
-        <article class="flex items-center justify-between gap-4 border-border border rounded-xl p-4">
-          <div class="flex flex-col gap-3 flex-1 min-w-0">
-            <h3 class="font-semibold">
-              {{ candidature.job }}
-            </h3>
+        <li>
+          <article class="flex items-center justify-between gap-4 border-border border rounded-xl p-4">
+            <div class="flex flex-col gap-3 flex-1 min-w-0">
+              <h3 class="font-semibold">
+                {{ candidature.job }}
+              </h3>
 
-            <div class="flex flex-col lg:flex-row items-baseline gap-x-2 gap-y-1 text-sm text-foreground/60">
-              <span>{{ candidature.company?.name }}</span>
-              <span aria-hidden="true" class="hidden lg:inline">•</span>
-              <span>{{ candidature.company?.city }}</span>
-              <span aria-hidden="true" class="hidden lg:inline">•</span>
-              <span class="text-primary font-medium">{{ candidature.salary }}</span>
+              <div class="flex flex-col lg:flex-row items-baseline gap-x-2 gap-y-1 text-sm text-foreground/60">
+                <span>{{ candidature.company?.name }}</span>
+                <span aria-hidden="true" class="hidden lg:inline">•</span>
+                <span>{{ candidature.company?.city }}</span>
+                <span aria-hidden="true" class="hidden lg:inline">•</span>
+                <span class="text-primary font-medium">{{ candidature.salary }}</span>
+              </div>
             </div>
-          </div>
-          <span
-            [class]="(candidature.status | statusStyle).styleCard"
-            class="flex-shrink-0 inline-flex items-center gap-1 text-xs font-bold px-2 py-0.5 rounded-3xl"
-            [attr.aria-label]="'Statut: ' + candidature.status"
-          >
-            <svg
-              [class]="'size-3.5 ' + (candidature.status | statusStyle).fontColor"
-              aria-hidden="true"
-              focusable="false"
+            <span
+              [class]="(candidature.status | statusStyle).styleCard"
+              class="shrink-0 inline-flex items-center gap-1 text-xs font-bold px-2 py-0.5 rounded-3xl"
+              [attr.aria-label]="'Statut: ' + candidature.status"
             >
-              <use [attr.href]="(candidature.status | statusStyle).icon"></use>
-            </svg>
-            <span [class]="(candidature.status | statusStyle).fontColor">{{ candidature.status }}</span>
-          </span>
-        </article>
-      </li>
+              <svg
+                [class]="'size-3.5 ' + (candidature.status | statusStyle).fontColor"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <use [attr.href]="(candidature.status | statusStyle).icon"></use>
+              </svg>
+              <span [class]="(candidature.status | statusStyle).fontColor">{{ candidature.status }}</span>
+            </span>
+          </article>
+        </li>
       }
     </ul>
   `,

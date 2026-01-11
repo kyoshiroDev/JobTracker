@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
-import { SupabaseCandidatureGateway } from '../supabase-candidature-gateway';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { SupabaseCandidatureGateway } from '@apps/frontend/features/candidatures/supabase-candidature-gateway';
 
 @Component({
   selector: 'fdw-candidatures-search',

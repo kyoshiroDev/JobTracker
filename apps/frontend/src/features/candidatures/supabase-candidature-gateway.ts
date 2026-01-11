@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
-import { SUPABASE } from '../../app/providers/supabase.client';
+import { SUPABASE } from '@apps/frontend/app/providers/supabase.client';
 import { catchError, from, map, Observable, of } from 'rxjs';
-import { Candidature } from './candidature';
+import { Candidature } from '@apps/frontend/features/candidatures/candidature';
 
 @Injectable({
   providedIn: 'root',

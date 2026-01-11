@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Header } from '../../app/components/header';
 import { RouterOutlet } from '@angular/router';
-import { SidebarComponent } from '../../app/components/sidebar/sidebar.component';
+import { SidebarComponent } from '@apps/frontend/app/components/sidebar/sidebar.component';
+import { Header } from '@apps/frontend/app/components/header';
 
 @Component({
   selector: 'fdw-dashboard',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [Header, RouterOutlet, SidebarComponent],
+  imports: [Header, RouterOutlet, SidebarComponent, SidebarComponent],
   host: {
     class: 'flex flex-1 w-screen h-screen ',
   },

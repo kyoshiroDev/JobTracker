@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
-import { SidebarData } from '../../app/components/sidebar/sidebar-data';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { CandidaturesSearch } from './components/candidatures-search';
+import { SidebarData } from '@apps/frontend/app/components/sidebar/sidebar-data';
+import { CandidaturesSearch } from '@apps/frontend/features/candidatures/components/candidatures-search';
 
 @Component({
   selector: 'fdw-candidatures-list',

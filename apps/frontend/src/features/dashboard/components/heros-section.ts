@@ -1,14 +1,13 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { AuthService } from '../../../auth/auth.service';
-import { Motivation } from './motivation/motivation';
-import { ButtonNewCandidature } from '../../../app/components/button-new-candidature';
+import { ButtonNewCandidature } from '@apps/frontend/app/components/button-new-candidature';
+import { Motivation } from '@apps/frontend/features/dashboard/components/motivation/motivation';
+import { AuthService } from '@apps/frontend/auth/auth.service';
 
 @Component({
   selector: 'fdw-heros-section',
   imports: [Motivation, ButtonNewCandidature],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
-    <section
+  template: ` <section
     class="relative flex lg:flex items-center justify-between lg:h-60 overflow-hidden rounded-2xl shadow-xl ring-1 ring-primary-foreground/10 bg-[url('/assets/images/hero-bg.jpg')] bg-cover bg-center"
   >
     <div class="absolute inset-0 bg-linear-to-r from-primary/90 via-primary/90 to-primary/10"></div>

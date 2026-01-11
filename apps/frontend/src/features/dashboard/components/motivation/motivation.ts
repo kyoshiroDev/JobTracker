@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { MotivationData } from './motivation-data';
+import { InMemoryMotivationGateway } from '@apps/frontend/features/dashboard/components/motivation/in-memory-motivation.gateway';
 
 @Component({
   selector: 'fdw-motivation',
@@ -21,5 +21,5 @@ import { MotivationData } from './motivation-data';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Motivation {
-  protected readonly motivationService = inject(MotivationData);
+  protected readonly motivationService = inject(InMemoryMotivationGateway);
 }

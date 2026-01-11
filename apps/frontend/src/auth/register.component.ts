@@ -1,12 +1,11 @@
 import { ChangeDetectionStrategy, Component, inject, input, output } from '@angular/core';
-
 import { FormControl, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { AuthService } from './auth.service';
 import { CreateUser } from '@libs/schemas-zod';
 import { Router } from '@angular/router';
-import { passwordsMatchValidator } from './register.validators';
 import { signal } from '@angular/core';
+import { AuthService } from '@apps/frontend/auth/auth.service';
+import { passwordsMatchValidator } from '@apps/frontend/auth/register.validators';
 
 type AuthForm = {
   username: FormControl<string>;

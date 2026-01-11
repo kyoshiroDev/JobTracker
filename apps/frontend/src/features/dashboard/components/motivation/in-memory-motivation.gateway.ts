@@ -8,7 +8,7 @@ export interface MotivationMessage {
 @Injectable({
   providedIn: 'root',
 })
-export class MotivationData {
+export class InMemoryMotivationGateway {
   protected readonly motivation = signal<MotivationMessage[]>([
     {
       id: 'b8f65a34-52e3-4e7d-8b74-12c2b45e5b21',
@@ -113,7 +113,7 @@ export class MotivationData {
   private pickRandom(): MotivationMessage {
     const list = this.motivation();
     const i = Math.floor(Math.random() * list.length);
-    return list[i];
+    return list[i]!;
   }
 
   private loadOrPickForToday() {

@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { SidebarData } from './sidebar-data';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { AuthService } from '../../../auth/auth.service';
+import { AuthService } from '@apps/frontend/auth/auth.service';
+import { SidebarData } from '@apps/frontend/app/components/sidebar/sidebar-data';
 
-interface MenuItem {
+type MenuItem = {
   id: number;
   icon: string;
   name: string;
@@ -45,7 +45,7 @@ interface MenuItem {
         [routerLinkActiveOptions]="{ exact: true }"
         [routerLink]="menu.routerLink"
       >
-        <svg class="size-5 shrink-0 [stroke-width:1] text-current" aria-hidden="true" focusable="false">
+        <svg class="size-5 shrink-0 stroke-1 text-current" aria-hidden="true" focusable="false">
           <use [attr.href]="menu.icon"></use>
         </svg>
         <span class="flex justify-center items-center h-5">{{ menu.name }}</span>
