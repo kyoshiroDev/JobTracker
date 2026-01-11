@@ -1,6 +1,6 @@
 [build]
   # Commande de build
-  command = "pnpm install && nx build frontend --configuration=production"
+  command = "pnpm install && NX_DAEMON=false nx build frontend --configuration=production --skip-nx-cache"
 
   # Dossier de publication (output du build Angular)
   publish = "dist/apps/frontend/browser"
@@ -14,6 +14,10 @@
 
   # Utiliser pnpm
   NPM_FLAGS = "--prefer-offline --no-audit"
+
+  # Désactiver Nx Cloud
+  NX_CLOUD_ACCESS_TOKEN = ""
+  NX_DAEMON = "false"
 
 # Configuration pour Single Page Application (SPA)
 # Redirige toutes les routes vers index.html pour le routing Angular
