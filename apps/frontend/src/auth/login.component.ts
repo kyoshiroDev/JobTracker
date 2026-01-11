@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject, input, output } from '@angu
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { AuthService } from '@apps/frontend/auth/auth.service';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'fdw-auth-login',
@@ -31,9 +31,10 @@ import { AuthService } from '@apps/frontend/auth/auth.service';
         />
       </div>
       @if (invalidSaisie('email', 'required')) {
-      <p class="pl-1 mt-1 text-xs text-destructive">Ce champ est obligatoire.</p>
-      } @if (invalidSaisie('email', 'email')) {
-      <p class="pl-1 mt-1 text-xs text-destructive">L’adresse e-mail n’est pas valide.</p>
+        <p class="pl-1 mt-1 text-xs text-destructive">Ce champ est obligatoire.</p>
+      }
+      @if (invalidSaisie('email', 'email')) {
+        <p class="pl-1 mt-1 text-xs text-destructive">L’adresse e-mail n’est pas valide.</p>
       }
     </div>
 
@@ -64,18 +65,18 @@ import { AuthService } from '@apps/frontend/auth/auth.service';
           class="pr-3 inline-flex items-center cursor-pointer"
         >
           @if (typePasswordInput() === 'password') {
-          <svg class="size-6 text-foreground" aria-label="eye close">
-            <use href="assets/icons/sprite.svg#i-eye-close"></use>
-          </svg>
+            <svg class="size-6 text-foreground" aria-label="eye close">
+              <use href="assets/icons/sprite.svg#i-eye-close"></use>
+            </svg>
           } @else {
-          <svg class="size-6 text-foreground" aria-label="eye open">
-            <use href="assets/icons/sprite.svg#i-eye-open"></use>
-          </svg>
+            <svg class="size-6 text-foreground" aria-label="eye open">
+              <use href="assets/icons/sprite.svg#i-eye-open"></use>
+            </svg>
           }
         </button>
       </div>
       @if (invalidSaisie('password', 'required')) {
-      <p class="pl-1 mt-1 text-xs text-destructive">Ce champ est obligatoire.</p>
+        <p class="pl-1 mt-1 text-xs text-destructive">Ce champ est obligatoire.</p>
       }
     </div>
 

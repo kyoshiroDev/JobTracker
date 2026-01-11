@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { HerosSection } from '@apps/frontend/features/dashboard/components/heros-section';
-import { StatsCards } from '@apps/frontend/features/dashboard/components/stats-cards/stats-cards';
-import { CandidaturesRecentes } from '@apps/frontend/features/dashboard/components/candidatures-recentes/candidatures-recentes';
+import { HerosSection } from './components/heros-section';
+import { StatsCards } from './components/stats-cards/stats-cards';
+import { CandidaturesRecentes } from './components/candidatures-recentes/candidatures-recentes';
 
 @Component({
   selector: 'fdw-dashboard',

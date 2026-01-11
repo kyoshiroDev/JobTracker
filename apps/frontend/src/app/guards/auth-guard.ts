@@ -1,8 +1,7 @@
 import { CanMatchFn, Router } from '@angular/router';
 import { inject } from '@angular/core';
 import { SupabaseClient } from '@supabase/supabase-js';
-import { SUPABASE } from '@apps/frontend/app/providers/supabase.client';
-
+import { SUPABASE } from '../providers/supabase.client';
 
 export const authMatchGuard: CanMatchFn = async (route, segments) => {
   const router = inject(Router);

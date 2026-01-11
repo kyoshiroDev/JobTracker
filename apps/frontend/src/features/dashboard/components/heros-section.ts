@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { ButtonNewCandidature } from '@apps/frontend/app/components/button-new-candidature';
-import { Motivation } from '@apps/frontend/features/dashboard/components/motivation/motivation';
-import { AuthService } from '@apps/frontend/auth/auth.service';
+import { ButtonNewCandidature } from '../../../app/components/button-new-candidature';
+import { Motivation } from './motivation/motivation';
+import { AuthService } from '../../../auth/auth.service';
 
 @Component({
   selector: 'fdw-heros-section',

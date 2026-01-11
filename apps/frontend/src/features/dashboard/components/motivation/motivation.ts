@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { InMemoryMotivationGateway } from '@apps/frontend/features/dashboard/components/motivation/in-memory-motivation.gateway';
+import { InMemoryMotivationGateway } from './in-memory-motivation.gateway';
 
 @Component({
   selector: 'fdw-motivation',

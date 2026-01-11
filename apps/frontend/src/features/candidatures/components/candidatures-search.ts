@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { SupabaseCandidatureGateway } from '@apps/frontend/features/candidatures/supabase-candidature-gateway';
+import { SupabaseCandidatureGateway } from '../supabase-candidature-gateway';
 
 @Component({
   selector: 'fdw-candidatures-search',
@@ -24,7 +24,11 @@ import { SupabaseCandidatureGateway } from '@apps/frontend/features/candidatures
         <svg class="size-6 text-muted-foreground absolute left-4 top-1/2 -translate-y-1/2">
           <use href="assets/icons/sprite.svg#i-filter"></use>
         </svg>
-        <select name="status" id="candidatures-status" class="appearance-none bg-muted text-foreground h-12 pr-10 rounded-lg input placeholder:text-muted-foreground pl-12 cursor-pointer">
+        <select
+          name="status"
+          id="candidatures-status"
+          class="appearance-none bg-muted text-foreground h-12 pr-10 rounded-lg input placeholder:text-muted-foreground pl-12 cursor-pointer"
+        >
           <option value="">Tous les statuts</option>
           @for (status of status(); track status) {
             <option [value]="status">{{ status }}</option>
@@ -41,8 +45,5 @@ export class CandidaturesSearch {
   protected readonly candidaturesGateway = inject(SupabaseCandidatureGateway);
   protected readonly candidatures = toSignal(this.candidaturesGateway.getAllCandidatures(), { initialValue: [] });
 
-  status = computed(() =>
-    Array.from(new Set(this.candidatures().map(c => c.status)))
-  );
-
+  status = computed(() => Array.from(new Set(this.candidatures().map((c) => c.status))));
 }

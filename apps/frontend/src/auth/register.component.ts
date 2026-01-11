@@ -4,8 +4,8 @@ import { ToastrService } from 'ngx-toastr';
 import { CreateUser } from '@libs/schemas-zod';
 import { Router } from '@angular/router';
 import { signal } from '@angular/core';
-import { AuthService } from '@apps/frontend/auth/auth.service';
-import { passwordsMatchValidator } from '@apps/frontend/auth/register.validators';
+import { AuthService } from './auth.service';
+import { passwordsMatchValidator } from './register.validators';
 
 type AuthForm = {
   username: FormControl<string>;
@@ -41,7 +41,7 @@ type AuthForm = {
           />
         </div>
         @if (invalidSaisie('username', 'required')) {
-        <p class="pl-1 mt-1 text-xs text-destructive">Ce champ est obligatoire.</p>
+          <p class="pl-1 mt-1 text-xs text-destructive">Ce champ est obligatoire.</p>
         }
       </div>
 
@@ -67,9 +67,10 @@ type AuthForm = {
           />
         </div>
         @if (invalidSaisie('email', 'required')) {
-        <p class="pl-1 mt-1 text-xs text-destructive">Ce champ est obligatoire.</p>
-        } @if (invalidSaisie('email', 'email')) {
-        <p class="pl-1 mt-1 text-xs text-destructive">L’adresse e-mail n’est pas valide.</p>
+          <p class="pl-1 mt-1 text-xs text-destructive">Ce champ est obligatoire.</p>
+        }
+        @if (invalidSaisie('email', 'email')) {
+          <p class="pl-1 mt-1 text-xs text-destructive">L’adresse e-mail n’est pas valide.</p>
         }
       </div>
 
@@ -100,18 +101,18 @@ type AuthForm = {
             aria-label="Afficher/Masquer le mot de passe"
           >
             @if (typePasswordInput() === 'password') {
-            <svg class="size-6 text-foreground">
-              <use href="assets/icons/sprite.svg#i-eye-close"></use>
-            </svg>
+              <svg class="size-6 text-foreground">
+                <use href="assets/icons/sprite.svg#i-eye-close"></use>
+              </svg>
             } @else {
-            <svg class="size-6 text-foreground">
-              <use href="assets/icons/sprite.svg#i-eye-open"></use>
-            </svg>
+              <svg class="size-6 text-foreground">
+                <use href="assets/icons/sprite.svg#i-eye-open"></use>
+              </svg>
             }
           </button>
         </div>
         @if (invalidSaisie('password', 'required')) {
-        <p class="pl-1 mt-1 text-xs text-destructive">Ce champ est obligatoire.</p>
+          <p class="pl-1 mt-1 text-xs text-destructive">Ce champ est obligatoire.</p>
         }
       </div>
 
@@ -142,20 +143,21 @@ type AuthForm = {
             aria-label="Afficher/Masquer la confirmation du mot de passe"
           >
             @if (typeConfirmPasswordInput() === 'password') {
-            <svg class="size-6 text-foreground">
-              <use href="assets/icons/sprite.svg#i-eye-close"></use>
-            </svg>
+              <svg class="size-6 text-foreground">
+                <use href="assets/icons/sprite.svg#i-eye-close"></use>
+              </svg>
             } @else {
-            <svg class="size-6 text-foreground">
-              <use href="assets/icons/sprite.svg#i-eye-open"></use>
-            </svg>
+              <svg class="size-6 text-foreground">
+                <use href="assets/icons/sprite.svg#i-eye-open"></use>
+              </svg>
             }
           </button>
         </div>
         @if (invalidSaisie('confirmPassword', 'required')) {
-        <p class="pl-1 mt-1 text-xs text-destructive">Ce champ est obligatoire.</p>
-        } @if (passwordMismatch()) {
-        <p class="pl-1 mt-1 text-xs text-destructive">Les mots de passe ne correspondent pas.</p>
+          <p class="pl-1 mt-1 text-xs text-destructive">Ce champ est obligatoire.</p>
+        }
+        @if (passwordMismatch()) {
+          <p class="pl-1 mt-1 text-xs text-destructive">Les mots de passe ne correspondent pas.</p>
         }
       </div>
 

@@ -113,7 +113,7 @@ export class InMemoryMotivationGateway {
   private pickRandom(): MotivationMessage {
     const list = this.motivation();
     const i = Math.floor(Math.random() * list.length);
-    return list[i]!;
+    return list[i] as MotivationMessage;
   }
 
   private loadOrPickForToday() {

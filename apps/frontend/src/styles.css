@@ -164,7 +164,9 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-feature-settings: 'rlig' 1, 'calt' 1;
+    font-feature-settings:
+      'rlig' 1,
+      'calt' 1;
   }
 
   /* Custom scrollbar */
@@ -255,7 +257,9 @@
   opacity: 0.95;
 
   /* Animation entrée/sortie */
-  animation: slideInTop 0.5s ease-out, slideOutTop 0.5s ease-in forwards;
+  animation:
+    slideInTop 0.5s ease-out,
+    slideOutTop 0.5s ease-in forwards;
   animation-delay: 0s, calc(var(--toast-timeout) - 0.4s);
   position: relative;
   margin-top: 30px;

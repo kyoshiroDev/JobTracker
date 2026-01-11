@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { StatusStylePipe } from '@apps/frontend/app/pipes/status-style.pipe';
-import { SupabaseCandidatureGateway } from '@apps/frontend/features/candidatures/supabase-candidature-gateway';
+import { StatusStylePipe } from '../../../../app/pipes/status-style.pipe';
+import { SupabaseCandidatureGateway } from '../../../candidatures/supabase-candidature-gateway';
 
 @Component({
   selector: 'fdw-candidatures-recentes',

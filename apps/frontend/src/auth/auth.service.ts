@@ -1,7 +1,7 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { CreateUser, LoginUser } from '@libs/schemas-zod';
 import { from } from 'rxjs';
-import { SUPABASE } from '@apps/frontend/app/providers/supabase.client';
+import { SUPABASE } from '../app/providers/supabase.client';
 import { Session, User } from '@supabase/supabase-js';
 
 @Injectable({

@@ -1,15 +1,15 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { AuthService } from '@apps/frontend/auth/auth.service';
-import { SidebarData } from '@apps/frontend/app/components/sidebar/sidebar-data';
+import { AuthService } from '../../../auth/auth.service';
+import { SidebarData } from './sidebar-data';
 
 type MenuItem = {
   id: number;
   icon: string;
   name: string;
   routerLink: string;
-}
+};
 
 @Component({
   selector: 'fdw-sidebar',
@@ -34,30 +34,27 @@ type MenuItem = {
       </div>
     </a>
     <div class="flex flex-col justify-between h-full">
-    <nav class="flex flex-col justify-center gap-3 mt-8 px-3">
-      @for (menu of sidebar(); track menu.id) {
-      <a
-        class="flex w-43 h-8 items-center gap-4 py-1 pl-4 hover:text-primary-foreground
+      <nav class="flex flex-col justify-center gap-3 mt-8 px-3">
+        @for (menu of sidebar(); track menu.id) {
+          <a
+            class="flex w-43 h-8 items-center gap-4 py-1 pl-4 hover:text-primary-foreground
          hover:bg-gradient-primary cursor-pointer rounded-xl
          text-muted-foreground text-sm"
-        (click)="toggleSidebar()"
-        routerLinkActive="active-link"
-        [routerLinkActiveOptions]="{ exact: true }"
-        [routerLink]="menu.routerLink"
-      >
-        <svg class="size-5 shrink-0 stroke-1 text-current" aria-hidden="true" focusable="false">
-          <use [attr.href]="menu.icon"></use>
-        </svg>
-        <span class="flex justify-center items-center h-5">{{ menu.name }}</span>
-      </a>
-      }
-    </nav>
-    <button
-      (click)="this.logOut()"
-      class="w-full rounded-lg text-red-500/90 h-10 font-medium cursor-pointer"
-    >
-      Déconnexion
-    </button>
+            (click)="toggleSidebar()"
+            routerLinkActive="active-link"
+            [routerLinkActiveOptions]="{ exact: true }"
+            [routerLink]="menu.routerLink"
+          >
+            <svg class="size-5 shrink-0 stroke-1 text-current" aria-hidden="true" focusable="false">
+              <use [attr.href]="menu.icon"></use>
+            </svg>
+            <span class="flex justify-center items-center h-5">{{ menu.name }}</span>
+          </a>
+        }
+      </nav>
+      <button (click)="this.logOut()" class="w-full rounded-lg text-red-500/90 h-10 font-medium cursor-pointer">
+        Déconnexion
+      </button>
     </div>
   `,
 })
@@ -91,7 +88,7 @@ export class SidebarComponent implements OnInit {
   toggleSidebar = () => (window.innerWidth < 720 ? this.sidebarService.toggleSidebar() : null);
 
   logOut() {
-    this.authService.signOut()
-    this.router.navigate(['/auth/login'])
-  };
+    this.authService.signOut();
+    this.router.navigate(['/auth/login']);
+  }
 }

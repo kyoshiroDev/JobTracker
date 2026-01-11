@@ -1,6 +1,6 @@
 import { InjectionToken, Provider } from '@angular/core';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
-import { environment } from '@apps/frontend/environments/environment';
+import { environment } from '../../environments/environment';
 
 export const SUPABASE = new InjectionToken<SupabaseClient>('SUPABASE');
 

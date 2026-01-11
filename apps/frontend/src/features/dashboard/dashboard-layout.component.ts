@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { SidebarComponent } from '@apps/frontend/app/components/sidebar/sidebar.component';
-import { Header } from '@apps/frontend/app/components/header';
+import { SidebarComponent } from '../../app/components/sidebar/sidebar.component';
+import { Header } from '../../app/components/header';
 
 @Component({
   selector: 'fdw-dashboard',

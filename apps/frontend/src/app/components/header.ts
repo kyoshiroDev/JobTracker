@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgOptimizedImage } from '@angular/common';
-import { ButtonNewCandidature } from '@apps/frontend/app/components/button-new-candidature';
-import { SidebarData } from '@apps/frontend/app/components/sidebar/sidebar-data';
+import { ButtonNewCandidature } from './button-new-candidature';
+import { SidebarData } from './sidebar/sidebar-data';
 
 @Component({
   selector: 'fdw-header',
