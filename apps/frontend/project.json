@@ -17,7 +17,7 @@
         "index": "apps/frontend/src/index.html",
         "browser": "apps/frontend/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "apps/frontend/tsconfig.app.json",
+        "tsconfig": "apps/frontend/tsconfig.app.json",
         "assets": [
           "apps/frontend/src/favicon.ico",
           "apps/frontend/src/assets",
