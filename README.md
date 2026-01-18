@@ -56,6 +56,7 @@ https://jobtrakerv2.netlify.app
 ## 🛠️ Stack technique
 
 ### Frontend
+
 - Angular 19+
 - TypeScript
 - Tailwind CSS 4
@@ -63,11 +64,13 @@ https://jobtrakerv2.netlify.app
 - **pnpm**
 
 ### Backend / Data
+
 - **Supabase**
   - base de données
   - appels via API
 
 ### Qualité & outils
+
 - ESLint
 - Prettier
 - Git / GitHub
@@ -77,6 +80,7 @@ https://jobtrakerv2.netlify.app
 ## 🧪 Lancer le projet en local
 
 ### 1️⃣ Cloner le dépôt
+
 ```bash
 git clone git@github.com:kyoshiroDev/jobtracker.git
 pnpm install
@@ -108,6 +112,7 @@ Développeur web Angular junior, avec 1 an de pratique, motivé et en recherche 
 ## 👤 Auteur
 
 **Grégory**
+
 - GitHub: [@kyoshiroDev](https://github.com/kyoshiroDev)
 - Projet: [JobTracker](https://github.com/kyoshiroDev/JobTracker)
 
