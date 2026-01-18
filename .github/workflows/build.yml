@@ -2,10 +2,15 @@ name: JobTracker
 
 on:
   push:
-    branches: [refactor/ui-redesign-v2] # dès qu’on push sur main
+    branches: [ refactor/ui-redesign-v2 ] # dès qu’on push sur main
   pull_request: # toutes les PR
 
+env:
+  NX_CLOUD: false
+  NX_NO_CLOUD: true
+
 jobs:
+
   build:
     runs-on: ubuntu-latest
 
@@ -26,8 +31,6 @@ jobs:
 
       - name: Lint
         run: pnpm run lint
-        env:
-          NX_CLOUD: false
 
       - name: Format
         run: pnpm run format
