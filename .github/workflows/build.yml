@@ -18,11 +18,17 @@ jobs:
         with:
           node-version: '22' # mettre la version utilisée en local
 
+      - name: Install pnpm
+        run: npm install -g pnpm
+
       - name: Install dependencies
         run: pnpm install
 
       - name: Lint
         run: pnpm run lint
+
+      - name: Format
+        run: pnpm run format
 
       - name: Run tests
         run: pnpm run test
