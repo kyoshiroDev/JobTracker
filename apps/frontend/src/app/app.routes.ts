@@ -1,12 +1,28 @@
-import { AnnonceListePageComponent } from '../annonce/annonce-liste/annonce-liste-page.component';
-import { DashboardComponent } from '../dashboard/dashboard-page.component';
-import { AnnonceDetailComponent } from '../annonce/annonce-detail/annonce-detail.component';
 import { Routes } from '@angular/router';
+import { AuthComponent } from '../auth/auth.component';
 import { NotFoundComponent } from './not-found.component';
+import { authMatchGuard } from './guards/auth-guard';
+import { DashboardLayoutComponent } from '../features/dashboard/dashboard-layout.component';
 
 export const routes: Routes = [
-  { path: '', component: DashboardComponent },
-  { path: 'annonces', component: AnnonceListePageComponent },
-  { path: 'annonce/:id', component: AnnonceDetailComponent },
-  { path: '**', component: NotFoundComponent }
+  { path: '', redirectTo: 'auth', pathMatch: 'full' },
+  { path: 'auth', component: AuthComponent },
+
+  {
+    path: '',
+    canMatch: [authMatchGuard],
+    component: DashboardLayoutComponent,
+    children: [
+      { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
+      {
+        path: 'dashboard',
+        loadComponent: () => import('../features/dashboard/dashboard.component').then((m) => m.DashboardComponent),
+      },
+      {
+        path: 'candidatures',
+        loadComponent: () => import('../features/candidatures/candidatures-list').then((m) => m.CandidaturesList),
+      },
+    ],
+  },
+  { path: '**', component: NotFoundComponent },
 ];

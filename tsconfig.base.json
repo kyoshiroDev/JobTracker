@@ -4,18 +4,20 @@
     "outDir": "./dist/out-tsc",
     "strict": true,
     "noImplicitOverride": true,
-    "noPropertyAccessFromIndexSignature": true,
+    "noPropertyAccessFromIndexSignature": false,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true,
     "isolatedModules": true,
     "esModuleInterop": true,
     "experimentalDecorators": true,
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
     "importHelpers": true,
     "target": "ESNext",
     "module": "ESNext",
-    "paths": {},
+    "paths": {
+      "@libs/schemas-zod": ["libs/schemas-zod/src/index.ts"]
+    },
     "baseUrl": ".",
     "rootDir": "."
   },

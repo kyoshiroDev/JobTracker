@@ -1,47 +1,121 @@
-# 📌 JobTracker
+# 📌 JobTracker – Application Angular de suivi de candidatures
 
-JobTracker est une application web développée avec Angular 19, conçue pour aider les chercheurs d'emploi à organiser et suivre efficacement leurs candidatures. Elle permet de centraliser toutes les informations relatives aux offres d'emploi, de suivre l'évolution des candidatures et d'analyser les opportunités.
+JobTracker est une application web développée avec **Angular 19** permettant de **centraliser et suivre des candidatures** (annonces, statuts, informations liées à l’entreprise).
 
-[🔗 Accéder à l'application en ligne](https://job-tracker-nx.vercel.app/)
+Ce projet a été conçu comme un **projet professionnel**, proche d’un contexte réel, afin de démontrer mes compétences en tant que **développeur Angular junior**.
+
+🔗 Démo en ligne :  
+https://jobtrakerv2.netlify.app
+
+---
+
+## 🎯 Objectifs du projet
+
+- Développer une application Angular moderne et maintenable
+- Mettre en pratique les **bonnes pratiques Angular**
+- Approfondir l’utilisation de **RxJS**
+- Structurer un projet comme en environnement professionnel
+- Travailler sur un projet évolutif (feature-based)
+
+---
 
 ## 🚀 Fonctionnalités principales
-- **Ajout d'offres d'emploi :** Enregistrement des détails des offres, y compris le titre, l'entreprise, le lien vers l'annonce et des notes personnelles.
-- **Suivi des candidatures :** Mise à jour du statut de chaque candidature (en attente, entretien, refus, etc.).
-- **Tableau de bord intuitif :** Vue d'ensemble des candidatures avec des filtres pour une navigation facilitée.
-- **Analyse des candidatures :** Statistiques sur les candidatures envoyées, les réponses reçues et les entretiens programmés.
 
-## 🛠️ Technologies utilisées
-- **Framewoek :** Angular 19
-- **Langage :** TypeScript 5
-- **Styles :** Tailwind CSS 4
+- 📄 **Gestion des candidatures**
+  - création, modification et suppression d’annonces
+  - informations liées à l’entreprise (poste, ville, type de contrat, lien)
 
-## 🧠 Compétences acquises
+- 🔄 **Suivi des statuts**
+  - organisation des candidatures (en cours, refus, entretien, etc.)
+  - mise à jour simple et rapide
 
-En développant JobTracker, j'ai renforcé et acquis les compétences suivantes :
+- 🧩 **Détail d’une annonce**
+  - affichage structuré
+  - composants réutilisables
 
-- **Les Signals (set() et computed()) :** J'ai utilisé les Signals pour gérer l'état réactif de l'application de manière plus simple et performante.
-- **Les directives (@If et @For) :** J'ai appris à utiliser ces directives pour gérer dynamiquement l'affichage des éléments.
-- **La création et gestion des services :** J'ai appris la création de services pour centraliser la logique métier et faciliter la gestion des données au sein de l'application.
-- **L'injection de dépendances (inject()) :** Grâce à l'utilisation de inject(), j'ai pu injecter des dépendances de manière plus moderne et concise, simplifiant ainsi le code et l'organisation des composants.
-- **Les input() et output() :** J'ai renforcé ma compréhension de la communication entre composants avec les signals input() et output(), facilitant les échanges de données entre les composants parents et enfants.
-- **La gestion des Reactive Forms :** J'ai développé un formulaires réactifs en, exploitant la puissance de Reactive Forms pour la validation, la gestion dynamique des champs, et l'intégration fluide avec les données de l'application.
-- **La gestion du routing :** J'ai mis en place le routing pour mon menu et aussi pour afficher mes annonces grâce à leur ID.
-- **Organisation du par feature :** Pour une meilleure maintenabilité et lisibilité, j'ai organisé mon code par features.
-- **Les pipes (notamment pour la gestion des dates) :** J'ai utilisé des pipes pour formater les données dans le template, en particulier pour les dates, afin d'améliorer l'expérience utilisateur et maintenir un code propre et réutilisable.
-- **Utilisation de Tailwind CSS :** Pour le responsive et le design de mon application j'ai mis en place Tailwind CSS 4.
-- **Déploiement :** Publication de l'application sur Vercel pour une accessibilité en ligne.
+---
 
-## 🧪 Lancer l'application en local
-1. **Cloner le dépôt :**
+## 🧠 Compétences Angular démontrées
+
+- **Angular 19**
+- Standalone Components
+- Architecture par fonctionnalités (feature-based)
+- **RxJS**
+  - Observables
+  - `map`, `switchMap`, `tap`
+  - gestion des flux asynchrones
+- Services Angular et injection de dépendances
+- Formulaires Angular structurés
+- Routing et navigation
+- Découpage de composants UI réutilisables
+- Bonnes pratiques de lisibilité et maintenabilité
+- Monorepo **NX**
+
+---
+
+## 🛠️ Stack technique
+
+### Frontend
+
+- Angular 19+
+- TypeScript
+- Tailwind CSS 4
+- **NX Monorepo** 22
+- **pnpm**
+
+### Backend / Data
+
+- **Supabase**
+  - base de données
+  - appels via API
+
+### Qualité & outils
+
+- ESLint
+- Prettier
+- Git / GitHub
+
+---
+
+## 🧪 Lancer le projet en local
+
+### 1️⃣ Cloner le dépôt
+
 ```bash
-    git clone git@github.com:kyoshiroDev/frontend.git
+git clone git@github.com:kyoshiroDev/jobtracker.git
+pnpm install
+nx serve frontend
 ```
-2. **Installer les dépendances :**
-```bash
-    npm install
-```
-3.**Démarrer le serveur de développement :**
-```bash
-    ng serve
-```
-L'application sera accessible à l'adresse http://localhost:4200/.
+
+Application accessible sur :
+👉 http://localhost:4200/
+
+---
+
+## 🔍 Démarche
+
+N’ayant pas encore d’expérience professionnelle en entreprise, ce projet me permet de :
+
+- démontrer mes compétences Angular sur un cas concret
+- travailler avec une architecture proche du monde professionnel
+- approfondir RxJS et la gestion des flux asynchrones
+- montrer ma rigueur, mon organisation et ma capacité d’apprentissage
+
+---
+
+## 👨‍💻 Profil
+
+Développeur web Angular junior, avec 1 an de pratique, motivé et en recherche d’un premier poste en CDI, souhaitant évoluer au sein d’une équipe Angular.
+
+---
+
+## 👤 Auteur
+
+**Grégory**
+
+- GitHub: [@kyoshiroDev](https://github.com/kyoshiroDev)
+- Projet: [JobTracker](https://github.com/kyoshiroDev/JobTracker)
+
+---
+
+Développé avec ❤️ et Angular 19+

@@ -1,38 +1,314 @@
-/* Import Tailwind CSS */
+@import 'ngx-toastr/toastr';
 @import 'tailwindcss';
+@source "./src/**/*.{html,ts}";
 
-@plugin "@tailwindcss/forms";
+/* JobTracker Design System - Modern, motivating colors for job search */
+:root {
+  --background: 240 10% 98%;
+  --foreground: 240 10% 9%;
 
-@theme {
+  --card: 0 0% 100%;
+  --card-foreground: 240 10% 9%;
+
+  --popover: 0 0% 100%;
+  --popover-foreground: 240 10% 9%;
+
+  /* Primary: Beautiful ocean blue */
+  --primary: 220 91% 55%;
+  --primary-foreground: 0 0% 100%;
+  --primary-glow: 220 100% 75%;
+
+  /* Secondary: Soft professional blue */
+  --secondary: 220 14% 96%;
+  --secondary-foreground: 240 10% 9%;
+
+  --muted: 220 14% 96%;
+  --muted-foreground: 240 3.8% 46.1%;
+
+  /* Accent & states */
+  --accent: 142 76% 36%;
+  --accent-foreground: 0 0% 100%;
+  --success: 142 76% 36%;
+  --success-foreground: 0 0% 100%;
+  --warning: 38 92% 50%;
+  --warning-foreground: 0 0% 100%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 100%;
+
+  --border: 220 13% 91%;
+  --input: 220 13% 91%;
+  --ring: 220 91% 55%;
+
+  /* Motivating gradients */
+  --gradient-primary: linear-gradient(135deg, hsl(220 91% 55%), hsl(220 100% 75%));
+  --gradient-success: linear-gradient(135deg, hsl(142 76% 36%), hsl(142 76% 50%));
+
+  /* Depth */
+  --shadow-elegant: 0 10px 30px -10px hsl(220 91% 55% / 0.2);
+  --shadow-glow: 0 0 40px hsl(220 100% 75% / 0.3);
+  --shadow-card: 0 4px 12px hsl(240 10% 9% / 0.08);
+
+  /* Motion & radius */
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --radius: 0.75rem;
+
+  /* SidebarData */
+  --sidebar-background: 0 0% 98%;
+  --sidebar-foreground: 240 5.3% 26.1%;
+  --sidebar-primary: 240 5.9% 10%;
+  --sidebar-primary-foreground: 0 0% 98%;
+  --sidebar-accent: 240 4.8% 95.9%;
+  --sidebar-accent-foreground: 240 5.9% 10%;
+  --sidebar-border: 220 13% 91%;
+  --sidebar-ring: 217.2 91.2% 59.8%;
+}
+
+.dark {
+  --background: 240 10% 4%;
+  --foreground: 0 0% 95%;
+
+  --card: 240 10% 6%;
+  --card-foreground: 0 0% 95%;
+
+  --popover: 240 10% 6%;
+  --popover-foreground: 0 0% 95%;
+
+  --primary: 220 91% 60%;
+  --primary-foreground: 0 0% 100%;
+  --primary-glow: 220 100% 80%;
+
+  --secondary: 240 3.7% 15.9%;
+  --secondary-foreground: 0 0% 95%;
+
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+
+  --accent: 142 76% 40%;
+  --accent-foreground: 0 0% 100%;
+  --success: 142 76% 40%;
+  --success-foreground: 0 0% 100%;
+  --warning: 38 92% 60%;
+  --warning-foreground: 0 0% 100%;
+  --destructive: 0 62.8% 50%;
+  --destructive-foreground: 0 0% 100%;
+
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --ring: 220 91% 60%;
+
+  --shadow-elegant: 0 10px 30px -10px hsl(220 91% 60% / 0.3);
+  --shadow-glow: 0 0 40px hsl(220 100% 80% / 0.4);
+  --shadow-card: 0 4px 12px hsl(0 0% 0% / 0.2);
+
+  --sidebar-background: 240 5.9% 10%;
+  --sidebar-foreground: 240 4.8% 95.9%;
+  --sidebar-primary: 224.3 76.3% 48%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 240 3.7% 15.9%;
+  --sidebar-accent-foreground: 240 4.8% 95.9%;
+  --sidebar-border: 240 3.7% 15.9%;
+  --sidebar-ring: 217.2 91.2% 59.8%;
+}
+
+/* Map tokens → Tailwind v4 theme variables so you can use bg-primary, text-foreground, shadow-elegant, etc. */
+@theme inline {
   /* Colors */
-  --color-JobTracker-blue: rgb(1, 103, 163);
-  --color-JobTracker-side: rgb(1, 79, 134);
-  --color-JobTracker-side-hover: rgb(0, 122, 189);
-  --color-JobTracker-white: rgb(255, 255, 255);
-  --color-JobTracker-gray: rgb(236, 240, 241);
-  --color-JobTracker-grayOpacity: rgba(236, 240, 241, 0.8);
-  --color-JobTracker-label: rgb(31, 41, 55);
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-success: hsl(var(--success));
+  --color-success-foreground: hsl(var(--success-foreground));
+  --color-warning: hsl(var(--warning));
+  --color-warning-foreground: hsl(var(--warning-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+
+  /* SidebarData palette */
+  --color-sidebar-background: hsl(var(--sidebar-background));
+  --color-sidebar-foreground: hsl(var(--sidebar-foreground));
+  --color-sidebar-primary: hsl(var(--sidebar-primary));
+  --color-sidebar-primary-foreground: hsl(var(--sidebar-primary-foreground));
+  --color-sidebar-accent: hsl(var(--sidebar-accent));
+  --color-sidebar-accent-foreground: hsl(var(--sidebar-accent-foreground));
+  --color-sidebar-border: hsl(var(--sidebar-border));
+  --color-sidebar-ring: hsl(var(--sidebar-ring));
+
+  /* Custom shadows available as shadow-elegant, shadow-glow, shadow-card */
+  --shadow-elegant: var(--shadow-elegant);
+  --shadow-glow: var(--shadow-glow);
+  --shadow-card: var(--shadow-card);
+
+  /* Optional: align a named radius to your system */
+  --radius-xl: var(--radius);
 }
 
-.active-link {
-  @apply bg-JobTracker-side-hover;
+/* Base layer */
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings:
+      'rlig' 1,
+      'calt' 1;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--muted));
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground) / 0.3);
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.5);
+  }
 }
 
-/* Title */
-h1,
-h2 {
-  @apply text-JobTracker-white font-semibold;
+/* Utilities / components */
+@utility transition-smooth {
+  transition: var(--transition-smooth);
+}
+@utility glass {
+  backdrop-filter: blur(16px) saturate(180%);
+  background-color: hsl(var(--background) / 0.8);
+  border: 1px solid hsl(var(--border) / 0.2);
+}
+@utility bg-gradient-primary {
+  background-image: var(--gradient-primary);
+}
+@utility bg-gradient-success {
+  background-image: var(--gradient-success);
 }
 
-h3 {
-  @apply text-JobTracker-blue font-semibold;
+@utility hover-lift {
+  transition: var(--transition-smooth);
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-elegant);
+  }
+}
+@utility hover-glow {
+  transition: var(--transition-smooth);
+  &:hover {
+    box-shadow: var(--shadow-glow);
+  }
 }
 
-label {
-  @apply text-JobTracker-label inline-flex gap-0.5 font-medium;
+@custom-variant dark (&:where(.dark, .dark *));
 
+@layer utilities {
+  .bg-gradient-primary {
+    background: var(--gradient-primary);
+  }
+  .clip-text {
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+  .input {
+    @apply flex items-center outline-none border border-muted-foreground/30 rounded-md focus-within:ring-2 focus-within:ring-primary/40 focus-within:border-primary transition;
+  }
+  .active-link {
+    @apply text-primary-foreground bg-gradient-primary rounded-xl;
+  }
+
+  /* Animation fade-slide */
+  @keyframes fade-slide {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  .animate-fade-slide {
+    animation: fade-slide 0.9s ease-in-out;
+  }
 }
 
-input, select, textarea {
-  @apply block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200;
+/* Container principal */
+#toast-container > div {
+  width: fit-content;
+  --toast-timeout: 3s;
+  font-family: 'Inter', sans-serif;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  opacity: 0.95;
+
+  /* Animation entrée/sortie */
+  animation:
+    slideInTop 0.5s ease-out,
+    slideOutTop 0.5s ease-in forwards;
+  animation-delay: 0s, calc(var(--toast-timeout) - 0.4s);
+  position: relative;
+  margin-top: 30px;
+  overflow: hidden;
+}
+
+/* Toast succès */
+.toast-success {
+  background-color: #28a745 !important;
+  color: white;
+}
+
+/* Toast erreur */
+.toast-error {
+  background-color: #dc3545 !important;
+  color: white;
+}
+
+/* Toast info */
+.toast-info {
+  background-color: #007bff !important;
+  color: white;
+}
+
+/* Progress bar */
+#toast-container > div .toast-progress {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+/* Animation entrée */
+@keyframes slideInTop {
+  from {
+    transform: translateY(-200%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Animation sortie */
+@keyframes slideOutTop {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-200%);
+    opacity: 0;
+  }
 }
