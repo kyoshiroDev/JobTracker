@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "buildCommand": "nx build frontend",
+  "buildCommand": "pnpm run build",
   "outputDirectory": "dist/apps/frontend/browser",
   "rewrites": [
     {
