@@ -38,4 +38,5 @@ jobs:
         run: pnpm run test
 
       - name: Build
-        run: pnpm run build
+        run: npx nx build frontend
+
