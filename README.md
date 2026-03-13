@@ -37,7 +37,7 @@ Ce projet a été conçu comme un **projet professionnel**, proche d’un contex
 
 ## 🧠 Compétences Angular démontrées
 
-- **Angular 19**
+- **Angular 19+**
 - Standalone Components
 - Architecture par fonctionnalités (feature-based)
 - **RxJS**
@@ -73,6 +73,8 @@ Ce projet a été conçu comme un **projet professionnel**, proche d’un contex
 
 - ESLint
 - Prettier
+- husky
+- commitlint
 - Git / GitHub
 
 ---
@@ -105,7 +107,7 @@ N’ayant pas encore d’expérience professionnelle en entreprise, ce projet me
 
 ## 👨‍💻 Profil
 
-Développeur web Angular junior, avec 1 an de pratique, motivé et en recherche d’un premier poste en CDI, souhaitant évoluer au sein d’une équipe Angular.
+Développeur web Angular, avec 1 an de pratique, motivé et en recherche d’un premier poste en CDI, souhaitant évoluer au sein d’une équipe Angular.
 
 ---
 
