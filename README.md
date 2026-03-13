@@ -5,7 +5,7 @@ JobTracker est une application web développée avec **Angular 19** permettant d
 Ce projet a été conçu comme un **projet professionnel**, proche d’un contexte réel, afin de démontrer mes compétences en tant que **développeur Angular junior**.
 
 🔗 Démo en ligne :  
-https://jobtrakerv2.netlify.app
+[https://job-tracker-one-alpha.vercel.app/](https://job-tracker-one-alpha.vercel.app/)
 
 ---
 
